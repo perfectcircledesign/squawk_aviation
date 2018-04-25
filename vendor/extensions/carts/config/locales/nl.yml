@@ -1,0 +1,56 @@
+nl:
+  refinery:
+    plugins:
+      line_items:
+        title: Line Items
+      carts:
+        title: Carts
+    line_items:
+      admin:
+        line_items:
+          actions:
+            create_new: Maak een nieuwe Line Item
+            reorder: Wijzig de volgorde van de Line Items
+            reorder_done: Klaar met het wijzingen van de volgorde van de Line Items
+          records:
+            title: Line Items
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Line Items. Druk op 'Maak een nieuwe Line
+              Item' om de eerste aan te maken.
+          line_item:
+            view_live_html: Bekijk deze line item op de website <br/><em>(opent een
+              nieuw venster)</em>
+            edit: Bewerk deze line item
+            delete: Verwijder deze line item voor eeuwig
+      line_items:
+        show:
+          other: Andere Line Items
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Maak een nieuwe Cart
+            reorder: Wijzig de volgorde van de Carts
+            reorder_done: Klaar met het wijzingen van de volgorde van de Carts
+          records:
+            title: Carts
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Carts. Druk op 'Maak een nieuwe Cart' om
+              de eerste aan te maken.
+          cart:
+            view_live_html: Bekijk deze cart op de website <br/><em>(opent een nieuw
+              venster)</em>
+            edit: Bewerk deze cart
+            delete: Verwijder deze cart voor eeuwig
+      carts:
+        show:
+          other: Andere Carts
+  activerecord:
+    attributes:
+      refinery/line_items/line_item:
+        cart_id: Cart
+        product_id: Product
+        quantity: Quantity
+      refinery/carts/cart:
+        customer_id: Customer
+        is_current: Is Current

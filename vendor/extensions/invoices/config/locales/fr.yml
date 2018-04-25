@@ -1,0 +1,35 @@
+fr:
+  refinery:
+    plugins:
+      invoices:
+        title: Invoices
+    invoices:
+      admin:
+        invoices:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Invoice
+            reorder: Réordonner les Invoices
+            reorder_done: Fin de réordonnancement des Invoices
+          records:
+            title: Invoices
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Invoice. Cliquer sur "Créer un(e) nouve(au/l/lle) Invoice" pour créer votre premi(er/ère) invoice.'
+          invoice:
+            view_live_html: Voir ce(t/tte) invoice <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) invoice
+            delete: Supprimer définitivement ce(t/tte) invoice
+      invoices:
+        show:
+          other: Autres Invoices
+  activerecord:
+    attributes:
+      'refinery/invoices/invoice':
+        invoice_number: Invoice Number
+        trans_number: Trans Number
+        sub_type: Sub Type
+        start_date: Start Date
+        end_date: End Date
+        price_dollar: Price Dollar
+        price_rand: Price Rand
+        card_last_digits: Card Last Digits
+        customer_id: Customer

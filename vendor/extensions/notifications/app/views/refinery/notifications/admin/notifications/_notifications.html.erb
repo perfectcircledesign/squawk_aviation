@@ -1,0 +1,2 @@
+<%= will_paginate @notifications if Refinery::Notifications::Admin::NotificationsController.pageable? %>
+<%= render 'sortable_list' %>

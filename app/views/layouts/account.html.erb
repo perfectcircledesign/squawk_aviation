@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<%= render '/refinery/html_tag' %>
+  <% site_bar = render('/refinery/site_bar', :head => true) -%>
+  <%= render '/refinery/head' %>
+  <body>
+    <%= site_bar -%>
+    <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+
+    <%= render '/refinery/header' -%>
+
+    <% unless action_name == 'news_feed' or action_name == 'jobs_feed' or action_name == 'search' or (controller_name == 'messages' and action_name == 'index') or (controller_name == 'jobs' and action_name == 'show') %>
+      <div class="sliver">
+      </div>
+    <% end %>
+    <% if action_name == 'jobs_feed' %>
+      <div class="index-sliver">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>Seeking employment? Here are the latest job offerings</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= yield :outside %>
+
+    <div class="feed">
+      <div class="container">
+        <div class="row">
+          <%= yield :left %>
+          <%= yield :middle %>
+          <%= yield :right %>
+        </div>
+      </div>
+    </div>
+
+    <%= render '/refinery/footer' -%>
+
+    <%= render '/refinery/javascripts' %>
+  </body>
+</html>

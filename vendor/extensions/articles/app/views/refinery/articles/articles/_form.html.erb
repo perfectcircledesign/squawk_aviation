@@ -1,0 +1,36 @@
+<div class="sliver"></div>
+<div class="article-create">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="card">
+        <h2>Create an Article</h2>
+        <%= simple_form_for [refinery, :articles, @article] do |f| -%>
+
+          <%= f.hidden_field :airline_id, :label => false, :value => current_airline.id  %>
+
+          <label>Title</label>
+          <%= f.text_field :name, required: true, :class=>"form-control"  %>
+          <label>Article</label>
+          <%= f.text_area :body, required: true, :rows => 10, :class=>"form-control"  %>
+          <label>Url Link</label>
+          <%= f.text_field :url, required: true, :class=>"form-control"  %>
+
+          <div class="upload-image">
+            <label>Upload a image</label>
+            <%= image_fu @article.image, '100x100#c' if @article.image.present? %>
+            <label class="btn-upload" for="article_image_id">Select File</label>
+            <%= f.file_field :image_id %>
+          </div>
+
+          <div class="text-right">
+            <a href="#" class="btn btn-window btn-green" onclick="window.history.back();">Cancel</a>
+            <%= f.button :submit, "Post Article", :class=>"btn btn-green" %>
+          </div>
+
+        <% end -%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

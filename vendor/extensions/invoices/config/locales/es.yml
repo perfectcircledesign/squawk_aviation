@@ -1,0 +1,36 @@
+es:
+  refinery:
+    plugins:
+      invoices:
+        title: Invoices
+#        article: masculino/femenino
+    invoices:
+      admin:
+        invoices:
+          actions:
+            create_new: Crear nuevo invoice
+            reorder: Reordenar invoices
+            reorder_done: Reordenación de invoices completada
+          records:
+            title: Invoices
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay invoices todavía. Pulsa en "Crear nuevo Invoice" para crear tu primer invoice.
+          invoice:
+            view_live_html: Ver este invoice como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este invoice
+            delete: Borrar este invoice para siempre
+      invoices:
+        show:
+          other: Otros invoices
+  activerecord:
+    attributes:
+      'refinery/invoices/invoice':
+        invoice_number: Invoice Number
+        trans_number: Trans Number
+        sub_type: Sub Type
+        start_date: Start Date
+        end_date: End Date
+        price_dollar: Price Dollar
+        price_rand: Price Rand
+        card_last_digits: Card Last Digits
+        customer_id: Customer

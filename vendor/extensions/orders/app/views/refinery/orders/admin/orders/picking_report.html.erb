@@ -1,0 +1,40 @@
+<% @orders.each do |order| %>
+  <div class="content">
+
+    <div class='field'>
+      <h2>Order Number: <%= order.order_number  -%></h2>
+    </div>
+
+
+
+
+    <table width="100%">
+      <tr class="<%= cycle("even", "odd") %>">
+        <th><b>Product Name</b></th>
+        <th><b>Price</b></th>
+        <th><b>Quantity</b></th>
+        <th><b>Stock Code</b></th>
+        <th><b>Total</b></th>
+      </tr>
+      <% order.order_items.each do |order_item| %>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td style="border:1 solid grey;"><%= order_item.product_name  -%></td>
+          <td style="border:1 solid grey;"><%= rands(order_item.price)  -%></td>
+          <td style="border:1 solid grey;"><%= order_item.quantity  -%></td>
+          <td style="border:1 solid grey;"><%= order_item.product_stock_code  -%></td>
+          <td style="border:1 solid grey;"><%= rands(order_item.total)  -%></td>
+        </tr>
+      <% end %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td colspan="4">Delivery Method: <%= order.delivery_option_name %></td>
+        <td><%= rands(order.delivery_cost)  -%></td>
+      </tr>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td colspan="4" align="right"><b>Grand Total</b></td>
+        <td><%= rands(order.grand_total)  -%></td>
+      </tr>
+    </table>
+    <hr />
+
+  </div>
+<% end %>

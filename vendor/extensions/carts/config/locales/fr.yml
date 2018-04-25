@@ -1,0 +1,56 @@
+fr:
+  refinery:
+    plugins:
+      line_items:
+        title: Line Items
+      carts:
+        title: Carts
+    line_items:
+      admin:
+        line_items:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Line Item
+            reorder: Réordonner les Line Items
+            reorder_done: Fin de réordonnancement des Line Items
+          records:
+            title: Line Items
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Line Item. Cliquer sur "Créer
+              un(e) nouve(au/l/lle) Line Item" pour créer votre premi(er/ère) line
+              item.
+          line_item:
+            view_live_html: Voir ce(t/tte) line item <br/><em>(Ouvre une nouvelle
+              fenêtre)</em>
+            edit: Modifier ce(t/tte) line item
+            delete: Supprimer définitivement ce(t/tte) line item
+      line_items:
+        show:
+          other: Autres Line Items
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Cart
+            reorder: Réordonner les Carts
+            reorder_done: Fin de réordonnancement des Carts
+          records:
+            title: Carts
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Cart. Cliquer sur "Créer
+              un(e) nouve(au/l/lle) Cart" pour créer votre premi(er/ère) cart.
+          cart:
+            view_live_html: Voir ce(t/tte) cart <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) cart
+            delete: Supprimer définitivement ce(t/tte) cart
+      carts:
+        show:
+          other: Autres Carts
+  activerecord:
+    attributes:
+      refinery/line_items/line_item:
+        cart_id: Cart
+        product_id: Product
+        quantity: Quantity
+      refinery/carts/cart:
+        customer_id: Customer
+        is_current: Is Current

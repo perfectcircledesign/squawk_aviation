@@ -1,0 +1,51 @@
+<% content_for :title do %>
+  Airlines
+<% end %>
+
+<% content_for :content do %>
+
+  <div class="box">
+    <div class="box-body">
+      <table id="airlines" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Airline Name</th>
+            <th>Email</th>
+            <th>Likes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @airlines.each_with_index do |airline, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= airline.airline_name %></td>
+              <td><%= mail_to(airline.email) %></td>
+              <td><%= airline.likes_count %></td>
+              <td><%= link_to('Show', admin_airline_path(airline)) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  $(function () {
+    $("#airlines").dataTable({
+      "pageLength": 50,
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]] 
+    });
+  });
+</script>
+
+
+<% end %>
+

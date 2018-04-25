@@ -1,0 +1,27 @@
+en:
+  refinery:
+    plugins:
+      airlines:
+        title: Airlines
+    airlines:
+      admin:
+        airlines:
+          actions:
+            create_new: Add New Airline
+            reorder: Reorder Airlines
+            reorder_done: Done Reordering Airlines
+          records:
+            title: Airlines
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Airlines yet. Click "Add New Airline" to add your first airline.
+          airline:
+            view_live_html: View this airline live <br/><em>(opens in a new window)</em>
+            edit: Edit this airline
+            delete: Remove this airline forever
+      airlines:
+        show:
+          other: Other Airlines
+  activerecord:
+    attributes:
+      'refinery/airlines/airline':
+        name: Name

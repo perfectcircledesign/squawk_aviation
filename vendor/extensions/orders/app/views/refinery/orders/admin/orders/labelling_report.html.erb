@@ -1,0 +1,50 @@
+<% @orders.each do |order| %>
+  <div class="content">
+
+    <div class='field'>
+      <h2>Order Number: <%= order.order_number  -%></h2>
+    </div>
+
+
+
+
+    <div class='field' style="clear:both;">
+      <h2>Customer Details</h2>
+    </div>
+
+    <div class="customer_details">
+
+      <div class='label' style="float:left;padding-right:5px;">
+        <div class='field'>
+          <b>Name: </b>
+        </div>
+        <div class='field'>
+          <b>Surname: </b>
+        </div>
+        <div class='field'>
+          <b>Contact No: </b>
+        </div>
+      </div>
+      <div class='text' style="float:left;">
+        <div class='field'>
+          <%= order.customer.first_name  -%>
+        </div>
+        <div class='field'>
+          <%= order.customer.surname  -%>
+        </div>
+        <div class='field'>
+          <%= order.customer.contact_number  -%>
+        </div>
+      </div>
+    </div>
+
+
+    <div style="clear:both;"></div>
+    <br><br>
+    <hr />
+
+  </div>
+
+  <div style="page-break-after:always"></div>
+  
+<% end %>

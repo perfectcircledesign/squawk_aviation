@@ -1,0 +1,62 @@
+<div class="col-xs-12 col-md-3">
+  <div class="completion">
+    <div class="profile-pic">
+      <% if @customer.profile_image.present? %>
+          <%= link_to(image_fu(@customer.profile_image, "164x164#c"), '/account') %><br>
+      <% else %>
+          <img src="/assets/profile-blank.jpg">
+      <% end %>
+    </div>
+    <h3><a href="/account"><%= @customer.name %><span><%= @customer.career_path %></span></a></h3>
+    <% if @customer.complete_percentage.present? and @customer.complete_percentage != 100 %>
+      <div class="progress-bar-container">
+      
+        <div class="progress-bar">
+          <div style="width: <%= @customer.complete_percentage.to_s %>%;" class="bar"></div>
+        </div>
+        <p><%= @customer.complete_percentage.to_s %>% Complete</p>
+
+        <a href="/account" class="btn btn-green">Complete Profile</a>  
+      </div>
+    <% end %>
+    <div class="stats">
+      <h3><%= @customer.views_count.to_s %><span>Profile Views</span></h3>
+    </div>
+    <div class="stats">
+      <h3><%= Refinery::Airlines::Airline.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.customer_id = ? AND favourites.airline_id = refinery_airlines.id', 'Airline', @customer.id).count %><span>Airlines favourited you</span></h3>
+    </div>
+  </div>
+  <!-- <div class="upgrade-mobile visible-xs"> -->
+    <!-- <a href="#" class="btn btn-green btn-sm">Go Pro</a> -->
+    <!-- <h1>Upgrade to Pro today</h1> -->
+  <!-- </div> -->
+  <% if @favourite_jobs.present? and @favourite_jobs.is_active.present? %>
+    <div class="dashboard-jobs">
+      <h5 class="pod-header">Jobs Liked</h5>
+        <% @favourite_jobs.is_active.each do |job| %>
+            <div class="media side-profiles">
+              <div class="media-left">
+                <%= link_to refinery.airlines_airline_path(job.airline) do %>
+                    <% if job.airline.logo.present? %>
+                        <%= image_fu job.airline.logo, '40x40#c' %>
+                    <% else %>
+                        <img src="/assets/profile-blank.jpg" width="40" height="40">
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to refinery.jobs_job_path(job) do %>
+                    <div class="media-header">
+                      <%= job.name %>
+                    </div>
+                    <%= job.airline.name %>
+                <% end %>
+              </div>
+              <div class="media-right">
+                <%= link_to 'View', refinery.jobs_job_path(job), :class=>"btn btn-green btn-sm btn-window pull-right" %>
+              </div>
+            </div>
+        <% end %>
+    </div>
+  <% end %>
+</div>

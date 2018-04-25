@@ -1,0 +1,337 @@
+<% content_for :must_not do %>
+<div class="upload">
+  <div class="container">
+    <div class="register-text">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>Register and Upload</h1>
+          <p>Register and upload your CV to apply for jobs faster and access all<br>
+            Squawk features available only for registered users.</p>
+        </div>
+      </div>
+    </div>
+    <div class="register-box">
+      <div>
+        <!--<h2>Cabin Crew</h2>-->
+        <!--<h3>Step 1 of 9 - Personal Details</h3>-->
+      </div>
+      <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a class="a1" href="#personal-details" aria-controls="personal-details" role="tab" data-toggle="tab">Personal Details</a></li>
+          <li><p>></p></li>
+          <li role="presentation"><a href="#qualifications" aria-controls="qualifications" role="tab" data-toggle="tab">Qualifications</a></li>
+          <li><p>></p></li>
+          <li role="presentation"><a href="#career-history" aria-controls="career-history" role="tab" data-toggle="tab">Career History</a></li>
+          <!--<li><p>></p></li>-->
+          <!--<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Declaration</a></li>-->
+          <!--<li><p>></p></li>-->
+          <!--<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Document Upload</a></li>-->
+        </ul>
+        <!-- Tab panes -->
+        <%= simple_nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal admin' }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <% @customer = Refinery::Customers::Customer.find(f.object.id)  %>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="personal-details">
+              <div class="col-xs-12 col-md-6 fields-left">
+                <div class="form-group">
+                  <%= f.input_field :first_name, :class=>'form-control', :placeholder => 'Name'%>
+                  <!--<input type="name" class="form-control" id="inputName" placeholder="Name">-->
+                </div>
+                <div class="form-group longdrop">
+                  <%= f.country_select :nationality, :class=>"form-control" %>
+                  <!--<input type="nationality" class="form-control" id="inputNationality" placeholder="Nationality">-->
+                </div>
+                <div class="form-group longdrop">
+                  <%= f.select :gender, ::Refinery::Customers::Customer::GENDERS %>
+                  <!--<input type="gender" class="form-control" id="inputGender" placeholder="Gender">-->
+                </div>
+                <div class="form-group linedrop">
+                  <div class="row">
+                    <div class="col-xs-3">
+                      <label class="">Date of Birth</label>
+                    </div>
+                    <div class="col-xs-9">
+                      <%= f.date_select(:date_of_birth, :start_year => 1950, order: [:day, :month, :year], :class=>"form-control slct") %>
+                      <!--<input class="form-control" type="date" value="2011-08-19" id="example-date-input">-->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.input_field :age, :class=>'form-control', :placeholder=>"Age" %>
+                  <!--<input type="age" class="form-control" id="inputAge" placeholder="Age">-->
+                </div>
+                <div class="form-group">
+                  <%= f.input_field :marital_period, :class=>"form-control", :placeholder=>"Marital Status" %>
+                  <!--<input type="marital-status" class="form-control" id="inputAge" placeholder="Marital Status">-->
+                </div>
+                <div class="form-group">
+                  <%= f.input_field :notice_period, :class=>"form-control", :placeholder=>"Notice Period" %>
+                  <!--<input type="marital-status" class="form-control" id="inputAge" placeholder="Notice Period">-->
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <label class="full-label">PPC Date</label>
+                      <%= f.input_field :ppc_date, as: :date, order: [:day, :month, :year], :class=>"form-control slct" %>
+                      <!--<input class="form-control" type="date" value="2011-08-19" id="example-date-input">-->
+                    </div>
+                    <div class="col-xs-6">
+                      <label class="full-label">PPC Expiry Date</label>
+                      <%= f.input_field :ppc_expiry_date, as: :date, order: [:day, :month, :year], :class=>"form-control slct" %>
+                      <!--<input class="form-control" type="date" value="2011-08-19" id="example-date-input">-->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <label class="full-label">IR Date</label>
+                      <%= f.input_field :ir_date, as: :date, order: [:day, :month, :year], :class=>"form-control slct" %>
+                      <!--<input class="form-control" type="date" value="2011-08-19" id="example-date-input">-->
+                    </div>
+                    <div class="col-xs-6">
+                      <label class="full-label">IR Expiry Date</label>
+                      <%= f.input_field :ir_expiry_date, as: :date, order: [:day, :month, :year], :class=>"form-control slct" %>
+                      <!--<input class="form-control" type="date" value="2011-08-19" id="example-date-input">-->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group btnmarg">
+                  <div class="row">
+                    <div class="btn btn-blue upload-container">
+                      <label class="">Upload a profile image</label>
+                      <% if @customer.profile_image.present? %>
+                        <%= image_fu @customer.profile_image, "100x100#c" %><br>
+                      <% end %>
+                      <%= f.file_field :image_upload, :multiple => true, :class => "upload-btn", :id => "uploadBtn2" %>
+                    </div>
+                    <input id="uploadFile2" placeholder="Choose File" disabled="disabled" class="intext" />
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-xs-12 col-md-6 fields-right">
+                  <div class="input-group form-group">
+                    <%= f.input_field :total_flying_time, :class=>"form-control hrs-in", :placeholder=>"Total Flying Time" %>
+                    <!--<input type="text" class="form-control" placeholder="Total Flying Time">-->
+                    <span class="input-group-addon hrs">Hours</span>
+                    <%= f.input_field :pass_12_months_hours_flown, :class=>"form-control hrs-in2 hrs2", :placeholder=>"Hrs Flown in Last 12 Months" %>
+                    <!--<input type="text" class="form-control hrs2" placeholder="Hrs Flown in Last 12 Months">-->
+                    <span class="input-group-addon hrs1">Hours</span>
+                  </div>
+                  <div class="form-group">
+                    <%= f.input_field :current_position, :class=>"form-control", :placeholder=>"Current Position" %>
+                    <!--<input type="name" class="form-control" id="inputName" placeholder="Current Position">-->
+                  </div>
+                  <div class="form-group">
+                    <%= f.input_field :current_aircraft, :class=>"form-control", :placeholder=>"Current Aircraft" %>
+                    <!--<input type="nationality" class="form-control" id="inputNationality" placeholder="Current Aircraft">-->
+                  </div>
+                  <div class="form-group">
+                    <%= f.input_field :current_airline, :class=>"form-control", :placeholder=>"Current Airline" %>
+                    <!--<input type="gender" class="form-control" id="inputGender" placeholder="Current Airline">-->
+                  </div>
+
+                  <!--<div class="form-group">-->
+                    <!--<%#= f.input_field :address, as: :text, :rows=> 2, :class=>"form-control", :placeholder=>"Address" %>-->
+                    <!--&lt;!&ndash;<input type="age" class="form-control" id="inputAge" placeholder="Address">&ndash;&gt;-->
+                  <!--</div>-->
+                  <!--<div class="form-group">-->
+                    <%#= f.country_select :province, :as => :string, :placeholder => 'Country', :class=>"form-control"%>
+                    <!--<input type="nationality" class="form-control" id="inputNationality" placeholder="Country">-->
+                  <!--</div>-->
+                  <div class="form-group">
+                    <%= f.input_field :contact_number, :placeholder => 'Mobile Phone Number', :class=>"form-control"%>
+                    <!--<input type="marital-status" class="form-control" id="inputAge" placeholder="Mobile Phone Number">-->
+                  </div>
+                  <!--<div class="form-group">-->
+                    <!--<input type="marital-status" class="form-control" id="inputAge" placeholder="Other Phone Number">-->
+                  <!--</div>-->
+                  <div class="form-group">
+                    <%= f.input_field :email, :placeholder => 'Email Address', :class=>"form-control"%>
+                    <!--<input type="marital-status" class="form-control" id="inputAge" placeholder="Email Address">-->
+                  </div>
+              </div>
+
+                <div class="col-xs-12 col-md-6 fields-right">
+                  <div class="btn btn-blue upload-container">
+                    <label>Upload a File</label>
+                    <%= file_field_tag :customer_file, :multiple => true, :class => "upload-btn", :id => "uploadBtn" %>
+                  </div>
+                  <input id="uploadFile" placeholder="Choose File" disabled="disabled" class="intext" />
+                  <h2>Files</h2>
+                  <% items = Refinery::CustomerFiles::CustomerFile.where(:customer_id => current_customer.id) %>
+                  <% if items.present? %>
+                    <% items.each do |item| %>
+                      <%= item.title  %>
+                      <%= link_to "Download", item.file.url  %>
+                      <%= link_to refinery_icon_tag("delete.png"), refinery.customer_files_customer_file_path(item),
+                                  :class => "cancel confirm-delete",
+                                  :confirm => "Are you shore you want to delete: " + item.title,
+                                  :method => :delete %>
+                      <div class="clear"></div>
+                    <% end %>
+                  <% end %>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="qualifications">
+              <div class="row">
+                <div class="col-xs-6 col-md-6 fields-left">
+                  <h2>Aviation Certification Details</h2>
+                  <%= f.fields_for :aviation_certification_details do |builder| %>
+                    <%= render 'aviation_certification_detail_fields', item: builder %>
+                  <% end %>
+                  <%= f.link_to_add "Add Aviation Certification Details", :aviation_certification_details, :class => "link" %>
+                  <h2>Aviation Education Details</h2>
+                  <%= f.fields_for :aviation_education_details do |builder| %>
+                    <%= render 'aviation_education_detail_fields', item: builder %>
+                  <% end %>
+                  <%= f.link_to_add "Add Aviation Education Details", :aviation_education_details, :class => "link" %>
+                </div>
+              </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="career-history">
+              
+                <div class="col-xs-6 col-md-6 fields-left">
+                  
+                  
+                  <div class="form-group">
+                    <label class="form-check-label">
+                      <%= f.check_box  :previously_interviewed, :class=>"boolean optional form-check-input" %>
+                      Have you been previously interviewed?
+                    </label>
+                    <%= f.input_field :interviewed_if_yes, :placeholder=>"If Yes, When?", :class=>"form-control"  %>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-check-label">
+                      <%= f.check_box :previously_employed, :class=>"boolean optional form-check-input" %>
+                      Have you been previously employed?
+                    </label>
+                    <%= f.input_field :employed_if_yes, :placeholder=>"If Yes, Staff Number", :class=>"form-control"  %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.input_field :icao, :placeholder=>"ICAO English Proficiency Level", :class=>"form-control" %>
+                    <!--<input type="name" class="form-control" id="inputName" placeholder="ICAO English Proficiency Level">-->
+                  </div>
+                  <div class="form-group">
+                    <label class="form-check-label">
+                      <%= f.check_box :any_aircraft_accident, :class=>"boolean optional form-check-input" %>
+                      Do you have any aircraft accidents?
+                    </label>
+                    <%= f.input_field :accident_if_yes, as: :text, :rows=> 2, :placeholder=>"If Yes, Specify Details", :class=>"form-control"  %>
+                  </div>
+
+                  <div class="form-group margbot">
+                    <label class="form-check-label">
+                      <%= f.check_box  :military_commitment, :class=>"boolean optional form-check-input" %>
+                      Do You have Any Military Commitment
+                    </label>
+                  </div>
+                  <div class="form-group margbot2">
+                    <label class="form-check-label">
+                      <%= f.check_box :any_criminal_records, :class=>"boolean optional form-check-input" %>
+                      Do you have a criminal record?
+                    </label>
+                  </div>
+                </div>
+
+              
+                <div class="col-xs-6 col-md-6 fields-right">
+                  <h2>Aviation Record</h2>
+                  <%= f.fields_for :aviation_records do |builder| %>
+                    <%= render 'aviation_record_fields', item: builder %>
+                  <% end %>
+                  <%= f.link_to_add "Add a Aviation Record", :aviation_records, :class => "link" %>
+                  <h2>Flying Hours</h2>
+                  <%= f.fields_for :flying_hours do |builder| %>
+                    <%= render 'flying_hour_fields', item: builder %>
+                  <% end %>
+                  <%= f.link_to_add "Add Flying Hours", :flying_hours, :class => "link" %>
+                  <h2>Route Experience</h2>
+                  <%= f.fields_for :route_experiences do |builder| %>
+                    <%= render 'route_experience_fields', item: builder %>
+                  <% end %>
+                  <%= f.link_to_add "Add a Route Experience", :route_experiences, :class => "link" %>
+                </div>
+              
+            </div>
+            <div role="tabpanel" class="tab-pane" id="settings">
+
+            </div>
+          </div>
+          
+
+          <div class="row">
+          <div class="col-xs-12 password-submit">
+            <%= f.input_field :current_password, :placeholder => 'Current Password', :class => 'form-control'%>
+            <%= f.button :submit, "Update Details", :class => 'btn btn-blue pull-right', :data => {:disable_with => "Saving..."} %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!--<h2>Edit Your Details</h2>-->
+
+  <%#= simple_nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal admin' }) do |f| %>
+    <%#= devise_error_messages! %>
+
+    <%# @customer = Refinery::Customers::Customer.find(f.object.id)  %>
+
+
+    <%#= f.input :first_name, :placeholder => 'Name'%>
+    <%#= f.input :surname, :placeholder => 'Surname'%>
+    <%#= f.input :contact_number, :placeholder => 'Contact Number'%>
+
+    <%#= f.input :email, :placeholder => 'Email Address'%>
+
+    <%#= f.input :dob %>
+    <%#= f.input :age %>
+    <%#= f.input :nationality %>
+    <%#= f.input :gender %>
+    <%#= f.input :ppc_date, as: :date, order: [:day, :month, :year] %>
+    <%#= f.input :ppc_expiry_date, as: :date, order: [:day, :month, :year] %>
+    <%#= f.input :ir_date, as: :date, order: [:day, :month, :year] %>
+    <%#= f.input :ir_expiry_date, as: :date, order: [:day, :month, :year] %>
+    <%#= f.input :total_flying_time %>
+    <%#= f.input :pass_12_months_hours_flown %>
+    <%#= f.input :dual_nationality_details %>
+    <%#= f.input :marital_period %>
+    <%#= f.input :notice_period %>
+    <%#= f.input :icao %>
+    <%#= f.input :military_commitment %>
+    <%#= f.input :previously_interviewed %>
+    <%#= f.input :previously_employed %>
+    <%#= f.input :any_aircraft_accident %>
+    <%#= f.input :any_criminal_records %>
+    <%#= f.input :current_position %>
+    <%#= f.input :current_aircraft %>
+    <%#= f.input :current_airline %>
+    <%#= f.input :address %>
+    <%#= f.input :interviewed_if_yes %>
+    <%#= f.input :employed_if_yes %>
+    <%#= f.input :accident_if_yes %>
+    <%#= f.input :online_application_number %>
+
+
+
+
+    <%#= f.input :current_password, :placeholder => 'Current Password'%>
+
+
+    <!--<div class="form-actions">-->
+      <%#= f.button :submit, "Update Details", :class => 'btn btn-custom'%>
+    <!--</div>-->
+  <%# end %>
+<% end %>
+
+

@@ -1,0 +1,15 @@
+<% content_for :full do %>
+  
+<form class='peachPaymentsForm' action='<%=  @capture_result.redirect_url %>' style='display:none' method="post">
+<% @capture_result.redirect_parameters.each do |parameters| %>	
+	<input type="text" name="<%= parameters['name']  %>" value="<%= parameters['value'] %>">
+<% end %>
+</form>
+
+<script type="text/javascript">
+	$(function() {
+	   $('.peachPaymentsForm').submit();
+	})
+</script>
+
+<% end %>

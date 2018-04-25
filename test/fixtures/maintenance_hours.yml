@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  aircraft_id: 1
+  airframe: false
+  power_plant: false
+  fuel: false
+  pneumatic: false
+  hydraulics: false
+  avionics: false
+  electrical: false
+  interiors: false
+  total_hours: 1
+  customer_id: 1
+
+two:
+  aircraft_id: 1
+  airframe: false
+  power_plant: false
+  fuel: false
+  pneumatic: false
+  hydraulics: false
+  avionics: false
+  electrical: false
+  interiors: false
+  total_hours: 1
+  customer_id: 1

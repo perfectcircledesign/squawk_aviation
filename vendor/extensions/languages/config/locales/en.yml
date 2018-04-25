@@ -1,0 +1,27 @@
+en:
+  refinery:
+    plugins:
+      languages:
+        title: Languages
+    languages:
+      admin:
+        languages:
+          actions:
+            create_new: Add New Language
+            reorder: Reorder Languages
+            reorder_done: Done Reordering Languages
+          records:
+            title: Languages
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Languages yet. Click "Add New Language" to add your first language.
+          language:
+            view_live_html: View this language live <br/><em>(opens in a new window)</em>
+            edit: Edit this language
+            delete: Remove this language forever
+      languages:
+        show:
+          other: Other Languages
+  activerecord:
+    attributes:
+      'refinery/languages/language':
+        name: Name

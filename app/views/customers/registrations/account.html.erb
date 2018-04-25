@@ -1,0 +1,219 @@
+<%= content_for :left do %>
+<div class="col-xs-12 col-md-9">
+
+  <%= render '/shared/customer/main_info' -%>
+
+  <%= render '/shared/customer/cover_letter' -%>
+
+  <%= render '/shared/customer/education' -%>
+
+  <% if @customer.career_path == 'Pilot' %>
+      <%= render '/shared/customer/licence_certificate' -%>
+  <% end %>
+
+  <% if @customer.career_path == 'Cabin Crew' %>
+      <%= render '/shared/customer/cabin_certificate' -%>
+  <% end %>
+
+  <% if @customer.career_path == 'Aircraft Maintenance' %>
+      <%= render '/shared/customer/maintenance_certificate' -%>
+  <% end %>
+
+  <%= render '/shared/customer/employment_history' -%>
+
+  <% if @customer.career_path == 'Pilot' %>
+    <%= render '/shared/customer/flying_hours' -%>
+  <% end %>
+
+  <% if @customer.career_path == 'Cabin Crew' %>
+    <%= render '/shared/customer/flying_hours_cabins' -%>
+  <% end %>
+
+  <% if @customer.career_path != 'Aircraft Maintenance' %>
+    <%= render '/shared/customer/route_experience' -%>
+    <%= render '../views/personal/route_experience' -%>
+    <%#= render '/shared/customer/route_experience' -%>
+  <% end %>
+
+  <% if @customer.career_path == 'Aircraft Maintenance' %>
+    <%= render '/shared/customer/maintenance_hour' -%>
+  <% end %>
+
+  <%= render '/shared/customer/logbook' -%>
+
+</div>
+
+
+    <%= render '../views/personal/form' -%>
+    <%= render '../views/personal/cover_letter' -%>
+    <%= render '../views/personal/profile_image' -%>
+    <%= render '../views/personal/file' -%>
+
+
+    <div class="modal fade" id="new_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <!--this is where we dynamically load the partial-->
+          <div class="form_details" id="form_details"></div>
+        </div>
+      </div>
+    </div>
+
+
+
+<% end %>
+
+
+<% content_for :right do %>
+    <div class="col-xs-12 col-md-3">
+      <% unless @customer.complete_percentage == 100 %>
+        <div class="card profile-complete-card hidden-xs">
+          <h5>Complete your Profile</h5>
+          <div class="progress-bar-container">
+            <div class="progress-bar">
+              <div style="width: <%= @customer.complete_percentage.to_s %>%;" class="bar"></div>
+            </div>
+            <p><%= @customer.complete_percentage.to_s %>% Complete</p>
+          </div>
+        </div>
+      <% end %>
+        <!--<div class="card upgrade-card">-->
+          <!--<h3>Upgrade to Pro</h3>-->
+          <!--<ul class="list-unstyled">-->
+            <!--<li>Lorem dolor <span>sit amet</span></li>-->
+            <!--<li>Aenean viverra <span>consectetur</span></li>-->
+            <!--<li>Mauris condimentum <span>id sapien</span></li>-->
+          <!--</ul>-->
+          <!--<a href="#" class="btn-green btn">Go Pro</a>-->
+        <!--</div>-->
+      <% if @customer.career_path == 'Pilot' %>
+        <div class="profile-stats hidden-xs">
+          <div class="general">
+            <h5>Total Flying Hours</h5>
+            <table>
+              <tr>
+                <td>
+                  P1:
+                </td>
+                <td>
+                  <%= @customer.p1.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  P2:
+                </td>
+                <td>
+                  <%= @customer.p2.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  P3:
+                </td>
+                <td>
+                  <%= @customer.p3.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      <% elsif @customer.career_path == 'Cabin Crew' %>
+        <div class="profile-stats hidden-xs">
+          <div class="general">
+            <h5>Total Flying Hours</h5>
+            <table>
+              <tr>
+                <td>
+                  Flight Attendant:
+                </td>
+                <td>
+                  <%= @customer.p1.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Purser:
+                </td>
+                <td>
+                  <%= @customer.p2.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Chief Purser:
+                </td>
+                <td>
+                  <%= @customer.p3.to_i %> <small>Hours</small>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="card details-card">
+        <h5 class="pod-header">Airlines in your circle</h5>
+        <% if @favourite_airlines.present? %>
+          <% @favourite_airlines.each do |airline| %>
+            <div class="media side-profiles">
+              <div class="media-left">
+                <% if airline.logo.present? %>
+                    <%= link_to refinery.favourite_airline_path(airline) do %>
+                      <%= image_fu airline.logo, '40x40#c' %>
+                    <% end %>
+                <% else %>
+                    <%= link_to refinery.favourite_airline_path(airline) do %>
+                      <img src="/assets/profile-blank.jpg" width="40" height="40">
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to refinery.favourite_airline_path(airline) do %>
+                  <div class="media-header">
+                      <%= airline.name %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="media-right">
+                <%= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => airline.id), :class=>"btn btn btn-sm btn-window pull-right", :remote => true %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% if @favourite_jobs.is_active.present? %>
+        <div class="card dashboard-jobs">
+          <h5 class="pod-header">Jobs you interested in</h5>
+          <% @favourite_jobs.is_active.each do |job| %>
+            <div class="media side-profiles">
+              <div class="media-left">
+                <%= link_to refinery.airlines_airline_path(job.airline) do %>
+                    <% if job.airline.logo.present? %>
+                        <%= image_fu job.airline.logo, '40x40#c' %>
+                    <% else %>
+                        <img src="/assets/profile-blank.jpg" width="40" height="40">
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to refinery.jobs_job_path(job) do %>
+                    <div class="media-header">
+                      <%= job.name %>
+                    </div>
+                    <%= job.airline.name %>
+                <% end %>
+              </div>
+              <div class="media-right">
+                <%= link_to 'Uninterest',refinery.favourite_job_path(:job_id => job.id), :class=>"btn btn btn-sm btn-window pull-right", :remote => true %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+<% end %>

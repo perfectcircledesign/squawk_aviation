@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  aircraft_id: 1
+  date_first_flown: 2017-07-19
+  date_last_flown: 2017-07-19
+  total_hours: MyString
+  customer_id: 1
+
+two:
+  aircraft_id: 1
+  date_first_flown: 2017-07-19
+  date_last_flown: 2017-07-19
+  total_hours: MyString
+  customer_id: 1

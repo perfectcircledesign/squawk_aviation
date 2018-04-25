@@ -1,0 +1,27 @@
+nb:
+  refinery:
+    plugins:
+      airlines:
+        title: Airlines
+    airlines:
+      admin:
+        airlines:
+          actions:
+            create_new: Lag en ny Airline
+            reorder: Endre rekkefølgen på Airlines
+            reorder_done: Ferdig å endre rekkefølgen Airlines
+          records:
+            title: Airlines
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Airlines enda. Klikk på "Lag en ny Airline" for å legge til din første airline.
+          airline:
+            view_live_html: Vis hvordan denne airline ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne airline
+            delete: Fjern denne airline permanent
+      airlines:
+        show:
+          other: Andre Airlines
+  activerecord:
+    attributes:
+      'refinery/airlines/airline':
+        name: Name

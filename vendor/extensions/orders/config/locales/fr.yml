@@ -1,0 +1,97 @@
+fr:
+  refinery:
+    plugins:
+      transactions:
+        title: Transactions
+      order_items:
+        title: Order Items
+      orders:
+        title: Orders
+    transactions:
+      admin:
+        transactions:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Transaction
+            reorder: Réordonner les Transactions
+            reorder_done: Fin de réordonnancement des Transactions
+          records:
+            title: Transactions
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Transaction. Cliquer sur
+              "Créer un(e) nouve(au/l/lle) Transaction" pour créer votre premi(er/ère)
+              transaction.
+          transaction:
+            view_live_html: Voir ce(t/tte) transaction <br/><em>(Ouvre une nouvelle
+              fenêtre)</em>
+            edit: Modifier ce(t/tte) transaction
+            delete: Supprimer définitivement ce(t/tte) transaction
+      transactions:
+        show:
+          other: Autres Transactions
+    order_items:
+      admin:
+        order_items:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Order Item
+            reorder: Réordonner les Order Items
+            reorder_done: Fin de réordonnancement des Order Items
+          records:
+            title: Order Items
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Order Item. Cliquer sur "Créer
+              un(e) nouve(au/l/lle) Order Item" pour créer votre premi(er/ère) order
+              item.
+          order_item:
+            view_live_html: Voir ce(t/tte) order item <br/><em>(Ouvre une nouvelle
+              fenêtre)</em>
+            edit: Modifier ce(t/tte) order item
+            delete: Supprimer définitivement ce(t/tte) order item
+      order_items:
+        show:
+          other: Autres Order Items
+    orders:
+      admin:
+        orders:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Order
+            reorder: Réordonner les Orders
+            reorder_done: Fin de réordonnancement des Orders
+          records:
+            title: Orders
+            sorry_no_results: Désolé ! Aucun résultat.
+            no_items_yet: Il n'y a actuellement aucun(e) Order. Cliquer sur "Créer
+              un(e) nouve(au/l/lle) Order" pour créer votre premi(er/ère) order.
+          order:
+            view_live_html: Voir ce(t/tte) order <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) order
+            delete: Supprimer définitivement ce(t/tte) order
+      orders:
+        show:
+          other: Autres Orders
+  activerecord:
+    attributes:
+      refinery/transactions/transaction:
+        unique_guid: Unique Guid
+        order_id: Order
+        amount: Amount
+        is_payment_successful: Is Payment Successful
+        notes: Notes
+      refinery/order_items/order_item:
+        product_name: Product Name
+        product_stock_code: Product Stock Code
+        product_supplier_stock_code: Product Supplier Stock Code
+        price: Price
+        order_id: Order
+        quantity: Quantity
+        total: Total
+      refinery/orders/order:
+        order_number: Order Number
+        customer_id: Customer
+        order_status: Order Status
+        grand_total: Grand Total
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        suburb: Suburb
+        city: City
+        postal_code: Postal Code
+        payment_type: Payment Type

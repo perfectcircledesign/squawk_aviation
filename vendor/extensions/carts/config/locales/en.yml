@@ -1,0 +1,54 @@
+en:
+  refinery:
+    plugins:
+      line_items:
+        title: Line Items
+      carts:
+        title: Carts
+    line_items:
+      admin:
+        line_items:
+          actions:
+            create_new: Add New Line Item
+            reorder: Reorder Line Items
+            reorder_done: Done Reordering Line Items
+          records:
+            title: Line Items
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Line Items yet. Click "Add New Line Item" to
+              add your first line item.
+          line_item:
+            view_live_html: View this line item live <br/><em>(opens in a new window)</em>
+            edit: Edit this line item
+            delete: Remove this line item forever
+      line_items:
+        show:
+          other: Other Line Items
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Add New Cart
+            reorder: Reorder Carts
+            reorder_done: Done Reordering Carts
+          records:
+            title: Carts
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Carts yet. Click "Add New Cart" to add your
+              first cart.
+          cart:
+            view_live_html: View this cart live <br/><em>(opens in a new window)</em>
+            edit: Edit this cart
+            delete: Remove this cart forever
+      carts:
+        show:
+          other: Other Carts
+  activerecord:
+    attributes:
+      refinery/line_items/line_item:
+        cart_id: Cart
+        product_id: Product
+        quantity: Quantity
+      refinery/carts/cart:
+        customer_id: Customer
+        is_current: Is Current

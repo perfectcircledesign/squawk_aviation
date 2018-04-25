@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  license_authority: MyString
+  license_type: MyString
+  customer_id: 1
+  file_id: 1
+
+two:
+  license_authority: MyString
+  license_type: MyString
+  customer_id: 1
+  file_id: 1

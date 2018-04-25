@@ -1,0 +1,96 @@
+<% content_for :full do %>
+<div class="index-sliver index-airline-list">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Follow the Airlines you love</h3>
+      <!--<div class="filters">-->
+        <!--<div class="form-group">-->
+          <!--<label>Location</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>South Africa</option>-->
+            <!--<option>South Africa</option>-->
+            <!--<option>South Africa</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+          <!--<label>Type</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>Commercial</option>-->
+            <!--<option>Private</option>-->
+            <!--<option>Cargo</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+          <!--<label>Sort by</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>A-Z</option>-->
+            <!--<option>Most active</option>-->
+            <!--<option>Rating</option>-->
+          <!--</select>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="index airline-index">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form accept-charset="UTF-8" action="/airlines" method="get" class="submit_this_form">
+          <div class="search">
+            <input type="text" name="airline_search" placeholder="Search for Airline by Title">
+            <a href="#" onclick="$('.submit_this_form').submit()" class="btn btn-green">Search</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <% if params[:airline_search].present? and @airlines.blank? %>
+          <div class="col-xs-3">
+            Sorry, no airlines where found.
+          </div>
+      <% else %>
+        <% @airlines.reverse!.each do |a, airlines| %>
+          <% airlines.each do |airline| %>
+            <div class="col-xs-12 col-sm-3">
+              <div class="card">
+                <%= link_to refinery.airlines_airline_path(airline) do %>
+                    <% if airline.logo.present? %>
+                        <div class="airline-image-container">
+                            <%= image_fu airline.logo, "150x150^", class: 'center-block' %>
+                        </div>
+                    <% else %>
+                        <div class="airline-image-container">
+                          <img src="/assets/airline-blank.jpg" width="150" height="150" class="center-block">
+                        </div>
+                    <% end %>
+                  <h3 class="text-center"><%= airline.name %></h3>
+                  <p><%#= airline.website %></p>
+                <% end %>
+                <div class="details">
+                  <% if current_customer.present? %>
+                    <% if customer_airline_favourite(current_customer.id, airline.id, 'pilot') %>
+                        <%= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => airline.id), :class=>"btn btn btn-sm btn-window pull-right", :remote => true %>
+                    <% else %>
+                        <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => airline.id), :class=>"btn btn-green btn-sm btn-window pull-right", :remote => true %>
+                    <% end %>
+                  <% end %>
+                  <p><%= airline.jobs.is_active.count %> Jobs Listed</p>
+                  <p>Joined <%= airline.created_at.strftime('%Y') %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<% end %>
+
+<%= render '/refinery/content_page' %>

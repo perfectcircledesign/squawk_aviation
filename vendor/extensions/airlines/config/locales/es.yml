@@ -1,0 +1,28 @@
+es:
+  refinery:
+    plugins:
+      airlines:
+        title: Airlines
+#        article: masculino/femenino
+    airlines:
+      admin:
+        airlines:
+          actions:
+            create_new: Crear nuevo airline
+            reorder: Reordenar airlines
+            reorder_done: Reordenación de airlines completada
+          records:
+            title: Airlines
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay airlines todavía. Pulsa en "Crear nuevo Airline" para crear tu primer airline.
+          airline:
+            view_live_html: Ver este airline como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este airline
+            delete: Borrar este airline para siempre
+      airlines:
+        show:
+          other: Otros airlines
+  activerecord:
+    attributes:
+      'refinery/airlines/airline':
+        name: Name

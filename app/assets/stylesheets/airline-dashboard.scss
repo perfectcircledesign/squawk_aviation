@@ -1,0 +1,162 @@
+@import 'application';
+@import 'dashboard';
+
+.airline-sliver {background: #b4b4b4 url(/assets/airlines.jpg) center center / cover; text-align: center; padding: 2em 0;
+	h1, h2, h3 {color: #fff;}
+	h2 {font-size: 2.25em;}
+	.stats {padding: 0 0 20px 0;
+		ul {list-style: none; padding-left: 0;
+			li {display: inline-block; padding: 0 2em;
+				h1 {font-size: 3em; margin-bottom: 0;}
+				h3 {font-size: 1em; font-weight: 300; margin: 0;}
+			}
+		}
+	}
+}
+
+.discover {text-align: center; padding: 2em 0; background-color: #fff;
+	h2 {margin-bottom: 0.5em;}
+	.search-fields {text-align: left; margin-top: 1em;
+		label {width: 180px; display: inline-block; padding-right: 10px; text-align: right; font-size: 0.875em; color: $jetblue;}
+		input[type='text'], select {display: inline-block; width: calc(100% - 200px); margin-bottom: 0; box-shadow: none;}
+		.form-checkbox {width: 40px;}
+		.btn {margin-right: calc(100% - 180px - calc(100% - 196px));}
+	}
+	select {background: #fff url(/assets/downarrow.jpg) no-repeat 95% 50%;
+    	-webkit-appearance: none;
+    	-moz-appearance: none;
+    	appearance: none;
+	}
+
+	select::-ms-expand {
+	    display: none;
+	}
+}
+
+.image_uploader {
+	.slim {background-image: none;}
+	.slim[data-state*="empty"] .slim-label {line-height: 1; font-size: 12px;}
+	ul {list-style: none; padding-left: 0;
+		li {width: 32%; display: inline-block;}
+	}
+	&:after {content: ''; clear: both; display: table;}
+}
+.image_uploader.background-sliver {margin-bottom: 20px;}
+
+.language-select {
+	.btn-group {display: inline-block!important; width: calc(100% - 200px)!important; margin-bottom: 0; box-shadow: none;}
+}
+
+.dashboard {padding: 2em 0; background-color: #f0f0f0;
+	.info {background-color: #fff; padding: 1.25em; margin-bottom: 30px;}
+	.card {
+		h3 {font-size: 1.5em; font-weight: 300;}
+	}
+	.job, .article {border-bottom: 1px solid #f0f0f0; padding-bottom: 1.5em; margin-bottom: 1.5em; font-size: 0.875em;
+		a {color: $body;}
+		h5 {color: $bodydark; margin-top: 0; position: relative;}
+	}
+	.jobs.card {
+		.table {font-size: 0.875em;
+			td:first-child {width:1000px;}
+			td {font-size: 0.875em;
+				a {color: $bodydark;}
+				.badge {
+					a {color: #fff;}
+				}
+			}
+		}
+	}
+	.article .media-left img {border-radius: 0;}
+	.job-index {border-left: 2px solid #eee; padding-left: 20px;
+		h5:before {position: absolute; content: ''; display: block; width: 16px; height: 16px; border: 2px solid #dadada; border-radius: 8px; background-color: #fff; left: -29px;}
+		.job:first-child {
+			h5:before {border: 2px solid $blue;}
+		}
+	}
+	.job:last-child, .article:last-child {border: none; padding-bottom: 0;}
+	.favourite-listing, .review-listing {margin-bottom: 1.25em;}
+	.all {border-top: 1px solid #f0f0f0; margin: 0 -1.25em; text-align: center; font-size: 0.875em; padding-top: 1.25em;}
+	.quick-post {
+		textarea {margin-bottom: 1em; resize: none;}
+		a + a {margin-left: 10px;}
+	}
+	.info {
+		h3 {font-weight: 300; margin: 0;}
+		p {font-size: 2em; margin: 0;}
+		.plus {color: $green;}
+		.minus {color: $red;}
+	}
+}
+input.career_path + .pilot_label {background: url(../assets/pilot-bg.png) no-repeat 10px 10px;}
+input.career_path + .cabin_crew_label {background: url(../assets/cabin_crew-bg.png) no-repeat 10px 10px;;}
+input.career_path + .aircraft_maintenance_label {background: url(../assets/aircraft_maintenance-bg.png) no-repeat 10px 10px;}
+
+input.career_path{visibility: hidden; position: absolute;}
+input.career_path + label {cursor: pointer; color: #03a9f5; background-color: transparent; display: inline-block; padding: 10px 20px 10px 40px; border-radius: 10px; border: 1px solid #03a9f5; font-weight: 300;}
+input.career_path:checked + label {background-color: #03a9f5; color: #fff; background-position: 10px -36px}
+
+
+.range-input {display: inline-block; width: calc(100% - 200px);
+}
+.irs-from, .irs-to, .irs-single {background: #03a9f5!important;}
+.irs-from::after, .irs-to::after, .irs-single::after {border-top-color: #03a9f5!important;}
+
+.airline-edit {padding: 0 0 1.25em 0;
+	.form-group {margin-bottom: 0;}
+	.card {margin-top: -8em;}
+	.airline-profile-pic {border: 1px solid #dadada; border-radius: 4px; padding: 0.5em; margin-bottom: 1.25em;
+		img {vertical-align: top; margin-right: 10px;}
+		input {display: none;}
+		p {font-size: 0.875em;}
+		label {display: inline-block; display: -moz-inline-box; display: -webkit-inline-box; color: #fff; vertical-align: top;}
+	}
+	input[type="text"], input[type="email"], input[type="password"] {width: 100%;}
+	label {display: block; font-size: 0.875em; color: $bodydark;}
+	textarea {width: 100%; height: 159px; resize: none; border: 1px solid #dadada; border-radius: 4px; padding: 0.75em;}
+	textarea {resize: none; margin-bottom: 1.25em; border-color: #dadada;}
+	select {display: inline-block; width: 100%; border: 1px solid #dadada; border-radius:4px; margin-bottom: 0; box-shadow: none; font-size: 14px; height: 34px; padding: 0 0.5em;}
+	select {background: #fff url(/assets/downarrow.jpg) no-repeat 95% 50%;
+    	-webkit-appearance: none;
+    	-moz-appearance: none;
+    	appearance: none;
+	}
+
+	select::-ms-expand {
+	    display: none;
+	}
+	.upload-image {
+		img {margin-bottom: 1em;}
+		input {display: none;}
+	}
+}
+
+.search_path{
+  ul{list-style: none;margin: 0;padding: 0;
+    li{display: inline-block;}
+  }
+
+}
+
+//Tiny
+@media (max-width:576px) {
+
+}
+
+//Extra Small
+@media (max-width: 767px) {
+
+}
+
+//Small
+@media (max-width: 991px) {
+}
+
+//Medium
+@media (max-width:1199px) {
+	
+}
+//Large
+@media (min-width: 1200px) { 
+
+}

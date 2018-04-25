@@ -1,0 +1,28 @@
+es:
+  refinery:
+    plugins:
+      languages:
+        title: Languages
+#        article: masculino/femenino
+    languages:
+      admin:
+        languages:
+          actions:
+            create_new: Crear nuevo language
+            reorder: Reordenar languages
+            reorder_done: Reordenación de languages completada
+          records:
+            title: Languages
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay languages todavía. Pulsa en "Crear nuevo Language" para crear tu primer language.
+          language:
+            view_live_html: Ver este language como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este language
+            delete: Borrar este language para siempre
+      languages:
+        show:
+          other: Otros languages
+  activerecord:
+    attributes:
+      'refinery/languages/language':
+        name: Name

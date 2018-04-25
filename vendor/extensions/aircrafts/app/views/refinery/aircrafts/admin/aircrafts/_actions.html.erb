@@ -1,0 +1,28 @@
+<ul>
+  <% if ::Refinery::Aircrafts::Admin::AircraftsController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.aircrafts_admin_aircrafts_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_aircrafts_admin_aircraft_path,
+                 :class => "add_icon" %>
+  </li>
+  <li>
+    <%= link_to('Import XLS', refinery.new_aircraft_import_path, :style => 'background-image: url(/assets/icon_excel.png);') %>
+  </li>
+<% if !searching? && ::Refinery::Aircrafts::Admin::AircraftsController.sortable? && ::Refinery::Aircrafts::Aircraft.any? %>
+  <li>
+    <%= link_to t('.reorder', :what => "Aircrafts"),
+                 refinery.aircrafts_admin_aircrafts_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Aircrafts"),
+                 refinery.aircrafts_admin_aircrafts_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,30 @@
+es:
+  refinery:
+    plugins:
+      employers:
+        title: Employers
+#        article: masculino/femenino
+    employers:
+      admin:
+        employers:
+          actions:
+            create_new: Crear nuevo employer
+            reorder: Reordenar employers
+            reorder_done: Reordenación de employers completada
+          records:
+            title: Employers
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay employers todavía. Pulsa en "Crear nuevo Employer" para crear tu primer employer.
+          employer:
+            view_live_html: Ver este employer como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este employer
+            delete: Borrar este employer para siempre
+      employers:
+        show:
+          other: Otros employers
+  activerecord:
+    attributes:
+      'refinery/employers/employer':
+        name: Name
+        image: Image
+        url: Url

@@ -1,0 +1,33 @@
+<% content_for :body_content_title do %>
+  <%= @route_experience.continent %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Continent</h1>
+    <p>
+      <%=raw @route_experience.continent %>
+    </p>
+  </section>
+  <section>
+    <h1>Airport</h1>
+    <p>
+      <%=raw @route_experience.airport %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="route_experiences">
+      <% @route_experiences.each do |route_experience| %>
+        <li>
+          <%= link_to route_experience.continent, refinery.route_experiences_route_experience_path(route_experience) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

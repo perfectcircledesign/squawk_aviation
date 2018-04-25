@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Make a Payment</title>
+</head>
+<body>
+
+  <form method="POST" action="https://www.vcs.co.za/vvonline/vcspay.aspx">
+    <input type="hidden" name="p1" value="<%= ::Refinery::Setting.find_or_set(:vcs_terminal_id, 'F492') %>">
+    <input type="hidden" name="p2" value="<%= @unique_guid %>">
+    <input type="hidden" name="p3" value="Repcillin Products">
+    <input type="hidden" name="p4" value="<%= (@order.grand_total) %>">
+    <input type="hidden" name="p5" value="ZAR">
+    <input type="hidden" name="p10" value="<%= refinery.orders_order_payment_fail_url(@order) %>">
+    <input type="hidden" name="Budget" value="N">
+    <input type="hidden" name="UrlsProvided" value="Y">
+    <input type="hidden" name="CardholderEmail" value="<%= @order.customer.email %>">
+
+    <input type="hidden" name="ApprovedUrl" value="<%= refinery.orders_order_payment_successful_url(@order) %>">
+    <input type="hidden" name="DeclinedUrl" value="<%= refinery.orders_order_payment_fail_url(@order) %>">
+
+
+    <!--<input type=”hidden” name=”hash” value=”Hash”>-->
+    <input type="submit" value="Proceed to Payment" style="display:none;" />
+  </form>
+
+  <script language="JavaScript" type="text/javascript">
+    document.forms[0].submit();
+  </script>
+</body>
+</html>

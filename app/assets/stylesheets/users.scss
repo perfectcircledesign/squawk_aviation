@@ -1,0 +1,247 @@
+@import 'application';
+@import 'dashboard';
+
+.sliver {background: #b4b4b4 url(/assets/profile-sliver.jpg) center center / cover; height: 200px;}
+
+.profile-card {margin-top: -100px;
+	.profile-pic {margin-top: -100px; display: inline-block; display: -webkit-inline-box; display: -moz-inline-box;
+		img {border-radius: 50%; border: 2px solid #fff; display: block; margin: 0 auto 0;}
+	}
+	.profile-details {text-align: center; padding-top: 1.5em; margin-bottom: 0;
+		h2 {font-size: 1.5em; margin-bottom: 0.3125em;}
+		.qualification {font-size: 1.125em; font-weight: 700; line-height: 28px; margin-bottom: 1em;}
+		.location, .employment, .languages {font-size: 0.875em; line-height: 28px;
+			.fa {color: $blue; margin-right: 5px;}
+			.fa+.fa {margin-left: 1em;}
+		}
+		a {margin: 0 5px;}
+	}
+	.employment-label {display: block; margin-bottom: 0; line-height: 1;}
+	.employment {line-height: 1; margin-top: 10px;}
+}
+
+.profile-complete-card {text-align: center;
+	.progress-bar-container {
+		.progress-bar {margin-bottom: 10px;}
+	}
+	p {font-size: 0.75em; line-height: 1.25em;}
+	.bullets {margin-bottom: 1em;}
+	.btn {font-size: 1em; padding: 10px; min-width: 170px;}
+}
+
+.qualification-table.table {width: 100%; text-align: left; margin-top: 30px;
+	td {font-size: 12px; font-weight: 700; color: $body; text-transform: uppercase; padding-top: 30px; width: 33.3333%;
+		span {font-weight: 300; text-transform: none;}
+	}
+}
+
+.licence-checkboxes {
+	label {display: inline-block!important;}
+	span {display: inline-block; font-size: 12px; margin-left: 5px;}
+}
+
+.route_experiences_form {
+	label {display: inline-block!important; font-size: 12px!important;}
+	.form-checkbox {margin-top: 3px!important; margin-right: 5px;}
+	.form-checkbox + label {cursor: pointer;}
+}
+
+.feed {
+	.send-message, .contact-number {
+		h4 {font-weight: 300; margin-bottom: 20px;}
+		.fa {margin-right: 5px;}
+		.btn {margin-top: 10px;}
+	}
+}
+
+.personal-checkbox {
+	.col-xs-4 {vertical-align: top;}
+	.form-checkbox {margin-top: 0;}
+}
+
+.modal-checkbox {margin-top: 0!important;}
+
+.details-card {
+	.btn-edit {position: absolute; right: 30px; top: 12px;}
+	h2 {font-size: 1.5em; margin-bottom: 1.5em}
+	.details-panel {border: 1px solid #f0f0f0; border-left: 5px solid $blue; border-radius: 5px; padding: 15px; font-size: 0.875em; position: relative;
+		h6 {font-size: 1em; color: $blue; font-weight: 700; margin-top: 0; display: inline;}
+		.close {font-size: 1em;}
+		table {width: 100%; font-size: 1em;
+			td:nth-child(1), td:nth-child(3) {width: 5000px;}
+			td:nth-child(2), td:nth-child(4) {width: 10000px;}
+		}
+		strong {color: $bodydark; display: block; margin-top: 10px;}
+	}
+	.details-panel + .details-panel {margin-top: 10px;}
+	.blank-state {text-align: center;}
+	.logbook-panel {border:1px solid #dadada; border-radius: 5px; overflow: hidden; display: inline-block; font-size: 0.875em;
+		.close {font-size: 14px;}
+		.logbook-header {background-color: #dadada; padding: 5px;}
+		.image {padding: 5px; height: 120px; display: table-cell; vertical-align: middle;
+			img {height: auto;}
+		}
+	}
+	.media {margin-bottom: 20px;
+		.media-body {vertical-align: middle;
+			h4 {font-weight: 300; color: $bodydark; margin: 0; line-height: normal;}
+			p {margin: 0; line-height: normal; color: $body}
+		}
+	}
+}
+
+.profile-stats {background-color: #fff; padding: 1.25em; margin-bottom: 30px;
+	.verified {border-bottom: 1px solid #f0f0f0; margin: 0 -10px; padding: 0 10px 10px;
+		.tick-container {height: 32px; width: 32px; border: 1px solid #cddc39; border-radius: 50%; margin-right: 10px;}
+		.tick {height: 32px; width: 32px; vertical-align: middle; display: table-cell; text-align: center;}
+		h5 {display: inline-block;}
+	}
+	.general {
+		table {width: 100%; margin: 10px 0;
+			td {padding: 10px 0 0;}
+			td:first-child {width: 42px; text-align: left;
+				img {margin-right: 10px;}
+			}
+		}
+	}
+}
+
+.other-candidates {
+	img {width: 40px; height: 40px;}
+}
+
+.user-search {padding-top: 0; padding-bottom: 0;
+	.index-search {text-align: left; background-color: $blue; padding-top: 10px;
+		h2 {text-align: left; display: inline-block; font-size: 1em; color: #fff; font-weight: 700}
+		ul {display: inline-block;
+			li {
+				a {color: #fff; padding: 2px 5px; border: 1px solid transparent;}
+			}
+			li.active {
+				a {color: $blue; background-color: #fff; border: 1px solid #fff;}
+			}
+		}
+	}
+}
+
+.personal-number {
+	#customer_contact_number {padding: 0.5em 0.5em 0.5em 3.5em;}
+}
+
+
+.index {
+	.users {margin-bottom: 30px; background-color: #fff;padding: 1.25em;
+		.sortby {font-size: 0.75em;
+			.form-group {display: inline-block; vertical-align: middle; margin-left: 10px;
+				label {margin: 0;}
+			}
+		}
+		h3,h4 {font-weight: 300;}
+		h4 {font-size: 1.25em; color: $bodydark; margin: 0 0 2em;}
+		.media {border-bottom: 1px solid #eee; padding-bottom: 1em; margin-bottom: 1em; margin-top: 1em;
+			.media-left {position: relative;
+				img {border-radius: 50%; width: 75px; height: 75px;}
+				.verified {position: absolute; border: 0; right: 15px; bottom: 15px; background-color: #fff; width: 18px; height: 18px; border-radius: 50%; border: 1px solid $green; text-align: center;
+					img {width: 14px; height: auto; border: none!important; margin-top: 2px;}
+				}
+			}
+			
+			.media-body {font-size: 0.75em; color: $body;
+				.media-header {color: $blue;  font-size: 1.25em;}	
+			}
+			.media-right {white-space: nowrap;
+				img {margin-right: 10px;}
+			}
+			.media-right, .media-body, .media-left {vertical-align: top;}
+			ul {
+				li:last-child {color: $bodydark; margin-top: 10px;
+					span {margin: 0 10px;}
+				}
+			}
+		}
+		.featured {
+			.media-left {
+				img {border: 2px solid $blue;}
+			}
+			.media-body {
+				.media-header {font-weight: 700;}
+			}
+			.media-right {
+				.btn-green {background-color: $blue; border-color: $blue; color: #fff;}
+			}
+		}
+	}
+	.filter-candidates {background: $blue; padding: 0.75em 1.25em;
+		h4 {color: #fff; font-size: 1em; margin-bottom: 0.5em;}
+		ul {margin-bottom: 0;}
+		li {padding: 0;
+			label {color: #fff; border-color: #fff; margin-bottom: 0; padding: 5px 5px 5px 5px; background: none;}
+			// input + .pilot_label {background: url(../assets/pilot-bg.png) no-repeat 5px -41px;}
+			// input + .cabin_crew_label {background: url(../assets/cabin_crew-bg.png) no-repeat 5px -41px;;}
+			// input + .aircraft_maintenance_label {background: url(../assets/aircraft_maintenance-bg.png) no-repeat 5px -41px;}
+			input:checked + label {color: $blue; background-color: #fff; background-position: 5px 4px!important;}
+		}
+	}
+	.filter.candidates {
+		.list-inline {
+			li {width: 32%; padding: 0;}
+			label {width: 100%; text-align: center;}
+		}
+		label {width: 120px;}
+		select, input, .range-input {width: calc(100% - 130px)}
+		.form-checkbox {vertical-align: middle; margin: 0;}
+		.multiselect-native-select {
+			.btn-group {width: calc(100% - 130px);}
+		}
+		.multiselect-container {
+			li {
+				a {padding: 0;
+					label {width: auto}
+				}
+			}
+			li.active {
+				a {background-color: $blue;}
+			}
+		}
+	}
+}
+
+.modal {
+	.profile-container {margin-bottom: 1em;}
+	input[type="file"]{display: none;}
+	[class*='col-xs-4'] {text-align: right;}
+}
+
+.new_aviation_certification_detail {
+}
+
+.temp-image {border: 1px dashed #dadada; width: 200px; height: 200px; margin: 0 auto 10px; padding: 0.5em; display: block;
+	img {max-width: 100%; max-height: 100%; height: auto; width: auto;}
+}
+
+.btn-view {display: block; border-top: 1px solid #dadada; font-size: 0.875em; text-align: center; padding: 1em 0; margin: 0 -1.25em -1.25em}
+
+.card.dashboard-jobs {border-bottom: none;}
+
+//Tiny
+@media (max-width:576px) {
+ 
+}
+
+//Extra Small
+@media (max-width: 767px) {
+
+}
+
+//Small
+@media (max-width: 991px) {
+}
+
+//Medium
+@media (max-width:1199px) {
+	
+}
+//Large
+@media (min-width: 1200px) { 
+
+}

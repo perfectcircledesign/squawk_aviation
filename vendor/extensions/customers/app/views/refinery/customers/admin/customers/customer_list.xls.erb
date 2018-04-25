@@ -1,0 +1,28 @@
+<table border="1">
+  <tr>
+    <th>Email</th>
+    <th>First Name</th>
+    <th>Surname</th>
+    <th>Mobile Number</th>
+    <th>Sign up date</th>
+  </tr>
+  <% Refinery::Customers::Customer.all.each_with_index do |customer, index| %>
+    <tr>
+      <td><%= customer.email %></td>
+      <td><%= customer.first_name %></td>
+      <td><%= customer.surname %></td>
+      <td class="ension_display<%= index.to_s %>"><%= customer.contact_number %></td>
+      <td><%= customer.created_at.strftime('%Y-%m-%d') %></td>
+      <td class="hidden ension<%= index.to_s %>" value="<%= customer.phone_extension1 %>"></td>
+      <script type="text/javascript">
+          var countryData = $.fn.intlTelInput.getCountryData();
+          $.each(countryData, function(i, country) {
+              if (country.iso2 == $(".ension<%= index.to_s %>").val()){
+                  $(".ension_display<%= index.to_s %>").prepend("(+" + country.dialCode +")");
+              }
+
+          });
+      </script>
+    </tr>
+  <% end %>
+</table>

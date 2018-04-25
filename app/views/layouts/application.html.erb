@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<%= render '/refinery/html_tag' %>
+  <% site_bar = render('/refinery/site_bar', :head => true) -%>
+  <%= render '/refinery/head' %>
+  <body style="background-color: #ffffff;">
+    <%= site_bar -%>
+    <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+
+    <%= render '/refinery/header' -%>
+
+    <%#= render '/shared/banner' -%>
+
+    <div class="sliver-banner">
+      <div class="white-skew"></div>
+    </div>
+    <h1 class="text-center"><%= @page.title if @page.present? and !@post.present? %></h1>
+
+    <% if request[:controller] == "refinery/portfolio/galleries" %>
+      <div class="cms">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% elsif ['sessions','registrations'].include? controller_name %>
+      <div class="cms">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="cms">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-7 col-md-8">
+              <%= yield %>
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-4">
+              <%= yield :right %>
+              <%= render '/refinery/pods/shared/pods', :pod_types => ['video','content','gallery','banner','inquiry'] -%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render '/refinery/footer' -%>
+
+    <%= render '/refinery/javascripts' %>
+  </body>
+</html>

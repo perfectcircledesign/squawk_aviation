@@ -1,0 +1,15 @@
+<% content_for :full do %>
+<div class="container">
+  <div class="row">
+    <% @articles.each do |article| %>
+        <div class="col-xs-3">
+          <%= link_to article.name, refinery.articles_article_path(article) %>
+          <%= raw article.body %>
+          <%= image_fu article.image, '150x150#c' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<%= render '/refinery/content_page' %>

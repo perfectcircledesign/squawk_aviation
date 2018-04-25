@@ -1,0 +1,29 @@
+nl:
+  refinery:
+    plugins:
+      aircrafts:
+        title: Aircrafts
+    aircrafts:
+      admin:
+        aircrafts:
+          actions:
+            create_new: Maak een nieuwe Aircraft
+            reorder: Wijzig de volgorde van de Aircrafts
+            reorder_done: Klaar met het wijzingen van de volgorde van de Aircrafts
+          records:
+            title: Aircrafts
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Aircrafts. Druk op 'Maak een nieuwe Aircraft' om de eerste aan te maken.
+          aircraft:
+            view_live_html: Bekijk deze aircraft op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze aircraft
+            delete: Verwijder deze aircraft voor eeuwig
+      aircrafts:
+        show:
+          other: Andere Aircrafts
+  activerecord:
+    attributes:
+      'refinery/aircrafts/aircraft':
+        name: Name
+        weight: Weight
+        engine: Engine

@@ -1,0 +1,96 @@
+nb:
+  refinery:
+    plugins:
+      transactions:
+        title: Transactions
+      order_items:
+        title: Order Items
+      orders:
+        title: Orders
+    transactions:
+      admin:
+        transactions:
+          actions:
+            create_new: Lag en ny Transaction
+            reorder: Endre rekkefølgen på Transactions
+            reorder_done: Ferdig å endre rekkefølgen Transactions
+          records:
+            title: Transactions
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Transactions enda. Klikk på "Lag en ny Transaction"
+              for å legge til din første transaction.
+          transaction:
+            view_live_html: Vis hvordan denne transaction ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne transaction
+            delete: Fjern denne transaction permanent
+      transactions:
+        show:
+          other: Andre Transactions
+    order_items:
+      admin:
+        order_items:
+          actions:
+            create_new: Lag en ny Order Item
+            reorder: Endre rekkefølgen på Order Items
+            reorder_done: Ferdig å endre rekkefølgen Order Items
+          records:
+            title: Order Items
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Order Items enda. Klikk på "Lag en ny Order
+              Item" for å legge til din første order item.
+          order_item:
+            view_live_html: Vis hvordan denne order item ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne order item
+            delete: Fjern denne order item permanent
+      order_items:
+        show:
+          other: Andre Order Items
+    orders:
+      admin:
+        orders:
+          actions:
+            create_new: Lag en ny Order
+            reorder: Endre rekkefølgen på Orders
+            reorder_done: Ferdig å endre rekkefølgen Orders
+          records:
+            title: Orders
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Orders enda. Klikk på "Lag en ny Order" for
+              å legge til din første order.
+          order:
+            view_live_html: Vis hvordan denne order ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne order
+            delete: Fjern denne order permanent
+      orders:
+        show:
+          other: Andre Orders
+  activerecord:
+    attributes:
+      refinery/transactions/transaction:
+        unique_guid: Unique Guid
+        order_id: Order
+        amount: Amount
+        is_payment_successful: Is Payment Successful
+        notes: Notes
+      refinery/order_items/order_item:
+        product_name: Product Name
+        product_stock_code: Product Stock Code
+        product_supplier_stock_code: Product Supplier Stock Code
+        price: Price
+        order_id: Order
+        quantity: Quantity
+        total: Total
+      refinery/orders/order:
+        order_number: Order Number
+        customer_id: Customer
+        order_status: Order Status
+        grand_total: Grand Total
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        suburb: Suburb
+        city: City
+        postal_code: Postal Code
+        payment_type: Payment Type

@@ -1,0 +1,29 @@
+nb:
+  refinery:
+    plugins:
+      employers:
+        title: Employers
+    employers:
+      admin:
+        employers:
+          actions:
+            create_new: Lag en ny Employer
+            reorder: Endre rekkefølgen på Employers
+            reorder_done: Ferdig å endre rekkefølgen Employers
+          records:
+            title: Employers
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Employers enda. Klikk på "Lag en ny Employer" for å legge til din første employer.
+          employer:
+            view_live_html: Vis hvordan denne employer ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne employer
+            delete: Fjern denne employer permanent
+      employers:
+        show:
+          other: Andre Employers
+  activerecord:
+    attributes:
+      'refinery/employers/employer':
+        name: Name
+        image: Image
+        url: Url

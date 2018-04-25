@@ -1,0 +1,131 @@
+<% order = @order %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Repcillin</title>
+</head>
+
+<body>
+
+<table width="640" border="0" cellpadding="0" cellspacing="0" align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#666666">
+  <tr>
+    <td valign="bottom" width="60%">
+      <table style="border-collapse:collapse; border-color:#aaaaaa; border:1px solid #aaaaaa; font-size:12px" border="1" width="100%" cellpadding="5">
+        <tr>
+          <th style="background-color:#999; color:white;">Overnight Express</th>
+          <th style="background-color:#999; color:white;">Next Day 24-48hrs</th>
+          <th style="background-color:#999; color:white;">Domestic Rd Freight</th>
+          <th style="background-color:#999; color:white;">EC Regional</th>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+    <td align="right" width="40%">
+      <!--<img src="http://repcillin.herokuapp.com/assets/logo.png" />-->
+      <!--<img src="http://www.barcodesinc.com/generator/image.php?code=<"%= order.order_number %>&style=197&type=C128B&width=180&height=100&xres=1&font=3" />-->
+    </td>
+  </tr>
+  <tr><td colspan=2><hr></td></tr>
+  <tr>
+    <td style="text-align:left">
+      <h2>Tracking Number: *<%= order.order_number %>*</h2>
+    </td>
+    <td style="text-align:right">
+      <h2><%= order.created_at.strftime("%d/%m/%Y") %></h2>
+    </td>
+  </tr>
+  <tr><td colspan=2><hr></td></tr>
+  <tr>
+    <td valign="top" style="line-height:20px;">
+      <table width="100%">
+        <tr>
+          <td width="50%">First Name: </td>
+          <td width="50%"><%= order.customer.first_name.capitalize %></td>
+        </tr>
+        <tr>
+          <td>Last Name: </td>
+          <td><%= order.customer.surname.capitalize %></td>
+        </tr>
+        <tr>
+          <td>Telephone Number: </td>
+          <td><%= order.customer.contact_number %></td>
+        </tr>
+        <tr>
+          <td valign="top">Delivery Address: </td>
+        </tr>
+        <tr>
+          <td valign="top">Postal Code: </td>
+          <td><%= order.postal_code %></td>
+        </tr>
+      </table>
+    </td>
+    <td valign="top" style="line-height:20px;">
+      <img src="http://www.barcodesinc.com/generator/image.php?code=<%= order.order_number %>&style=197&type=C128B&width=250&height=150&xres=1&font=3" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:center">
+      <table style="border-collapse:collapse; border-color:#aaaaaa; border:1px solid #aaaaaa; font-size:12px" border="1" width="100%" cellpadding="5">
+        <tr>
+          <th style="background-color:#999; color:white;">Boxes</th>
+          <th style="background-color:#999; color:white;">Dimensions (cm)</th>
+          <th style="background-color:#999; color:white;">Weight (kg)</th>
+          <th style="background-color:#999; color:white;">Comments</th>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr>
+    <td colspan="2" style="text-align:center">
+      <table style="border-collapse:collapse; border-color:#aaaaaa; border:1px solid #aaaaaa; font-size:12px" border="1" width="100%" cellpadding="5">
+        <tr>
+          <th width="33%" colspan="2" style="background-color:#999; color:white;">ISOSTAR ZA RELEASE</th>
+          <th width="33%" colspan="2" style="background-color:#999; color:white;">COLLECTION</th>
+          <th width="33%" colspan="2" style="background-color:#999; color:white;">GOODS RECEIVED IN GOOD ORDER</th>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td>Signature:</td>
+          <td>Date:</td>
+          <td>Signature:</td>
+          <td>Date:</td>
+          <td>Signature:</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="33%" colspan="2" rowspan="2">NIKKI PEEL (ISOSTAR)</td>
+          <td width="33%" colspan="2" align="left">Name (Printed)</td>
+          <td width="33%" colspan="2" align="left">Name (Printed)</td>
+        </tr>
+        <tr>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="2">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+</table>
+
+</body>
+</html>

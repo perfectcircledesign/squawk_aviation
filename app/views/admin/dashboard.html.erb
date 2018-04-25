@@ -1,0 +1,123 @@
+<% content_for :title do %>
+    Dashboard
+<% end %>
+
+<% content_for :content do %>
+    <div class="row">
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3><%= @dashboard_airlines.active.count %></h3>
+
+              <p>Total Airlines</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-plane"></i>
+            </div>
+            <a href="/admin/airlines" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3><%= @dashboard_jobs.is_active.count %></h3>
+              <p>Active Jobs</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-briefcase"></i>
+            </div>
+            <a href="/admin/jobs" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><%= @dashboard_articles.count %></h3>
+              <p>Articles</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-newspaper-o"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              <!--More info <i class="fa fa-arrow-circle-right"></i>-->
+              &nbsp;
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3><%= @dashboard_customers.all.count %></h3>
+
+              <p>Total Users</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Pilots <span class="pull-right badge bg-blue"><%= @dashboard_customers.where(:career_path => 'Pilot').count %></span></a></li>
+                <li><a href="#">Cabin Crew <span class="pull-right badge bg-aqua"><%= @dashboard_customers.where(:career_path => 'Cabin Crew').count %></span></a></li>
+                <li><a href="#">Aircraft Maintenance <span class="pull-right badge bg-green"><%= @dashboard_customers.where(:career_path => 'Aircraft Maintenance').count %></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3><%= @dashboard_customers.in_trial.count %></h3>
+
+              <p>Total Trial Users</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-android-stopwatch"></i>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Pilots <span class="pull-right badge bg-blue"><%= @dashboard_customers.where(:career_path => 'Pilot').in_trial.count %></span></a></li>
+                <li><a href="#">Cabin Crew <span class="pull-right badge bg-aqua"><%= @dashboard_customers.where(:career_path => 'Cabin Crew').in_trial.count %></span></a></li>
+                <li><a href="#">Aircraft Maintenance <span class="pull-right badge bg-green"><%= @dashboard_customers.where(:career_path => 'Aircraft Maintenance').in_trial.count %></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3><%= @dashboard_customers_paid.count %></h3>
+
+              <p>Total Paid</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-card"></i>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Pilots <span class="pull-right badge bg-blue"><%= @dashboard_pilot.count %></span></a></li>
+                <li><a href="#">Cabin Crew <span class="pull-right badge bg-aqua"><%= @dashboard_cabin.count %></span></a></li>
+                <li><a href="#">Aircraft Maintenance <span class="pull-right badge bg-green"><%= @dashboard_maintenance.count %></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- <div class="box">
+      <div class="box-body">
+      </div>
+    </div> -->
+<% end %>

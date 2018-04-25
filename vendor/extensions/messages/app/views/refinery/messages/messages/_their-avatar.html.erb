@@ -1,0 +1,17 @@
+<div class="media">
+  <div class="media-left">
+    <% if current_customer.present? and @their_avatar.logo.present? %>
+        <%= image_fu @their_avatar.logo, '50x50#c' %>
+    <% elsif current_airline.present? and @their_avatar.profile_image.present? %>
+        <%= image_fu @their_avatar.profile_image, '50x50#c' %>
+    <% else %>
+        <img src="/assets/profile-blank.jpg" width="50" height="50">
+    <% end %>
+  </div>
+  <div class="media-body">
+    <%= @their_avatar.name %>
+  </div>
+  <div class="media-right">
+    <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>&nbsp;<a href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
+  </div>
+</div>

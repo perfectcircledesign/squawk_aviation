@@ -1,0 +1,49 @@
+<% content_for :title do %>
+  Jobs
+<% end %>
+
+<% content_for :content do %>
+
+  <div class="box">
+    <div class="box-body">
+      <table id="jobs" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Liked</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @jobs.each_with_index do |job, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= job.name %></td>
+              <td><%= Favourite.where(:job_id => job.id).count %> Candidates</td>
+              <td><%= link_to('Show', admin_job_path(job)) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  $(function () {
+    $("#jobs").dataTable({
+      "pageLength": 50,
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]] 
+    });
+  });
+</script>
+
+
+<% end %>
+

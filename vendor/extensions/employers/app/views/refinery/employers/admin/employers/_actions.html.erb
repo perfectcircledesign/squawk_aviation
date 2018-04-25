@@ -1,0 +1,25 @@
+<ul>
+  <% if ::Refinery::Employers::Admin::EmployersController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.employers_admin_employers_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_employers_admin_employer_path,
+                 :class => "add_icon" %>
+  </li>
+<% if !searching? && ::Refinery::Employers::Admin::EmployersController.sortable? && ::Refinery::Employers::Employer.any? %>
+  <li>
+    <%= link_to t('.reorder', :what => "Employers"),
+                 refinery.employers_admin_employers_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Employers"),
+                 refinery.employers_admin_employers_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Squawk</title>
+</head>
+
+<body>
+
+<!--:invoice_number, :trans_number, :sub_type, :start_date, :end_date, :price_dollar, :price_rand, :card_last_digits, :customer_id,-->
+
+<table height="100%" width="100%" border="0" cellspacing="0" cellpadding="30" style="background-color:#f0f0f0;">
+  <tr>
+    <td>
+
+      <table width="640" border="0" cellspacing="0" cellpadding="0" align="center" style="background-color:#ffffff; font-family: 'Arial', sans-serif;">
+        <tr>
+          <td colspan="2">
+            <a href="#"><img src="https://www.squawkaviation.com/header.jpg" width="640" height="120" border="0"></a>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="font-size: 16px; padding: 20px 10px; border-bottom: 1px solid #ddd; font-family: 'Arial', sans-serif;">
+            <strong>Invoice Number: <%= @invoice.invoice_number %></strong>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px; padding: 20px 10px 0; font-family: 'Arial', sans-serif;">
+            <b>First Name:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 20px 10px 0; font-family: 'Arial', sans-serif;">
+            <%= @invoice.customer.first_name %><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Surname:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.customer.surname %><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Telephone Number:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.customer.contact_number %><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Email:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.customer.email %><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Customer Id:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.customer.id %>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Date:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.start_date %>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <b>Transaction Number:</b><br>
+          </td>
+          <td valign="top" style="line-height:20px;padding: 0 10px; font-family: 'Arial', sans-serif;">
+            <%= @invoice.trans_number %>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="padding: 0 10px">
+            <br>
+            <table style="border-collapse:collapse; border-color:#aaaaaa; border:1px solid #aaaaaa; font-size:12px; font-family: 'Arial', sans-serif;" border="1" width="100%" cellpadding="5">
+              <tbody><tr>
+                <th style="background-color:#999; color:white; padding: 5px; font-family: 'Arial', sans-serif;">Subscription</th>
+                <th style="background-color:#999; color:white; padding: 5px; font-family: 'Arial', sans-serif;">Description</th>
+                <th style="background-color:#999; color:white; padding: 5px; font-family: 'Arial', sans-serif;">Price</th>
+              </tr>
+                <tr>
+                  <td style="padding: 5px; font-family: 'Arial', sans-serif;"><%= @invoice.sub_type %></td>
+                  <td style="padding: 5px; font-family: 'Arial', sans-serif;">Period(<%= @invoice.start_date %> - <%= @invoice.end_date %>)<br>
+                                      Paid With Card<br>
+                                      xxxx xxxx xxxx <%= @invoice.card_last_digits %></td>
+                  <td style="padding: 5px; font-family: 'Arial', sans-serif;">$<%= @invoice.price_dollar %> (R<%= @invoice.price_rand %>)</td>
+                </tr>
+            </tbody></table>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 20px 10px; border-bottom: 1px solid #ddd; color: #6b7c93; font-family: 'Arial', sans-serif;">
+            Thank You,<br>
+            Squawk Team<br>
+            <a href="mailto:info@squawkaviation.com">info@squawkaviation.com</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="left" style="line-height:20px; padding: 20px 10px; font-family: 'Arial', sans-serif;">
+            Email: <a href="mailto:info@squawkaviation.com" style="text-decoration: none; color: #000000;">info@squawkaviation.com</a> &#8226; Web: <a href="http://www.squawkaviation.com/" style="text-decoration: none; color: #000000;">www.squawkaviation.com</a><br>
+            Squawk Aviation &#169; All rights reserved.
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

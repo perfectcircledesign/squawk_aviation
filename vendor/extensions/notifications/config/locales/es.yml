@@ -1,0 +1,34 @@
+es:
+  refinery:
+    plugins:
+      notifications:
+        title: Notifications
+#        article: masculino/femenino
+    notifications:
+      admin:
+        notifications:
+          actions:
+            create_new: Crear nuevo notification
+            reorder: Reordenar notifications
+            reorder_done: Reordenación de notifications completada
+          records:
+            title: Notifications
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay notifications todavía. Pulsa en "Crear nuevo Notification" para crear tu primer notification.
+          notification:
+            view_live_html: Ver este notification como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este notification
+            delete: Borrar este notification para siempre
+      notifications:
+        show:
+          other: Otros notifications
+  activerecord:
+    attributes:
+      'refinery/notifications/notification':
+        notification_type: Notification Type
+        url: Url
+        receiver_id: Receiver
+        receiver_class: Receiver Class
+        sender_id: Sender
+        sender_class: Sender Class
+        seen: Seen

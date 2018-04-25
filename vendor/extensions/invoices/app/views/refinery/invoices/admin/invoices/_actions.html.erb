@@ -1,0 +1,25 @@
+<ul>
+  <% if ::Refinery::Invoices::Admin::InvoicesController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.invoices_admin_invoices_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_invoices_admin_invoice_path,
+                 :class => "add_icon" %>
+  </li>
+<% if !searching? && ::Refinery::Invoices::Admin::InvoicesController.sortable? && ::Refinery::Invoices::Invoice.any? %>
+  <li>
+    <%= link_to t('.reorder', :what => "Invoices"),
+                 refinery.invoices_admin_invoices_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Invoices"),
+                 refinery.invoices_admin_invoices_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,18 @@
+<%content_for :body_content_title do %>
+
+    Gallery
+
+<% end %>
+
+<% content_for :body_content_left do %>
+  <% if @items.count > 1 %>
+    <%= render :partial => "refinery/portfolio/items/items", :locals => {:items => @items} %>
+  <% end %>
+   
+  <%= render :partial => "galleries", :locals => {:galleries => @galleries} %>
+<% end %>
+
+<%= render "/refinery/content_page" %>
+
+
+

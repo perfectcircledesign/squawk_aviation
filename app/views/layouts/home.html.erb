@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<%= render '/refinery/html_tag' %>
+  <% site_bar = render('/refinery/site_bar', :head => true) -%>
+  <%= render '/refinery/head' %>
+  <body style="background-color: #ffffff;">
+    <%= site_bar -%>
+    <%= render '/refinery/ie6check' if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+
+    <%= render '/refinery/header' -%>
+
+
+    <div class="signup">
+      <div class="container">
+        <h1><span>Find to Found - Aviation professionals to Airlines</span>Join the fastest growing network today
+          <!-- <img src="/assets/9dollars.png"> -->
+          <!--<small>30 Day Free Trial – No Obligation, no Credit Card Required.</small>-->
+        </h1>
+        <div class="signup-form">
+          <% unless flash[:error].blank? %>
+              <div class="alert alert-danger">
+                <a class="close" data-dismiss="alert">x</a>
+                <%= flash[:error] %>
+              </div>
+          <% end %>
+          <form accept-charset="UTF-8" action="/sign_in_customer" method="post">
+            <input placeholder="Email" name="email" type="text">
+            <input placeholder="Password" name="password" type="password">
+            <input value="Crew Login" type="submit" class="btn btn-lrg btn-green">            
+            
+            <!--<input value="Register" data-toggle="modal" data-target="#register_form" class="btn btn-lrg btn-window">-->
+            <a href="#" class="btn btn-lrg btn-window reg_form" type="button" data-toggle="modal" data-target="#register_form">Register</a>
+             
+          </form>
+          <a href="#" class="forgot" type="button" data-toggle="modal" data-target="#password_form">Forgot your password?</a>
+          <div class="social-login"> 
+            <a href="<%= omniauth_authorize_path(:customer, :facebook) %>" class="fb-signin"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i>Sign in with Facebook</a>
+            <a href="<%= omniauth_authorize_path(:customer, :linkedin) %>" class="in-signin"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i>Sign in with LinkedIn</a>
+          </div>
+          <%#= link_to "Forgot your password?", '/customers/password/new', class: 'forgot' %>
+          
+          <!--<input value="Register" type="submit" class="btn btn-lrg btn-window">-->
+        </div>
+        <!-- <div class="download-app">
+          <h4>Download the App for Free</h4>
+          <a href="#"><img src="/assets/appstore.png"></a><a href="#"><img src="/assets/playstore.png"></a>
+        </div> -->
+      </div>
+      <div class="white-skew"></div>
+    </div>
+
+    <div class="usps">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 col-md-6">
+            <h1>The modern way of getting noticed</h1>
+            <div class="usp">
+              <img src="/assets/network.gif">
+              <h4>Search Aviation Careers</h4>
+              <p><%= copywriting('Aviation Network', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+            <div class="usp">
+              <img src="/assets/headhunt.gif">
+              <h4>Get Discovered</h4>
+              <p><%= copywriting('Get Headhunted', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+            <div class="usp">
+              <img src="/assets/crew.gif">
+              <h4>Be a Better Candidate</h4>
+              <p><%= copywriting('Pilots to Cabin Crew', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+            <a href="#" class="btn btn-lrg btn-blue reg_form" type="button" data-toggle="modal" data-target="#register_form">Register Now</a>
+          </div>
+        </div>
+      </div>
+      <img src="/assets/tablet.jpg" class="tablet">
+    </div>
+
+    <div class="how-it-works">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-7 col-md-offset-5 col-lg-6 col-lg-offset-6">
+            <h1>How it all works</h1>
+            <div class="diagram">
+              <p>Sign up and complete your profile</p>
+              <p>Get verified and connect with Airlines</p>
+              <p>Get headhunted and employed</p>
+            </div>
+            <a href="#" class="btn btn-lrg btn-white reg_form" type="button" data-toggle="modal" data-target="#register_form">Register Now</a>
+          </div>
+        </div>
+      </div>
+      <img src="/assets/how-clouds.jpg" class="how-screen1">
+      <img src="/assets/how-dash.jpg" class="how-screen2">
+      <img src="/assets/how-profile.jpg" class="how-screen3">
+    </div>
+
+    <div class="app">
+      <div class="container">
+        <h1 class="text-center">Stay Connected</h1>
+        <h3 class="text-center">Log your progress, be informed and join the network</h3>
+        <div class="app-usps">
+          <div class="row">
+            <div class="col-xs-12 col-md-4">
+              <div class="usp text-right">
+                <img src="/assets/app-logbook.gif">
+                <h4>Update your Logbook</h4>
+                <p><%= copywriting('Update your Logbook', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+              <div class="usp text-right">
+                <img src="/assets/app-hours.gif">
+                <h4>Select which Airlines you follow</h4>
+                <p><%= copywriting('Post your flying hours', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+              <div class="usp text-right">
+                <img src="/assets/app-airlines.gif">
+                <h4>Track Airline Employment Activity</h4>
+                <p><%= copywriting('Stay in touch with Airlines', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-offset-4 col-md-4">
+              <div class="usp">
+                <img src="/assets/app-alert.gif">
+                <h4>Know first about new jobs</h4>
+                <p><%= copywriting('Know first about new jobs', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+              <div class="usp">
+                <img src="/assets/app-messenger.gif">
+                <h4>Messenger App</h4>
+                <p><%= copywriting('Messenger App', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+              <div class="usp">
+                <img src="/assets/app-track.gif">
+                <h4>From only $15 a month</h4>
+                <p><%= copywriting('Track your credits', {:phrase_type => 'string', :scope => 'Stay Connected', :default => 'text here' }) %></p>
+              </div>
+            </div>
+          </div>
+          <img src="/assets/phone.jpg" class="phone">
+        </div>
+        <!-- <div class="download">
+          <div class="row">
+            <div class="col-xs-12">
+              <% apple_store = copywriting('Apple Store', {:phrase_type => 'string', :scope => 'App', :default => '#' }) %>
+              <% google_play = copywriting('Google Play', {:phrase_type => 'string', :scope => 'App', :default => '#' }) %>
+              <a href="<%= apple_store %>" target="_blank"><img src="/assets/appstore_dark.png"></a>
+              <a href="<%= google_play %>" target="_blank"><img src="/assets/playstore_dark.png"></a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <% posts = Refinery::Blog::Post.live.first(3) %>
+    <% if posts.present? %>
+      <div class="blogs">
+        <div class="container">
+          <div class="row">
+            <% posts.each do |post| %>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <%= link_to refinery.blog_post_path(post) do %>
+                  <div class="blog-post">
+                    <% if post.image.present? %>
+                      <%= image_fu post.image, '375x250#c', class: 'img-responsive' %>
+                    <% else %>
+                      <img src="assets/blank-blog.gif" class="img-responsive">
+                    <% end %>
+                    <div class="details">
+                      <h3><%= post.title %></h3>
+                      <% if post.custom_teaser.present? %>
+                        <%= raw post.custom_teaser %>
+                      <% else %>
+                        <%= raw truncate(post.body, length: 200) %>
+                      <% end %>
+                      <div class="btn btn-grey">Read More</div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <!--<div class="posts">-->
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-xs-12 col-md-6">-->
+            <!--<a href="<%#= copywriting('Airline News Link', {:phrase_type => 'string', :scope => 'Home Page', :default => '#' }) %>" class="float-card">-->
+              <!--<img src="/assets/airline-news.gif">-->
+              <!--<h4>Airline News</h4>-->
+              <!--<p><%#= copywriting('Airline News', {:phrase_type => 'string', :scope => 'Home Page', :default => 'Text here' }) %></p>-->
+            <!--</a>-->
+          <!--</div>-->
+          <!--<div class="col-xs-12 col-md-6">-->
+            <!--<a href="<%#= copywriting('Latest Airline Job Offerings Link', {:phrase_type => 'string', :scope => 'Home Page', :default => '#' }) %>" class="float-card">-->
+              <!--<img src="/assets/jobs.gif">-->
+              <!--<h4>Latest Airline Job Offerings</h4>-->
+              <!--<p><%#= copywriting('Latest Airline Job Offerings', {:phrase_type => 'string', :scope => 'Home Page', :default => 'Text here' }) %></p>-->
+            <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="airlines">
+      <div class="container">
+        <ul id="airlines">
+          <% partners = Refinery::Airlines::Airline.all %>
+          <% if partners.present? %>
+              <% partners.each do |partner| %>
+                  <% if partner.logo.present? %>
+                    <li><%= image_fu partner.logo, '150x150^' %></li>
+                  <% end %>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <script type="application/javascript">
+      $(window).ready(function () {
+        <% if params[:reg_form] %>
+          $('.reg_form').click();
+        <% end %>
+        <% if params[:password_form] %>
+          $('.forgot').click();
+        <% end %>
+      });
+    </script>
+
+
+    <%= render '/refinery/footer' -%>
+    <%= render '/shared/password_form' -%>
+    <%= render '/shared/register_form' -%>
+    <%= render '/shared/thank_you' -%>
+    <%= render '/shared/login_form' -%>
+
+    <%= render '/refinery/javascripts' %>
+  </body>
+</html>

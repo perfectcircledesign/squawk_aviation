@@ -1,0 +1,68 @@
+<% content_for :full do %>
+    <div class="index-sliver">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>Your Notifications</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="notifications-index">
+    <div class="container">
+      <div class="row">
+        <% if @notifications.present? %>
+          <div class="col-xs-12 col-sm-9">
+            <div class="card notification-card">
+              <ul class="notifications_index">
+                <% @notifications.order('created_at DESC').each do |notification| %>
+                    <li class="<%= notification.seen? ? '' : 'new' %>">
+                      <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+                        <div class="media">
+                          <div class="media-left">
+                            <% if notification.sender.logo.present? %>
+                              <%= image_fu notification.sender.logo, "40x40#c" %>
+                            <% else %>
+                                <img src="/assets/profile-blank.jpg" width="24" height="24">
+                            <% end %>
+                          </div>
+                          <div class="media-body">
+                            <p><%= notification.message %><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+                          </div>
+                        </div>
+                      <% end %>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% else %>
+            <div class="col-sm-9 col-xs-12">
+              <div class="card empty-notification">
+                <img src="/assets/notification-large.png">
+                <h3>You don't have any notifications yet</h3>
+              </div>
+            </div>
+        <% end %>
+        <!-- <div class="col-sm-3 col-xs-12"> -->
+            <!-- <div class="card upgrade-card hidden-xs"> -->
+              <!-- <h3>Upgrade to Pro</h3> -->
+              <!-- <ul class="list-unstyled"> -->
+                <!-- <li>Lorem dolor <span>sit amet</span></li> -->
+                <!-- <li>Aenean viverra <span>consectetur</span></li> -->
+                <!-- <li>Mauris condimentum <span>id sapien</span></li> -->
+              <!-- </ul> -->
+              <!-- <a href="#" class="btn-green btn">Go Pro</a> -->
+            <!-- </div> -->
+            <!-- <div class="upgrade-mobile visible-xs"> -->
+              <!-- <a href="#" class="btn btn-green btn-sm">Go Pro</a> -->
+              <!-- <h1>Upgrade to Pro today</h1> -->
+            <!-- </div> -->
+          <!-- </div> -->
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render '/refinery/content_page' %>

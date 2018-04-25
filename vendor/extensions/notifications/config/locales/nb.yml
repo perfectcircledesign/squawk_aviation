@@ -1,0 +1,33 @@
+nb:
+  refinery:
+    plugins:
+      notifications:
+        title: Notifications
+    notifications:
+      admin:
+        notifications:
+          actions:
+            create_new: Lag en ny Notification
+            reorder: Endre rekkefølgen på Notifications
+            reorder_done: Ferdig å endre rekkefølgen Notifications
+          records:
+            title: Notifications
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Notifications enda. Klikk på "Lag en ny Notification" for å legge til din første notification.
+          notification:
+            view_live_html: Vis hvordan denne notification ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne notification
+            delete: Fjern denne notification permanent
+      notifications:
+        show:
+          other: Andre Notifications
+  activerecord:
+    attributes:
+      'refinery/notifications/notification':
+        notification_type: Notification Type
+        url: Url
+        receiver_id: Receiver
+        receiver_class: Receiver Class
+        sender_id: Sender
+        sender_class: Sender Class
+        seen: Seen

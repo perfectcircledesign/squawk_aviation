@@ -1,0 +1,472 @@
+<% content_for :full do %>
+    <!-- <div class="discover user-search">
+      <div class="index-search">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12"> -->
+              <!--<h2>Searching for:</h2>-->
+              <!--<ul class="search-tabs">-->
+                <!--<li class="active"><a href="#">Pilot</a></li>-->
+                <!--<li><a href="#">Cabin Crew</a></li>-->
+                <!--<li><a href="#">Hostess</a></li>-->
+                <!--<li><a href="#">Baggage Handlers</a></li>-->
+              <!--</ul>-->
+            <!-- </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="index">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8">
+            <div class="users">
+              <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <h4>Candidates</h4>
+                </div>
+              </div>
+              <% if @customers.present? %>
+                <% @customers.each do |customer| %>
+                  <% next if !['Trail','Active'].include?(customer.account_status) %>
+                    <div class="media">
+                      <div class="media-left">
+                        <% if customer.profile_image.present? %>
+                            <%= image_fu customer.profile_image, "75x75#c" %>
+                        <% else %>
+                            <img src="/assets/profile-blank.jpg" width="150" height="150">
+                        <% end %>
+                      </div>
+                      <div class="media-body">
+                        <div class="media-header">
+                          <%= link_to refinery.customers_customer_path(customer) do %>
+                            <%= customer.first_name %> <%= customer.surname %>
+                          <% end %>
+                        </div>
+                        <ul class="list-unstyled">
+                          <li><%= customer.career_path %></li>
+                          <li><%= country_name(customer.dual_nationality_details) %></li>
+                          <% if customer.career_path == 'Pilot' %>
+                            <li>P1: <%= customer.p1.to_i %>hrs<span>&#8226;</span>P2: <%= customer.p2.to_i %>hrs<span>&#8226;</span>P3: <%= customer.p3.to_i %>hrs</li>
+                          <% elsif customer.career_path == 'Cabin Crew' %>
+                            <li>Flight Attendant: <%= customer.p1.to_i %>hrs<span>&#8226;</span>Purser: <%= customer.p2.to_i %>hrs<span>&#8226;</span>Chief Purser: <%= customer.p3.to_i %>hrs</li>
+                          <% end %>
+                        </ul>
+                      </div>
+                      <div class="media-right">
+                        <div>
+                          <% if customer_airline_favourite(customer.id, current_airline.id, 'Airline') %>
+                              <img src="/assets/favourite.jpg">
+                          <% end %>
+                          <% if customer_airline_favourite(customer.id, current_airline.id, 'pilot') %>
+                            <img src="/assets/followed.jpg">
+                          <% end %>
+                          <!--<img src="/assets/verified.jpg">-->
+                          <!--<span class="btn btn-green btn-window" >Contact Now</span>-->
+                          <%= link_to refinery.customers_customer_path(customer) do %>
+                            <span class="btn btn-green btn-window">View Profile</span>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="user-details">
+                      </div>
+                    </div>
+                <% end %>
+                <% else %>
+                <div class="text-center no-results">
+                  <img src="/assets/search-results.png">
+                  <h3>No candidates found</h3>
+                </div>
+                <% end %>
+              <!--<div class="more text-center">-->
+                <!--<a href="#" class="btn btn-blue btn-window">Load More</a>-->
+              <!--</div>-->
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-sm-4">
+          <div class="filter-candidates">
+            <h4>Searching For:</h4>
+            <ul class="list-inline">
+                <li>
+                  <input type="radio" class="career_path crew1" name="career_path" data-value="pilot" value="Pilot" id="pilot_form" checked>
+                  <label for="pilot_form" class="pilot_label">Pilot</label>
+                </li>
+                <li>
+                  <input type="radio" class="career_path crew2" name="career_path" data-value="cabin_crew" value="Cabin Crew" id="cabin_form">
+                  <label for="cabin_form" class="cabin_crew_label">Cabin Crew</label>
+                </li>
+                <li>
+                  <input type="radio" class="career_path crew3" name="career_path" data-value="aircraft_maintenance" value="Aircraft Maintenance" id="maintenance_form">
+                  <label for="maintenance_form" class="aircraft_maintenance_label">Maintenance</label>
+                </li>
+              </ul>
+          </div>
+            <!-----------------Pilot---------------->
+            <div class="card filter candidates">
+              <div class=" all_paths pilot">
+              <!-- <h3>Filter Pilots</h3> -->
+              <form action="/customers" class="simple_form form-horizontal" method="get">
+                <input type="hidden" class="career_field" value="" name="career_path" />
+                <input type="hidden" name="job_id" value=<%= params[:job_id] %>>
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" value="<%= params[:general] %>" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Age</label>
+                  <div class="range-input">
+                    <input type="text" class="age_range_in" value="" name="age_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Flying Hours</label>
+                  <div class="range-input">
+                    <input type="text" class="flying_hours_range_in" value="" name="flying_hours_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Aircraft</label>
+                  <select name="aircraft_type" class="form-control">
+                    <option value="">All Aircraft</option>
+                    <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', {prompt: "Please Select Nationality", include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group">
+                  <label>Languages</label>
+                  <select name="languages[]" class="form-control" id="example-getting-started" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <script type="application/javascript">
+                    $(function() {
+                        $('#example-getting-started').multiselect({
+                            nonSelectedText: 'Please Select Languages'
+                        });
+                    });
+                </script>
+                <div class="form-group">
+                  <label>P1 - Captain</label>
+                  <div class="range-input">
+                    <input type="text" class="p1_range" value="" name="p1" />
+                  </div>
+                  <!--<input name="p1" placeholder="minimum hours" value="<%#= params[:p1] %>"  class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>P2 - First Officer</label>
+                  <div class="range-input">
+                    <input type="text" class="p2_range" value="" name="p2" />
+                  </div>
+                  <!--<input name="p2" placeholder="minimum hours" value="<%#= params[:p2] %>" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>P3 - Cruise Only</label>
+                  <div class="range-input">
+                    <input type="text" class="p3_range" value="" name="p3" />
+                  </div>
+                  <!--<input name="p3" placeholder="minimum hours" value="<%#= params[:p3] %>" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Show Blocked Customers</label>
+                  <input type="checkbox" id="show_blacklist1" name="show_blacklist" <%= params[:show_blacklist].present? ? 'Checked' : '' %> class="boolean optional hidden">
+                  <label for="show_blacklist1" class="form-checkbox modal-checkbox"></label>
+                </div>
+                <div class="text-right">
+                  <button href="#" type="submit" class="btn btn-green">Search</button>
+                </div>
+              </form>
+              </div>
+            <!-----------------END---------------->
+
+            <!-----------------Cabin Crew---------------->
+            <div class="all_paths cabin_crew">
+              <!-- <h3>Filter Cabin Crew</h3> -->
+              <form action="/customers" class="simple_form form-horizontal" method="get">
+                <input type="hidden" class="career_field" value="" name="career_path" />
+                <input type="hidden" name="job_id" value=<%= params[:job_id] %>>
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" value="<%= params[:general] %>" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Age</label>
+                  <div class="range-input">
+                    <input type="text" class="age_range_in" value="" name="age_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Flying Hours</label>
+                  <div class="range-input">
+                    <input type="text" class="flying_hours_range_in" value="" name="flying_hours_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Aircraft</label>
+                  <select name="aircraft_type" class="form-control">
+                    <option value="">All Aircraft</option>
+                    <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', {prompt: "Please Select Nationality", include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group">
+                  <label>Languages</label>
+                  <select name="languages[]" class="form-control" id="example-getting" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <script type="application/javascript">
+                    $(function() {
+                        $('#example-getting').multiselect({
+                            nonSelectedText: 'Please Select Languages'
+                        });
+                    });
+                </script>
+                <div class="form-group">
+                  <label>Flight Attendant</label>
+                  <div class="range-input">
+                    <input type="text" class="p1_range" value="" name="p1" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p1" value="<%#= params[:p1] %>" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Purser</label>
+                  <div class="range-input">
+                    <input type="text" class="p2_range" value="" name="p2" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p2" value="<%#= params[:p2] %>" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Chief Purser</label>
+                  <div class="range-input">
+                    <input type="text" class="p3_range" value="" name="p3" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p3" value="<%#= params[:p3] %>" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Show Blocked Customers</label>
+                  <input type="checkbox" id="show_blacklist2" name="show_blacklist" <%= params[:show_blacklist].present? ? 'Checked' : '' %> class="boolean optional hidden">
+                  <label for="show_blacklist2" class="form-checkbox modal-checkbox"></label>
+                </div>
+                <div class="text-right">
+                  <button href="#" type="submit" class="btn btn-green">Search</button>
+                </div>
+              </form>
+            </div>
+            <!-----------------END---------------->
+
+            <!-----------------Aircraft Maintenance---------------->
+            <div class="all_paths aircraft_maintenance">
+              <!-- <h3>Filter Aircraft Maintenance</h3> -->
+              <form action="/customers" class="simple_form form-horizontal" method="get">
+                <input type="hidden" class="career_field" value="" name="career_path" />
+                <input type="hidden" name="job_id" value=<%= params[:job_id] %>>
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" value="<%= params[:general] %>" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Age</label>
+                  <div class="range-input">
+                    <input type="text" class="age_range_in" value="" name="age_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Total On the Job Hours</label>
+                  <div class="range-input">
+                    <input type="text" class="flying_hours_range_in" value="" name="flying_hours_range" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Aircraft</label>
+                  <select name="aircraft_type" class="form-control">
+                    <option value="">All Aircraft</option>
+                    <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Licences</label>
+                  <select name="licence_type" class="form-control">
+                    <option value="">All Licences</option>
+                    <% MaintenanceCertification::TYPES.each do |item| %>
+                        <option value="<%= item %>"><%= item %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', {prompt: "Please Select Nationality", include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group">
+                  <label>Languages</label>
+                  <select name="languages[]" class="form-control" id="example2" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+                <script type="application/javascript">
+                    $(function() {
+                        $('#example2').multiselect({
+                            nonSelectedText: 'Please Select Languages'
+                        });
+                    });
+                </script>
+                <div class="form-group">
+                  <label>Show Blocked Customers</label>
+                  <input type="checkbox" id="show_blacklist3" name="show_blacklist" <%= params[:show_blacklist].present? ? 'Checked' : '' %> class="boolean optional hidden">
+                  <label for="show_blacklist3" class="form-checkbox modal-checkbox"></label>
+                </div>
+
+                <div class="text-right">
+                  <button href="#" type="submit" class="btn btn-green">Search</button>
+                </div>
+              </form>
+            </div>
+            </div>
+            <!-----------------END---------------->
+
+
+            <script type="application/javascript">
+                $('.all_paths').hide();
+                $('.all_paths.pilot').show();
+
+                <% if params[:career_path].present? %>
+                  $(window).load(function () {
+                    <% if params[:career_path] == 'Pilot' %>
+                      $('.crew1').click();
+                    <% elsif params[:career_path] == 'Cabin Crew' %>
+                      $('.crew2').click();
+                    <% else %>
+                      $('.crew3').click();
+                    <% end %>
+                  });
+                <% end %>
+
+                $('.career_path').click(function() {
+                    $('.all_paths').hide();
+
+                    var career = $(this).data('value');
+                    $('.'+ career).show();
+                    
+                    $('.career_field').val($(this).val());
+                });
+
+                $(window).ready(function () {
+                  $(".age_range_in").ionRangeSlider({
+                      hide_min_max: true,
+                      keyboard: true,
+                      min: 18,
+                      max: 65,
+                      <% if params[:age_range].present? %>
+                      <% hours = params[:age_range].split(";") %>
+                      from: <%= hours.first.to_i %>,
+                      to: <%= hours.last.to_i %>,
+                      <% else %>
+                      from: 18,
+                      to: 60,
+                      <% end %>
+                      step: 1,
+                      type: 'double',
+                      // prefix: "R",
+                      grid: false,
+                      // max_postfix: "+"
+                  });
+
+                  $(".flying_hours_range_in").ionRangeSlider({
+                      hide_min_max: true,
+                      keyboard: true,
+                      min: 0,
+                      max: 15000,
+                      <% if params[:flying_hours_range].present? %>
+                      <% hours = params[:flying_hours_range].split(";") %>
+                      from: <%= hours.first.to_i %>,
+                      to: <%= hours.last.to_i %>,
+                      <% else %>
+                      from: 500,
+                      to: 15000,
+                      <% end %>
+                      step: 1,
+                      type: 'double',
+                      // prefix: "R",
+                      grid: false,
+                      max_postfix: "+"
+                  });
+
+                  $(".p1_range").ionRangeSlider({
+                      hide_min_max: true,
+                      keyboard: true,
+                      min: 0,
+                      max: 15000,
+                      <% if params[:p1].present? %>
+                      from: <%= params[:p1] %>,
+                      <% else %>
+                      from: 0,
+                      <% end %>
+                      step: 1,
+                      // type: 'double',
+                      // prefix: "R",
+                      grid: false,
+                      max_postfix: "+"
+                  });
+
+                  $(".p2_range").ionRangeSlider({
+                      hide_min_max: true,
+                      keyboard: true,
+                      min: 0,
+                      max: 15000,
+                      <% if params[:p2].present? %>
+                      from: <%= params[:p2] %>,
+                      <% else %>
+                      from: 0,
+                      <% end %>
+                      step: 1,
+                      // type: 'double',
+                      // prefix: "R",
+                      grid: false,
+                      max_postfix: "+"
+                  });
+
+                  $(".p3_range").ionRangeSlider({
+                      hide_min_max: true,
+                      keyboard: true,
+                      min: 0,
+                      max: 15000,
+                      <% if params[:p3].present? %>
+                      from: <%= params[:p3] %>,
+                      <% else %>
+                      from: 0,
+                      <% end %>
+                      step: 1,
+                      // type: 'double',
+                      // prefix: "R",
+                      grid: false,
+                      max_postfix: "+"
+                  });
+                });
+            </script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+<%= render '/refinery/content_page' %>

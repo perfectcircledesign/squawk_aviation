@@ -1,0 +1,28 @@
+nl:
+  refinery:
+    plugins:
+      route_experiences:
+        title: Route Experiences
+    route_experiences:
+      admin:
+        route_experiences:
+          actions:
+            create_new: Maak een nieuwe Route Experience
+            reorder: Wijzig de volgorde van de Route Experiences
+            reorder_done: Klaar met het wijzingen van de volgorde van de Route Experiences
+          records:
+            title: Route Experiences
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Route Experiences. Druk op 'Maak een nieuwe Route Experience' om de eerste aan te maken.
+          route_experience:
+            view_live_html: Bekijk deze route experience op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze route experience
+            delete: Verwijder deze route experience voor eeuwig
+      route_experiences:
+        show:
+          other: Andere Route Experiences
+  activerecord:
+    attributes:
+      'refinery/route_experiences/route_experience':
+        continent: Continent
+        airport: Airport

@@ -1,0 +1,11 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(customer) -%>">
+  <span class='title'>
+    <%= customer.name %>
+  </span>
+  <span class='actions'>
+    <%#= link_to refinery_icon_tag('cog_add.png'), refinery.user_messages_path(:id => customer.id),
+                :title => 'Message or file upload' %>
+    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_customers_admin_customer_path(customer),
+         :title => t('.edit') %>
+  </span>
+</li>

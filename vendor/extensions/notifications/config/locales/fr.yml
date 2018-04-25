@@ -1,0 +1,33 @@
+fr:
+  refinery:
+    plugins:
+      notifications:
+        title: Notifications
+    notifications:
+      admin:
+        notifications:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Notification
+            reorder: Réordonner les Notifications
+            reorder_done: Fin de réordonnancement des Notifications
+          records:
+            title: Notifications
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Notification. Cliquer sur "Créer un(e) nouve(au/l/lle) Notification" pour créer votre premi(er/ère) notification.'
+          notification:
+            view_live_html: Voir ce(t/tte) notification <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) notification
+            delete: Supprimer définitivement ce(t/tte) notification
+      notifications:
+        show:
+          other: Autres Notifications
+  activerecord:
+    attributes:
+      'refinery/notifications/notification':
+        notification_type: Notification Type
+        url: Url
+        receiver_id: Receiver
+        receiver_class: Receiver Class
+        sender_id: Sender
+        sender_class: Sender Class
+        seen: Seen

@@ -1,0 +1,15 @@
+<div class="media-left">
+  <% if current_customer.present? and @their_avatar.logo.present? %>
+      <%= image_fu @their_avatar.logo, '40x40#c', :class=>"img-circle" %>
+  <% elsif current_airline.present? and @their_avatar.profile_image.present? %>
+      <%= image_fu @their_avatar.profile_image, '40x40#c', :class=>"img-circle" %>
+  <% else %>
+      <img src="/assets/profile-blank.jpg" width="40" height="40" class="img-circle">
+  <% end %>
+</div>
+<div class="media-body">
+  <h2><%= @their_avatar.name %></h2>
+</div>
+<div class="media-right">
+  <a href="#" id="message-back"><img src="/assets/backarrow.png"></a>
+</div>

@@ -1,0 +1,6 @@
+<% if params[:wizard] %>
+$(".wizard_airlines").html("");
+$(".wizard_airlines").html("<%= j render :partial => 'unliked_airlines' %>");
+<% else %>
+  location.reload();
+<% end %>

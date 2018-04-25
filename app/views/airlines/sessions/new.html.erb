@@ -1,0 +1,173 @@
+<% content_for :full_mid do %>
+    <div class="signup signup-a">
+      <div class="container">
+        <h1>Finding the perfect crew has never been this easy.</h1>
+        <div class="signup-form">
+          <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+              <%= render '/shared/flashes' -%>
+              <input autofocus="autofocus" class="string email" style="width: 100%;" id="airline_email" name="airline[email]" size="50" type="email" value="">
+              <input class="password optional" id="airline_password" name="airline[password]" size="50" type="password">
+
+              <%= f.button :submit, "Login", :class=>"btn btn-lrg btn-green" %>
+              <a href="<%= new_registration_path(resource_name) %>" class="btn btn-lrg btn-window" type="button">Register</a>
+          <% end %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'forgot' %>
+        </div>
+        <!-- <div class="download-app">
+          <h4>Download the app</h4>
+          <a href="#"><img src="/assets/appstore.png"></a><a href="#"><img src="/assets/playstore.png"></a>
+        </div> -->
+      </div>
+      <div class="white-skew"></div>
+    </div>
+
+    <!-- STATS -->
+    <% pilot = Refinery::Customers::Customer.where(:career_path => 'Pilot') %>
+    <% crew = Refinery::Customers::Customer.where(:career_path => 'Cabin Crew') %>
+    <% eng = Refinery::Customers::Customer.where(:career_path => 'Aircraft Maintenance') %>
+    <div class="stats">
+      <h1>The fastest growing airline recruiter</h1>
+      <div class="container-fluid container-lud">
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="media" id="counter">
+              <div class="media-left">
+                <img src="/assets/landing-airline/pilot.jpg" class="media-object">
+              </div>
+              <div class="media-body">
+                <h2 class="media-heading">Pilots</h2>
+                <h1 class="counter-value" data-count="<%= pilot.count %>">0</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="media">
+              <div class="media-left">
+                <img src="/assets/landing-airline/hostess.jpg" class="media-object">
+              </div>
+              <div class="media-body">
+                <h2 class="media-heading">Cabin Crew</h2>
+                <h1 class="counter-value" data-count="<%= crew.count %>">0</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="media">
+              <div class="media-left">
+                <img src="/assets/landing-airline/mechanic.jpg" class="media-object">
+              </div>
+              <div class="media-body">
+                <h2 class="media-heading">Maintenance</h2>
+                <h1 class="counter-value" data-count="<%= eng.count %>">0</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USPs
+================================================== -->
+
+    <div class="usps usps-a">
+      <img src="/assets/landing-airline/macbook.jpg" class="macbook">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 col-sm-offset-4 col-md-6 col-md-offset-6">
+            <h1>The modern way of finding a crew</h1>
+            <div class="usp">
+              <img src="/assets/landing/network.gif">
+              <h4>Aviation Network</h4>
+              <p><%= copywriting('Aviation Network Airline', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+            <div class="usp">
+              <img src="/assets/landing/headhunt.gif">
+              <h4>Database with Candidates</h4>
+              <p><%= copywriting('Database with Candidates Airline', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+            <div class="usp">
+              <img src="/assets/landing/crew.gif">
+              <h4>Pilots to Cabin Crew</h4>
+              <p><%= copywriting('Pilots to Cabin Crew Airline', {:phrase_type => 'string', :scope => 'The modern way', :default => 'text here' }) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- HOW IT WORKS
+    ================================================== -->
+
+    <div class="how-it-works how-it-works-a">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6">
+            <h1>How it all works</h1>
+            <div class="diagram">
+              <p>Sign up and complete your profile</p>
+              <p>Get verified, post articles and jobs</p>
+              <p>Find the perfect candidates</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="/assets/landing/how-clouds.jpg" class="how-screen1">
+      <img src="/assets/landing-airline/how-dash.jpg" class="how-screen2">
+      <img src="/assets/landing-airline/how-profile.jpg" class="how-screen3">
+    </div>
+
+    <div class="stats text-center" style="padding-bottom: 80px;">
+      <h1>Start finding the perfect crew</h1>
+      <a href="<%= new_registration_path(resource_name) %>" class="btn btn-lrg btn-blue">Get started</a>
+    </div>
+
+    <script type="application/javascript">
+        var a = 0;
+        $(window).scroll(function() {
+
+            var oTop = $('#counter').offset().top - window.innerHeight;
+            if (a == 0 && $(window).scrollTop() > oTop) {
+                $('.counter-value').each(function() {
+                    var $this = $(this),
+                        countTo = $this.attr('data-count');
+                    $({
+                        countNum: $this.text()
+                    }).animate({
+                            countNum: countTo
+                        },
+                        {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function() {
+                                $this.text(Math.floor(this.countNum));
+                            },
+                            complete: function() {
+                                $this.text(this.countNum);
+                                //alert('finished');
+                            }
+                        });
+                });
+                a = 1;
+            }
+        });
+    </script>
+<% end %>
+<!--<div class="col-xs-12 col-md-6 col-md-offset-3">-->
+	<!--<div class="log-in-body">-->
+    <!--<h2>Airline Sign in</h2>-->
+    <!--<%#= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>-->
+      <!--<%#= render '/shared/flashes' -%>-->
+      <!--<div class="inputs">-->
+        <!--<%#= f.input :email, :required => false, :autofocus => true %>-->
+        <!--<%#= f.input :password, :required => false %>-->
+        <!--<%#= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>-->
+      <!--</div>-->
+      <!--<%#= render "airlines/links" %>-->
+      <!--<div class="actions">-->
+        <!--<%#= f.button :submit, "Sign in", :class=>"btn btn-green" %>-->
+      <!--</div>-->
+    <!--<%# end %>-->
+  <!--</div>-->
+
+<!--</div>-->

@@ -1,0 +1,20 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(airline) -%>">
+  <span class='title'>
+    <%= airline.name %> <% if airline.valid_airline %> - Valid <% end %>
+
+  </span>
+  <span class='actions'>
+    
+    <%= link_to refinery_icon_tag("application_go.png"), refinery.airlines_airline_path(airline),
+        :title => t('.view_live_html'),
+        :target => "_blank" %>
+    
+    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_airlines_admin_airline_path(airline),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), refinery.airlines_admin_airline_path(airline),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'refinery.admin.delete', :title => airline.name),
+        :method => :delete %>
+  </span>
+</li>

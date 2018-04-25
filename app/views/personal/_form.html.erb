@@ -1,0 +1,283 @@
+<% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+<%= simple_form_for @customer, url: refinery.customers_customers_path do |f| -%>
+
+  <div class="modal fade" id="personal_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Personal Details</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>First Name</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.input_field :first_name, :class=>'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Surname</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.input_field :surname, :class=>'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Career Path</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.select :career_path, ::Refinery::Customers::Customer::CAREERS %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Date of birth</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.text_field :date_of_birth, :label => false, :class => "date_pick", required: true  %>
+                <%#= f.date_select(:date_of_birth, :start_year => 1950, order: [:day, :month, :year], :class=>"form-control slct") %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Gender</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.select :gender, ::Refinery::Customers::Customer::GENDERS %>
+              </div>
+            </div>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<div class="row">-->
+              <!--<div class="col-xs-4">-->
+                <!--<label>Address</label>-->
+              <!--</div>-->
+              <!--<div class="col-xs-8">-->
+                <!--<%#= f.input_field :address, as: :text, :rows=> 2, :class=>"form-control" %>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <%#= f.input_field :age, :class=>'form-control',=>"Age" %>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Email</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.input_field :email, :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Mobile Number</label>
+              </div>
+              <div class="col-xs-8 personal-number">
+                <%= f.input_field :contact_number, :class=>"form-control country_phone1" %>
+                <input id="contact_number_extension" value="" name="customer[phone_extension1]" type="hidden">
+              </div>
+            </div>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<div class="row">-->
+              <!--<div class="col-xs-4">-->
+                <!--<label>Alternative Number</label>-->
+              <!--</div>-->
+              <!--<div class="col-xs-8">-->
+                <!--<%#= f.input_field :other_number, :class=>"form-control country_phone2" %>-->
+                <!--<input id="other_number_extension" value="" name="customer[phone_extension2]" type="hidden">-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Nationality</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.country_select :nationality, selected: @customer.nationality, :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Country of Residence</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.country_select :dual_nationality_details, selected: @customer.dual_nationality_details, :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>Languages</label>
+              </div>
+              <div class="col-xs-8">
+                <select name="customer[language_ids][]" class="form-control" id="example-getting-started" multiple="multiple">
+                  <% ::Refinery::Languages::Language.order('position ASC').all.each do |item| %>
+                    <option value="<%= item.id %>"><%= item.name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<div class="row">-->
+              <!--<div class="col-xs-4">-->
+                <!--<label>Marital Status</label>-->
+              <!--</div>-->
+              <!--<div class="col-xs-8">-->
+                <!--<%#= f.select :marital_period, ::Refinery::Customers::Customer::MARITALSTATUS, :class=>"form-control" %>-->
+                <!--<%#= f.input_field :marital_period, :class=>"form-control" %>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-4">
+                <label>ICAO English Proficiency</label>
+              </div>
+              <div class="col-xs-8">
+                <%= f.select :icao, ::Refinery::Customers::Customer::ICAO, :class=>"form-control" %>
+                <%#= f.input_field :icao, :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group personal-checkbox">
+            <div class="row">
+              <div class="col-xs-4">
+                <label class="vertical-top"><strong>Any criminal records?</strong></label>
+              </div>
+              <div class="col-xs-8">
+
+                <%= f.check_box :any_criminal_records, :class=>"boolean optional hidden" %>
+                <label for="customer_any_criminal_records" class="form-checkbox"></label>
+
+
+                <div class="records_info">
+                  "In accordance with JC 360 T&C's we do not present candidates with a criminal record."
+                </div>
+              </div>
+            </div>
+            <script type="application/javascript">
+                $(function() {
+                    $(".records_info").hide();
+
+                    $('#customer_any_criminal_records').change(function() {
+                        if (this.checked) {
+                          $(".records_info").show();
+                        } else {
+                          $(".records_info").hide();
+                        }
+                    });
+
+
+
+
+                    <% if @customer.phone_extension1.present? %>
+                      $(".country_phone1").intlTelInput({
+                          formatOnInit: true,
+                          separateDialCode: true,
+                          preferredCountries: ["<%= @customer.phone_extension1 %>"],
+                          utilsScript: "utils.js"
+                      });
+                    <% else %>
+                      $(".country_phone1").intlTelInput({
+                          formatOnInit: true,
+                          separateDialCode: true,
+                          preferredCountries: ["za"],
+                          utilsScript: "utils.js"
+                      });
+                    <% end %>
+
+                    <% if @customer.phone_extension2.present? %>
+                      $(".country_phone2").intlTelInput({
+                          formatOnInit: true,
+                          separateDialCode: true,
+                          preferredCountries: ["<%= @customer.phone_extension2 %>"],
+                          utilsScript: "utils.js"
+                      });
+                    <% else %>
+                      $(".country_phone2").intlTelInput({
+                          formatOnInit: true,
+                          separateDialCode: true,
+                          preferredCountries: ["za"],
+                          utilsScript: "utils.js"
+                      });
+                    <% end %>
+
+                    $(".country_phone1").on("keyup change", function() {
+//                      var intlNumber = $(".country_phone1").intlTelInput("getNumber");
+                        var intlNumber = $(".country_phone1").intlTelInput("getSelectedCountryData").iso2;
+                        if (intlNumber) {
+                            $('#contact_number_extension').val(intlNumber);
+                        }
+                    });
+
+                    $(".country_phone2").on("keyup change", function() {
+//                      var intlNumber = $(".country_phone1").intlTelInput("getNumber");
+                        var intlNumber = $(".country_phone2").intlTelInput("getSelectedCountryData").iso2;
+                        if (intlNumber) {
+                            $('#other_number_extension').val(intlNumber);
+                        }
+                    });
+
+                    $("#customer_nationality").on("keyup change", function() {
+                        $('#customer_dual_nationality_details').val($(this).val())
+                    });
+
+
+
+
+//                    $(".country_phone1").on("countrychange", function(e, countryData) {
+//                        $('#contact_number_extension').val('+' + countryData.dialCode)
+//                    });
+//
+//
+//                    $(".country_phone2").on("countrychange", function(e, countryData) {
+//                        $('#other_number_extension').val('+' + countryData.dialCode)
+//                    });
+
+                    $('#example-getting-started').multiselect({
+                        nonSelectedText: 'Please Select Languages'
+                    });
+
+                    <% ids = @customer.languages.map {|x| x.id} %>
+                    <% if ids.present? %>
+                      $('#example-getting-started').multiselect('select', <%= ids %>);
+                    <% end %>
+                });
+            </script>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+          <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
+
+
+
+

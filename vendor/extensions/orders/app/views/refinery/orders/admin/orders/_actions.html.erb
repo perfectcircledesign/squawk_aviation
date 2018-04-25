@@ -1,0 +1,60 @@
+<ul>
+  <% if ::Refinery::Orders::Admin::OrdersController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.orders_admin_orders_path %>
+    </li>
+  <% end %>
+</ul>
+
+<ul class='collapsible_menu'>
+  <li class='not_a_link'>
+    <%= link_to 'Manage Orders', '#' %>
+  </li>
+  <li class=<%= !params[:order_status].present? ? "selected" : "" %>>
+    <%= link_to "All", refinery.orders_admin_orders_path %>
+  </li>
+  <li class=<%= params[:order_status] == "Awaiting EFT Payment" ? "selected" : "" %>>
+    <%= link_to "Awaiting EFT Payment", refinery.orders_admin_orders_path(:order_status => "Awaiting EFT Payment") %>
+  </li>
+  <li class=<%= params[:order_status] == "Awaiting Credit Card Payment" ? "selected" : "" %>>
+    <%= link_to "Awaiting Credit Card Payment", refinery.orders_admin_orders_path(:order_status => "Awaiting Credit Card Payment") %>
+  </li>
+  <li class=<%= params[:order_status] == "New" ? "selected" : "" %>>
+    <%= link_to "New", refinery.orders_admin_orders_path(:order_status => "New") %>
+    <ul class='collapsible_menu'>
+      <li class='not_a_link'>
+        <%= link_to 'Manage Reports', "#" %>
+      </li>
+      <li><%= link_to "Picking Report", refinery.orders_admin_picking_report_path() %></li>
+      <li><%= link_to "Labelling Report", refinery.orders_admin_labelling_report_path() %></li>
+      <li><%= link_to "Invoicing Report", refinery.orders_admin_invoicing_report_path() %></li>
+      <li><%= link_to "Mark all as 'Processing'", refinery.orders_admin_mark_all_as_processing_path() %></li>
+    </ul>
+  </li>
+  <li class=<%= params[:order_status] == "Processing" ? "selected" : "" %>>
+    <%= link_to "Processing", refinery.orders_admin_orders_path(:order_status => "Processing") %>
+  </li>
+  <li class=<%= params[:order_status] == "Complete" ? "selected" : "" %>>
+    <%= link_to "Complete", refinery.orders_admin_orders_path(:order_status => "Complete") %>
+  </li>
+  <li class=<%= params[:order_status] == "Cancelled" ? "selected" : "" %>>
+    <%= link_to "Cancelled", refinery.orders_admin_orders_path(:order_status => "Cancelled") %>
+  </li>
+  <li class=<%= params[:order_status] == "Stale" ? "selected" : "" %>>
+    <%= link_to "Stale", refinery.orders_admin_orders_path(:order_status => "Stale") %>
+  </li>
+</ul>
+
+<ul>
+  <li>
+    <%= link_to('Export to CSV', refinery.export_orders_admin_orders_path(:format => 'csv'), :style => 'background-image: url(/assets/icon_excel.png)') %>
+  </li>
+</ul>
+
+<!--<ul>-->
+  <!--<li>-->
+    <%#= link_to "Update who gets notified",
+#                refinery.orders_admin_notification_recipients_path(:dialog => true, :height => 200),
+                :class => 'user_comment_icon' %>
+  <!--</li>-->
+<!--</ul>-->

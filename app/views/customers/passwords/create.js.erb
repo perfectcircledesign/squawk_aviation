@@ -1,0 +1,11 @@
+<% if @error_messages.present? %>
+  $(".message_error").html("<%= j render :partial => 'error' %>");
+<% else %>
+  $('#password_form').modal('hide');
+
+  $("#password_success_error_form").modal('show');
+  $('#password_form .content-place').html("<%= j render '/shared/pass_form' %>")
+
+<% end %>
+
+

@@ -1,0 +1,96 @@
+nl:
+  refinery:
+    plugins:
+      transactions:
+        title: Transactions
+      order_items:
+        title: Order Items
+      orders:
+        title: Orders
+    transactions:
+      admin:
+        transactions:
+          actions:
+            create_new: Maak een nieuwe Transaction
+            reorder: Wijzig de volgorde van de Transactions
+            reorder_done: Klaar met het wijzingen van de volgorde van de Transactions
+          records:
+            title: Transactions
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Transactions. Druk op 'Maak een nieuwe
+              Transaction' om de eerste aan te maken.
+          transaction:
+            view_live_html: Bekijk deze transaction op de website <br/><em>(opent
+              een nieuw venster)</em>
+            edit: Bewerk deze transaction
+            delete: Verwijder deze transaction voor eeuwig
+      transactions:
+        show:
+          other: Andere Transactions
+    order_items:
+      admin:
+        order_items:
+          actions:
+            create_new: Maak een nieuwe Order Item
+            reorder: Wijzig de volgorde van de Order Items
+            reorder_done: Klaar met het wijzingen van de volgorde van de Order Items
+          records:
+            title: Order Items
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Order Items. Druk op 'Maak een nieuwe Order
+              Item' om de eerste aan te maken.
+          order_item:
+            view_live_html: Bekijk deze order item op de website <br/><em>(opent een
+              nieuw venster)</em>
+            edit: Bewerk deze order item
+            delete: Verwijder deze order item voor eeuwig
+      order_items:
+        show:
+          other: Andere Order Items
+    orders:
+      admin:
+        orders:
+          actions:
+            create_new: Maak een nieuwe Order
+            reorder: Wijzig de volgorde van de Orders
+            reorder_done: Klaar met het wijzingen van de volgorde van de Orders
+          records:
+            title: Orders
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Orders. Druk op 'Maak een nieuwe Order'
+              om de eerste aan te maken.
+          order:
+            view_live_html: Bekijk deze order op de website <br/><em>(opent een nieuw
+              venster)</em>
+            edit: Bewerk deze order
+            delete: Verwijder deze order voor eeuwig
+      orders:
+        show:
+          other: Andere Orders
+  activerecord:
+    attributes:
+      refinery/transactions/transaction:
+        unique_guid: Unique Guid
+        order_id: Order
+        amount: Amount
+        is_payment_successful: Is Payment Successful
+        notes: Notes
+      refinery/order_items/order_item:
+        product_name: Product Name
+        product_stock_code: Product Stock Code
+        product_supplier_stock_code: Product Supplier Stock Code
+        price: Price
+        order_id: Order
+        quantity: Quantity
+        total: Total
+      refinery/orders/order:
+        order_number: Order Number
+        customer_id: Customer
+        order_status: Order Status
+        grand_total: Grand Total
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        suburb: Suburb
+        city: City
+        postal_code: Postal Code
+        payment_type: Payment Type

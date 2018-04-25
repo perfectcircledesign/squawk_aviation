@@ -1,0 +1,132 @@
+<%= content_for :full do %>
+    <!-- <div class="sliver"></div> -->
+<div class="payment-plan">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <% if current_customer.subscription.present? %>
+          <% sub = current_customer.subscription %>
+            <div class="plan-header">
+              <p>My subscription plan</p>
+              <h3><%= sub.plan.name %></h3>
+            </div>
+            <div class="card">
+              <%= render '/shared/flashes' -%>
+                <h5>Next Payment Due</h5>
+                <div class="subscription-details">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      Date<br>
+                      <%= sub.exp_date.strftime('%d/%m/%Y') %>
+                    </div>
+                    <div class="col-xs-6">
+                      Amount<br>
+                      $<%= sub.plan.cost %>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+
+                <h5>Payment Method</h5>
+                <% if sub.credit_card.present? %>
+                  <div class="subscription-details">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        Holder: <%= sub.credit_card.holder %><br>
+                        Type: <%= sub.credit_card.brand %><br>
+                        Card Number: **** **** **** <%= sub.credit_card.last_digits %>
+                      </div>
+                      <div class="col-xs-6">
+                        Expiration Month: <%= sub.credit_card.exp_month %><br>
+                        Expiration Year: <%= sub.credit_card.exp_year %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
+                <div class="update">
+                  <%= link_to 'Change Credit Card', load_new_form_path(type:"credit_card", method_type: :post), :class=>"link", remote:true  %>
+                  <%= link_to refinery.subscriptions_subscription_path(id:sub.id),
+                              :class => "link",
+                              :confirm => "Are you sure you want to cancel your subscription?",
+                              :method => :delete do %>
+                      Cancel Subscription
+                  <% end %>
+                  <%# if sub.fail_payment_count.present? and sub.fail_payment_count >= 3%>
+                    <%= link_to 'Change Credit Card and Do Payment', load_new_form_path(type:"credit_card", method_type: :post, :payment_type=>'DB'), :class=>"link", remote:true  %>
+                    <%= link_to 'Retry Payment Now', '/retry_payment', :class=>"link"  %>
+                  <%# end %>
+                </div>
+
+                <div class="modal fade" id="new_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <!--this is where we dynamically load the partial-->
+                      <div class="form_details" id="form_details"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <% elsif current_customer.trial? %>
+            <div class="plan-header">
+              <p>My subscription plan</p>
+              <h3>Trial</h3>
+            </div>
+            <div class="card text-center">
+              <div class='col-xs-12'>
+                <p style="margin-bottom: 20px;">You are currently on the trial version of Squawk Aviation. Sign up for a subscription plan to upgrade your account.</p>
+                <%= link_to("Select Plan", "/subscriptions/new", class: 'btn btn-window') %>
+              </div>               
+            </div>
+          <% end %>
+        </div>
+        <div class="col-xs-6">
+          <div class="plan-header">
+            <p>My Invoices</p>
+            <h3>Squawk Payments</h3>
+          </div>
+          <div class="card">
+            <% invoices = Refinery::Invoices::Invoice.where(:customer_id => current_customer) %>
+            <% if invoices.present? %>
+              <div class="subscription-details">
+                <table class="table table-condensed">
+                  <tr>
+                    <th>Invoice Nr</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Cost</th>
+                  </tr>
+                  <% invoices.each do |invoice| %>
+                    <tr>
+                      <td>
+                        <%= link_to "/invoice_show?id=#{invoice.id}", :target => "_blank" do %>
+                          <%= invoice.invoice_number %>
+                        <% end %>  
+                      </td>
+                      <td>
+                        <%= link_to "/invoice_show?id=#{invoice.id}", :target => "_blank" do %>
+                          <%= invoice.sub_type %>
+                        <% end %> 
+                      </td>
+                      <td>
+                        <%= link_to "/invoice_show?id=#{invoice.id}", :target => "_blank" do %>
+                          <%= invoice.start_date %>
+                        <% end %> 
+                      </td>
+                      <td>
+                        <%= link_to "/invoice_show?id=#{invoice.id}", :target => "_blank" do %>
+                          $<%= invoice.price_dollar %> (R<%= invoice.price_rand %>)
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

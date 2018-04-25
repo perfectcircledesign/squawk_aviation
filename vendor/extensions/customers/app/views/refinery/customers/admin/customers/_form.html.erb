@@ -1,0 +1,82 @@
+<%= form_for [refinery, :customers_admin, @customer] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @customer,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%= f.label :first_name -%>
+    <%= f.text_field :first_name, :class => 'larger widest'  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :surname -%>
+    <%= f.text_field :surname  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label :email -%>
+    <%= f.text_field :email -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :contact_number -%>
+    <%= f.text_field :contact_number  -%>
+
+  </div>
+  
+  <!--<div class='field'>-->
+    <!--<%#= f.label :fax_number -%>-->
+    <!--<%#= f.text_field :fax_number  -%>-->
+
+  <!--</div>-->
+
+  <div class='field'>
+    <%= f.label :free_user -%>
+    <%= f.check_box :free_user  -%>
+  </div>
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :company_name -%>-->
+    <!--<%#= f.text_field :company_name  -%>-->
+
+  <!--</div>-->
+  
+  <!--<div class='field'>-->
+    <!--<%#= f.label :company_registration_number -%>-->
+    <!--<%#= f.text_field :company_registration_number  -%>-->
+
+  <!--</div>-->
+  <!-- -->
+  <!--<div class='field'>-->
+    <!--<%#= f.label :company_vat_number -%>-->
+    <!--<%#= f.text_field :company_vat_number  -%>-->
+
+  <!--</div>-->
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :province -%>-->
+    <!--<%#= f.text_field :province  -%>-->
+
+  <!--</div>-->
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :sport -%>-->
+    <!--<%#= f.text_field :sport  -%>-->
+
+  <!--</div>-->
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :other_sport -%>-->
+    <!--<%#= f.text_field :other_sport  -%>-->
+
+  <!--</div>-->
+
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.customers.admin.customers.customer'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @customer.first_name) %>
+<% end -%>

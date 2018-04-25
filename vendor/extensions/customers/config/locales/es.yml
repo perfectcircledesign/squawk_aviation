@@ -1,0 +1,68 @@
+es:
+  refinery:
+    plugins:
+      addresses:
+        title: Addresses
+      customers:
+        title: Customers
+    addresses:
+      admin:
+        addresses:
+          actions:
+            create_new: Crear nuevo address
+            reorder: Reordenar addresses
+            reorder_done: Reordenación de addresses completada
+          records:
+            title: Addresses
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay addresses todavía. Pulsa en "Crear nuevo Address"
+              para crear tu primer address.
+          address:
+            view_live_html: Ver este address como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este address
+            delete: Borrar este address para siempre
+      addresses:
+        show:
+          other: Otros addresses
+    customers:
+      admin:
+        customers:
+          actions:
+            create_new: Crear nuevo customer
+            reorder: Reordenar customers
+            reorder_done: Reordenación de customers completada
+          records:
+            title: Customers
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay customers todavía. Pulsa en "Crear nuevo Customer"
+              para crear tu primer customer.
+          customer:
+            view_live_html: Ver este customer como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este customer
+            delete: Borrar este customer para siempre
+      customers:
+        show:
+          other: Otros customers
+  activerecord:
+    attributes:
+      refinery/addresses/address:
+        friendly_name: Friendly Name
+        line_1: Line 1
+        line_2: Line 2
+        suburb: Suburb
+        city: City
+        province: Province
+        country: Country
+        customer_id: Customer
+        is_current: Is Current
+      refinery/customers/customer:
+        first_name: First Name
+        surname: Surname
+        contact_number: Contact Number
+        fax_number: Fax Number
+        is_company: Is Company
+        company_name: Company Name
+        company_registration_number: Company Registration Number
+        company_vat_number: Company Vat Number

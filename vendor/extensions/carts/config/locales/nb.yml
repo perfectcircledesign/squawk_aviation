@@ -1,0 +1,56 @@
+nb:
+  refinery:
+    plugins:
+      line_items:
+        title: Line Items
+      carts:
+        title: Carts
+    line_items:
+      admin:
+        line_items:
+          actions:
+            create_new: Lag en ny Line Item
+            reorder: Endre rekkefølgen på Line Items
+            reorder_done: Ferdig å endre rekkefølgen Line Items
+          records:
+            title: Line Items
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Line Items enda. Klikk på "Lag en ny Line Item"
+              for å legge til din første line item.
+          line_item:
+            view_live_html: Vis hvordan denne line item ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne line item
+            delete: Fjern denne line item permanent
+      line_items:
+        show:
+          other: Andre Line Items
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Lag en ny Cart
+            reorder: Endre rekkefølgen på Carts
+            reorder_done: Ferdig å endre rekkefølgen Carts
+          records:
+            title: Carts
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Carts enda. Klikk på "Lag en ny Cart" for å
+              legge til din første cart.
+          cart:
+            view_live_html: Vis hvordan denne cart ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne cart
+            delete: Fjern denne cart permanent
+      carts:
+        show:
+          other: Andre Carts
+  activerecord:
+    attributes:
+      refinery/line_items/line_item:
+        cart_id: Cart
+        product_id: Product
+        quantity: Quantity
+      refinery/carts/cart:
+        customer_id: Customer
+        is_current: Is Current

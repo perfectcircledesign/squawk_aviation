@@ -1,0 +1,27 @@
+nl:
+  refinery:
+    plugins:
+      airlines:
+        title: Airlines
+    airlines:
+      admin:
+        airlines:
+          actions:
+            create_new: Maak een nieuwe Airline
+            reorder: Wijzig de volgorde van de Airlines
+            reorder_done: Klaar met het wijzingen van de volgorde van de Airlines
+          records:
+            title: Airlines
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Airlines. Druk op 'Maak een nieuwe Airline' om de eerste aan te maken.
+          airline:
+            view_live_html: Bekijk deze airline op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze airline
+            delete: Verwijder deze airline voor eeuwig
+      airlines:
+        show:
+          other: Andere Airlines
+  activerecord:
+    attributes:
+      'refinery/airlines/airline':
+        name: Name

@@ -1,0 +1,29 @@
+nb:
+  refinery:
+    plugins:
+      aircrafts:
+        title: Aircrafts
+    aircrafts:
+      admin:
+        aircrafts:
+          actions:
+            create_new: Lag en ny Aircraft
+            reorder: Endre rekkefølgen på Aircrafts
+            reorder_done: Ferdig å endre rekkefølgen Aircrafts
+          records:
+            title: Aircrafts
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Aircrafts enda. Klikk på "Lag en ny Aircraft" for å legge til din første aircraft.
+          aircraft:
+            view_live_html: Vis hvordan denne aircraft ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne aircraft
+            delete: Fjern denne aircraft permanent
+      aircrafts:
+        show:
+          other: Andre Aircrafts
+  activerecord:
+    attributes:
+      'refinery/aircrafts/aircraft':
+        name: Name
+        weight: Weight
+        engine: Engine

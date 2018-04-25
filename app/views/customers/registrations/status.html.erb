@@ -1,0 +1,29 @@
+<%= content_for :full do %>
+    <!-- <div class="sliver"></div> -->
+<div class="payment-plan">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+          <div class="plan-header">
+            <p>Payment</p>
+            <h3>Status</h3>
+          </div>
+          <div class="card">
+            <%= render '/shared/flashes' -%>
+
+              <div class="update">
+                <% if current_customer.subscription.present? %>
+                  <%= link_to 'Try Again', '/payments', :class=>"btn-blue btn-window btn" %>
+                <% else %>
+                  <%= link_to 'Try Again', '/subscriptions/new', :class=>"btn-blue btn-window btn" %>
+                <% end %>
+              </div>
+
+            </div>
+        </div>
+        <div class="col-xs-3">
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

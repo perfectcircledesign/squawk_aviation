@@ -1,0 +1,76 @@
+<% content_for :full_mid do %>
+<div class="index-sliver">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Articles Control Panel</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="index">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <div class="article-index">
+              <div class="header">
+                <h3>Your Articles</h3>
+                <a href="/articles/new" class="add"><img src="/assets/plus.png"></a>
+              </div>
+              <% if @airline.articles.present?  %>
+                <table>
+                  <tr>
+                    <th>
+                      Article
+                    </th>
+                    <th>
+                      Date Posted
+                    </th>
+                    <th>
+                      View
+                    </th>
+                    <th>
+                      Edit
+                    </th>
+                    <th>
+                      Delete
+                    </th>
+                  </tr>
+                  <% @airline.articles.order('created_at DESC').each do |item| %>
+                    <tr>
+                      <td>
+                        <%= item.name %>
+                      </td>
+                      <td>
+                        <%= item.created_at.strftime('%d-%m-%Y') %>
+                      </td>
+                      <td>
+                        <a href="<%= refinery.articles_article_path(item) %>"><i class="fa fa-eye fa-fw" aria-hidden="true"></i></a>
+                      </td>
+                      <td>
+                        <a href="/articles/<%= item.id.to_s %>/edit"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a>
+                      </td>
+                      <td>
+                        <%= link_to '/articles/' + item.id.to_s,
+                                    :confirm => "Are you shore you want to delete: " + item.name,
+                                    :method => :delete do %>
+                            <i class="fa fa-trash fa-fw" aria-hidden="true"></i>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              <% else %>
+                <div class="blank-state">
+                  <img src="/assets/plane.jpg">
+                  <h2>Create your first article</h2>
+                  <a href="/articles/new" class="btn btn-green btn-window btn-lrg">Create</a>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

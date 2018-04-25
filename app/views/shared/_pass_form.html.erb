@@ -1,0 +1,32 @@
+<% @customer = Refinery::Customers::Customer.new %>
+<%= form_for(@customer, :url => customer_password_path(@customer), remote:true) do |f| %>
+
+    <div class="modal-body">
+      <div class="message_error"></div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-3">
+            <label>Email</label>
+          </div>
+          <div class="col-xs-9">
+            <!--<input class="string email optional" id="customer_email" name="customer[email]" placeholder="Email Address" size="50" type="email" value="">-->
+            <%= f.email_field :email, :placeholder => 'Email Address', :label => false, required:true  %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <!--<input class="btn btn-blue" name="commit" type="submit" >-->
+      <a href="javascript:void(0)" class="btn btn-green" data-dismiss="modal">Close</a>
+      <%= f.button :submit, :class => 'btn btn-blue' %>
+    </div>
+<% end %>
+
+
+
+
+
+
+

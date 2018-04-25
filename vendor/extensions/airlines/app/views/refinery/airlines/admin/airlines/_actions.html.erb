@@ -1,0 +1,25 @@
+<ul>
+  <% if ::Refinery::Airlines::Admin::AirlinesController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.airlines_admin_airlines_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_airlines_admin_airline_path,
+                 :class => "add_icon" %>
+  </li>
+<% if !searching? && ::Refinery::Airlines::Admin::AirlinesController.sortable? && ::Refinery::Airlines::Airline.any? %>
+  <li>
+    <%= link_to t('.reorder', :what => "Airlines"),
+                 refinery.airlines_admin_airlines_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Airlines"),
+                 refinery.airlines_admin_airlines_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>

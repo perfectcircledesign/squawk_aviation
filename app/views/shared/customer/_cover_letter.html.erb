@@ -1,0 +1,19 @@
+<div class="card details-card" id="letter">
+  <h2>Introduction</h2>
+  <% if current_customer.present? %>
+    <%# if @customer.cover_letter.present? %>
+      <a href="#" class="edit" data-toggle="modal" data-backdrop="static" data-target="#cover_letter"><img src="/assets/edit.png"></a>
+    <%# else %>
+      <!--<a href="#" class="edit" data-toggle="modal" data-backdrop="static" data-target="#cover_letter"><img src="/assets/plus.png"></a>-->
+    <%# end %>
+  <% end %>
+  <% if @customer.cover_letter.present? %>
+      <p><%= raw @customer.cover_letter %></p>
+  <% else %>
+  	<div class="blank-state">
+        <img src="/assets/cover-letter.jpg">
+        <h2>Tell Airlines a bit about yourself</h2>
+        <a href="#" class="btn btn-green btn-window btn-lrg" data-backdrop="static" data-toggle="modal" data-target="#cover_letter">Add Cover Letter</a>
+    </div>
+  <% end %>
+</div>

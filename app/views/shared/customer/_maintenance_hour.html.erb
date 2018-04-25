@@ -1,0 +1,78 @@
+<div class="card details-card" id="fly_tag">
+  <h2>On the Job Experience</h2>
+  <% if current_customer.present? %>
+    <%= link_to load_new_form_path(type:"maintenance_hour", method_type: :post), class:"edit", remote:true do %>
+          <img src="/assets/edit.png">
+    <% end %>
+  <% end %>
+  <% if @customer.maintenance_hours.present? %>
+      <% @customer.maintenance_hours.each do |item| %>
+          <div class="details-panel">
+            <h6><%= item.aircraft.name if item.aircraft.present? %></h6>
+            <% if current_customer.present? %>
+              <%= link_to load_new_form_path(type:"maintenance_hour", id: item.id, method_type: :put), class:"btn-edit", remote:true do %>
+                  <img src="/assets/edit.png" width="10" height="10">
+              <% end %>
+              <%= link_to maintenance_hours_path(id:item.id),
+                          :class => "btn-delete",
+                          :confirm => "Are you sure you want to delete: " + item.aircraft.name,
+                          :method => :delete do %>
+                  <span aria-hidden="true" class="close">&times;</span>
+              <% end %>
+            <% end %>
+            <table>
+              <tr>
+                <td>
+                  Total Hours:
+                </td>
+                <td>
+                  <% if item.total_hours.present? %>
+                    <%= item.total_hours %>
+                  <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Experience:
+                </td>
+                <td>
+                  <% if item.airframe %>
+                      Airframe
+                  <% end %>
+                  <% if item.avionics %>
+                      Avionics
+                  <% end %>
+                  <% if item.electrical %>
+                      Electrical
+                  <% end %>
+                  <% if item.fuel %>
+                      Fuel
+                  <% end %>
+                  <% if item.hydraulics %>
+                      Hydraulics
+                  <% end %>
+                  <% if item.interiors %>
+                      Interiors incl Air-con
+                  <% end %>
+                  <% if item.pneumatic %>
+                      Pneumatic
+                  <% end %>
+                  <% if item.power_plant %>
+                      Power Plant
+                  <% end %>
+                  <% if item.interiors %>
+                      Interiors incl Air-con
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/certificate.jpg">
+        <h2>What job experience do you have?</h2>
+        <%= link_to 'Add On the Job Experience', load_new_form_path(type:"maintenance_hour", method_type: :post), class:"btn btn-green btn-window btn-lrg", remote:true %>
+      </div>
+  <% end %>
+</div>

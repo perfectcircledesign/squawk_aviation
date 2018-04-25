@@ -1,0 +1,29 @@
+en:
+  refinery:
+    plugins:
+      employers:
+        title: Employers
+    employers:
+      admin:
+        employers:
+          actions:
+            create_new: Add New Employer
+            reorder: Reorder Employers
+            reorder_done: Done Reordering Employers
+          records:
+            title: Employers
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Employers yet. Click "Add New Employer" to add your first employer.
+          employer:
+            view_live_html: View this employer live <br/><em>(opens in a new window)</em>
+            edit: Edit this employer
+            delete: Remove this employer forever
+      employers:
+        show:
+          other: Other Employers
+  activerecord:
+    attributes:
+      'refinery/employers/employer':
+        name: Name
+        image: Image
+        url: Url

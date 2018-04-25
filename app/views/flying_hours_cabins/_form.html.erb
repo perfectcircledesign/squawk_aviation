@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Cabin Crew Flying Hours</h4>
+</div>
+<%= simple_form_for @flying_hours_cabin, :url => flying_hours_cabins_path, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <%= hidden_field_tag :id, @flying_hours_cabin.id if @flying_hours_cabin.id.present?  %>
+
+    <div class="form-group">        
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Aircraft</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.collection_select :aircraft_id, ::Refinery::Aircrafts::Aircraft.order(:name), :id , :name, {:prompt => "-- Please select Aircraft --"}, {:class=> "longdrop dropmarg", required: true} %><br>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">    -->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>Date First Flown</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :date_first_flown, :label => false, :class => "date_pick"  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">    
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Date Last Flown</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :date_last_flown, :label => false, :class => "date_pick"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">    
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Flight Attendant</label>
+        </div>
+        <div class="col-xs-8">
+          <input type="text" class="p1_range" value="" name="flying_hours_cabin[flight_attendant]" />
+          <%#= f.text_field :flight_attendant, :label => false, :placeholder => "Flight Attendant Hours", :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Purser</label>
+        </div>
+        <div class="col-xs-8">
+          <input type="text" class="p2_range" value="" name="flying_hours_cabin[purser]" />
+          <%#= f.text_field :purser, :label => false, :placeholder => "Purser Hours", :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Chief Purser</label>
+        </div>
+        <div class="col-xs-8">
+          <input type="text" class="p3_range" value="" name="flying_hours_cabin[chief_purser]" />
+          <%#= f.text_field :chief_purser, :label => false, :placeholder => "Chief Purser Hours", :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @flying_hours_cabin.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+

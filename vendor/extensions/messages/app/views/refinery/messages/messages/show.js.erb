@@ -1,0 +1,74 @@
+$(".live-message").html("");
+$(".live-message").html("<%= j render :partial => 'live-message' %>");
+
+$(".their-avatar").html("");
+$(".their-avatar").html("<%= j render :partial => 'their-avatar' %>");
+
+/*MOBILE*/
+
+$(".their_avatar_mobile").html("");
+$(".their_avatar_mobile").html("<%= j render :partial => 'their_avatar_mobile' %>");
+$( ".contact-index > ul > li > a" ).click(function() {
+    $('.message-display').addClass('message-view');
+    $('.contact-index').hide();
+});
+
+$( "#message-back" ).click(function() {
+    $('.message-display').removeClass('message-view');
+    $('.contact-index').show();
+});
+
+/*END*/
+$('.messages').scrollTop($('.messages')[0].scrollHeight);
+
+
+
+
+
+$(".avatar").css('background-color', '');
+$(".avatar_id<%= params[:id] %>").css('background-color', '#d4f0fc');
+
+<%# if current_airline.try(:message_count) > 0 or current_customer.try(:message_count) > 0 %>
+//  if ($('.notification_count').html().length){
+//    var item_count = parseInt($(".avatar_id<%= params[:id] %> .unread_count").html());
+//    var message_count = parseInt($('.notification_count').html());
+//    var message_count_left = message_count - item_count;
+//    if (message_count_left <= 0) {
+//        $('.notification_count').remove();
+//    } else{
+//        $('.notification_count').html(message_count_left);
+//    }
+//  }
+<%# end %>
+
+$(".avatar_id<%= params[:id] %> .unread_count").html('0');
+$(".avatar_id<%= params[:id] %> .unread_count").hide();
+
+<% if current_airline.present? and current_airline.unread_message_count > 0 %>
+  $('#unread_msg').html(<%= current_airline.unread_message_count %>);
+<% else %>
+  $('#unread_msg').hide();
+<% end %>
+
+<% if current_customer.present? and current_customer.unread_message_count > 0 %>
+  $('#unread_msg').html(<%= current_customer.unread_message_count %>);
+<% else %>
+  $('#unread_msg').hide();
+<% end %>
+
+
+
+
+$(document)
+    .one('focus.autoExpand', 'textarea.autoExpand', function(){
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    })
+    .on('input.autoExpand', 'textarea.autoExpand', function(){
+        var minRows = this.getAttribute('data-min-rows')|0, rows;
+        this.rows = minRows;
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+        this.rows = minRows + rows;
+    });

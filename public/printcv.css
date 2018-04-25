@@ -1,0 +1,41 @@
+html,body, .container {
+    height:100%;
+}
+
+/*table {*/
+  /*margin-top: 5mm; }*/
+  table td {
+    font-size: 9pt; }
+
+@page {
+  size: a4;
+  /* auto is the initial value */
+  margin: 0mm; }
+table {
+  border-collapse: collapse;
+  page-break-inside: avoid !important; }
+
+tr {
+  page-break-inside: avoid !important; }
+
+td {
+  page-break-inside: avoid !important;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  padding: 1px;
+  font-size: xx-small; }
+
+td div h4 {color: #028c99!important;}
+td div {margin-bottom: 5mm}
+
+/*# sourceMappingURL=printcv.css.map */
+
+h1 {margin-bottom: 0; font-size: 30px;}
+
+@media print {
+  td[rowspan='7'] {color: #fff!important;}
+  .side-panel td {color: #fff!important;}
+  .side-panel td div {color: #fff!important;}
+  .side-panel td strong {color: #fff!important;}
+  td div h4 {color: #028c99!important;}
+}

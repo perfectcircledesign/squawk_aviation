@@ -1,0 +1,80 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Cabin Crew Licence and Certificates Details</h4>
+</div>
+<%= simple_form_for @cabin_certification, :url => cabin_certifications_path, :html => {multipart:true}, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @cabin_certification.id if @cabin_certification.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Licencing Authority</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :license_authority, CabinCertification::AUTHORITIES, {:include_blank => true}, :class => "form-control fc2", required: true %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4 vertical-top">
+          <label>Endorsements</label>
+        </div>
+        <div class="col-xs-8">
+          <div class="row full-mobile">
+            <div class="col-xs-12 col-md-6 vertical-top">
+              <%= f.check_box :CRM, :class=>"boolean optional" %> CRM<br>
+              <%= f.check_box :DG, :class=>"boolean optional" %> DG<br>
+              <%= f.check_box :Ditching, :class=>"boolean optional" %> Ditching<br>
+            </div>
+            <div class="col-xs-12 col-md-6 vertical-top">
+              <%= f.check_box :Fire_fighting, :class=>"boolean optional" %> Fire Fighting<br>
+              <%= f.check_box :SEPT, :class=>"boolean optional" %> SEPT<br>
+              <%= f.check_box :first_aid, :class=>"boolean optional" %> First Aid<br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4 vertical-top">
+          <label>Upload supporting document</label>
+        </div>
+        <div class="col-xs-8">
+          <div class="preview">
+            <% if @cabin_certification.present? and  @cabin_certification.file.present? %>
+              <%= @cabin_certification.file.file_name %>
+            <% end %>
+          </div>
+          <label class="btn btn-upload" for="inp">Select File</label>
+          <%= file_field_tag :aviation_file, id: 'inp' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @cabin_certification.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create new", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+<script type="application/javascript">
+  $(document).on('change','#inp', function(){
+      var filename = $(this).val().replace(/^.*\\/, "");
+      $(".preview").html(filename);
+  });
+</script>
+
+
+
+
+
+
+
+

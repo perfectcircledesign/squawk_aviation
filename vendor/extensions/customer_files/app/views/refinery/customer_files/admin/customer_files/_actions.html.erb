@@ -1,0 +1,25 @@
+<ul>
+  <% if ::Refinery::CustomerFiles::Admin::CustomerFilesController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.customer_files_admin_customer_files_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_customer_files_admin_customer_file_path,
+                 :class => "add_icon" %>
+  </li>
+<% if !searching? && ::Refinery::CustomerFiles::Admin::CustomerFilesController.sortable? && ::Refinery::CustomerFiles::CustomerFile.any? %>
+  <!--<li>-->
+    <%#= link_to t('.reorder', :what => "Customer Files"),
+                 refinery.customer_files_admin_customer_files_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%#= link_to t('.reorder_done', :what => "Customer Files"),
+                 refinery.customer_files_admin_customer_files_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  <!--</li>-->
+<% end %>
+</ul>

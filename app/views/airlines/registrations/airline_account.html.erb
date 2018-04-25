@@ -1,0 +1,170 @@
+<% content_for :full_mid do %>
+    <% if @airline.sliver.present? %>
+      <div class="airline-sliver" style="background:url(<%= @airline.sliver.url %>) center center / cover; text-align: center; height:242px;">
+    <% else %>
+      <div class="airline-sliver">
+    <% end %>
+      <h2><%= @airline.name %></h2>
+      <div class="stats">
+        <ul>
+          <% if @airline.jobs.present? %>
+            <li><h1><%= @airline.jobs.is_active.count %></h1><h3>Jobs Active</h3></li>
+          <% else %>
+            <li><h1>0</h1><h3>Jobs Active</h3></li>
+          <% end %>
+          <li><h1><%= @airline.favourites.where(:who_favourite => "Airline").count %></h1><h3>Favourited Pilots</h3></li>
+          <li><h1><%= @airline.views_count.to_s %></h1><h3>Profile Views</h3></li>
+          <li>
+            <h1>
+              <% if @airline.articles.present? %>
+                <%= (Date.today - @airline.articles.last.created_at.to_date).to_i %>
+              <% else %>
+                0
+              <% end %>
+            </h1>
+            <h3>Days since last post</h3>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="discover">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>I'm looking for?</h2>
+          </div>
+        </div>
+        <%= render 'path_search' -%>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <!--<div class="card text-center">-->
+              <!--<h3 class="text-left">Profile Status</h3>-->
+              <!--<div class="progress-bar-container">-->
+                <!--<div class="progress-bar">-->
+                  <!--<div style="width: 30%;" class="bar"></div>-->
+                <!--</div>-->
+                <!--<p>30% Complete</p>-->
+                <!--<a href="#" class="btn btn-green">Complete Profile</a>-->
+              <!--</div>-->
+            <!--</div>-->
+            <div class="jobs card">
+              <h3>Latest Jobs</h3>
+              <a href="/jobs/new" class="add"><img src="/assets/plus.png"></a>
+
+              <% if @airline.jobs.present? and @airline.jobs.is_active.present? %>
+                <table class="table table-striped">
+                  <% @airline.jobs.is_active.limit(4).each do |job| %>
+                    <tr>
+                      <td>
+                        <a href="<%= refinery.jobs_job_path(job) %>"><%= job.name %></a>
+                      </td>
+                      <td>
+                        <span class="badge"><%= link_to Favourite.where(:job_id => job.id).count, refinery.customers_customers_path(:job_id => job.id) %></span>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+              <% end %>
+            </div>
+            <% @favourite_customers = Refinery::Customers::Customer.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.airline_id = ? AND favourites.customer_id = refinery_customers.id', 'Airline', @airline.id) %>
+            <% if @favourite_customers.present? %>
+              <div class="card">
+                <h3>Recently Favourited</h3>
+                <div class="favourite-listing">
+                  <% @favourite_customers.each do |customer| %>
+                    <div class="media side-profiles">
+                      <div class="media-left">
+                        <%= link_to refinery.customers_customer_path(customer) do %>
+                          <% if customer.profile_image.present? %>
+                            <%= image_fu customer.profile_image, '40x40#c' %>
+                          <% else %>
+                            <img src="/assets/profile-blank.jpg" width="40" height="40">
+                          <% end %>
+                        <% end %>
+                      </div>
+                      <div class="media-body">
+                        <%= link_to refinery.customers_customer_path(customer) do %>
+                          <div class="media-header">
+                            <%= customer.name %>
+                          </div>
+                          <!--Turbo Engine Pilot-->
+                        <% end %>
+                      </div>
+                      <!--<div class="media-right">-->
+                        <!--<small>Today</small>-->
+                      <!--</div>-->
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-sm-8">
+            <!--<div class="card quick-post">-->
+              <!--<h3>Quick Post</h3>-->
+              <!--<textarea class="form-control" rows="5"></textarea>-->
+              <!--<a href="#" class="btn btn-green">Post</a>-->
+              <!--<a href="#"><img src="images/image.png"></a>-->
+              <!--<a href="#" class="btn btn-green btn-window pull-right">Full Editor</a>-->
+            <!--</div>-->
+            <div class="card">
+              <h3>Latest Articles</h3>
+              <a href="/articles/new" class="add"><img src="/assets/plus.png"></a>
+              <div class="article-listing">
+                <% if @airline.articles.present? %>
+                  <% @airline.articles.each do |article| %>
+                    <div class="article">
+                      <div class="media">
+                        <div class="media-left">
+                          <%= image_fu article.image, '50x50#c' %>
+                        </div>
+                        <div class="media-body">
+                          <small class="pull-right"><%= time_ago_in_words(article.created_at) %></small>
+                          <h5><%= article.name %></h5>
+                          <div>
+                            <%= raw article.body %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                  <div class="all">
+                    <a href="/airline_posts">View All</a>
+                  </div>
+                <% else %>
+                  <div class="blank-state">
+                    <img src="/assets/article-post.png">
+                    <h2>Create your first post!</h2>
+                    <a href="/articles/new" class="btn btn-green btn-window btn-lrg">New Article</a>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+
+              </div>
+              <div class="col-xs-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+
+<% content_for :left do %>
+
+<% end %>
+
+<% content_for :right do %>
+
+<% end %>

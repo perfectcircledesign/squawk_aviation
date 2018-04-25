@@ -1,0 +1,96 @@
+es:
+  refinery:
+    plugins:
+      transactions:
+        title: Transactions
+      order_items:
+        title: Order Items
+      orders:
+        title: Orders
+    transactions:
+      admin:
+        transactions:
+          actions:
+            create_new: Crear nuevo transaction
+            reorder: Reordenar transactions
+            reorder_done: Reordenación de transactions completada
+          records:
+            title: Transactions
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay transactions todavía. Pulsa en "Crear nuevo Transaction"
+              para crear tu primer transaction.
+          transaction:
+            view_live_html: Ver este transaction como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este transaction
+            delete: Borrar este transaction para siempre
+      transactions:
+        show:
+          other: Otros transactions
+    order_items:
+      admin:
+        order_items:
+          actions:
+            create_new: Crear nuevo order item
+            reorder: Reordenar order items
+            reorder_done: Reordenación de order items completada
+          records:
+            title: Order Items
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay order items todavía. Pulsa en "Crear nuevo Order
+              Item" para crear tu primer order item.
+          order_item:
+            view_live_html: Ver este order item como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este order item
+            delete: Borrar este order item para siempre
+      order_items:
+        show:
+          other: Otros order items
+    orders:
+      admin:
+        orders:
+          actions:
+            create_new: Crear nuevo order
+            reorder: Reordenar orders
+            reorder_done: Reordenación de orders completada
+          records:
+            title: Orders
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay orders todavía. Pulsa en "Crear nuevo Order" para
+              crear tu primer order.
+          order:
+            view_live_html: Ver este order como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este order
+            delete: Borrar este order para siempre
+      orders:
+        show:
+          other: Otros orders
+  activerecord:
+    attributes:
+      refinery/transactions/transaction:
+        unique_guid: Unique Guid
+        order_id: Order
+        amount: Amount
+        is_payment_successful: Is Payment Successful
+        notes: Notes
+      refinery/order_items/order_item:
+        product_name: Product Name
+        product_stock_code: Product Stock Code
+        product_supplier_stock_code: Product Supplier Stock Code
+        price: Price
+        order_id: Order
+        quantity: Quantity
+        total: Total
+      refinery/orders/order:
+        order_number: Order Number
+        customer_id: Customer
+        order_status: Order Status
+        grand_total: Grand Total
+        address_line_1: Address Line 1
+        address_line_2: Address Line 2
+        suburb: Suburb
+        city: City
+        postal_code: Postal Code
+        payment_type: Payment Type

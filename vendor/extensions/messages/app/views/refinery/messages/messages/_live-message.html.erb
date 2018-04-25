@@ -1,0 +1,38 @@
+<div class="messages">
+  <% if @all_message.present? %>
+  <ul>
+    <% @all_message.each do |item| %>
+    <li class="<%= item.sender %>"><div class="message"><%= item.message %><span><%= time_ago_in_words(item.created_at) %> ago</span></div></li>
+    <!--<li class="user-message"><div class="message">Hello<span>4:50PM</span></div></li>-->
+    <% end %>
+  </ul>
+
+  <% end %>
+</div>
+<div class="reply">
+  <%= simple_form_for [refinery, :messages, @message], :remote => true do |f| -%>
+      <input type="hidden" value="<%= params[:id] %>" name="id" >
+      <% if current_customer.present? %>
+          <%= f.hidden_field :seen, :label => false, :value => false  %>
+          <%= f.hidden_field :sender, :label => false, :value => 'user-message'  %>
+          <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+          <%= f.hidden_field :airline_id, :label => false, :value => params[:id]  %>
+      <% elsif current_airline.present? %>
+          <%= f.hidden_field :seen, :label => false, :value => false %>
+          <%= f.hidden_field :sender, :label => false, :value => 'airline-message'  %>
+          <%= f.hidden_field :airline_id, :label => false, :value => current_airline.id  %>
+          <%= f.hidden_field :customer_id, :label => false, :value => params[:id]  %>
+      <% end %>
+    <textarea name="message[message]" class='form-control autoExpand' rows='1' data-min-rows='1' placeholder="Reply"></textarea>
+    <button type="submit" class="form_btn" ><img src="/assets/send.png"></button>
+  <% end -%>
+</div>
+
+<script type="application/javascript">
+  $("textarea").keypress(function(event) {
+      if (event.which == 13) {
+          event.preventDefault();
+          $(".form_btn").click();
+      }
+  });
+</script>

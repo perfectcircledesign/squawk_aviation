@@ -1,0 +1,174 @@
+<% content_for :full do %>
+<% if @airline.sliver.present? %>
+  <div class="airline-profile-sliver" style="background:url(<%= @airline.sliver.url %>) center center / cover;height:220px;">
+  </div>
+<% else %>
+  <div class="airline-profile-sliver">
+  </div>
+<% end %>
+<div class="airline-profile">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-9">
+        <div class="card airline-description">
+          <div class="airline-header">
+            <% if @airline.logo.present? %>
+              <div class="airline-logo"><%= image_fu @airline.logo, "150x150^" %></div>
+            <% else %>
+              <div class="airline-logo"><img src="/assets/airline-blank.jpg" width="150" height="150"></div>
+            <% end %>
+            <div class="airline-details">
+              <h2><%= @airline.name %></h2>
+              <p><%= link_to @airline.website, @airline.website, :target => '_blank' if @airline.website.present? %></p>
+            </div>
+            <div class="visible-xs text-center">
+              <% if current_customer.present? %>
+                <% if customer_airline_favourite(current_customer.id, @airline.id, 'pilot') %>
+                    <%= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => @airline.id), :class=>"btn btn-green btn-window", :remote => true %>
+                <% else %>
+                    <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => @airline.id), :class=>"btn btn-green", :remote => true %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <p><%= raw @airline.description %></p>
+          </div>
+          <div>
+            <ul class="list-inline airline-gallery">
+            <% if @airline.image1.present? %>
+                <li><%= image_fu @airline.image1, "157x157#c" %></li>
+            <% end %>
+            <% if @airline.image2.present? %>
+                <li><%= image_fu @airline.image2, "157x157#c" %></li>
+            <% end %>
+            <% if @airline.image3.present? %>
+                <li><%= image_fu @airline.image3, "157x157#c"  %></li>
+            <% end %>
+            <% if @airline.image4.present? %>
+                <li><%= image_fu @airline.image4, "157x157#c"  %></li>
+            <% end %>
+            <% if @airline.image5.present? %>
+                <li><%= image_fu @airline.image5, "157x157#c"  %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <% if @airline.jobs.present? and @airline.jobs.is_active.present? %>
+              <div class="jobs card">
+                <h3>Latest Jobs</h3>
+                <div class="job-index">
+                  <% @airline.jobs.is_active.order('created_at DESC').each do |job| %>
+                    <div class="job">
+                      <%= link_to refinery.jobs_job_path(job) do %>
+                        <h5><%= job.name %></h5>
+                        <small>Created <%= time_ago_in_words(job.created_at) %> ago</small>
+                        <div>
+                          <%= raw truncate(job.description, :length => 40, :omission => '...')  %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div class="card">
+                <h3>Latest Jobs</h3>
+                <div class="article-listing">
+                    <div class="article-empty">
+                      <img src="/assets/job-post.png" class="center-block">
+                      <h4 class="text-center">No Jobs Posted</h4>
+                    </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <% if @airline.articles.present? %>
+              <div class="card">
+                <h3>Latest Articles</h3>
+                <div class="article-listing">
+                  <% @airline.articles.each do |article| %>
+                    <div class="article">
+                      <%#= link_to refinery.articles_article_path(article) do %>
+                        <div class="media">
+                          <%= link_to refinery.articles_article_path(article) do %>
+                            <div class="media-left">
+                              <%= image_fu article.image, '50x50#c', :class=>"media-object" %>
+                            </div>
+                            <div class="media-body">
+                              <h5><%= article.name %></h5>
+                              <small>Posted <%= time_ago_in_words(article.created_at) %> ago</small>
+                            </div>
+                          <% end %>
+                        </div>
+                      <%# end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div class="card">
+                <h3>Latest Articles</h3>
+                <div class="article-listing">
+                    <div class="article-empty">
+                      <img src="/assets/article-post.png" class="center-block">
+                      <h4 class="text-center">No Articles Posted</h4>
+                    </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-3">
+        <div class="hidden-xs">
+        <% if current_customer.present? %>
+            <% if customer_airline_favourite(current_customer.id, @airline.id, 'pilot') %>
+                <%= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => @airline.id), :class=>"btn btn-unfollow btn-lrg", :remote => true %>
+            <% else %>
+                <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => @airline.id), :class=>"btn btn-green btn-follow btn-lrg", :remote => true %>
+            <% end %>
+        <% end %>
+        </div>
+        <div class="card">
+          <ul class="list-unstyled">
+            <%# if @airline.email.present? %>
+              <!-- <li><a href="mailto:<%#= @airline.email %>"><%#= @airline.email %></a></li> -->
+            <%# end %>
+            <li>Joined <%= @airline.created_at.strftime('%Y') %></li>
+            <% if @airline.last_sign_in_at.present? %>
+              <li>Last Logged In <%= @airline.last_sign_in_at.strftime('%d %b') %></li>
+            <% end %>
+            <li><%= @airline.jobs.is_active.count %> Listed Jobs</li>
+            <li><%= @airline.articles.count %> Articles</li>
+            <li><%= @airline.company_size %> Company Size</li>
+            <li class="divider"></li>
+            <% if @airline.facebook.present? %>
+              <li class="social-inline"><a href="<%= @airline.facebook %>" target="_blank"><i class="fa fa-facebook fb" aria-hidden="true"></i></a></li>
+            <% end %>
+            <% if @airline.twitter.present? %>
+              <li class="social-inline"><a href="<%= @airline.twitter %>" target="_blank"><i class="fa fa-twitter twitter" aria-hidden="true"></i></a></li>
+            <% end %>
+            <% if @airline.linkedin.present? %>
+              <li class="social-inline"><a href="<%= @airline.linkedin %>" target="_blank"><i class="fa fa-linkedin linkedin" aria-hidden="true"></i></a></li>
+            <% end %>
+            <% if @airline.googleplus.present? %>
+                <li class="social-inline"><a href="<%= @airline.googleplus %>" target="_blank"><i class="fa fa-google-plus-official google" aria-hidden="true"></i></a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% content_for :right do %>
+<div class='col-xs-4'>
+</div>
+<% end %>
+
+<%= render '/refinery/content_page' %>

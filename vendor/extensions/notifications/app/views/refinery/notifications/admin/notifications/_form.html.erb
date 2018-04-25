@@ -1,0 +1,53 @@
+<%= form_for [refinery, :notifications_admin, @notification] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @notification,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%= f.label :notification_type -%>
+    <%= f.text_field :notification_type, :class => 'larger widest'  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :url -%>
+    <%= f.text_field :url  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :receiver_id -%>
+    <%= f.number_field :receiver_id  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :receiver_class -%>
+    <%= f.text_field :receiver_class  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :sender_id -%>
+    <%= f.number_field :sender_id  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :sender_class -%>
+    <%= f.text_field :sender_class  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :seen -%>
+    <%= f.check_box :seen, :checked => @notification[:seen]  -%>
+
+  </div>
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.notifications.admin.notifications.notification'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @notification.notification_type) %>
+<% end -%>

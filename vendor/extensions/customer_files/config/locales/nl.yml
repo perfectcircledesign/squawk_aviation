@@ -1,0 +1,31 @@
+nl:
+  refinery:
+    plugins:
+      customer_files:
+        title: Customer Files
+    customer_files:
+      admin:
+        customer_files:
+          actions:
+            create_new: Maak een nieuwe Customer File
+            reorder: Wijzig de volgorde van de Customer Files
+            reorder_done: Klaar met het wijzingen van de volgorde van de Customer Files
+          records:
+            title: Customer Files
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Customer Files. Druk op 'Maak een nieuwe Customer File' om de eerste aan te maken.
+          customer_file:
+            view_live_html: Bekijk deze customer file op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze customer file
+            delete: Verwijder deze customer file voor eeuwig
+      customer_files:
+        show:
+          other: Andere Customer Files
+  activerecord:
+    attributes:
+      'refinery/customer_files/customer_file':
+        file_mime_type: File Mime Type
+        file_name: File Name
+        file_size: File Size
+        file_uid: File Uid
+        file_ext: File Ext

@@ -1,0 +1,30 @@
+<% content_for :body_content_left do %>
+  <div class='files'>
+    <%= render :partial => "shared/flashes" %>
+    <h2>Upload a file</h2>
+
+    <%= form_tag(refinery.customer_send_file_path, multipart: true) do %>
+
+      <%= file_field_tag "customer_file[file]" %>
+
+      <input type="hidden" id="customer_id" name="customer_file[customer_id]" value="<%= current_customer.id %>" /><br>
+
+      <%= submit_tag 'Upload' %>
+
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :right do %>
+  <h2>Files</h2>
+  <% items = Refinery::CustomerFiles::CustomerFile.where(:customer_id => current_customer.id) %>
+  <% if items.present? %>
+    <% items.each do |item| %>
+      <%= item.title  %>
+      <%= link_to "Download", item.file.url  %>
+      <br>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render '/refinery/content_page' %>

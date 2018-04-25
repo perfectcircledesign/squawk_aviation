@@ -1,0 +1,31 @@
+<% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+<%= simple_form_for @customer, url: refinery.customers_customers_path do |f| -%>
+
+  <div class="modal fade" id="cover_letter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Introduction</h4>
+        </div>
+        <div class="modal-body">
+          <%= f.input_field :cover_letter, as: :text, :rows=> 8, :class=>"form-control", :placeholder=>"Introduction" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+          <% if @customer.cover_letter.blank? %>
+            <%= f.button :submit, "Add Introduction", :class=>"btn btn-green" %>
+          <% else %>
+            <%= f.button :submit, "Update Introduction", :class=>"btn btn-green" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
+
+
+
+

@@ -1,0 +1,33 @@
+nl:
+  refinery:
+    plugins:
+      notifications:
+        title: Notifications
+    notifications:
+      admin:
+        notifications:
+          actions:
+            create_new: Maak een nieuwe Notification
+            reorder: Wijzig de volgorde van de Notifications
+            reorder_done: Klaar met het wijzingen van de volgorde van de Notifications
+          records:
+            title: Notifications
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Notifications. Druk op 'Maak een nieuwe Notification' om de eerste aan te maken.
+          notification:
+            view_live_html: Bekijk deze notification op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze notification
+            delete: Verwijder deze notification voor eeuwig
+      notifications:
+        show:
+          other: Andere Notifications
+  activerecord:
+    attributes:
+      'refinery/notifications/notification':
+        notification_type: Notification Type
+        url: Url
+        receiver_id: Receiver
+        receiver_class: Receiver Class
+        sender_id: Sender
+        sender_class: Sender Class
+        seen: Seen

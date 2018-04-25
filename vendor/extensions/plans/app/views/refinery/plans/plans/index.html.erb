@@ -1,0 +1,265 @@
+<% content_for :full do %>
+
+    <div class="sliver-banner">
+      <div class="white-skew"></div>
+    </div>
+    <h1 class="text-center"><%= @page.present? ? @page.title : 'Payment Plans' %></h1>
+
+    <div class="payment-table">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="padding">
+              <%= raw @page.content_for(:body) if @page.present? %>
+            </div>
+          </div>
+          <div class="plans text-center">
+            <% @plans.each do |plan| %>
+              <div class="plan-container">
+                <div class="plan-option">
+                  <a href="/?reg_form=true">
+                    <label for="<%= plan.id %>">
+                      <h1>$<%= plan.cost %></h1>
+                      <h4><%= plan.duration %> Months</h4>
+                      <h3><%= plan.name %></h3>
+                      <!--<p>+ 90 Days Free</p>-->
+                    </label>
+                  </a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 pricing-table">
+            <table id="plan-table" class="checked-first table-striped">
+              <tr>                
+                <% if @plans.present? %>
+                  <% @plans.each do |plan| %>
+                    <td>
+                        <h4><%= plan.name %></h4>
+                    </td>
+                    <td>
+                    </td>
+                  <% end %>
+                <% end %>
+
+              </tr>
+              <!--<tr>-->
+                <!--<td>-->
+                  <!--<img src="/assets/tick.png">-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--90 Days Free-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--<img src="/assets/tick.png">-->
+                <!--</td>-->
+              <!--</tr>-->
+              <tr>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Create a profile
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Connect with airlines and recruiters
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  See who's viewing your profile
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Unlimited Profile Updates
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Full profile visible to airlines
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Direct job application
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                <td>
+                  Airline private messenger
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+               
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+                 <td>
+                  Training discount offers
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+              <tr>
+                
+                <td>
+                  <span class="close">&times;</span>
+                </td>
+                <td>
+                  30% saving
+                </td>
+                <td>
+                  <img src="/assets/tick.png">
+                </td>
+              </tr>
+            </table>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center pricing-btn">
+              <a href="/?reg_form=true" class="btn btn-blue btn-large">Select A Plan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="why">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>Find the package best for you</h2>
+            <table>
+              <tr>
+                <th></th>
+                <th>Bronze</th>
+                <th>Silver</th>
+                <th>Gold</th>
+              </tr>
+              <tr>
+                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+              <tr>
+                <td>Aenean hendrerit quam mattis, efficitur neque.</td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+              <tr>
+                <td>Nulla sed ipsum rhoncus dui molestie imperdiet.</td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+              <tr>
+                <td>Ut sit amet leo tempor, vestibulum ligula at, dictum mauris.</td>
+                <td></td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+              <tr>
+                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                <td></td>
+                <td><img src="/assets/tick.png"></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+              <tr>
+                <td>Ut sit amet leo tempor, vestibulum ligula at, dictum mauris.</td>
+                <td></td>
+                <td></td>
+                <td><img src="/assets/tick.png"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="faq">
+      <div class="container">
+        <div class="row">
+          <h2>Frequently Asked Questions</h2>
+          <% faqs = Refinery::Faqs::Faq.first(6) %>
+          <% if faqs.present? %>
+            <% faqs.each do |item| %>
+              <div class="col-xs-12 col-sm-6">
+                <div class="question">
+                  <h4><%= raw item.question %></h4>
+                  <%= raw item.answer %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+
+         <!--  <div class="text-center">
+            <a href="/faqs">View all frequently asked questions</a>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+
+
+<% end %>
+
+
+
+
+
+<%= render '/refinery/content_page' %>

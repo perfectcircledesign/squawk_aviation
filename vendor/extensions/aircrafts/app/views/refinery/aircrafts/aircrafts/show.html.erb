@@ -1,0 +1,39 @@
+<% content_for :body_content_title do %>
+  <%= @aircraft.name %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Name</h1>
+    <p>
+      <%=raw @aircraft.name %>
+    </p>
+  </section>
+  <section>
+    <h1>Weight</h1>
+    <p>
+      <%=raw @aircraft.weight %>
+    </p>
+  </section>
+  <section>
+    <h1>Engine</h1>
+    <p>
+      <%=raw @aircraft.engine %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="aircrafts">
+      <% @aircrafts.each do |aircraft| %>
+        <li>
+          <%= link_to aircraft.name, refinery.aircrafts_aircraft_path(aircraft) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

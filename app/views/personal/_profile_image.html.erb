@@ -1,0 +1,45 @@
+<% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+<%= simple_form_for @customer, url: refinery.customers_customers_path do |f| -%>
+
+  <div class="modal fade" id="profile_image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Profile Image</h4>
+        </div>
+        <div class="modal-body">
+          <div class="profile-container">
+            <% if @customer.profile_image.present? %>
+              <div class="slim"
+                   data-label="Click to select your profile image or drag and drop it in here"
+                   data-size="600,600"
+                   data-ratio="1:1">
+                <%= image_fu @customer.profile_image, "240x240" %>
+                <input type="file" name="customer[image_upload][]" required />
+              </div>
+            <% else %>
+              <div class="slim"
+                   data-label="Click to select your profile image or drag and drop it in here"
+                   data-size="500,500"
+                   data-ratio="1:1">
+                <img src="/assets/profile-blank.jpg">
+                <input type="file" name="customer[image_upload][]" required />
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+          <%= f.button :submit, "Update Profile Image", :class=>"btn btn-green" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<% end %>
+
+
+
+

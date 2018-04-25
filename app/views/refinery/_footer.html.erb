@@ -1,0 +1,35 @@
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-push-8 col-md-4">
+        <div class="social">
+          <% facebook = copywriting('Facebook', {:phrase_type => 'string', :scope => 'Social', :default => '#' }) %>
+          <%# twitter = copywriting('Twitter', {:phrase_type => 'string', :scope => 'Social', :default => '#' }) %>
+          <% instagram = copywriting('Instagram', {:phrase_type => 'string', :scope => 'Social', :default => '#' }) %>
+          <% linkedin = copywriting('LinkedIn', {:phrase_type => 'string', :scope => 'Social', :default => '#' }) %>
+          <% if facebook != '#' %>
+             <a href="<%= facebook %>" target="_blank"><img src="/assets/fb.svg"></a> 
+          <% end %>
+          <% if instagram != '#' %>
+             <a href="<%= instagram %>" target="_blank"><img src="/assets/instagram.svg"></a> 
+          <% end %>
+          <% if linkedin != '#' %>
+             <a href="<%= linkedin %>" target="_blank"><img src="/assets/linkedin.svg"></a> 
+          <% end %>
+          <a href="mailto:info@squawkaviation.com" target="_blank" style="color: #fff;">info@squawkaviation.com</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-pull-4 col-md-8"><p>Squawk © All rights reserved. website designed by <a href="#">Perfect Circle</a></p></div>
+    </div>
+  </div>
+</div>
+
+<!--Start of Zendesk Chat Script-->
+<script type="text/javascript">
+    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+        d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+        $.src="https://v2.zopim.com/?56TwI2gOKGlLbccxOREpffNqViycEJZX";z.t=+new Date;$.
+            type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zendesk Chat Script-->

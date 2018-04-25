@@ -1,0 +1,35 @@
+<% content_for :full do %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>Notifications</h1>
+        </div>
+        <% if @notifications.present? %>
+          <ul class="notifications_show">
+            <% @notifications.order('created_at DESC').each do |notification| %>
+              <li class="<%= notification.seen? ? '' : 'new' %>">
+                <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+                  <% if notification.sender.logo.present? %>
+                      <%= image_fu notification.sender.logo, "40x40#c" %>
+                  <% else %>
+                      <img src="/assets/profile-blank.jpg" width="24" height="24">
+                  <% end %>
+                  <p><%= notification.message %><br><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="col-xs-12">
+            No notifications available
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+<% end %>
+
+
+
+
+<%= render '/refinery/content_page' %>

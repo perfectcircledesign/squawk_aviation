@@ -1,0 +1,29 @@
+nl:
+  refinery:
+    plugins:
+      employers:
+        title: Employers
+    employers:
+      admin:
+        employers:
+          actions:
+            create_new: Maak een nieuwe Employer
+            reorder: Wijzig de volgorde van de Employers
+            reorder_done: Klaar met het wijzingen van de volgorde van de Employers
+          records:
+            title: Employers
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Employers. Druk op 'Maak een nieuwe Employer' om de eerste aan te maken.
+          employer:
+            view_live_html: Bekijk deze employer op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze employer
+            delete: Verwijder deze employer voor eeuwig
+      employers:
+        show:
+          other: Andere Employers
+  activerecord:
+    attributes:
+      'refinery/employers/employer':
+        name: Name
+        image: Image
+        url: Url

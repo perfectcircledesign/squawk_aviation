@@ -1,0 +1,63 @@
+<%= form_for [refinery, :invoices_admin, @invoice] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @invoice,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%=  @invoice.invoice_number -%>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :trans_number -%>
+    <%= f.text_field :trans_number  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :sub_type -%>
+    <%= f.text_field :sub_type  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :start_date -%>
+    <%= f.text_field :start_date  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :end_date -%>
+    <%= f.text_field :end_date  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :price_dollar -%>
+    <%= f.text_field :price_dollar  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :price_rand -%>
+    <%= f.text_field :price_rand  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :card_last_digits -%>
+    <%= f.text_field :card_last_digits  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :customer_id -%>
+    <%= f.number_field :customer_id  -%>
+
+  </div>
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.invoices.admin.invoices.invoice'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @invoice.invoice_number) %>
+<% end -%>

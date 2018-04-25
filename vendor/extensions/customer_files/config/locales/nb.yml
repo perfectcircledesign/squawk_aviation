@@ -1,0 +1,31 @@
+nb:
+  refinery:
+    plugins:
+      customer_files:
+        title: Customer Files
+    customer_files:
+      admin:
+        customer_files:
+          actions:
+            create_new: Lag en ny Customer File
+            reorder: Endre rekkefølgen på Customer Files
+            reorder_done: Ferdig å endre rekkefølgen Customer Files
+          records:
+            title: Customer Files
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Customer Files enda. Klikk på "Lag en ny Customer File" for å legge til din første customer file.
+          customer_file:
+            view_live_html: Vis hvordan denne customer file ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne customer file
+            delete: Fjern denne customer file permanent
+      customer_files:
+        show:
+          other: Andre Customer Files
+  activerecord:
+    attributes:
+      'refinery/customer_files/customer_file':
+        file_mime_type: File Mime Type
+        file_name: File Name
+        file_size: File Size
+        file_uid: File Uid
+        file_ext: File Ext

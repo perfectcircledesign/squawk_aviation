@@ -1,0 +1,32 @@
+es:
+  refinery:
+    plugins:
+      customer_files:
+        title: Customer Files
+#        article: masculino/femenino
+    customer_files:
+      admin:
+        customer_files:
+          actions:
+            create_new: Crear nuevo customer file
+            reorder: Reordenar customer files
+            reorder_done: Reordenación de customer files completada
+          records:
+            title: Customer Files
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay customer files todavía. Pulsa en "Crear nuevo Customer File" para crear tu primer customer file.
+          customer_file:
+            view_live_html: Ver este customer file como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este customer file
+            delete: Borrar este customer file para siempre
+      customer_files:
+        show:
+          other: Otros customer files
+  activerecord:
+    attributes:
+      'refinery/customer_files/customer_file':
+        file_mime_type: File Mime Type
+        file_name: File Name
+        file_size: File Size
+        file_uid: File Uid
+        file_ext: File Ext

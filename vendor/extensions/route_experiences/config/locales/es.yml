@@ -1,0 +1,29 @@
+es:
+  refinery:
+    plugins:
+      route_experiences:
+        title: Route Experiences
+#        article: masculino/femenino
+    route_experiences:
+      admin:
+        route_experiences:
+          actions:
+            create_new: Crear nuevo route experience
+            reorder: Reordenar route experiences
+            reorder_done: Reordenación de route experiences completada
+          records:
+            title: Route Experiences
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay route experiences todavía. Pulsa en "Crear nuevo Route Experience" para crear tu primer route experience.
+          route_experience:
+            view_live_html: Ver este route experience como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este route experience
+            delete: Borrar este route experience para siempre
+      route_experiences:
+        show:
+          other: Otros route experiences
+  activerecord:
+    attributes:
+      'refinery/route_experiences/route_experience':
+        continent: Continent
+        airport: Airport

@@ -1,0 +1,331 @@
+<% if current_airline.present? and @show_nav %>
+  <nav class="navbar navbar-dash">
+    <div class="container">
+      <div class="navbar-header hidden-xs">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/airline_account"><img src="/assets/logo-white-dash.png"></a>
+      </div>
+      <div class="visible-xs mobile-logo">
+        <img src="/assets/logo-mobile.png">
+      </div>
+          <!--<div class="input-group">-->
+            <!--<input type="text" class="form-control" placeholder="Search for...">-->
+            <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-default" type="button"><img src="/assets/search.jpg"></button>-->
+            <!--</span>-->
+          <!--</div>-->
+        <!--</form>-->
+      <div class="collapse navbar-collapse" id="navigation">
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/airline_account"><img src="/assets/home.png">Dashboard</a></li>
+          <li><a href="/customers"><img src="/assets/user.png">Candidates</a></li>
+          <li><a href="/airline_jobs"><img src="/assets/jobs.png">Jobs</a></li>
+          <li><a href="/airline_posts"><img src="/assets/feed.png">Articles</a></li>
+          <li class="messages-li"><a href="/messages"><img src="/assets/messaging.png"><span class="message-title">Messaging</span>
+          <% if current_airline.unread_message_count > 0 %>
+            <span class="notification_count" id="unread_msg"><%= current_airline.unread_message_count %></span>
+          <% end %>
+          </a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle activate_notify" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/assets/notifications.png"><span class="notification_title">Notifications</span>
+            <% if current_airline.notification_count > 0 %>
+              <span class="notification_count" id="unread_notify"><%= current_airline.notification_count if current_airline.notification_count > 0 %></span>
+            <% end %>
+              </a>
+            <ul class="dropdown-menu notifications">
+              <div><span>Notifications</span></div>
+              <% if current_airline.notifications.present? %>
+                  <% current_airline.notifications.order('created_at DESC').each do |notification| %>
+                      <li class="<%= notification.seen? ? '' : 'new' %>">
+                        <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+                            <% if notification.sender.logo.present? %>
+                                <%= image_fu notification.sender.logo, "40x40^" %>
+                            <% else %>
+                                <img src="/assets/airline-blank.jpg" width="40 " height="40">
+                            <% end %>
+                            <p><%= notification.message %><br><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+                        <% end %>
+                      </li>
+                  <% end %>
+              <% end %>
+              <a href="/notifications" class="view-all">View All</a>
+            </ul>
+          </li>
+          <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <% if @airline.logo.present? %>
+                  <%= image_fu @airline.logo, "24x24#c" %>
+              <% else %>
+                  <img src="/assets/profile-blank.jpg" width="24" height="24">
+              <% end %>
+              <span>Me</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/airline_profile">Edit Profile</a></li>
+              <li><a href="#" data-backdrop="static" data-toggle="modal" data-target="#password_change2" >Change Password</a></li>
+              <li><%= link_to "Log out", refinery.destroy_airline_session_path, :method => :delete %></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-nav visible-xs">
+    <ul>
+      <li><a href="/airline_account"><img src="/assets/feed-dark.png"></a></li>
+      <li><a href="/airline_jobs"><img src="/assets/jobs-dark.png"></a></li>
+      <li><a href="/messages"><img src="/assets/messaging-dark.png"></a></li>
+      <li><a href="#" id="toggle-notifications"><img src="/assets/notifications-dark.png"></a></li>
+      <li><a href="#" id="toggle-nav"><span class="bar"></span><span class="bar"></span><span class="bar"></span></a></li>
+    </ul>
+  </div>
+  <div class="blackout"></div>
+  <div class="side-nav side-nav-hidden">
+    <div class="profile-header">
+      <div class="black-overlay"></div>
+      <div class="user-details">
+        <a href="/account">
+         <% if @airline.logo.present? %>
+                  <%= image_fu @airline.logo, "50x50#c" %>
+        <% else %>
+            <img src="/assets/airline-blank.jpg" width="50" height="50">
+        <% end %>
+        <h3>Current user</h3>
+        <p>Qualification</p>
+        </a>
+      </div>
+    </div>
+    <div class="navigation">
+      <ul>
+        <li><a href="">Discover</a></li>
+        <li><a href="">Interested Jobs</a></li>
+        <li><a href="/airlines">Airlines</a></li>
+        <li class="divider"></li>
+        <li><a href="/account">View Profile</a></li>
+        <li><%= link_to "Log out", refinery.destroy_customer_session_path, :method => :delete %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mobile-notifications">
+    <div class="header">
+      <button type="button" id="notifications-close" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h1>Notifications</h1>
+    </div>
+    <ul>
+      <% if current_airline.notifications.present? %>
+        <% current_airline.notifications.order('created_at DESC').each do |notification| %>
+          <li class="<%= notification.seen? ? '' : 'new' %>">
+            <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+               <% if notification.sender.logo.present? %>
+                  <%= image_fu notification.sender.logo, "50x50#c" %>
+              <% else %>
+                  <img src="/assets/profile-blank.jpg" width="50" height="50">
+              <% end %>
+              <p><%= notification.message %><br><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+            <% end %>    
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= render '/shared/password_change2' -%>
+
+<% elsif current_customer.present? and @show_nav and action_name != 'new' and controller_name != 'subscriptions' %>
+<nav class="navbar navbar-dash">
+  <div class="container">
+    <div class="navbar-header hidden-xs">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/news_feed"><img src="/assets/logo-white-dash.png"></a>
+    </div>
+    <div class="visible-xs mobile-logo">
+      <img src="/assets/logo-mobile.png">
+    </div>
+    <form accept-charset="UTF-8" action="/search" method="get" class="navbar-form navbar-left" >
+            <div class="input-group">
+              <input type="text" name="search" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><img class="hidden-xs" src="/assets/search.jpg"><img class="visible-xs" src="/assets/search-white.png"></button>
+          </span>
+            </div>
+          </form>
+    
+    <div class="collapse navbar-collapse" id="navigation">
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/news_feed"><img src="/assets/home.png">Feed</a></li>
+        <li><a href="/jobs_feed"><img src="/assets/jobs.png">Jobs</a></li>
+        <li><a href="/airlines"><img src="/assets/airlines.png">Airlines</a></li>
+        <li class="messages-li"><a href="/messages"><img src="/assets/messaging.png">
+        <span class="message-title">Messaging</span>
+        <% if current_customer.unread_message_count > 0 %>
+          <span class="notification_count"><%= current_customer.unread_message_count if current_customer.unread_message_count > 0 %></span>
+        <% end %>
+        </a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle activate_notify" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" remote="true"><img src="/assets/notifications.png"><span class="notification_title">Notifications</span>
+          <% if current_customer.notification_count > 0 %>
+            <span class="notification_count"><%= current_customer.notification_count if current_customer.notification_count > 0 %></span>
+          <% end %>
+          </a>
+          <ul class="dropdown-menu notifications">
+            <div><span>Notifications</span></div>
+
+              <% if current_customer.notifications.present? %>
+                <% current_customer.notifications.order('created_at DESC').each do |notification| %>
+                  <li class="<%= notification.seen? ? '' : 'new' %>">
+                    <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+                       <% if notification.sender.logo.present? %>
+                          <%= image_fu notification.sender.logo, "40x40#c" %>
+                      <% else %>
+                          <img src="/assets/airline-blank.jpg" width="40" height="40">
+                      <% end %>
+                      <p><%= notification.message %><br><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+                    <% end %>    
+                  </li>
+                <% end %>
+              <% end %>
+              <!-- TODO CREATE NOTIFIACTION SHOW PAGE -->
+             <a href="/notifications" class="view-all">View All</a>
+          </ul>
+        </li>
+        <li class="dropdown active">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <% if @customer.profile_image.present? %>
+                <%= image_fu @customer.profile_image, "24x24#c" %>
+            <% else %>
+                <img src="/assets/profile-blank.jpg" width="24" height="24">
+            <% end %>
+            <span>Me</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/payments">Billing info</a></li>
+            <li><a href="/account">View Profile</a></li>
+            <li><a href="#" data-backdrop="static" data-toggle="modal" data-target="#password_change" >Change Password</a></li>
+            <li><%= link_to "Log out", refinery.destroy_customer_session_path, :method => :delete %></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<%= render '/shared/password_change' -%>
+
+<div class="mobile-nav visible-xs">
+  <ul>
+    <li><a href="/news_feed"><img src="/assets/feed-dark.png"></a></li>
+    <li><a href="/jobs_feed"><img src="/assets/jobs-dark.png"></a></li>
+    <li><a href="/messages"><img src="/assets/messaging-dark.png"></a></li>
+    <li><a href="#" id="toggle-notifications"><img src="/assets/notifications-dark.png"></a></li>
+    <li><a href="#" id="toggle-nav"><span class="bar"></span><span class="bar"></span><span class="bar"></span></a></li>
+  </ul>
+</div>
+<div class="blackout"></div>
+<div class="side-nav side-nav-hidden">
+  <div class="profile-header">
+    <div class="black-overlay"></div>
+    <div class="user-details">
+      <a href="/account">
+      <% if @customer.profile_image.present? %>
+          <%= image_fu @customer.profile_image, "50x50#c" %>
+      <% else %>
+          <img src="/assets/profile-blank.jpg" width="50" height="50">
+      <% end %>
+      <h3>Current user</h3>
+      <p>Qualification</p>
+      </a>
+    </div>
+  </div>
+  <div class="navigation">
+    <ul>
+      <li><a href="">Discover</a></li>
+      <li><a href="">Interested Jobs</a></li>
+      <li><a href="/airlines">Airlines</a></li>
+      <li class="divider"></li>
+      <li><a href="#" class="upgrade">Upgrade to <span>Pro</span></a></li>
+      <li><a href="/account">View Profile</a></li>
+      <li><a href="/account">Update Logbook</a></li>
+      <li><a href="#">Add Credits</a></li>
+      <li><%= link_to "Log out", refinery.destroy_customer_session_path, :method => :delete %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="mobile-notifications">
+  <div class="header">
+    <button type="button" id="notifications-close" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h1>Notifications</h1>
+  </div>
+  <ul>
+    <% if current_customer.notifications.present? %>
+      <% current_customer.notifications.order('created_at DESC').each do |notification| %>
+        <li class="<%= notification.seen? ? '' : 'new' %>">
+          <%= link_to(refinery.mark_seen_notifications_notification_path(notification)) do %>
+             <% if notification.sender.logo.present? %>
+                <%= image_fu notification.sender.logo, "50x50#c" %>
+            <% else %>
+                <img src="/assets/profile-blank.jpg" width="50" height="50">
+            <% end %>
+            <p><%= notification.message %><br><span><%= time_ago_in_words(notification.created_at) %> ago</span></p>
+          <% end %>    
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<% elsif action_name == 'new' and controller_name == 'subscriptions' %>
+<div class="card-wizard-header">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="/customers/sign_out" data-method="delete"><img src="/assets/logo-color.png" class="img-responsive"></a>
+      <a class="cancel" href="/customers/sign_out" data-method="delete">Cancel</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<% else %>
+  <nav class="navbar navbar-home">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="/assets/logo-white.png"></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navigation">
+        <%= render(:partial => "/refinery/menu", :locals => {
+            :dom_id => 'nav navbar-nav navbar-right',
+            :css => 'nav navbar-nav navbar-right'
+        }) %>
+      </div>
+    </div>
+  </nav>
+<% end %>
+
+<script type="application/javascript">
+    $('.activate_notify').click(function(){
+        $.ajax({
+            url: '/set_last_notification',
+            dataType: 'script'
+        });
+    })
+</script>

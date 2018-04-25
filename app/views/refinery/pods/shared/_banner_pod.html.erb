@@ -1,0 +1,15 @@
+<% if pod.image.present? and home_page? %>
+  <% if pod.url.present? %>
+    <%= link_to (image_fu(pod.image, '540x375#c', :class => "img-responsive")), pod.url %>
+  <% else %>
+    <%= image_fu pod.image, '540x375#c', :class => "img-responsive" %>
+  <% end %>
+<% elsif pod.image.present? %>
+  <div class="side-pod banner-pod">
+    <% if pod.url.present? %>
+      <%= link_to (image_fu(pod.image, '360x', :class => "img-responsive")), pod.url %>
+    <% else %>
+      <%= image_fu pod.image, '360x', :class => "img-responsive" %>
+    <% end %>
+  </div>
+<% end %>

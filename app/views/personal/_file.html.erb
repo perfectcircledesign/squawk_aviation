@@ -1,0 +1,36 @@
+<% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+<%= simple_form_for @customer, url: refinery.customer_files_customer_files_path, :method => :post, :html => {multipart:true} do |f| -%>
+
+  <div class="modal fade" id="file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Logbook File</h4>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <div id="slim-logbook" class="slim"
+                 data-ratio="16:9"
+                 data-label="Click or drag and drop your image here."
+                 data-size="750,750">
+              <input type="file" name="customer_file"/>
+            </div>
+            <!--<div class="temp-image"><img src="/assets/upload-img.jpg" id="preview"></div>-->
+            <!--<label class="btn-upload" for="imgInp">Select File</label>-->
+            <%#= file_field_tag :customer_file, id: 'imgInp' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-window btn-green" id="reset" data-dismiss="modal">Close</button>
+          <%= f.button :submit, "Upload File", :class=>"btn btn-green" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+
+
+

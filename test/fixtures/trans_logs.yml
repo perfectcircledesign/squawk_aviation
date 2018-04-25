@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  request: MyString
+  response: MyString
+  subscription_transaction_id: 1
+
+two:
+  request: MyString
+  response: MyString
+  subscription_transaction_id: 1

@@ -1,0 +1,110 @@
+<%= content_for :full do %>
+     <!--<div class="sliver"></div> -->
+
+
+<table width="640" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top: 20px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color: #6b7c93; background-color: #fff">
+  
+
+  <tr>
+    <td colspan="2"><img src="/assets/header.jpg" width="640" height="120"></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="font-size: 16px; padding: 20px 10px; border-bottom: 1px solid #ddd">
+      <strong>Invoice Number: <%= @invoice.invoice_number %></strong>
+    </td>
+
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px; padding: 20px 10px 0;">
+      <b>First Name:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 20px 10px 0;">
+      <%= @invoice.customer.first_name %><br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Surname:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.customer.surname %><br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Telephone Number:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.customer.contact_number %><br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Email:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.customer.email %><br>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Customer Id:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.customer.id %>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Date:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.start_date %>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <b>Transaction Number:</b><br>
+    </td>
+    <td valign="top" style="line-height:20px;padding: 0 10px;">
+      <%= @invoice.trans_number %>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" style="padding: 0 10px">
+      <br>
+      <table style="border-collapse:collapse; border-color:#aaaaaa; border:1px solid #aaaaaa; font-size:12px" border="1" width="100%" cellpadding="5">
+        <tbody><tr>
+          <th style="background-color:#999; color:white; padding: 5px;">Subscription</th>
+          <th style="background-color:#999; color:white; padding: 5px;">Description</th>
+          <th style="background-color:#999; color:white; padding: 5px;">Price</th>
+        </tr>
+          <tr>
+            <td style="padding: 5px;"><%= @invoice.sub_type %></td>
+            <td style="padding: 5px;">Period(<%= @invoice.start_date %> - <%= @invoice.end_date %>)<br>
+                                Paid With Card<br>
+                                xxxx xxxx xxxx <%= @invoice.card_last_digits %></td>
+            <td style="padding: 5px;">$<%= @invoice.price_dollar %> (R<%= @invoice.price_rand %>)</td>
+          </tr>
+      </tbody></table>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding: 20px 10px; border-bottom: 1px solid #ddd; color: #6b7c93">
+      Thank You,<br>
+      Squawk Team<br>
+      <a href="mailto:info@squawkaviation.com">info@squawkaviation.com</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left" style="line-height:20px; padding: 20px 10px; font-family: 'Arial', sans-serif;">
+      Email: <a href="mailto:info@squawkaviation.com" style="text-decoration: none; color: #000000;">info@squawkaviation.com</a> &#8226; Web: <a href="http://www.squawkaviation.com/" style="text-decoration: none; color: #000000;">www.squawkaviation.com</a><br>
+      Squawk Aviation &#169; All rights reserved.
+    </td>
+  </tr>
+</table>
+
+
+<% end %>

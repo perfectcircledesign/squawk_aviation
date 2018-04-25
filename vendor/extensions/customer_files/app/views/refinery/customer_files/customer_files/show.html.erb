@@ -1,0 +1,51 @@
+<% content_for :body_content_title do %>
+  <%= @customer_file.file_mime_type %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>File Mime Type</h1>
+    <p>
+      <%=raw @customer_file.file_mime_type %>
+    </p>
+  </section>
+  <section>
+    <h1>File Name</h1>
+    <p>
+      <%=raw @customer_file.file_name %>
+    </p>
+  </section>
+  <section>
+    <h1>File Size</h1>
+    <p>
+      <%=raw @customer_file.file_size %>
+    </p>
+  </section>
+  <section>
+    <h1>File Uid</h1>
+    <p>
+      <%=raw @customer_file.file_uid %>
+    </p>
+  </section>
+  <section>
+    <h1>File Ext</h1>
+    <p>
+      <%=raw @customer_file.file_ext %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="customer_files">
+      <% @customer_files.each do |customer_file| %>
+        <li>
+          <%= link_to customer_file.file_mime_type, refinery.customer_files_customer_file_path(customer_file) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

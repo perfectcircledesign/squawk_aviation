@@ -1,0 +1,370 @@
+<% content_for :body_content_title do %>
+  <h1>Pilots Search</h1>
+<% end %>
+
+<% content_for :body_search do %>
+  <div class="airline">
+    <div class="overview">
+      <div class="search-pilot">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 class="text-center">Find a Pilot</h1>
+            </div>
+            <form accept-charset="UTF-8" action="/customers" class="simple_form form-horizontal" method="get">
+              <div class="col-xs-6">
+                <div class="search-input age-label">
+                  <label>Age</label>
+                  <div class="age-container">
+                    <input type="text" class="range" value="" name="age" />
+                    <!--<input type="text">-->
+                  </div>
+                </div>
+                <div class="search-input">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', { include_blank: 'Select a nationality' }) %><br>
+                  <!--<select>-->
+                    <!--<option>South Africa</option>-->
+                    <!--<option>France</option>-->
+                    <!--<option>Italy</option>-->
+                  <!--</select>-->
+                </div>
+                <div class="search-input search-check">
+                  <label>MTOW More than 10 Tons</label>
+                  <input type="checkbox" name="more_than" value="true" id="10tons" class="check">
+                  <label for="10tons" class="switch"></label>
+                </div>
+                <div class="search-input search-check">
+                  <label>Turbine</label>
+                  <input type="checkbox" name="turbine" value="true" id="turbine" class="check">
+                  <label for="turbine" class="switch"></label>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="search-input">
+                  <label>P1 - Captain</label>
+                  <input type="text" name="p1" placeholder="Hours">
+                </div>
+                <div class="search-input">
+                  <label>P2 - First Officer</label>
+                  <input type="text" name="p2" placeholder="Hours">
+                </div>
+                <div class="search-input">
+                  <label>P3 - Cruise Only</label>
+                  <input type="text" name="p3" placeholder="Hours">
+                </div>
+                <!--<div class="search-input">-->
+                  <!--<label>Aircraft Rating</label>-->
+                  <!--<select>-->
+                    <!--<option>747</option>-->
+                    <!--<option>Jet</option>-->
+                    <!--<option>Cargo</option>-->
+                  <!--</select>-->
+                <!--</div>-->
+                <button class="btn-jetcrew pull-right" type="submit">Find Pilots</button>
+                <!--<a href="#" class="btn-jetcrew pull-right">Find Pilots</a>-->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="pane">
+                    <a href="#" class="add">+</a>
+                    <h5><img src="/assets/jobs-small.png">Latest Job Posted</h5>
+                    <ul class="job-list">
+                      <!-- <li>
+                        <a href="#">
+                          <small class="pull-right red">2 Days Ago</small>
+                          <strong>Pilot need for 747</strong>
+                          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                          <small>30 Views</small>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <small class="pull-right">3 Days Ago</small>
+                          <strong>Pilot need for 747</strong>
+                          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                          <small>30 Views</small>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <small class="pull-right">4 Days Ago</small>
+                          <strong>Pilot need for 747</strong>
+                          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                          <small>30 Views</small>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <small class="pull-right">5 Days Ago</small>
+                          <strong>Pilot need for 747</strong>
+                          <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>
+                          <small>30 Views</small>
+                        </a>
+                      </li> -->
+
+
+                      <!--IF STATEMENT FOR NO JOBS -->
+
+                      <li class="no-jobs">
+                        <img src="/assets/jobs.png">
+                        <p>You haven't posted any jobs yet!</p>
+                        <a href="#" class="btn-jetcrew btn-small">Post a job</a>
+                      </li>
+
+                      <!-- END -->
+
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="pane profile-completion">
+                    <a href="#" class="add">+</a>
+                    <h5><img src="/assets/profile-icon.png">Profile Completion</h5>
+                    <ul class="profile-list">
+                      <li><img src="/assets/tick.png" class="pull-left"><div>Add your Logo</div></li>
+                      <li><img src="/assets/tick.png" class="pull-left"><div>Add a Bio</div></li>
+                      <li><img src="/assets/tick.png" class="pull-left"><div>Post a job</div></li>
+                      <li><img src="/assets/tick.png" class="pull-left"><div>Create an Article</div></li>
+                      <li><div class="pull-left no-tick"></div><div>Review a pilot cv</div></li>
+                    </ul>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 83%;">
+                        <span>83% Complete</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="pane">
+                    <a href="#" class="add">+</a>
+                    <h5><img src="/assets/blog-small.png">Latest Articles Posted</h5>
+                    <ul class="blog-list">
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/blog-post.jpg">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">4 Days ago</small>
+                              <strong>Acquired a new Jet Plane and require staff</strong>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mollis, velit efficitur bibendum imperdiet, nisl dui luctus ligula, id egestas leo nunc ac arcu. Aliquam nec nunc malesuada, ultricies quam id, mollis dolor. Donec feugiat euismod ligula id vestibulum. Fusce iaculis enim...</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/blog-post.jpg">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">4 Days ago</small>
+                              <strong>Acquired a new Jet Plane and require staff</strong>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mollis, velit efficitur bibendum imperdiet, nisl dui luctus ligula, id egestas leo nunc ac arcu. Aliquam nec nunc malesuada, ultricies quam id, mollis dolor. Donec feugiat euismod ligula id vestibulum. Fusce iaculis enim...</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/blog-post.jpg">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">4 Days ago</small>
+                              <strong>Acquired a new Jet Plane and require staff</strong>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin mollis, velit efficitur bibendum imperdiet, nisl dui luctus ligula, id egestas leo nunc ac arcu. Aliquam nec nunc malesuada, ultricies quam id, mollis dolor. Donec feugiat euismod ligula id vestibulum. Fusce iaculis enim...</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+
+                      <!-- IF STATEMENT FOR NO POSTS -->
+
+                      <!-- <li class="no-posts">
+                        <img src="images/post.png">
+                        <p>You haven't said anything yet!</p>
+                        <a href="#" class="btn-jetcrew btn-small">Post an article</a>
+                      </li> -->
+                      <!-- END -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="pane">
+                    <h5><img src="/assets/star-small.png">Recently Favourited</h5>
+                    <ul class="user-list">
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+
+                      <!-- IF STATEMENT FOR NO FAVOURITES -->
+
+                      <!-- <li class="no-user">
+                        <img src="images/favourite.png">
+                        <p>You haven't favourited anyone yet!</p>
+                        <a href="#" class="btn-jetcrew btn-small">Start searching</a>
+                      </li> -->
+
+                      <!-- END -->
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="pane">
+                    <h5><img src="/assets/view-small.png">Recently Reviewed</h5>
+                    <ul class="user-list">
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <div class="media">
+                            <div class="media-left">
+                              <img src="/assets/avatar.jpg" class="img-circle">
+                            </div>
+                            <div class="media-body">
+                              <small class="pull-right">Today</small>
+                              <strong>Name Surname</strong>
+                              <p>Flying Hours: 600</p>
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+
+                      <!-- IF STATEMENT FOR NO FAVOURITES -->
+
+                      <!-- <li class="no-user">
+                        <img src="images/view.png">
+                        <p>You haven't reviewed anyone yet!</p>
+                        <a href="#" class="btn-jetcrew btn-small">FIND PILOTS</a>
+                      </li> -->
+
+                      <!-- END -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render '/refinery/content_page' %>

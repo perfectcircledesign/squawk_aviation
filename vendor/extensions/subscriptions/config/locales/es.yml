@@ -1,0 +1,32 @@
+es:
+  refinery:
+    plugins:
+      subscriptions:
+        title: Subscriptions
+#        article: masculino/femenino
+    subscriptions:
+      admin:
+        subscriptions:
+          actions:
+            create_new: Crear nuevo subscription
+            reorder: Reordenar subscriptions
+            reorder_done: Reordenación de subscriptions completada
+          records:
+            title: Subscriptions
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay subscriptions todavía. Pulsa en "Crear nuevo Subscription" para crear tu primer subscription.
+          subscription:
+            view_live_html: Ver este subscription como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este subscription
+            delete: Borrar este subscription para siempre
+      subscriptions:
+        show:
+          other: Otros subscriptions
+  activerecord:
+    attributes:
+      'refinery/subscriptions/subscription':
+        customer_id: Customer
+        plan_name: Plan Name
+        plan_duration: Plan Duration
+        plan_cost: Plan Cost
+        exp_date: Exp Date

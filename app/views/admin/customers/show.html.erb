@@ -1,0 +1,260 @@
+<% content_for :title do %>
+  Customer Details
+<% end %>
+
+<% content_for :content do %>
+  <div class="row">
+      <div class="col-md-4">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="/assets/profile-blank.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><%= @customer.name %></h3>
+
+              <p class="text-muted text-center"><%= @customer.career_path %></p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Email</b> <a class="pull-right"><%= @customer.email %></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Number</b> <a class="pull-right"><%= @customer.contact_number %></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Age</b> <a class="pull-right"><%= @customer.age %></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Location</b> <a class="pull-right"><%= @customer.nationality %></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Gender</b> <a class="pull-right"><%= @customer.gender %></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Airlines Favourited</b> <a class="pull-right"><%= @favourited.count %></a>
+                </li>
+              </ul>
+
+              <!--<a href="#" class="btn btn-primary btn-block"><b>Block Account</b></a>-->
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Invoices</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <% if @invoices.present? %>
+              <table id="customers" class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Invoice Nr</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Cost</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @invoices.each do |invoice| %>
+                    <tr>
+                      <td><%= invoice.invoice_number %></td>
+                      <td><%= invoice.sub_type %></td>
+                      <td><%= invoice.start_date %></td>
+                      <td>$<%= invoice.price_dollar %> (R<%= invoice.price_rand %>)</td>
+                      <td><%= link_to('Show', "/invoice_show?id=#{invoice.id}", :target => "_blank") %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <% else %>
+                <p class="text-center">No invoices</p>
+              <% end %>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Payment Details</h3>
+            </div>
+            <!-- /.box-header -->
+            <% sub = @customer.subscription %>
+            <% if sub.present? %>
+              <% if sub.credit_card.present? %>
+                <div class="box-body">
+                  <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                      <b>Holder</b> <a class="pull-right"><%= sub.credit_card.holder %></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Type</b> <a class="pull-right"><%= sub.credit_card.brand %></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Card Number</b> <a class="pull-right">**** **** **** <%= sub.credit_card.last_digits %></a>
+                    </li>
+                    <li class="list-group-item">
+                      <b>Expiration</b> <a class="pull-right"><%= sub.credit_card.exp_month %>/<%= sub.credit_card.exp_year %></a>
+                    </li>
+                  </ul>
+                </div>
+              <% else %>
+                <div class="box-body">
+                  <p class="text-center">No Card Details Loaded</p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if sub.present? %>
+            <div class="box box-info">
+              <div class="box-header with-border">
+                <h3 class="box-title">Current Plan: <span class="text-light-blue"><%= sub.plan.name %></span></h3>
+              </div>
+              <div class="box-body">
+                Next Payment Due: <%= sub.exp_date.strftime('%d/%m/%Y') %><br>
+                Amount: $<%= sub.plan.cost.to_i %><br>
+                <%= link_to refinery.subscriptions_subscription_path(id:sub.id),
+                            :class => "link",
+                            :confirm => "Are you sure you want to cancel this subscription?",
+                            :method => :delete do %>
+                    Cancel Subscription
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Airlines Liked</h3>
+            </div>
+            <div class="box-body">
+              <% if @favourite_airlines.present? %>
+              <ul class="list-unstyled">
+                <% @favourite_airlines.each do |airline| %>
+                  <li><%= airline.name %></li>
+                <% end %>
+              </ul>
+              <% else %>
+                <p class="text-center">No airlines liked</p>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="box box-primary">
+              <div class="box-header">
+                <h3 class="box-title">More Information</h3>
+              </div>
+              <div class="box-body">
+                <ul class="timeline">
+                  <li>
+                    <i class="fa fa-envelope bg-blue"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">Cover Letter</h3>
+                      <div class="timeline-body">
+                        <% if @customer.cover_letter.present? %>
+                            <p><%= raw @customer.cover_letter %></p>
+                        <% end %>
+                      </div>                      
+                    </div>
+                  </li>
+                  <li>
+                    <i class="fa fa-plane bg-blue"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">Education Details</h3>
+                      <div class="timeline-body">
+                        <% if @customer.aviation_education_details.present? %>
+                          <% @customer.aviation_education_details.each do |item| %>
+                              <div class="details-panel">
+                                <h6><%= item.program %></h6>
+                                <table>
+                                  <tr>
+                                    <td>
+                                      Qualification:
+                                    </td>
+                                    <td>
+                                      <%= item.program %>
+                                    </td>
+                                    <td>
+                                      Institution:
+                                    </td>
+                                    <td>
+                                      <%= item.institution %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      Year Graduated:
+                                    </td>
+                                    <td>
+                                      <%= item.period %>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                          <% end %>
+                        <% end %>
+                        </dl>
+                      </div>                      
+                    </div>
+                  </li>
+                  <li>
+                    <i class="fa fa-graduation-cap bg-blue"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">Employment Details</h3>
+                      <div class="timeline-body">
+                        <% if @customer.aviation_records.present? %>
+                            <% @customer.aviation_records.each do |item| %>
+                                <div class="details-panel">
+                                  <h6><%= item.employer %></h6>
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        Start Date:
+                                      </td>
+                                      <% if item.start_date.present? %>
+                                          <td><%= item.start_date.strftime("%d/%m/%Y") %></td>
+                                      <% end %>
+                                      <% if item.end_date.present? %>
+                                          <td>
+                                            End Date:
+                                          </td>
+                                          <td><%= item.end_date.strftime("%d/%m/%Y") %></td>
+                                      <% end %>
+                                    </tr>
+                                    <tr>
+                                      <% if item.position_held.present? %>
+                                          <td>
+                                            Position Held:
+                                          </td>
+                                          <td><%= item.position_held %></td>
+                                      <% end %>
+                                    </tr>
+                                  </table>
+                                  <% if item.reason_for_leaving.present? %>
+                                      <strong>Reason for leaving</strong>
+                                      <%= raw item.reason_for_leaving %>
+                                  <% end %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                      </div>                      
+                    </div>
+                  </li>
+              </ul>
+              </div>
+            </div>
+        </div>
+  </div>
+
+
+<% end %>
+
+<% content_for :javascript do %>
+
+<% end %>

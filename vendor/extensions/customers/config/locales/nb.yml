@@ -1,0 +1,68 @@
+nb:
+  refinery:
+    plugins:
+      addresses:
+        title: Addresses
+      customers:
+        title: Customers
+    addresses:
+      admin:
+        addresses:
+          actions:
+            create_new: Lag en ny Address
+            reorder: Endre rekkefølgen på Addresses
+            reorder_done: Ferdig å endre rekkefølgen Addresses
+          records:
+            title: Addresses
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Addresses enda. Klikk på "Lag en ny Address"
+              for å legge til din første address.
+          address:
+            view_live_html: Vis hvordan denne address ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne address
+            delete: Fjern denne address permanent
+      addresses:
+        show:
+          other: Andre Addresses
+    customers:
+      admin:
+        customers:
+          actions:
+            create_new: Lag en ny Customer
+            reorder: Endre rekkefølgen på Customers
+            reorder_done: Ferdig å endre rekkefølgen Customers
+          records:
+            title: Customers
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Customers enda. Klikk på "Lag en ny Customer"
+              for å legge til din første customer.
+          customer:
+            view_live_html: Vis hvordan denne customer ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne customer
+            delete: Fjern denne customer permanent
+      customers:
+        show:
+          other: Andre Customers
+  activerecord:
+    attributes:
+      refinery/addresses/address:
+        friendly_name: Friendly Name
+        line_1: Line 1
+        line_2: Line 2
+        suburb: Suburb
+        city: City
+        province: Province
+        country: Country
+        customer_id: Customer
+        is_current: Is Current
+      refinery/customers/customer:
+        first_name: First Name
+        surname: Surname
+        contact_number: Contact Number
+        fax_number: Fax Number
+        is_company: Is Company
+        company_name: Company Name
+        company_registration_number: Company Registration Number
+        company_vat_number: Company Vat Number

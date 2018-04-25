@@ -1,0 +1,6 @@
+<% @orders.each do |order| %>
+  <%= render :partial => 'refinery/invoice_body', :locals => {:order => order} %>
+
+  <div style="page-break-after:always"></div>
+  
+<% end %>

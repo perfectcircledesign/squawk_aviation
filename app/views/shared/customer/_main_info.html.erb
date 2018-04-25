@@ -1,0 +1,156 @@
+<div class="card profile-card">
+  <div class="text-center">
+    <div class="profile-pic">
+      <% if @customer.profile_image.present? %>
+          <% if current_customer.present? %>
+            <a href="#" data-toggle="modal" data-target="#profile_image"><%= image_fu @customer.profile_image, "164x164#c" %></a>
+          <% else %>
+            <%= image_fu @customer.profile_image, "164x164#c" %>
+          <% end %>
+      <% else %>
+          <% if current_customer.present? %>
+          <a href="#" data-toggle="modal" data-backdrop="static" data-target="#profile_image"><img src="/assets/profile-blank.jpg"></a>
+          <% else %>
+            <img src="/assets/profile-blank.jpg">
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% if current_customer.present? %>
+    <a href="#" class="edit" data-toggle="modal" data-backdrop="static" data-target="#personal_info"><img src="/assets/edit.png"></a>
+  <% end %>
+  <div class="profile-details">
+    <h2><%= @customer.name %></h2>
+    <div class="qualification"><%= @customer.career_path if @customer.career_path.present? %></div>
+    <div class="location"><i class="fa fa-map-marker fa-fw"></i><%= country_name(@customer.dual_nationality_details) %><i class="fa fa-birthday-cake fa-fw"></i><%= @customer.age %>
+      <% if @customer.gender == 'Male' %>
+          <i class="fa fa-male" aria-hidden="true"></i>
+      <% else %>
+          <i class="fa fa-female" aria-hidden="true"></i>
+      <% end %>
+      <%= @customer.gender %>
+    </div>
+    <div class="employment">
+      <% if @customer.current_airline.present? %>
+        <label class="employment-label">Current Employment:</label>
+        <%= @customer.current_airline %>
+          <% if @customer.notice_period.present? %>
+            - <%= @customer.notice_period %> (Notice Period)
+          <% end %>
+      <% else %>
+        <label class="employment-label">Current Employment:</label>
+        Not Currently Employed
+      <% end %>
+    </div>
+
+
+    <table class="qualification-table table hidden-xs">
+      <tr>
+        <td>
+          Languages:<br>
+          <span><% if @customer.languages.present? %>
+            <% @customer.languages.all.each do |lang| %>
+              <%= lang.name %>
+              <%= ',' unless lang == @customer.languages.last %>
+            <% end %>
+          <% end %></span>
+        </td>
+        <td>
+          ICAO Proficency:<br>
+          <span><%= @customer.icao %></span>
+        </td>
+        <td> 
+          Nationality:<br>
+          <span><%= country_name(@customer.nationality) %></span>
+        </td>
+        <!--<%# if @customer.notice_period.present? %>-->
+          <!--<td>-->
+            <!--Notice Period:<br>-->
+            <!--<span><%#= @customer.notice_period %></span>-->
+          <!--</td>-->
+        <!--<%# end %>-->
+        <!--<td>-->
+          <!--Marital Status:<br>-->
+          <!--<span><%#= @customer.marital_period %></span>-->
+        <!--</td>-->
+      </tr>
+    </table>
+
+    <div class="visible-xs">
+        <a href="#" class="table-more">More</a>
+        <div class="mobile-table">
+          <table>
+            <tr>
+              <td>
+                Languages:
+              </td>
+              <td>
+                <% if @customer.languages.present? %>
+                  <% @customer.languages.all.each do |lang| %>
+                    <%= lang.name %>
+                    <%= ',' unless lang == @customer.languages.last %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ICAO Proficency:
+              </td>
+              <td>
+                <%= @customer.icao %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Nationality:
+              </td>
+              <td>
+                <%= country_name(@customer.nationality) %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Notice Period:
+              </td>
+              <td>
+                <%= @customer.notice_period %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Marital Status:
+              </td>
+              <td>
+                <%= @customer.marital_period %>
+              </td>
+            </tr>
+          </table>
+          <a href="#" class="table-less">Less</a>
+        </div>
+    </div>
+
+    <% if current_airline.present? %>
+      <% if customer_airline_favourite(@customer.id, current_airline.id, 'Airline') %>
+          <%= link_to 'Unfavourite',refinery.favourite_customer_path(:customer_id => @customer.id), :class=>"btn btn", :remote => true %>
+      <% else %>
+          <%= link_to 'Favourite',refinery.favourite_customer_path(:customer_id => @customer.id), :class=>"btn btn-green", :remote => true %>
+      <% end %>
+
+      <% if is_blacklisted(@customer.id, current_airline.id) %>
+          <%= link_to 'Unblock',  '/blacklist?customer_id=' + @customer.id.to_s, :class=>"btn btn" %>
+      <% else %>
+          <%= link_to 'Block',  '/blacklist?customer_id=' + @customer.id.to_s, :class=>"btn btn-green btn-window" %>
+      <% end %>
+    <% end %>
+    <!--<a href="#" class="btn btn-green btn-window">Contact Details</a>-->
+  </div>
+</div>
+
+<!--<div class="flying-hours-mobile visible-xs">-->
+  <!--<ul>-->
+    <!--<li>P1<div><%#= @customer.p1.to_i %> <small>Hours</small></div></li>-->
+    <!--<li>P2<div><%#= @customer.p2.to_i %> <small>Hours</small></div></li>-->
+    <!--<li>P3<div><%#= @customer.p3.to_i %> <small>Hours</small></div></li>-->
+  <!--</ul>-->
+<!--</div>-->

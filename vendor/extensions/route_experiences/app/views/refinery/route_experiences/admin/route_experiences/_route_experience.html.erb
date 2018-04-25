@@ -1,0 +1,20 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(route_experience) -%>">
+  <span class='title'>
+    <%= route_experience.continent %> - <%= route_experience.airport %>
+
+  </span>
+  <span class='actions'>
+    
+    <%= link_to refinery_icon_tag("application_go.png"), refinery.route_experiences_route_experience_path(route_experience),
+        :title => t('.view_live_html'),
+        :target => "_blank" %>
+    
+    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_route_experiences_admin_route_experience_path(route_experience),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), refinery.route_experiences_admin_route_experience_path(route_experience),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'refinery.admin.delete', :title => route_experience.continent),
+        :method => :delete %>
+  </span>
+</li>

@@ -1,0 +1,517 @@
+<%= content_for :full do %>
+    <nav class="navbar navbar-dash">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/assets/logo-white.png"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navigation">
+          <form class="navbar-form navbar-left">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><img src="/assets/search.jpg"></button>
+          </span>
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="#"><img src="/assets/feed.png">Feed</a></li>
+            <li><a href="#"><img src="/assets/jobs.png">Jobs</a></li>
+            <li><a href="#"><img src="/assets/messaging.png">Messaging</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/assets/notifications.png">Notifications</a>
+              <ul class="dropdown-menu notifications">
+                <div><span>Notifications</span><a href="#">Settings</a><a href="#">Mark all as read</a></div>
+                <li class="new"><a href="#"><img src="/assets/card-profile-pic.jpg"><p>Notification 1<br><span>4 hours ago</span></p></a></li>
+                <li><a href="#"><img src="/assets/card-profile-pic.jpg"><p>Notification 2<br><span>4 hours ago</span></p></a></li>
+                <li><a href="#"><img src="/assets/card-profile-pic.jpg"><p>Notification 3<br><span>4 hours ago</span></p></a></li>
+                <a href="#" class="view-all">View All</a>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/assets/profile-blank.jpg" width="24" height="24"><span>Me</span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">View Profile</a></li>
+                <li><a href="#">Add Credits</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Log Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="feed">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-3">
+            <div class="completion wizard-completion">
+              <div class="profile-pic">
+                <div class="empty-profile"></div>
+              </div>
+              <div class="name-placeholder"></div>
+              <div class="job-placeholder"></div>
+              <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+                <div class="completion-placeholder"></div>
+                <!--<div href="#" class="btn-placeholder"></div>-->
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+
+            <div class="card">
+              <div class="media">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+                  <a href="#">
+                    <div class="media-header"><div class="placeholder-airline-name"></div></div>
+                    <div class="placeholder-airline-location"></div>
+                  </a>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="text-placeholder"></div>
+                <div class="text-placeholder"></div>
+                <div class="text-placeholder"></div>
+              </div>
+              <div class="image-placeholder"></div>
+            </div>
+
+            <div class="card">
+              <div class="media">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+                  <a href="#">
+                    <div class="media-header"><div class="placeholder-airline-name"></div></div>
+                    <div class="placeholder-airline-location"></div>
+                  </a>
+                </div>
+              </div>
+              <div class="post-content">
+                <div class="text-placeholder"></div>
+                <div class="text-placeholder"></div>
+                <div class="text-placeholder"></div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <div class="airlines-circle">
+              <div class="pod-placeholder-title"></div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-jobs">
+              <div class="pod-placeholder-title"></div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+              <div class="media side-profiles">
+                <div class="media-left">
+                  <div class="logo-placeholder"></div>
+                </div>
+                <div class="media-body">
+
+                  <div class="media-header">
+                    <div class="placeholder-airline-name"></div>
+                  </div>
+                  <div class="placeholder-airline-location"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-push-8 col-md-4"><div class="social"><img src="/assets/fb.svg"></a><a href="#"><img src="/assets/twitter.svg"></a><a href="#"><img src="/assets/linkedin.svg"></a></div></div>
+          <div class="col-xs-12 col-md-pull-4 col-md-8"><p>Squawk © All rights reserved. website designed by <a href="#">Perfect Circle</a></p></div>
+        </div>
+      </div>
+    </div>
+
+    <% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+    <%= simple_form_for @customer, url: refinery.customers_customers_path do |f| -%>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="wizard-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" id="step0">
+          <div class="modal-background">
+            <video autoplay loop muted poster="/assets/wizardcover.jpg" style="width: 100%;">
+              <source src="/assets/wizard-video.mp4" type="video/mp4">
+            </video>
+            <!-- <img src="/assets/plane.gif" class="img-responsive"> -->
+          </div>
+
+          <div class="modal-body">
+            <div class="text-center body-text">
+              <h2>Congrats, your account was successfully created.</h2>
+              <p>Now lets get your career off the ground by completing your profile. <br/> It only takes 10 Minutes</p>
+              <a href="#" class="btn-start">Start</a>
+              <div class="record">Please note that candidates may not have a <span>criminal record.</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-content hidden" id="step1">
+          <div class="steppers">
+            <ul class="stepper">
+              <!-- First Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">1</span>
+                  <span class="label">Personal Information</span>
+                </a>
+              </li>
+              <!-- Second Step -->
+              <li>
+                <a href="#!">
+                  <span class="circle">2</span>
+                  <span class="label">Profile Picture</span>
+                </a>
+              </li>
+              <!-- Third Step -->
+              <li class="">
+                <a href="#!">
+                  <span class="circle">3</span>
+                  <span class="label">Interests</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="modal-body wizard-form">
+            <div class="text-center body-text">
+              <h2>Complete Personal Information</h2>
+              <p>Fill in some basic info to help recruiters find you</p>
+            </div>
+            <div class="career">
+              <h4 class="text-center">Select your career path</h4>
+              <ul>
+                <li>
+                  <a href="#" class="pilot-btn" data-career="Pilot"><img src="/assets/pilot.png" class="img-responsive center-block">Pilot</a>
+                </li>
+                <li>
+                  <a href="#" class="pilot-btn" data-career="Cabin Crew"><img src="/assets/hostess.png" class="img-responsive center-block">Cabin Crew</a>
+                </li>
+                <li>
+                  <a href="#" class="pilot-btn" data-career="Aircraft Maintenance"><img src="/assets/mechanic.png" class="img-responsive center-block">Aircraft Maintenance</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="pilot-form">
+              <div class="row">
+                <div class="col-xs-12"><h4 class="career_path"></h4></div>
+                <input type="hidden" name="customer[career_path]" class="career_path_input" value="<%#= @customer.career_path %>">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="form-group">
+                    <label>Date of Birth</label>
+                    <%= f.text_field :date_of_birth, :label => false, :class => "date_pick" %>
+                    <%#= f.date_select(:date_of_birth, :start_year => 1950, order: [:day, :month, :year], :class=>"form-control slct") %>
+                  </div>
+                  <div class="form-group">
+                    <label>Gender</label>
+                    <%= f.select :gender, ::Refinery::Customers::Customer::GENDERS %>
+                  </div>
+                  <div class="form-group">
+                    <label>Nationality</label>
+                    <%= f.country_select :nationality, :class=> "form-control" %>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="form-group">
+                    <label>Languages</label>
+                    <select name="customer[language_ids][]" class="form-control" id="example-getting-started" multiple="multiple">
+                      <% ::Refinery::Languages::Language.order('position ASC').all.each do |item| %>
+                          <option value="<%= item.id %>"><%= item.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Country of Residence</label>
+                    <%= f.country_select :dual_nationality_details, :class=> "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <label>ICAO English Proficiency</label>
+                    <%= f.select :icao, ::Refinery::Customers::Customer::ICAO, :class=> "form-control" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-blue btn-window back1">Back</a>
+            <a type="button" class="btn btn-blue" id="personal-next">Next</a>
+          </div>
+        </div>
+
+        <div class="modal-content hidden" id="step2">
+          <div class="steppers">
+            <ul class="stepper">
+              <!-- First Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">1</span>
+                  <span class="label">Personal Information</span>
+                </a>
+              </li>
+              <!-- Second Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">2</span>
+                  <span class="label">Profile Picture</span>
+                </a>
+              </li>
+              <!-- Third Step -->
+              <li class="">
+                <a href="#!">
+                  <span class="circle">3</span>
+                  <span class="label">Interests</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="modal-body wizard-form">
+            <div class="text-center body-text">
+              <h2>Upload your Profile Picture</h2>
+              <p>Recruiters respond better to photos</p>
+            </div>
+            <div class="profile-picture-upload">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="picture-container">
+                    <% if @customer.profile_image.present? %>
+                      <div class="slim"
+                           data-label="Click here to upload your profile image, or drag and drop your image here."
+                           data-size="500,500"
+                           data-ratio="1:1">
+                        <%= image_fu @customer.profile_image, "240x240" %>
+                        <input type="file" name="customer[image_upload][]" />
+                      </div>
+                    <% else %>
+                      <div class="slim"
+                           data-label="Click here to upload your profile image, or drag and drop your image here."
+                           data-size="500,500"
+                           data-ratio="1:1">
+                        <!--<img src="/assets/upload-img.jpg">-->
+                        <input type="file" name="customer[image_upload][]" />
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-blue btn-window back2">Back</a>
+            <a type="button" class="btn btn-blue" id="photo-next">Update Profile Image</a>
+          </div>
+        </div>
+
+        <div class="modal-content hidden" id="step3">
+          <div class="steppers">
+            <ul class="stepper">
+              <!-- First Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">1</span>
+                  <span class="label">Personal Information</span>
+                </a>
+              </li>
+              <!-- Second Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">2</span>
+                  <span class="label">Profile Picture</span>
+                </a>
+              </li>
+              <!-- Third Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">3</span>
+                  <span class="label">Interests</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="modal-body wizard-form">
+            <div class="text-center body-text">
+              <h2>Start following Airlines</h2>
+              <p>For the latest jobs and news from Airlines you like.</p>
+            </div>
+            <!-- TODO must be selections that ticks -->
+            <div class="airline-listings wizard_airlines">
+              <ul class="list-inline airlines_like_wiz">
+                <% @airlines = Refinery::Airlines::Airline.active.has_logo.order('position ASC') %>
+                <% if @airlines.present? %>
+                  <% @airlines.each do |airline| %>
+                    <% if airline.logo.present? %>
+                      <li>
+                        <%= link_to refinery.favourite_airline_path(:airline_id => airline.id, :wizard => true), :remote => true do %>
+                          <%= image_fu airline.logo, '150x150^', :class=> "img-responsive center-block" %>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-blue btn-window back3">Back</a>
+            <button type="submit" class="btn btn-blue" id="photo-next">Finish</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <% end %>
+
+    <script type="text/javascript">
+      $(window).load(function(){
+          $('#wizard-modal').modal({
+              show: true,
+              backdrop: 'static'
+          });
+
+          $('#example-getting-started').multiselect({
+              nonSelectedText: 'Please Select Languages'
+          });
+
+          <% ids = @customer.languages.map {|x| x.id} %>
+          <% if ids.present? %>
+          $('#example-getting-started').multiselect('select', <%= ids %>);
+          <% end %>
+
+          $('.btn-start').click(function() {
+              $('#step0').hide();
+              $('#step1').removeClass('hidden');
+          });
+
+          $('.pilot-btn').click(function() {
+              $('.career').hide();
+              $('.pilot-form').show();
+              $('.modal-footer').show();
+
+              var career = $(this).data('career');
+              $('.career_path').text(career);
+              $('.career_path_input').val(career);
+          });
+
+          $('.back1').click(function() {
+              $('.career').show();
+              $('.pilot-form').hide();
+              $('.modal-footer').hide();
+          });
+
+          $('#personal-next').click(function() {
+              $('#step1').hide();
+              $('#step2').removeClass('hidden');
+          });
+
+          $('.back2').click(function() {
+              $('#step2').addClass('hidden');
+              $('#step1').show();
+          });
+
+          $('#photo-next').click(function() {
+              $('#step2').hide();
+              $('#step3').removeClass('hidden');
+          });
+
+          $('.back3').click(function() {
+              $('#step3').addClass('hidden');
+              $('#step2').show();
+          });
+
+          $("#customer_nationality").on("keyup change", function() {
+              $('#customer_dual_nationality_details').val($(this).val())
+          });
+
+//          $(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });
+      });
+
+
+    </script>
+<% end %>

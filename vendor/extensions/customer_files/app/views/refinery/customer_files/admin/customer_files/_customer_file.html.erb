@@ -1,0 +1,22 @@
+<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(customer_file) -%>">
+  <span class='title'>
+    <%= link_to customer_file.title, customer_file.file.url %>
+    <% if customer_file.customer.present? %>
+      - <%= customer_file.customer.name %>
+    <% end %>
+    </span>
+  <span class='actions'>
+    
+    <%#= link_to refinery_icon_tag("application_go.png"), refinery.customer_files_customer_file_path(customer_file),
+        :title => t('.view_live_html'),
+        :target => "_blank" %>
+    
+    <%#= link_to refinery_icon_tag("application_edit.png"), refinery.edit_customer_files_admin_customer_file_path(customer_file),
+         :title => t('.edit') %>
+    <%= link_to refinery_icon_tag("delete.png"), refinery.customer_files_admin_customer_file_path(customer_file),
+        :class => "cancel confirm-delete",
+        :title => t('.delete'),
+        :confirm => t('message', :scope => 'refinery.admin.delete', :title => customer_file.file_mime_type),
+        :method => :delete %>
+  </span>
+</li>

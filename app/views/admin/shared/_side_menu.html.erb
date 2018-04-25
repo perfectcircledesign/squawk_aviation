@@ -1,0 +1,23 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="header">MAIN NAVIGATION</li>
+      <li><a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+      <li>
+        <%= link_to admin_customers_path do %>
+            <i class="fa fa-user fa-fw"></i> Customers
+        <% end %>
+      </li>
+      <li>
+        <%= link_to admin_airlines_path do %>
+          <i class="fa fa-plane fa-fw"></i> Airlines
+        <% end %>
+      </li>
+      <li>
+        <%= link_to admin_jobs_path do %>
+            <i class="fa fa-briefcase fa-fw"></i> Jobs
+        <% end %>
+      </li>
+    </ul>
+  </section>
+</aside>

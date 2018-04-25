@@ -1,0 +1,29 @@
+fr:
+  refinery:
+    plugins:
+      employers:
+        title: Employers
+    employers:
+      admin:
+        employers:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Employer
+            reorder: Réordonner les Employers
+            reorder_done: Fin de réordonnancement des Employers
+          records:
+            title: Employers
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Employer. Cliquer sur "Créer un(e) nouve(au/l/lle) Employer" pour créer votre premi(er/ère) employer.'
+          employer:
+            view_live_html: Voir ce(t/tte) employer <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) employer
+            delete: Supprimer définitivement ce(t/tte) employer
+      employers:
+        show:
+          other: Autres Employers
+  activerecord:
+    attributes:
+      'refinery/employers/employer':
+        name: Name
+        image: Image
+        url: Url

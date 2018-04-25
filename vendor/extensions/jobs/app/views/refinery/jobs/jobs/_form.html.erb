@@ -1,0 +1,84 @@
+<div class="sliver"></div>
+<div class="job-create">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2"> 
+      <div class="card">
+        <h2>Create a New Job</h2>
+        <%= simple_form_for [refinery, :jobs, @job] do |f| -%>
+
+            <%= f.hidden_field :airline_id, :label => false, :value => current_airline.id  %>
+            <label>Name</label>
+            <%= f.text_field :name, required: true, :class=>"form-control", :label => false  %>
+
+            <label>Description</label>
+            <%= f.text_area :description, required: true, :rows => 4, :class=>"form-control"  %>
+
+            <label>Requirements</label>
+            <small>Seperate each requirement with a <mark>semicolon</mark></small>
+            <%= f.text_area :requirements, :rows => 4, :class=>"form-control"  %>
+
+            <label>Benefits</label>
+            <small>Seperate each benefit with a <mark>semicolon</mark></small>
+            <%= f.text_area :benefits, :rows => 4, :class=>"form-control"  %>
+
+            <div class="row">
+              <div class="col-xs-12">
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <label>Published Date</label>
+                <%= f.text_field :published_date, :class=>"form-control date_pick" %>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <label>Expiry Date</label>
+                <%= f.text_field :expiry_date, :class=>"form-control date_pick" %>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <label>Location</label>
+                <%= f.country_select :location, :class=>"form-control" %>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <label>Salary</label>
+                <%= f.text_field :salary, :class=>"form-control"  %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <label>Job Type</label>
+                <%= f.select :career_path, ::Refinery::Customers::Customer::CAREERS, :include => :blank %>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <label>Contract Type</label>
+                <%= f.select :contract_type, ::Refinery::Jobs::Job::CONTRACTS, :include => :blank %>
+              </div>
+            </div>
+
+            <label>Job is visible to public?</label>
+            <%= f.check_box :active, as: :boolean, class: "hidden" %>
+            <label for="job_active" class="form-checkbox"></label>
+
+            <!--  <div class="form-group">
+              <label>Job is visible to public?</label>
+              <%#= f.input_field :active, as: :boolean %>
+            </div> -->
+
+            <div class="clear"></div>
+            <div class="text-right">
+              <a href="#" class="btn btn-window btn-green" onclick="window.history.back();">Cancel</a>
+              <%= f.button :submit, "Post Job", :class=>"btn btn-green" %>
+            </div>
+
+      <% end -%>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

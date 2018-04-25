@@ -1,0 +1,28 @@
+en:
+  refinery:
+    plugins:
+      route_experiences:
+        title: Route Experiences
+    route_experiences:
+      admin:
+        route_experiences:
+          actions:
+            create_new: Add New Route Experience
+            reorder: Reorder Route Experiences
+            reorder_done: Done Reordering Route Experiences
+          records:
+            title: Route Experiences
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Route Experiences yet. Click "Add New Route Experience" to add your first route experience.
+          route_experience:
+            view_live_html: View this route experience live <br/><em>(opens in a new window)</em>
+            edit: Edit this route experience
+            delete: Remove this route experience forever
+      route_experiences:
+        show:
+          other: Other Route Experiences
+  activerecord:
+    attributes:
+      'refinery/route_experiences/route_experience':
+        continent: Continent
+        airport: Airport

@@ -1,0 +1,62 @@
+<% content_for :progress_image do %>
+  <%= render :partial => 'shared/progress_image', :locals => {:image_name => 'steps_1.gif'} %>
+<% end %>
+
+<% content_for :body do %>
+  <% if @current_cart.line_items.present? %>
+    <table class="table table-striped table-bordered table-condensed">
+      <th>Product</th>
+      <th class="price">Unit Price</th>
+      <th>Qty</th>
+      <th>Modify</th>
+      <th>Delete</th>
+      <th class="price">Full Price</th>
+      <% @current_cart.line_items.each do |cart_item| %>
+        <% if cart_item.product.present? %>
+          <tr>
+            <td><%= cart_item.product.name %></td>
+            <td><%= rands(cart_item.product.price) %></td>
+            <td><%= cart_item.quantity %></td>
+            <td>
+              <%= link_to image_tag("/assets/plus.png", :size => "20x20"), refinery.add_to_cart_path(cart_item.product.id) %>
+              <%= link_to image_tag("/assets/minus.png", :size => "20x20"), refinery.add_to_cart_path(:id => cart_item.product.id, :quantity => '-1') unless cart_item.quantity == 1 %>
+            </td>
+            <td><%= link_to raw("<i class=\"icon-trash icon-white\"></i> Delete"), refinery.destroy_line_item_path(cart_item.id), :confirm => 'Are you sure?', :class => 'btn btn-danger' %></td>
+            <td><%= rands(cart_item.total_price) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td colspan="5">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="5">Total:</td>
+        <td><b><%= rands(@current_cart.grand_total) %></b></td>
+      </tr>
+    </table>
+      <!--<tr>-->
+        <!--<td colspan="5">Delivery Method: <%#= @delivery_option.name_for_cart(@current_cart, @coupon) %></td>-->
+        <!--<td><%#= rands(@delivery_option.cost_for_cart(@current_cart, @coupon)) %></td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td colspan="5">&nbsp;</td>-->
+        <!--<td>&nbsp;</td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td colspan="5">&nbsp;</td>-->
+        <!--<td><b><%#= rands(@delivery_option.grand_total_for_cart(@current_cart, @coupon)) %></b></td>-->
+      <!--</tr>-->
+    <!--</table>-->
+
+    <p>
+    </p>
+
+  <% else %>
+    <p>Your cart is currently empty.</p>
+    <p><%= link_to('Continue Shopping', refinery.products_products_path, :class => 'btn btn-custom') %></p>
+  <% end %>
+
+<% end %>
+
+<%= render '/refinery/content_page' %>

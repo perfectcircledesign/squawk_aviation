@@ -1,0 +1,141 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Employment History</h4>
+</div>
+<%= simple_form_for @aviation_record, :url => aviation_records_path, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @aviation_record.id if @aviation_record.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Employer</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :employer, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-3">-->
+          <!--<label>Aircraft</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :aircraft, :label => false, :class => "form-control fc2"  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Position Held</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :position_held, AviationRecord::POSITION_HELD, {:include_blank => true}, :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Currently employed here</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.check_box :current_work, :class=>"boolean optional hidden aviation_current_work" %>
+          <label for="aviation_record_current_work" class="form-checkbox modal-checkbox"></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>From</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :start_date, :label => false, :class => "date_pick", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group leave_period">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Notice period</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :notice_period, AviationRecord::NOTICEPERIOD, {:include_blank => true}, :class=>"form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group still_working_here">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>To</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :end_date, :label => false, :class => "date_pick"  %>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>Captain (P1)</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :ca, :label => false, :placeholder => "Hours", :class => "form-control fc2"  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>First Officer (P2)</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :fo, :label => false, :placeholder => "Hours", :class => "form-control fc2"  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>Total Hours</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :total, :label => false, :placeholder => "Total", :class => "form-control fc2"  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group still_working_here">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Reason For Leaving</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :reason_for_leaving, AviationRecord::REASONS, {:include_blank => true}, :class => "form-control fc2" %>
+          <%#= f.text_field :reason_for_leaving, :label => false, :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @aviation_record.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create new", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+

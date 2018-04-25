@@ -1,0 +1,338 @@
+<% content_for :full do %>
+  
+            
+            
+
+    <div class="card-wizard">
+      <%= simple_form_for @credit_card, :url => refinery.subscriptions_subscriptions_path, :method => 'post' do |f| -%>
+      <div class="steppers">
+        <div class="container">
+          <div class="col-xs-12">
+            <ul class="stepper">
+              <!-- First Step -->
+              <li class="completed">
+                <a href="#!">
+                  <span class="circle">1</span>
+                  <span class="label">Welcome</span>
+                </a>
+              </li>
+              <!-- Second Step -->
+              <li>
+                <a href="#!">
+                  <span class="circle">2</span>
+                  <span class="label">Choose your plan</span>
+                </a>
+              </li>
+              <!-- Third Step -->
+              <li class="">
+                <a href="#!">
+                  <span class="circle">3</span>
+                  <span class="label">Set up your Payment</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-container">
+        <div class="container">
+          
+
+            <div class="step fade in active" id="tab1">
+              <div class="row">
+                <%# if current_customer.trial? or current_customer.subscription.present? %>
+                  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                    <div class="choose">
+                      <% unless flash[:error].blank? %>
+                          <div class="alert alert-danger">
+                            <a class="close" data-dismiss="alert">x</a>
+                            <%= flash[:error] %>
+                          </div>
+                      <% end %>
+                      <h1>Select Price Plan</h1>
+                      <p>Select a plan and register your credit card to get started. Your account will automatically be billed based on the billing plan you choose and can cancel at any time.<br><strong><small>Credit Card Required</small></strong></p>
+                      <a href="#tab2" id="step2-highlight" class="btn btn-blue" data-toggle="tab">Continue to see plans</a>
+                    </div>
+                  </div>
+                <%# else %>
+                  <!--<div class="col-xs-12 col-sm-6">-->
+                    <!--<div class="choose">-->
+                      <!--<% unless flash[:error].blank? %>-->
+                          <!--<div class="alert alert-danger">-->
+                            <!--<a class="close" data-dismiss="alert">x</a>-->
+                            <!--<%= flash[:error] %>-->
+                          <!--</div>-->
+                      <!--<% end %>-->
+                      <!--<h1>Start Free Trial</h1>-->
+                      <!--<p>Start your 30 day free trail now. There is no obligation to sign up after your 30 day free trial is over and you can cancel at any time.<br><strong><small>No Credit Card Required.</small></strong></p>-->
+                      <!--&lt;!&ndash; <a href="#tab2" id="step2-highlight" class="btn btn-blue" data-toggle="tab">Continue to see plans</a> &ndash;&gt;-->
+                      <!--<%= link_to("Start", refinery.trial_subscriptions_subscriptions_path , :class => "btn btn-blue") %>-->
+                    <!--</div>-->
+                  <!--</div>-->
+
+                  <!--<div class="col-xs-12 col-sm-6">-->
+                    <!--<div class="choose">-->
+                      <!--<% unless flash[:error].blank? %>-->
+                          <!--<div class="alert alert-danger">-->
+                            <!--<a class="close" data-dismiss="alert">x</a>-->
+                            <!--<%= flash[:error] %>-->
+                          <!--</div>-->
+                      <!--<% end %>-->
+                      <!--<h1>Select Price Plan</h1>-->
+                      <!--<p>Select a plan and register your credit card to get started. Your account will automatically be billed based on the billing plan you choose and can cancel at any time.<br><strong><small>Credit Card Required</small></strong></p>-->
+                      <!--<a href="#tab2" id="step2-highlight" class="btn btn-blue" data-toggle="tab">Continue to see plans</a>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                <%# end %>
+              </div>
+            </div>
+
+            <div class="step fade" id="tab2">
+              <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                  <div class="plans">
+                    <h1 class="text-center">Select the plan best suited for you.</h1>
+                    <p class="text-center">Choose from either our monthly option or save 20% and choose the annual package. Remember, you can cancel at any time.</p>
+                    <% plans = Refinery::Plans::Plan.order('position ASC').all %>
+                    <div class="text-center">
+                    <% if plans.present? %>
+                      <% plans.each do |plan| %>
+                        <div class="plan-container">
+                          <input type="radio" id="<%= plan.id %>" name="plan_id" value="<%= plan.id %>" class="hidden option<%= plan.id %>">
+                          <div class="plan-option">
+                            <label for="<%= plan.id %>">
+                              <h1>$<%= plan.cost %></h1>
+                              <% if plan.duration == '1' %>
+                                  <h4>Billed every Month</h4>
+                              <% else %>
+                                  <h4>Billed every <%= plan.duration %> Months</h4>
+                              <% end %>
+                              <h3><%= plan.name %></h3>
+                              <!--<p>+90 Days Free</p>-->
+                            </label>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                    </div>
+
+                    <div class="text-center next">
+                      <a href="#tab3" id="step3-highlight" class="btn btn-blue" data-toggle="tab">Continue</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step fade" id="tab3">
+              <div class="row">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                  <h1 class="text-center">Set up your Credit or Debit Card</h1>
+                  <p class="text-center">Enter your billing information below to get your subscription activated. You can update your billing information or cancel your subscription at any time by going to the 'Billing Info' tab under your Squawk Aviation Account.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+                  <div class="card-details">
+                    <div class='card-wrapper'></div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <%= f.text_field :holder, :label => false, :placeholder => "Card Holder", :class => "form-control", required: true %>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <%= f.text_field :card_number, :label => false, :placeholder => "Card Number", :class => "form-control", required: true %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-4">
+                          <%= f.text_field :exp_month, :label => false, :placeholder => "Month", :class => "form-control", required: true %>
+                        </div>
+                        <div class="col-xs-4">
+                          <%= f.text_field :exp_year, :label => false, :placeholder => "Year", :class => "form-control", required: true %>
+                        </div>
+                        <div class="col-xs-4">
+                          <%= f.text_field :bin, :label => false, :placeholder => "cvv", :class => "form-control", required: true %>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="secure-payment">
+                      <img class="peachpayments" src="/assets/Peach_Payments_Vertical.png">
+                      <p>All credit card information is securely stored with the <a href="https://www.peachpayments.com/" target="_blank">Peach Payments</a> (Pty) Ltd.</p>
+                      <img src="/assets/visa-mastercard.png" class="visa-mastercard">
+                    </div>
+                  </div>
+                </div>
+                <% if plans.present? %>
+                  <% plans.each do |plan| %>
+                    <div class="col-xs-12 col-sm-5 plan_details <%= plan == plans.first ? 'plan_1': 'plan_2' %>">
+                      <div class="payment-table">
+                        <table>
+                          <tr>
+                            <td colspan="2">
+                              <%= plan.name %><br>
+                              <% if plan.duration == '1' %>
+                                <span>Billed every Month</span>
+                              <% else %>
+                                <span>Billed every <%= plan.duration %> Months</span>
+                              <% end %>
+                            </td>
+                          </tr>
+                          <!--<tr>-->
+                            <!--<td class="free" colspan="2">-->
+                              <!--Free for 90 days. Cancel Online at anytime.-->
+                            <!--</td>-->
+                          <!--</tr>-->
+                          <tr>
+                            <td>Subtotal</td><td>$<%= plan.cost.to_i %></td>
+                          </tr>
+                          <tr>
+                            <td>Discount</td><td>$0.00</td>
+                          </tr>
+                          <tr>
+                            <td>Total</td><td>$<%= plan.cost.to_i %></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <!--<p class="text-center">First payment of <strong>$<%#= plan.cost %></strong> will be billed on <strong><%#= 90.days.from_now.strftime('%d/%m/%Y') %></strong><br>Cancel anytime online. No obligations.</p>-->
+                      <!--<p class="text-center">I have read and understand the <a href="<%= copywriting('Terms and Conditions', {:phrase_type => 'string', :scope => 'Customer Reg', :default => 'URL here' }) %>" target="_blank">Terms and Conditions</a></p>-->
+
+                      <p class="text-center" style="font-size: 11px; line-height: 16px;">When you sign up for an account, Squawk Aviation verifies your payment information and bills you immediately. Should there be any issues with your card we will automatically try process the payment the next day. You will be notified on any issues but do feel free to contact us with questions.</p>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="text-center start-membership">
+                <%= f.button :submit, "Start Membership", :class=>"btn btn-blue" %>
+              </div>
+            </div>
+
+            <div class="step fade" id="tab4">
+              <div class="row">
+                <h1 class="text-center">Confirm Details</h1>
+                  <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+                    <h3>Card Details</h3>
+                    <div class="credit-table">
+                    <table>
+                      <tr>
+                        <td>Card Holder</td>
+                        <td>...</td>
+                      </tr>
+                      <tr>
+                        <td>Card Number</td>
+                        <td>...</td>
+                      </tr>
+                      <tr>
+                        <td>Expiry Date</td>
+                        <td>mm/yy</td>
+                      </tr>
+                      <tr>
+                        <td>CCV</td>
+                        <td>...</td>
+                      </tr>
+                    </table>
+                    </div>
+                    <a href="#tab3" data-toggle="tab" class="btn btn-green">Edit Card Details</a>
+                  </div>
+                  <div class="col-xs-12 col-sm-4">
+                    <h3>Plan Details</h3>
+                    <div class="payment-table">
+                      <table>
+                        <tr>
+                          <td colspan="2">
+                            Plan Name<br>
+                            <span>Plan Duration</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Subtotal</td><td>$9.99</td>
+                        </tr>
+                        <tr>
+                          <td>Discount</td><td>$0.00</td>
+                        </tr>
+                        <tr>
+                          <td>Total</td><td>$9.99</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <p>First payment of <strong>$....</strong> will be billed on <strong>DATE</strong></p>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <%= f.button :submit, "Start Membership", :class=>"btn btn-blue" %>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <script type="application/javascript">
+      $(window).load(function () {
+          var card = new Card({
+              form: '.new_credit_card',
+              container: '.card-wrapper',
+
+              formSelectors: {
+                  numberInput: '#credit_card_card_number',
+                  nameInput: '#credit_card_holder',
+                  expiryInput: '#credit_card_exp_month, #credit_card_exp_year',
+                  cvcInput: '#credit_card_bin'
+              },
+              messages: {
+                  validDate: 'valid\ndate', // optional - default 'valid\nthru'
+                  monthYear: 'mm/yyyy', // optional - default 'month/year'
+              },
+              placeholders: {
+                  number: '•••• •••• •••• ••••',
+                  name: 'Full Name',
+                  expiry: '••/••',
+                  cvc: '•••'
+              }
+
+          });
+
+          $('#credit_card_card_number').change(function () {
+              var i = $(this).val().charAt(0)
+              if(!(i == 4 || i == 5)){
+                  alert('Please note: Only MasterCard and Visa Accepted')
+              }
+          });
+
+          $('.plan_details').hide();
+
+          $('#step3-highlight').hide();
+
+          $('.plan-container').click(function () {
+              $('#step3-highlight').show();
+          })
+
+          $('#step3-highlight').click(function () {
+              if($('.plan-container:first-child input').is(':checked')) {
+                  $('.plan_1').show();
+                  $('.plan_2').hide();
+              }
+              else if($('.plan-container:last-child input').is(':checked')) {
+                  $('.plan_1').hide();
+                  $('.plan_2').show();
+              }
+          });
+
+
+      });
+    </script>
+
+<% end %>
+
+<%= render '/refinery/content_page' %>

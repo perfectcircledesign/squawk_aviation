@@ -1,0 +1,68 @@
+nl:
+  refinery:
+    plugins:
+      addresses:
+        title: Addresses
+      customers:
+        title: Customers
+    addresses:
+      admin:
+        addresses:
+          actions:
+            create_new: Maak een nieuwe Address
+            reorder: Wijzig de volgorde van de Addresses
+            reorder_done: Klaar met het wijzingen van de volgorde van de Addresses
+          records:
+            title: Addresses
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Addresses. Druk op 'Maak een nieuwe Address'
+              om de eerste aan te maken.
+          address:
+            view_live_html: Bekijk deze address op de website <br/><em>(opent een
+              nieuw venster)</em>
+            edit: Bewerk deze address
+            delete: Verwijder deze address voor eeuwig
+      addresses:
+        show:
+          other: Andere Addresses
+    customers:
+      admin:
+        customers:
+          actions:
+            create_new: Maak een nieuwe Customer
+            reorder: Wijzig de volgorde van de Customers
+            reorder_done: Klaar met het wijzingen van de volgorde van de Customers
+          records:
+            title: Customers
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Customers. Druk op 'Maak een nieuwe Customer'
+              om de eerste aan te maken.
+          customer:
+            view_live_html: Bekijk deze customer op de website <br/><em>(opent een
+              nieuw venster)</em>
+            edit: Bewerk deze customer
+            delete: Verwijder deze customer voor eeuwig
+      customers:
+        show:
+          other: Andere Customers
+  activerecord:
+    attributes:
+      refinery/addresses/address:
+        friendly_name: Friendly Name
+        line_1: Line 1
+        line_2: Line 2
+        suburb: Suburb
+        city: City
+        province: Province
+        country: Country
+        customer_id: Customer
+        is_current: Is Current
+      refinery/customers/customer:
+        first_name: First Name
+        surname: Surname
+        contact_number: Contact Number
+        fax_number: Fax Number
+        is_company: Is Company
+        company_name: Company Name
+        company_registration_number: Company Registration Number
+        company_vat_number: Company Vat Number

@@ -1,0 +1,28 @@
+nb:
+  refinery:
+    plugins:
+      route_experiences:
+        title: Route Experiences
+    route_experiences:
+      admin:
+        route_experiences:
+          actions:
+            create_new: Lag en ny Route Experience
+            reorder: Endre rekkefølgen på Route Experiences
+            reorder_done: Ferdig å endre rekkefølgen Route Experiences
+          records:
+            title: Route Experiences
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Route Experiences enda. Klikk på "Lag en ny Route Experience" for å legge til din første route experience.
+          route_experience:
+            view_live_html: Vis hvordan denne route experience ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne route experience
+            delete: Fjern denne route experience permanent
+      route_experiences:
+        show:
+          other: Andre Route Experiences
+  activerecord:
+    attributes:
+      'refinery/route_experiences/route_experience':
+        continent: Continent
+        airport: Airport

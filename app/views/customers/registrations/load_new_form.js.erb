@@ -1,0 +1,230 @@
+<% if @flying_hour.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/flying_hours/form' %>");
+  $('#new_form').modal({
+    backdrop: 'static'
+  });
+
+$(".p1_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hour.ca.present? %>
+    from: <%= @flying_hour.ca %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+$(".p2_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hour.fo.present? %>
+    from: <%= @flying_hour.fo %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+$(".p3_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hour.cruise_only_pilot.present? %>
+    from: <%= @flying_hour.cruise_only_pilot %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+<% elsif @flying_hours_cabin.present? %>
+$("#new_form .modal-content").html("<%= j render :partial => '../views/flying_hours_cabins/form' %>");
+$('#new_form').modal({
+    backdrop: 'static'
+});
+
+$(".p1_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hours_cabin.flight_attendant.present? %>
+    from: <%= @flying_hours_cabin.flight_attendant %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+$(".p2_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hours_cabin.purser.present? %>
+    from: <%= @flying_hours_cabin.purser %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+$(".p3_range").ionRangeSlider({
+    hide_min_max: true,
+    keyboard: true,
+    min: 0,
+    max: 15000,
+    <% if @flying_hours_cabin.chief_purser.present? %>
+    from: <%= @flying_hours_cabin.chief_purser %>,
+    <% else %>
+    from: 0,
+    <% end %>
+    step: 1,
+    // type: 'double',
+    // prefix: "R",
+    grid: false,
+    max_postfix: "+"
+});
+
+<% elsif @aviation_record.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/aviation_records/form' %>");
+  $('#new_form').modal({
+    backdrop: 'static'
+  });
+  <% unless @aviation_record.current_work %>
+    $('.leave_period').hide();
+  <% end %>
+  $("#aviation_record_current_work").change(function() {
+    if(this.checked) {
+      $(".still_working_here").hide();
+      $('.leave_period').show();
+      $('#aviation_record_end_date').val(" ")
+    }
+      else{
+      $(".still_working_here").show();
+      $('.leave_period').hide();
+    }
+  });
+  if (document.getElementById('aviation_record_current_work').checked) {
+    $(".still_working_here").hide();
+  }
+
+<% elsif @credit_card.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/credit_cards/form' %>");
+  $('#new_form').modal({
+    backdrop: 'static'
+  });
+
+  $('#credit_card_card_number').change(function () {
+     var i = $(this).val().charAt(0)
+     if(!(i == 4 || i == 5)){
+      alert('Please note: Only MasterCard and Visa Accepted')
+     }
+  });
+
+var card = new Card({
+    form: '.new_credit_card',
+    container: '.card-wrapper',
+
+    formSelectors: {
+        numberInput: '#credit_card_card_number',
+        nameInput: '#credit_card_holder',
+        expiryInput: '#credit_card_exp_month, #credit_card_exp_year',
+        cvcInput: '#credit_card_bin'
+    },
+    messages: {
+        validDate: 'valid\ndate', // optional - default 'valid\nthru'
+        monthYear: 'mm/yyyy', // optional - default 'month/year'
+    },
+    placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: 'Full Name',
+        expiry: '••/••',
+        cvc: '•••'
+    },
+
+});
+
+<% elsif @aviation_certification.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/aviation_certification/form' %>");
+  $('#new_form').modal({
+    backdrop: 'static'
+  });
+
+$("#inp").change(function(){
+    readURL(this);
+});
+<% elsif @cabin_certification.present? %>
+$("#new_form .modal-content").html("<%= j render :partial => '../views/cabin_certification/form' %>");
+$('#new_form').modal({
+    backdrop: 'static'
+});
+
+$("#inp").change(function(){
+    readURL(this);
+});
+<% elsif @maintenance_certification.present? %>
+$("#new_form .modal-content").html("<%= j render :partial => '../views/maintenance_certification/form' %>");
+$('#new_form').modal({
+    backdrop: 'static'
+});
+
+$("#inp").change(function(){
+    readURL(this);
+});
+<% elsif @maintenance_hour.present? %>
+$("#new_form .modal-content").html("<%= j render :partial => '../views/maintenance_hour/form' %>");
+$('#new_form').modal({
+    backdrop: 'static'
+});
+<% elsif @aviation_education.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/aviation_education/form' %>");
+  $('#new_form').modal({
+    backdrop: 'static'
+  });
+<% end %>
+
+$('.date_pick').data( "theme", "calendar-squawk" );
+$('.date_pick').data( "modal", true);
+$('.date_pick').data( "large-mode", true);
+$('.date_pick').data( "format", "Y-m-d" );
+$('.date_pick').data( "max-year", "2030" );
+$('.date_pick').data( "min-year", "1800" );
+$(".date_pick").each(function() {
+    var v = $(this).val();
+    if(v.length > 0){
+      var value = v.substr(5,2) + "-" + v.substr(8,2) + "-" + v.substr(0,4);
+      $(this).data("default-date", value);
+    }
+});
+$('.date_pick').dateDropper();
+$('.pick-d').css('display', 'none');
+
+
+//$(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });

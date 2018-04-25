@@ -1,0 +1,113 @@
+<% content_for :full_mid do %>
+<div class="sliver"></div>
+<div class="airline-edit">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <div class="card">
+            <h3>Airline Profile</h3>
+            <div class="row">
+                <%= simple_form_for @airline, url: '/airlines', :method => :put do |f| -%>
+                <div class="col-xs-12 col-md-6">
+                    <%= f.input :name, :required => true, :autofocus => true %>
+                    <%= f.input :airline_name, :required => true %>
+                    <%= f.input :email, :required => true %>
+                    <%= f.input :website %>
+                    <%= f.input :description, :rows => 3, :class=>"form-control"  %>
+                    <%= f.input :head_office_address, :required => true %>
+                    <%= f.input :company_size %>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <label>Profile Image</label>
+                    <div class="airline-profile-pic">
+                        <div class="media">
+                            <div class="media-left">
+                                <% if @airline.logo.present? %>
+                                    <%= image_fu @airline.logo, '100x100#c' %>
+                                <% else %>
+                                    <img src="/assets/profile-blank.jpg" width="100" height="100">
+                                <% end %>
+                            </div>
+                            <div class="media-body">
+                                <label class="btn-upload" for="airline_logo_id">Upload an image</label>
+                                <%= f.file_field :logo_id, :class=>"pp-upload" %>
+                                <p>Please upload a clear image of your company and limit the filesize below 5mb</p>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <label>Gallery Images</label>
+                      <div class="image_uploader">
+                        <ul>
+                          <li>
+                            <div class="slim"
+                             data-ratio="16:9"
+                             data-size="640,640">
+                              <%= image_fu @airline.image1, "240x240" if @airline.image1.present? %>
+                              <input type="file" name="airline[image1_upload][]"/>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="slim"
+                             data-ratio="16:9"
+                             data-size="640,640">
+                              <%= image_fu @airline.image2, "240x240" if @airline.image2.present? %>
+                              <input type="file" name="airline[image2_upload][]"/>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="slim"
+                             data-ratio="16:9"
+                             data-size="640,640">
+                              <%= image_fu @airline.image3, "240x240" if @airline.image3.present? %>
+                              <input type="file" name="airline[image3_upload][]"/>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="slim"
+                             data-ratio="16:9"
+                             data-size="640,640">
+                              <%= image_fu @airline.image4, "240x240" if @airline.image4.present? %>
+                              <input type="file" name="airline[image4_upload][]"/>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="slim"
+                             data-ratio="16:9"
+                             data-size="640,640">
+                              <%= image_fu @airline.image5, "240x240" if @airline.image5.present? %>
+                              <input type="file" name="airline[image5_upload][]"/>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <label>Background Sliver</label>
+                      <div class="image_uploader background-sliver">
+                        <div class="slim"
+                             data-ratio="16:4"
+                             data-size="640,640">
+                          <%= image_fu @airline.sliver, "535x133" if @airline.sliver.present? %>
+                          <input type="file" name="airline[sliver_upload][]"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <%= f.input :facebook %>
+                    <%= f.input :twitter %>
+                    <%= f.input :linkedin %>
+                    <%= f.input :googleplus %>
+                </div>
+            </div>
+            <div class="text-right">
+                <a href="#" class="btn btn-green btn-window" onclick="window.history.back();">Cancel</a>
+                <%= f.button :submit, "Update", :class=>"btn btn-green" %>
+            </div>
+        </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+

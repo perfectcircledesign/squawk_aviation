@@ -1,0 +1,11 @@
+<% content_for :body_content_left do %>
+  <ul id="invoices">
+    <% @invoices.each do |invoice| %>
+      <li>
+        <%= link_to invoice.invoice_number, refinery.invoices_invoice_path(invoice) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

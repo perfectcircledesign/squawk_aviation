@@ -1,0 +1,48 @@
+<div class="card details-card" id="fly_tag">
+  <h2>Cabin Crew Flying Hours</h2>
+  <% if current_customer.present? %>
+    <%= link_to load_new_form_path(type:"flying_hours_cabins", method_type: :post), class:"edit", remote:true do %>
+        <img src="/assets/edit.png">
+    <% end %>
+  <% end %>
+  <% if @customer.flying_hours_cabins.present? %>
+      <% @customer.flying_hours_cabins.each do |item| %>
+          <div class="details-panel">
+            <% if current_customer.present? %>
+              <h6><%= item.aircraft.name if item.aircraft.present? %></h6>
+              <%= link_to load_new_form_path(type:"flying_hours_cabins", id: item.id, method_type: :put), class:"btn-edit", remote:true do %>
+                  <img src="/assets/edit.png" width="10" height="10">
+              <% end %>
+              <%= link_to flying_hours_cabins_path(id:item.id),
+                          :class => "btn-delete",
+                          :confirm => "Are you sure you want to delete: " + (item.aircraft.name if item.aircraft.present?).to_s,
+                          :method => :delete do %>
+                  <span aria-hidden="true" class="close">&times;</span>
+              <% end %>
+            <% end %>
+            <table>
+              <tr>
+                <!--<td>-->
+                  <!--Date First Flown:-->
+                <!--</td>-->
+                <!--<td>-->
+                  <!--<%#= item.date_first_flown %>-->
+                <!--</td>-->
+                <td>
+                  Date Last Flown:
+                </td>
+                <td>
+                  <%= item.date_last_flown %>
+                </td>
+              </tr>
+            </table>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/plane.jpg">
+        <h2>Update your Flying Hours</h2>
+        <%= link_to 'Add Flying Hours', load_new_form_path(type:"flying_hours_cabins", method_type: :post), class:"btn btn-green btn-window btn-lrg", remote:true %>
+      </div>
+  <% end %>
+</div>

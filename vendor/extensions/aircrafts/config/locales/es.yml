@@ -1,0 +1,30 @@
+es:
+  refinery:
+    plugins:
+      aircrafts:
+        title: Aircrafts
+#        article: masculino/femenino
+    aircrafts:
+      admin:
+        aircrafts:
+          actions:
+            create_new: Crear nuevo aircraft
+            reorder: Reordenar aircrafts
+            reorder_done: Reordenación de aircrafts completada
+          records:
+            title: Aircrafts
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay aircrafts todavía. Pulsa en "Crear nuevo Aircraft" para crear tu primer aircraft.
+          aircraft:
+            view_live_html: Ver este aircraft como abierto al público <br/><em>(abre en ventana nueva)</em>
+            edit: Editar este aircraft
+            delete: Borrar este aircraft para siempre
+      aircrafts:
+        show:
+          other: Otros aircrafts
+  activerecord:
+    attributes:
+      'refinery/aircrafts/aircraft':
+        name: Name
+        weight: Weight
+        engine: Engine

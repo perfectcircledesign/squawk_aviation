@@ -1,0 +1,65 @@
+en:
+  refinery:
+    plugins:
+      addresses:
+        title: Addresses
+      customers:
+        title: Customers
+    addresses:
+      admin:
+        addresses:
+          actions:
+            create_new: Add New Address
+            reorder: Reorder Addresses
+            reorder_done: Done Reordering Addresses
+          records:
+            title: Addresses
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Addresses yet. Click "Add New Address" to add
+              your first address.
+          address:
+            view_live_html: View this address live <br/><em>(opens in a new window)</em>
+            edit: Edit this address
+            delete: Remove this address forever
+      addresses:
+        show:
+          other: Other Addresses
+    customers:
+      admin:
+        customers:
+          actions:
+            create_new: Add New Customer
+            reorder: Reorder Customers
+            reorder_done: Done Reordering Customers
+          records:
+            title: Customers
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Customers yet.
+          customer:
+            view_live_html: View this customer live <br/><em>(opens in a new window)</em>
+            edit: Edit this customer
+            delete: Remove this customer forever
+      customers:
+        show:
+          other: Other Customers
+  activerecord:
+    attributes:
+      refinery/addresses/address:
+        friendly_name: Friendly Name
+        line_1: Line 1
+        line_2: Line 2
+        suburb: Suburb
+        city: City
+        province: Province
+        country: Country
+        customer_id: Customer
+        is_current: Is Current
+      refinery/customers/customer:
+        first_name: First Name
+        surname: Surname
+        contact_number: Contact Number
+        fax_number: Fax Number
+        is_company: Is Company
+        company_name: Company Name
+        company_registration_number: Company Registration Number
+        company_vat_number: Company Vat Number

@@ -1,0 +1,179 @@
+<% content_for :full do %>
+    <div class="job-show">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-9">
+            <div class="card job-show-card">
+              <% if @job.live? %>
+                <h1><%=raw @job.name %></h1>
+                <table>
+                  <tr>
+                    <td>Location:</td>
+                    <td><%= country_name(@job.location) %></td>
+                  </tr>
+                  <% if @job.salary.present? %>
+                    <tr>
+                      <td>Salary:</td>
+                      <td><%= @job.salary %></td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <td>Date Listed:</td>
+                    <td><%= @job.created_at.strftime('%e %B %Y') %></td>
+                  </tr>
+                </table>
+                <hr>
+                <div class="description"><%=raw @job.description %></div>
+                <div class="row">
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Benefits:</h3>
+                    <ul id="benefits">
+                      <%=raw @job.benefits %>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <h3>Requirements:</h3>
+                    <ul id="requirements">
+                      <%=raw @job.requirements %>
+                    </ul>
+                  </div>
+                </div>
+                <% if current_customer.present? %>
+                  <div class="bottom-bar">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="like">
+                          <span class="vertical-middle">Share</span> <div id="job_share"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <h3>This job is no longer available.</h3>
+                <p>Please visit the jobs page to see all current jobs.</p>
+              <% end %>
+            </div>
+            <% if @job.live? %>
+              <div class="interested">
+              <% if current_customer.present? %>
+                <% if customer_job_favourite(current_customer.id, @job.id) %>
+                    <%= link_to refinery.favourite_job_path(:job_id => @job.id), :class=>"btn btn-blue btn-window btn-lrg", :remote => true do %>
+                        I'm Uninterested
+                    <% end %>
+                <% else %>
+                    <%= link_to refinery.favourite_job_path(:job_id => @job.id), :class=>"btn btn-blue btn-lrg", :remote => true do %>
+                        I'm Interested
+                    <% end %>
+                <% end %>
+              <% end %>
+              </div>
+            <% end %>
+
+            <% @jobs = @job.airline.jobs.is_active.where("id != ?", @job.id) %>
+            <% if @jobs.present? %>
+              <div class="job-index job-index-show">
+                <h3>More Jobs From Recruiter</h3>
+                <% @jobs.each do |job| %>
+                  <div class="media jobs">
+                    <div class="media-left">
+                      <%= link_to refinery.jobs_job_path(job) do %>
+                          <% if job.airline.logo.present? %>
+                              <%= image_fu job.airline.logo, '75x75#c' %>
+                          <% else %>
+                              <img src="/assets/airline-blank.jpg" width="75" height="75">
+                          <% end %>
+                      <% end %>
+                    </div>
+                    <div class="media-body">
+                      <div class="media-header">
+                        <a href="<%= refinery.jobs_job_path(job) %>" class="btn btn-green btn-window pull-right">View Listing</a>
+                        <%= job.name %>
+                      </div>
+                      <%= link_to refinery.airlines_airline_path(job.airline), class: 'btn-airline' do %>
+                          <%= job.airline.name %>
+                      <% end %>
+                      <div class="details">
+                        <table>
+                          <tr>
+                            <td>
+                              Location:
+                            </td>
+                            <td>
+                              <%= country_name(job.location) %>
+                            </td>
+                            <% if job.salary.present? %>
+                              <td>
+                                Salary:
+                              </td>
+                              <td>
+                                <%= job.salary %>
+                              </td>
+                            <% end %>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="card job-details">
+              <%= link_to refinery.airlines_airline_path(@job.airline) do %>
+                <% if @job.airline.logo.present? %>
+                    <%= image_fu @job.airline.logo, '223x223#c' %>
+                <% else %>
+                    <img src="/assets/airline-blank.jpg" width="223" height="223">
+                <% end %>
+                <h4 class="visible-xs">Posted by</h4>
+                <h3><%= @job.airline.name %></h3>
+                <!--<small>Based in Dubai</small>-->
+              <% end %>
+              <p><%= raw @job.airline.description %></p>
+              <% if current_customer.present? %>
+                  <% if customer_airline_favourite(current_customer.id, @job.airline.id, 'pilot') %>
+                      <%#= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => @job.airline.id), :class=>"btn btn-unfollow btn-lrg", :remote => true %>
+                  <% else %>
+                      <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => @job.airline.id), :class=>"btn btn-green btn-follow btn-lrg", :remote => true %>
+                  <% end %>
+              <% end %>
+            </div>
+            <% if current_airline.present? %>
+              <% favs = Favourite.where(:job_id => @job.id).first(3) %>
+              <% if favs.present? %>
+                <div class="other-candidates">
+                  <h5 class="pod-header">Candidates who are interested</h5>
+                  <% favs.each do |item| %>
+                    <div class="media side-profiles">
+                      <div class="media-left">
+                        <% if item.customer.profile_image.present? %>
+                          <a href="<%= refinery.customers_customer_path(item.customer) %>"><%= image_fu item.customer.profile_image, '40x40#c' %></a>
+                        <% else %>
+                          <a href="<%= refinery.customers_customer_path(item.customer) %>"><img src="/assets/profile-blank.jpg" width="40" height="40"></a>
+                        <% end %>
+                      </div>
+                      <div class="media-body">
+                        <%= link_to refinery.customers_customer_path(item.customer) do %>
+                          <div class="media-header">
+                          <%= item.customer.name %>
+                          </div>
+                          <%= item.customer.career_path %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                  <a href="<%= refinery.customers_customers_path(:job_id => @job.id) %>" class="btn btn-green">View All</a>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+
+
+<%= render '/refinery/content_page' %>

@@ -1,0 +1,54 @@
+<% content_for :full do %>
+    <div class="sliver-banner">
+      <div class="white-skew"></div>
+    </div>
+    <div class="container">
+      <div class="row" style="text-align: center;">
+        <div class="col-xs-12">
+          <div class="padding">
+            <h1>Confirm your email</h1>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post}) do |f| %>
+              <% if flash[:error].present? %>
+                  <p><%= flash[:error] %></p>
+              <% end %>
+              <h2>Resend confirmation email</h2>
+
+
+              <%= f.input :email, :placeholder => 'me@example.com', :label=>'Email Address' %>
+
+              <%= f.button :submit, "Resend confirmation email", :class => 'btn btn-blue btn-large' %>
+
+          <% end %>
+
+          <%- if controller_name != 'sessions' %>
+              <%= link_to "Sign in", '/' %><br />
+          <% end -%>
+
+          <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+              <%= link_to "Sign up", '/?reg_form=true' %><br />
+          <% end -%>
+
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+              <%= link_to "Forgot your password?", '/?password_form=true' %><br />
+          <% end -%>
+
+          <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+              <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+          <% end -%>
+
+          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+              <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+          <% end -%>
+
+          <%- if devise_mapping.omniauthable? %>
+              <%- resource_class.omniauth_providers.each do |provider| %>
+                  <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+              <% end -%>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+<% end -%>

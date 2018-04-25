@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Route Experience</h4>
+</div>
+<%= simple_form_for @route_experience, :url => route_experiences_path, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @route_experience.id if @route_experience.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <div class="form-group">    
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Continent Flown To/On</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :continent_flown_to, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">    
+      <div class="row">
+        <div class="col-xs-4">
+          <label>City Destinations (IATA3)</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :city_destinations, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @route_experience.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create new", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+

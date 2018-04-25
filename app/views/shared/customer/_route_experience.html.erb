@@ -1,0 +1,30 @@
+<div class="card details-card" id="route_tag">
+  <h2>Route Experiences</h2>
+  <% if current_customer.present? %>
+      <%# if @customer.route_experiences.present? %>
+          <a href="#" class="edit" data-toggle="modal" data-backdrop="static" data-target="#route_experience"><img src="/assets/edit.png"></a>
+      <%# else %>
+          <!--<a href="#" class="edit" data-toggle="modal" data-backdrop="static" data-target="#route_experience"><img src="/assets/plus.png"></a>-->
+      <%# end %>
+  <% end %>
+  <% if @customer.route_experiences.present? %>
+    <div class="details-panel">
+      <table>
+          <% @customer.route_experiences.order(:continent).each do |item| %>
+            <tr>
+              <td>
+                <%= item.continent %> -
+                <%= item.airport %>
+              </td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/route.jpg">
+        <h2>Where have you traveled to?</h2>
+        <a href="#" class="btn btn-green btn-window btn-lrg" data-backdrop="static" data-toggle="modal" data-target="#route_experience">Add Route Experience</a>
+      </div>
+  <% end %>
+</div>

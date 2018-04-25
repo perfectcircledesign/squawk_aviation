@@ -1,0 +1,27 @@
+nb:
+  refinery:
+    plugins:
+      languages:
+        title: Languages
+    languages:
+      admin:
+        languages:
+          actions:
+            create_new: Lag en ny Language
+            reorder: Endre rekkefølgen på Languages
+            reorder_done: Ferdig å endre rekkefølgen Languages
+          records:
+            title: Languages
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Languages enda. Klikk på "Lag en ny Language" for å legge til din første language.
+          language:
+            view_live_html: Vis hvordan denne language ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne language
+            delete: Fjern denne language permanent
+      languages:
+        show:
+          other: Andre Languages
+  activerecord:
+    attributes:
+      'refinery/languages/language':
+        name: Name

@@ -1,0 +1,56 @@
+es:
+  refinery:
+    plugins:
+      line_items:
+        title: Line Items
+      carts:
+        title: Carts
+    line_items:
+      admin:
+        line_items:
+          actions:
+            create_new: Crear nuevo line item
+            reorder: Reordenar line items
+            reorder_done: Reordenación de line items completada
+          records:
+            title: Line Items
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay line items todavía. Pulsa en "Crear nuevo Line Item"
+              para crear tu primer line item.
+          line_item:
+            view_live_html: Ver este line item como abierto al público <br/><em>(abre
+              en ventana nueva)</em>
+            edit: Editar este line item
+            delete: Borrar este line item para siempre
+      line_items:
+        show:
+          other: Otros line items
+    carts:
+      admin:
+        carts:
+          actions:
+            create_new: Crear nuevo cart
+            reorder: Reordenar carts
+            reorder_done: Reordenación de carts completada
+          records:
+            title: Carts
+            sorry_no_results: Lo siento, no hay resultados
+            no_items_yet: No hay carts todavía. Pulsa en "Crear nuevo Cart" para crear
+              tu primer cart.
+          cart:
+            view_live_html: Ver este cart como abierto al público <br/><em>(abre en
+              ventana nueva)</em>
+            edit: Editar este cart
+            delete: Borrar este cart para siempre
+      carts:
+        show:
+          other: Otros carts
+  activerecord:
+    attributes:
+      refinery/line_items/line_item:
+        cart_id: Cart
+        product_id: Product
+        quantity: Quantity
+      refinery/carts/cart:
+        customer_id: Customer
+        is_current: Is Current

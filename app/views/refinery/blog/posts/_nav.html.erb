@@ -1,0 +1,23 @@
+<% posts = Refinery::Blog::Post.live.where('id != ?', @post.id).order('RANDOM()').first(3) %>
+  <% if posts.present? %>
+    <div class="blogs">
+      <h1 class="text-center">You might also like</h1>
+      <div class="row">
+        <% posts.each do |post| %>
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <%= link_to refinery.blog_post_path(post) do %>
+              <div class="blog-show-index">
+                <% if post.image.present? %>
+                  <%= image_fu post.image, '375x250#c', class: 'img-responsive' %>
+                <% else %>
+                  <img src="/assets/blank-blog.gif" class="img-responsive">
+                <% end %>
+                <h3><%= post.title %></h3>
+                <p><%= t('created_at', :scope => 'refinery.blog.shared.posts', :when => l(post.published_at.to_date, :format => :short)) %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>

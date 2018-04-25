@@ -1,0 +1,41 @@
+<%= form_for(resource, :as => :customer, :url => session_path(:customer) , :html => {:id => "sign_in_customer"}, :format => :json, :remote => true ) do |f|%>
+  <%= devise_error_messages! %>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Email</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.email_field :email, :placeholder => 'Email Address', :label => false %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Password</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.password_field :password, :placeholder => 'Password', :label => false %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window" data-dismiss="modal">Close</button>
+    <%= f.submit "Sign In", :class=>"btn btn-jetcrew" %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+

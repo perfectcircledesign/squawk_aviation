@@ -1,0 +1,38 @@
+<div class="card details-card" id="logbook">
+  <h2>Logbook Files</h2>
+  <% if current_customer.present? %>
+    <a href="#" class="edit" data-toggle="modal" data-target="#file"><img src="/assets/edit.png"></a>
+  <% end %>
+  <% items = Refinery::CustomerFiles::CustomerFile.where(:customer_id => @customer.id) %>
+  <% if items.present? %>
+      <% items.each do |item| %>
+          <div class="logbook-panel">
+            <div class="logbook-header">
+              <%= item.title  %>
+              <% if current_customer.present? %>
+                <% if current_customer.present? %>
+                  <%= link_to refinery.customer_files_customer_file_path(item),
+                              :class => "cancel confirm-delete",
+                              :confirm => "Are you sure you want to delete: " + item.title,
+                              :method => :delete do %>
+                      <span aria-hidden="true" class="close">&times;</span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="image">
+              <% if item.file_mime_type.include? "image" %>
+                  <%= link_to(image_tag(item.file.url, :width => '170', :height => '110'), item.file.url) %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/logbook-state.jpg">
+        <h2>Capture your logbook and upload them here</h2>
+        <!-- <span>Upload your logbooks to back up your experience and will better improve your profile to future employers.</span> -->
+        <a href="#" class="btn btn-green btn-window btn-lrg" data-toggle="modal" data-target="#file">Upload Logbook Photo</a>
+      </div>
+  <% end %>
+</div>

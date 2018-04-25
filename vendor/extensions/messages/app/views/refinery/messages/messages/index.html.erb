@@ -1,0 +1,131 @@
+<% content_for :full do %>
+    <div class="messenger-sliver"></div>
+
+    <div class="messenger">
+      <div class="container">
+        <div class="message-header">
+          <div class="my-avatar">
+            <div class="media">
+              <% if @airline.present? %>
+                <div class="media-left">
+                  <% if @airline.logo.present? %>
+                      <%= image_fu @airline.logo, '75x75#c' %>
+                  <% else %>
+                      <img src="/assets/profile-blank.jpg" width="75" height="75">
+                  <% end %>
+                </div>
+                <div class="media-body">
+                  <%= @airline.name %>
+                </div>
+              <% elsif @customer.present? %>
+                <div class="media-left">
+                  <% if @customer.profile_image.present? %>
+                      <%= image_fu @customer.profile_image, '75x75#c' %>
+                  <% else %>
+                      <img src="/assets/profile-blank.jpg" width="75" height="75">
+                  <% end %>
+                </div>
+                <div class="media-body">
+                  <%= @customer.name %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!--Start-->
+          <div class="their-avatar"></div>
+          <!--End-->
+        </div>
+        <div class="messenger-container">
+          <ul class="message-list"  id="desktop_msg">
+           <%= render 'desktop_msg' %>
+          </ul>
+          <!--Start-->
+          <div class="live-message" id="live-message">
+            <div class="text-center blank-message">
+              <img src="assets/blank-message.png" class="center-block">
+              <h1>Welcome to the Messenger</h1>
+              <p>New messages will appear on the left</p>
+            </div>
+          </div>
+          <!--End-->
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-messenger">
+      <div class="contact-index">
+        <div class="header">
+          <h1>Messenger</h1>
+          <!-- TODO: Change links based on Airline or Pilot-->
+          <% if current_customer.present? %>
+            <div class="mobile-nav">
+              <ul>
+                <li><a href="/news_feed"><img src="/assets/feed-light.png"></a></li>
+                <li><a href="/jobs_feed"><img src="/assets/jobs-light.png"></a></li>
+                <li><a href="/messages"><img src="/assets/messaging-light.png"></a></li>
+                <li><a href="#" id="toggle-notifications-messenger"><img src="/assets/notifications-light.png"></a></li>
+                <li><a href="#" id="toggle-nav-messenger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></a></li>
+              </ul>
+            </div>
+          <% elsif current_airline.present? %>
+            <div class="mobile-nav">
+              <ul>
+                <li><a href="/airline_account"><img src="/assets/feed-light.png"></a></li>
+                <li><a href="/airline_jobs"><img src="/assets/jobs-light.png"></a></li>
+                <li><a href="/messages"><img src="/assets/messaging-light.png"></a></li>
+                <li><a href="#" id="toggle-notifications-messenger"><img src="/assets/notifications-light.png"></a></li>
+                <li><a href="#" id="toggle-nav-messenger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></a></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        <ul id="mobile_msg">
+          <%= render 'mobile_msg' %>
+
+          <!--<li class="media">-->
+            <!--<a href="#">-->
+              <!--<div class="media-left">-->
+                <!--<img src="/assets/profile-blank.jpg" width="40" height="40" class="img-circle">-->
+              <!--</div>-->
+              <!--<div class="media-body">-->
+                <!--<div class="media-header">Person Name</div>-->
+                <!--<span class="time">Yesterday</span>-->
+                <!--<p>Their message's placeholder text goes in here to see ahead</p>-->
+                <!--<span class="message-count">1</span>-->
+              <!--</div>-->
+            <!--</a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+
+      <div class="message-display">
+        <div class="header">
+          <!--START-->
+          <div class="media their_avatar_mobile"></div>
+          <!--END-->
+        </div>
+
+        <div class="message-container">
+
+        <!-- TODO: Linkup the create.js.erb jquery with these elements. Scroll to the bottom and autoexpand the textarea -->
+
+          <div class="live-message" id="live-message"></div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <script type="application/javascript">
+      $(window).load(function () {
+        <% if params[:msg_click].present? %>
+          $( ".msg_click<%= params[:msg_click] %>").trigger( "click" );
+        <% end %>
+      });
+    </script>
+
+<% end %>
+
+
+<%= render '/refinery/content_page' %>

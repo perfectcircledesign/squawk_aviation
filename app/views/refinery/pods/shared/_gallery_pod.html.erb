@@ -1,0 +1,21 @@
+<div class="side-pod gallery-pod">
+  <div id="<%= pod.name.downcase.gsub(" ",'_') + '_' +"#{ pod.id}"  %>" class="carousel slide">
+    <div class="carousel-inner">
+      <% pod.portfolio_entry.items.each do |item| %>
+        <div class="item <%= "active" if pod.portfolio_entry.items.first == item %>">
+          <%= link_to(image_fu(item.image, '360x180#c'), item.image.url, :class => "cboxElement img-responsive",:rel => 'group_' + "#{item.gallery.id}") %>
+        </div>
+      <% end if pod.portfolio_entry.present? and pod.portfolio_entry.items.present? %>
+    </div>
+    <!-- Carousel nav -->
+    <a class="left left_arrow" href="#<%= pod.name.downcase.gsub(" ",'_')  + '_' + "#{pod.id}" %>" data-slide="prev" style="position: absolute; top: 0;"><img src="/assets/prev_gal.png"></a>
+    <a class="right right_arrow" href="#<%= pod.name.downcase.gsub(" ",'_') + '_' + "#{pod.id}" %>" data-slide="next" style="position: absolute;top: 0;right: 0;"><img src="/assets/next_gal.png"></a>
+
+      <% if pod.url.present? %>
+        <div class="name"><%=link_to pod.name, pod.url %></div>
+      <% else %>
+        <div class="name"><%= pod.name %></div>
+      <% end %>
+
+  </div>
+</div>

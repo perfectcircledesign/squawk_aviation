@@ -1,0 +1,99 @@
+<% content_for :progress_image do %>
+  <%= render :partial => 'shared/progress_image', :locals => {:image_name => 'steps_3.gif'} %>
+<% end %>
+
+  <h1>Your Order</h1>
+
+  <h2>Please review your order</h2>
+
+  <div class="admin">
+    <table>
+      <th>Product</th>
+      <th class="price">Price</th>
+      <th>Qty</th>
+      <th class="price">Total</th>
+
+      <% @current_cart.line_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %> (<%= link_to('Change', refinery.categories_categories_path) %>)</td>
+          <td><%= rands(cart_item.product.price) %>.00</td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= rands(cart_item.total_price) %>.00</td>
+        </tr>
+      <% end %>
+      <tr class="cart_total_with_delivery">
+        <td>&nbsp;</td>
+        <td>&nbsp;</td> 
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr class="cart_total_with_delivery">
+        <td class="total">Grand Total</td>
+        <td class="total">&nbsp;</td>
+        <td class="total">&nbsp;</td>
+        <td class="total"><%= rands(@current_cart.grand_total) %>.00</td>
+      </tr>
+    </table>
+  </div>
+
+  <%= form_tag(refinery.orders_orders_path) do %>
+
+    <h2>How would you like to pay?</h2>
+      <!--<p>-->
+        <!--<label for="payment_eft" class="radio">-->
+          <!--<input type="radio" name="payment_type" value="EFT" id="payment_eft" />-->
+          <!--Pay Via EFT-->
+        <!--</label>-->
+      <!--</p>-->
+
+      <p>
+        <label for="payment_credit_card" class="radio">
+          <input type="radio" name="payment_type" value="Credit Card" id="payment_credit_card" />
+          Pay Online Via Credit Card
+        </label>
+      </p>
+
+    <div id="pay_via_eft_container" style="clear:both; display:none" class="form-horizontal">
+      <h2>Pay Via EFT</h2>
+
+      <p>Please note that your order will only be processed once we confirm that payment has been received.</p>
+
+      <%= raw(::Refinery::Setting.get(:eft_bank_details)) %>
+
+      <div class="form-actions">
+       <%= submit_tag 'Pay Via EFT', :class => 'btn btn-custom' %>
+      </div>
+    </div>
+
+    <div id="pay_via_credit_card_container" style="clear:both; display:none" class="form-horizontal">
+      <h2>Pay Via Credit Card</h2>
+
+      <p>You will be redirected to the PayGate website where you will be able to submit your credit card payment in a safe and secure environment.</p>
+
+      <div class="form-actions">
+        <%= submit_tag 'Pay Via Credit Card', :class => 'btn btn-custom' %>
+      </div>
+    </div>
+  <% end %>
+
+
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      init_payment_options();
+    });
+
+    function init_payment_options() {
+    <%# if params[:payment_type].present? and params[:payment_type] == 'EFT' %>
+//      show_eft_payment();
+    <%# end %>
+
+    <% if params[:payment_type].present? and params[:payment_type] == 'Credit Card' %>
+      show_credit_card_payment();
+    <% end %>
+    }
+
+  </script>
+<% end %>

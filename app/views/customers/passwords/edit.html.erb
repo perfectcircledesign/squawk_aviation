@@ -1,0 +1,16 @@
+<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+  <div class="modal-body">
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <%= f.button :submit, "Change my password", :class => 'btn btn-custom' %>
+  </div>
+<% end %>
+
+
+

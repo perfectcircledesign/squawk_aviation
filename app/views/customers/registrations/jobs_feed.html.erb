@@ -1,0 +1,141 @@
+<% content_for :outside do %>
+<div class="index">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <form accept-charset="UTF-8" action="/jobs_feed" method="get" class="submit_this_form">
+          <div class="search">
+              <input type="text" name="jobs_search" placeholder="Search for Job by Title or Keyword">
+              <a href="#" onclick="$('.submit_this_form').submit()" class="btn btn-green">Search</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="card filter">
+          <h3>Filter Jobs</h3>
+          <form action="/jobs_feed" method="get">
+            <input type="hidden" name="jobs_search" value="<%= params[:jobs_search] %>" >
+            <div class="form-group">
+              <label>Location</label>
+              <%= country_select('job','location', { include_blank: 'All Locations', :prompt => 'Select a Location', selected: (params[:job][:location] if params[:job].present?) }, :class=>"form-control") %>
+            </div>
+            <div class="form-group">
+              <label>Job Type</label>
+              <select class="form-control" name="job[career_path]">
+                <option value="">Select</option>
+                <option value="">All</option>
+                <% ::Refinery::Customers::Customer::CAREERS.each do |item| %>
+                  <option value="<%= item %>" <%= 'selected' if params[:job].present? and params[:job][:career_path].present? and params[:job][:career_path] == item %>><%= item %></option>
+                <% end %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Contract</label>
+              <select class="form-control" name="job[contract_type]">
+                <option value="">Select Contract Type</option>
+                <option value="">All</option>
+                <% ::Refinery::Jobs::Job::CONTRACTS.each do |item| %>
+                    <option value="<%= item %>" <%= 'selected' if params[:job].present? and params[:job][:contract_type].present? and params[:job][:contract_type] == item %>><%= item %></option>
+                <% end %>
+              </select>
+            </div>
+            <!--<div class="form-group">-->
+              <!--<label>Sort By</label>-->
+              <!--<select class="form-control">-->
+                <!--<option>A-Z</option>-->
+                <!--<option>Reputation</option>-->
+                <!--<option>Cargo</option>-->
+              <!--</select>-->
+            <!--</div>-->
+            <button href="#" type="submit" class="btn btn-green">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-8">
+        <div class="job-index">
+        <% if @jobs.present? %>
+          <% @jobs.each do |job| %>
+            <div class="media jobs">
+              <div class="media-left">
+                <%= link_to refinery.jobs_job_path(job) do %>
+                  <% if job.airline.logo.present? %>
+                      <%= image_fu job.airline.logo, '75x75#c' %>
+                  <% else %>
+                      <img src="/assets/airline-blank.jpg" width="75" height="75">
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <div class="media-header">
+                  <a href="<%= refinery.jobs_job_path(job) %>" class="btn btn-green btn-window pull-right">View Listing</a>
+                  <%= job.name %>
+                </div>
+                <%= link_to refinery.airlines_airline_path(job.airline), class: 'btn-airline' do %>
+                  <%= job.airline.name %>
+                <% end %>
+                <div class="details">
+                  <table>
+                    <tr>
+                      <td>
+                        Location:
+                      </td>
+                      <td>
+                        <%= country_name(job.location) %>
+                      </td>
+                      <td>
+                        Type:
+                      </td>
+                      <td>
+                        <%= job.career_path %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Salary:
+                      </td>
+                      <td>
+                        <%= job.salary %>
+                      </td>
+                      <td>
+                        Created:
+                      </td>
+                      <td>
+                        <%= job.created_at.strftime('%e %B %Y') %>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!--<div class="like">-->
+                <!--<div class="share1">-->
+                  <!--Share <a href="#"><img src="/assets/fb-color.svg"></a><a href="#"><img src="/assets/twitter-color.svg"></a><a href="#"><img src="/assets/linkedin-color.svg"></a>-->
+                <!--</div>-->
+                <!--<div class="thumb">-->
+                  <!--<%# if customer_job_favourite(current_customer.id, job.id) %>-->
+                      <!--<%#= link_to refinery.favourite_job_path(:job_id => job.id), :class=>"btn btn-blue btn-sm", :remote => true do %>-->
+                          <!--Like <i class="fa fa-thumbs-o-up"></i>-->
+                      <!--<%# end %>-->
+                  <!--<%# else %>-->
+                      <!--<%#= link_to refinery.favourite_job_path(:job_id => job.id), :class=>"btn btn-blue btn-window btn-sm", :remote => true do %>-->
+                          <!--Like <i class="fa fa-thumbs-o-up"></i>-->
+                      <!--<%# end %>-->
+                  <!--<%# end %>-->
+                <!--</div>-->
+              <!--</div>-->
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card text-center no-results">
+            <img src="/assets/search-results.png">
+            <h2>No Results Found</h2>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

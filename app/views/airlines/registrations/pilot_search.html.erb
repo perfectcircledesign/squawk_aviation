@@ -1,0 +1,180 @@
+<% content_for :search_page do %>
+
+<% end %>
+
+
+<% content_for :results_left do %>
+  <form accept-charset="UTF-8" action="/pilot_search?" class="simple_form form-horizontal" method="get">
+    <div class="search-small pane">
+      <h5><img src="/assets/search.png">Refine Search</h5>
+      <div class="search-input">
+        <label>Age</label>
+        <input type="text" class="range" value="" name="age" />
+      </div>
+      <div class="search-input">
+        <label>Nationality</label>
+        <%= country_select('customer','nationality', { include_blank: 'Select a nationality' }) %>
+      </div>
+      <div class="search-input search-check">
+        <label>MTOW > 10 Tons</label>
+        <input type="checkbox" name="more_than" value="true" id="10tons" class="check">
+        <label for="10tons" class="switch"></label>
+      </div>
+      <div class="search-input search-check">
+        <label>Turbine</label>
+        <input type="checkbox" name="turbine" value="true" id="turbine" class="check">
+        <label for="turbine" class="switch"></label>
+      </div>
+      <div class="search-input">
+        <label>P1 - Captain</label>
+        <input type="text" name="p1" placeholder="Hours">
+      </div>
+      <div class="search-input">
+        <label>P2 - First Officer</label>
+        <input type="text" name="p2" placeholder="Hours">
+      </div>
+      <div class="search-input">
+        <label>P3 - Cruise Only</label>
+        <input type="text" name="p3" placeholder="Hours">
+      </div>
+      <!--<div class="search-input">-->
+        <!--<label>Aircraft Rating</label>-->
+        <!--<select>-->
+          <!--<option>747</option>-->
+          <!--<option>Jet</option>-->
+          <!--<option>Cargo</option>-->
+        <!--</select>-->
+      <!--</div>-->
+      <button class="btn-jetcrew" type="submit">Find Pilots</button>
+      <!--<a href="#" class="btn-jetcrew">Find Pilots</a>-->
+    </div>
+  </form>
+<% end %>
+
+<% content_for :full_mid do %>
+
+  <% if @customers.present? %>
+    <div class="pane">
+      <ul class="list-unstyled">
+      <% @customers.each do |customer| %>
+        <li>
+          <%= link_to refinery.customers_customer_path(customer) do %>
+            <div class="media">
+              <div class="media-left">
+                <% if customer.profile_image.present? %>
+                  <%= image_fu customer.profile_image,"132x132#c", :class=>"img-circle verified-profile" %>
+                <% else %>
+                  <img src="/assets/profile-blank.jpg" width="132" height="132" class="img-circle verified-profile">
+                <% end %>
+                <img src="/assets/verified.png" class="verified">
+              </div>
+              <div class="media-body">
+                <h4><%= customer.first_name %> <%= customer.surname %></h4>
+                <table>
+                  <tr>
+                    <td>Employment:</td>
+                    <td>Emirates 2009 - Present</td>
+                  </tr>
+                  <tr>
+                    <td>Current Age:</td>
+                    <td><%= customer.age %></td>
+                  </tr>
+                  <tr>
+                    <td>Nationality:</td>
+                    <td><%= customer.nationality %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <% if customer.turbine %>
+                        <img src="/assets/turbine-on.jpg">
+                      <% else %>
+                        <img src="/assets/turbine.jpg">
+                      <% end %>
+                      <% if customer.more_than %>
+                        <img src="/assets/10ton-on.jpg">
+                      <% else %>
+                        <img src="/assets/10ton.jpg">
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="media-right">
+                <div class="stat">
+                  <h6>P1<br>Captain</h6>
+                  <h3><%= customer.p1.to_i %><br><small>Hours</small></h3>
+                </div>
+                <div class="stat">
+                  <h6>P2<br>First Officer</h6>
+                  <h3><%= customer.p2.to_i %><br><small>Hours</small></h3>
+                </div>
+                <div class="stat">
+                  <h6>P3<br>Cruise Only</h6>
+                  <h3><%= customer.p3.to_i %><br><small>Hours</small></h3>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+        </li>
+      <% end %>
+      <!--<li>-->
+        <!--<a href="#">-->
+          <!--<div class="media">-->
+            <!--<div class="media-left">-->
+              <!--<img src="/assets/avatar.jpg" class="img-circle">-->
+            <!--</div>-->
+            <!--<div class="media-body">-->
+              <!--<h4>Name Surname</h4>-->
+              <!--<table>-->
+                <!--<tr>-->
+                  <!--<td>Employment:</td>-->
+                  <!--<td>Emirates 2009 - Present</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>Current Age:</td>-->
+                  <!--<td>35</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td>Nationality:</td>-->
+                  <!--<td>South Africa</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td colspan="2">-->
+                    <!--<img src="/assets/turbine.jpg"><img src="/assets/10ton.jpg">-->
+                  <!--</td>-->
+                <!--</tr>-->
+              <!--</table>-->
+            <!--</div>-->
+            <!--<div class="media-right">-->
+              <!--<div class="stat">-->
+                <!--<h6>P1<br>Captain</h6>-->
+                <!--<h3>0<br><small>Hours</small></h3>-->
+              <!--</div>-->
+              <!--<div class="stat">-->
+                <!--<h6>P2<br>First Officer</h6>-->
+                <!--<h3>0<br><small>Hours</small></h3>-->
+              <!--</div>-->
+              <!--<div class="stat">-->
+                <!--<h6>P3<br>Cruise Only</h6>-->
+                <!--<h3>0<br><small>Hours</small></h3>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</a>-->
+      <!--</li>-->
+
+      </ul>
+    </div>
+  <% else %>
+  <!-- IF NO PILOTS FOUND -->
+  <div class="pane no-results">
+    <img src="/assets/paper-plane.png" class="center-block">
+    <h3 class="text-center">No Results Found</h3>
+    <p class="text-center">Try refining your search and try again</p>
+  </div>
+  <!-- END -->
+  <% end %>
+<% end %>
+
+<%= render '/refinery/content_page' %>

@@ -1,0 +1,331 @@
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="search_path text-center">
+          <div class="hidden">
+            <img src="assets/pilot-white.png">
+            <img src="assets/cabin_crew-white.png">
+            <img src="assets/aircraft_maintenance-white.png">
+            <img src="assets/pilot-blue.png">
+            <img src="assets/cabin_crew-blue.png">
+            <img src="assets/aircraft_maintenance-blue.png">
+          </div>
+          <ul>
+            <li>
+              <input type="radio" class="career_path" name="career_path" data-value="pilot" value="Pilot" id="pilot_path">
+              <label for="pilot_path" class="pilot_label">Pilot</label>
+            </li>
+            <li>
+              <input type="radio" class="career_path" name="career_path" data-value="cabin_crew" value="Cabin Crew" id="crew_path">
+              <label for="crew_path" class="cabin_crew_label">Cabin Crew</label>
+            </li>
+            <li>
+              <input type="radio" class="career_path" name="career_path" data-value="aircraft_maintenance" value="Aircraft Maintenance" id="maintenance_path">
+              <label for="maintenance_path" class="aircraft_maintenance_label">Maintenance</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="all_paths pilot">
+      <div class="search-fields">
+        <form accept-charset="UTF-8" action="/customers" class="simple_form form-horizontal" method="get">
+          <input type="hidden" class="career_field" value="" name="career_path" />
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label>Age</label>
+                <div class="range-input">
+                  <input type="text" class="age_range" value="" name="age_range" />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label>Total Flying Hours</label>
+                <div class="range-input">
+                  <input type="text" class="flying_hours_range" value="" name="flying_hours_range" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Aircraft</label>
+                <select name="aircraft_type" class="form-control">
+                  <option value="">All Aircraft</option>
+                  <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                      <option value="<%= item.id %>"><%= item.name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+
+            <div class="all_advanced pilot_advanced">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label>P1 - Captain</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p1" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p1" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>P2 - First Officer</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p2" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p2" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>P3 - Cruise Only</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p3" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p3" class="form-control">-->
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', { include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group language-select">
+                  <label>Language</label>
+                  <select name="languages[]" class="form-control" id="example-getting-started" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                  <script type="application/javascript">
+                      $(function() {
+                          $('#example-getting-started').multiselect({
+                              nonSelectedText: 'Please Select Languages'
+                          });
+                      });
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <a class="pilot_adv btn btn-window">Show Advanced Search</a><button type="submit" class="btn btn-green">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="all_paths cabin_crew">
+      <div class="search-fields">
+        <form accept-charset="UTF-8" action="/customers" class="simple_form form-horizontal" method="get">
+          <input type="hidden" class="career_field" value="" name="career_path" />
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label>Age</label>
+                <div class="range-input">
+                  <input type="text" class="age_range" value="" name="age_range" />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label>Total Flying Hours</label>
+                <div class="range-input">
+                  <input type="text" class="flying_hours_range" value="" name="flying_hours_range" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Aircraft</label>
+                <select name="aircraft_type" class="form-control">
+                  <option value="">All Aircraft</option>
+                  <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                      <option value="<%= item.id %>"><%= item.name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+
+            <div class="all_advanced cabin_advanced">
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label>Flight Attendant</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p1" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p1" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Purser</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p2" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p2" class="form-control">-->
+                </div>
+                <div class="form-group">
+                  <label>Chief Purser</label>
+                  <div class="range-input">
+                    <input type="text" class="ex_range" value="" name="p3" />
+                  </div>
+                  <!--<input type="text" placeholder="minimum hours" name="p3" class="form-control">-->
+                </div>
+
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', { include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group language-select">
+                  <label>Language</label>
+                  <select name="languages[]" class="form-control" id="example-getting" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                  <script type="application/javascript">
+                      $(function() {
+                          $('#example-getting').multiselect({
+                              nonSelectedText: 'Please Select Languages'
+                          });
+                      });
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <a class="cabin_adv btn btn-window">Show Advanced Search</a><button type="submit" class="btn btn-green">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="all_paths aircraft_maintenance">
+      <div class="search-fields">
+        <form accept-charset="UTF-8" action="/customers" class="simple_form form-horizontal" method="get">
+          <input type="hidden" class="career_field" value="" name="career_path" />
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="form-group">
+                <label>Age</label>
+                <div class="range-input">
+                  <input type="text" class="age_range" value="" name="age_range" />
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Total On the Job Hours</label>
+                <div class="range-input">
+                  <input type="text" class="flying_hours_range" value="" name="flying_hours_range" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Aircraft</label>
+                <select name="aircraft_type" class="form-control">
+                  <option value="">All Aircraft</option>
+                  <% ::Refinery::Aircrafts::Aircraft.order(:name).all.each do |item| %>
+                      <option value="<%= item.id %>"><%= item.name %></option>
+                  <% end %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Licences</label>
+                <select name="licence_type" class="form-control">
+                  <option value="">All Licences</option>
+                  <% MaintenanceCertification::TYPES.each do |item| %>
+                      <option value="<%= item %>"><%= item %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+
+            <div class="all_advanced eng_advanced">
+              <div class="col-xs-12 col-sm-offset-6 col-sm-6">
+                <div class="form-group">
+                  <label>Keyword Search</label>
+                  <input name="general" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Nationality</label>
+                  <%= country_select('customer','nationality', { include_blank: 'All Nationalities' }, :class=>"form-control") %>
+                </div>
+                <div class="form-group language-select">
+                  <label>Language</label>
+                  <select name="languages[]" class="form-control" id="example2" multiple="multiple">
+                    <% ::Refinery::Languages::Language.all.each do |item| %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                    <% end %>
+                  </select>
+                  <script type="application/javascript">
+                      $(function() {
+                          $('#example2').multiselect({
+                              nonSelectedText: 'Please Select Languages'
+                          });
+                      });
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <a class="eng_adv btn btn-window">Show Advanced Search</a><button type="submit" class="btn btn-green">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+<script type="application/javascript">
+    $('.all_paths').hide();
+    $('.all_paths.pilot').hide();
+    $('.all_advanced').hide();
+
+    $('.career_path').click(function() {
+        $('.all_paths').hide();
+
+        var career = $(this).data('value');
+        $('.'+ career).show();
+        $('.career_field').val($(this).val());
+    });
+
+    $('.pilot_adv').click(function(){
+        $('.pilot_advanced').toggle();
+        if($(this).html() == 'Show Advanced Search'){
+          $(this).html('Hide Advanced Search')
+        }else{
+          $(this).html('Show Advanced Search')
+        }
+    });
+
+    $('.cabin_adv').click(function(){
+        $('.cabin_advanced').toggle();
+        if($(this).html() == 'Show Advanced Search'){
+            $(this).html('Hide Advanced Search')
+        }else{
+            $(this).html('Show Advanced Search')
+        }
+    });
+
+    $('.eng_adv').click(function(){
+        $('.eng_advanced').toggle();
+        if($(this).html() == 'Show Advanced Search'){
+            $(this).html('Hide Advanced Search')
+        }else{
+            $(this).html('Show Advanced Search')
+        }
+    });
+
+</script>
+
+

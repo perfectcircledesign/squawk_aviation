@@ -1,0 +1,9 @@
+<h1>Order successful</h1>
+
+<h2>Your order number is <%= @order.order_number %></h2>
+
+<p>Thank you for your order.</p>
+
+<p>We have sent an email to your email address (<%= @order.customer.email %>) confirming your order. If you like, you can track the status of your order in your <a href="/account">order history</a>.</p>
+
+<p>Please feel free to <a href="/contact">contact us</a> if you have any questions.</p>

@@ -1,0 +1,75 @@
+<% content_for :body_content_title do %>
+  <%= @invoice.invoice_number %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Invoice Number</h1>
+    <p>
+      <%=raw @invoice.invoice_number %>
+    </p>
+  </section>
+  <section>
+    <h1>Trans Number</h1>
+    <p>
+      <%=raw @invoice.trans_number %>
+    </p>
+  </section>
+  <section>
+    <h1>Sub Type</h1>
+    <p>
+      <%=raw @invoice.sub_type %>
+    </p>
+  </section>
+  <section>
+    <h1>Start Date</h1>
+    <p>
+      <%=raw @invoice.start_date %>
+    </p>
+  </section>
+  <section>
+    <h1>End Date</h1>
+    <p>
+      <%=raw @invoice.end_date %>
+    </p>
+  </section>
+  <section>
+    <h1>Price Dollar</h1>
+    <p>
+      <%=raw @invoice.price_dollar %>
+    </p>
+  </section>
+  <section>
+    <h1>Price Rand</h1>
+    <p>
+      <%=raw @invoice.price_rand %>
+    </p>
+  </section>
+  <section>
+    <h1>Card Last Digits</h1>
+    <p>
+      <%=raw @invoice.card_last_digits %>
+    </p>
+  </section>
+  <section>
+    <h1>Customer</h1>
+    <p>
+      <%=raw @invoice.customer_id %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="invoices">
+      <% @invoices.each do |invoice| %>
+        <li>
+          <%= link_to invoice.invoice_number, refinery.invoices_invoice_path(invoice) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

@@ -1,0 +1,101 @@
+<%= form_for(resource, :as => :customer, :url => registration_path(:customer), :html => {:id => "sign_up_customer"}, :format => :json, :remote => true ) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>First Name</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :first_name, :placeholder => 'First Name', :label => false  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Surname</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :surname, :placeholder => 'Surname', :label => false  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Cell Number</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :contact_number, :placeholder => 'Contact Number', :label => false  %>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-3">-->
+          <!--<label>Other Contact Number</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-9">-->
+          <!--<%#= f.text_field :other_number, :placeholder => 'Other Contact Number', :label => false  %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Email</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.email_field :email, :placeholder => 'Email Address', :label => false %>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-3">-->
+          <!--<label>Career Path</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-9">-->
+          <!--<%#= f.select :career_path, ::Refinery::Customers::Customer::CAREERS %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Password</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.password_field :password, :placeholder => 'Password', :label => false  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Retype Password</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.password_field :password_confirmation, :placeholder => 'Password Confirmation', :label => false  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>T's & C's</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.check_box :agree_tc, :class=>"boolean optional hidden" %>
+          <label for="customer_agree_tc" class="form-checkbox modal-checkbox"></label><span class="small-text">
+                  I have read and understand the <a href="<%= copywriting('Terms and Conditions', {:phrase_type => 'string', :scope => 'Customer Reg', :default => 'URL here' }) %>" target="_blank">Terms and Conditions</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-green btn-window" data-dismiss="modal">Close</button>
+    <%= f.submit "Sign Up", :class=>"btn btn-green" %>
+  </div>
+<% end %>

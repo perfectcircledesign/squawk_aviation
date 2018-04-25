@@ -1,0 +1,60 @@
+<div class="card details-card" id="employment_tag">
+  <h2>Employment History</h2>
+  <% if current_customer.present? %>
+    <%= link_to load_new_form_path(type:"aviation_record", method_type: :post), class:"edit", remote:true, :data => {:backdrop => 'static'} do %>
+        <img src="/assets/edit.png">
+    <% end %>
+  <% end %>
+  <% if @customer.aviation_records.present? %>
+      <% @customer.aviation_records.each do |item| %>
+          <div class="details-panel">
+            <h6><%= item.employer %></h6>
+            <% if current_customer.present? %>
+              <%= link_to load_new_form_path(type:"aviation_record", id: item.id, method_type: :put), class:"btn-edit", remote:true, :data => {:backdrop => 'static'} do %>
+                  <img src="/assets/edit.png" width="10" height="10">
+              <% end %>
+              <%= link_to aviation_records_path(id:item.id),
+                          :class => "btn-delete",
+                          :confirm => "Are you sure you want to delete: " + "#{item.employer}",
+                          :method => :delete do %>
+                  <span aria-hidden="true" class="close">&times;</span>
+              <% end %>
+            <% end %>
+            <table>
+              <tr>
+                <td>
+                  Start Date:
+                </td>
+                <% if item.start_date.present? %>
+                    <td><%= item.start_date.strftime("%d/%m/%Y") %></td>
+                <% end %>
+                <% if item.end_date.present? %>
+                    <td>
+                      End Date:
+                    </td>
+                    <td><%= item.end_date.strftime("%d/%m/%Y") %></td>
+                <% end %>
+              </tr>
+              <tr>
+                <% if item.position_held.present? %>
+                    <td>
+                      Position Held:
+                    </td>
+                    <td><%= item.position_held %></td>
+                <% end %>
+              </tr>
+            </table>
+            <% if item.reason_for_leaving.present? %>
+                <strong>Reason for leaving</strong>
+                <%= raw item.reason_for_leaving %>
+            <% end %>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/employment.jpg">
+        <h2>Where have you worked before?</h2>
+        <%= link_to 'Add Employment History', load_new_form_path(type:"aviation_record", method_type: :post), class:"btn btn-green btn-window btn-lrg", remote:true, :data => {:backdrop => 'static'} %>
+      </div>
+  <% end %>
+</div>

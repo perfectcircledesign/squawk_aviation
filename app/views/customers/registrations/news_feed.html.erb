@@ -1,0 +1,173 @@
+<%= content_for :left do %>
+  <%= render '/shared/customer/side_panel' -%>
+<% end %>
+
+<% content_for :middle do %>
+  <div class="col-xs-12 col-md-6">
+    <% if @all_items.present? %>
+      <% @all_items.each do |item| %>
+        <% if item.article.present? %>
+          <div class="card">
+            <div class="media">
+              <div class="media-left">
+                <%= link_to refinery.airlines_airline_path(item.airline) do %>
+                  <% if item.article.airline.logo.present? %>
+                    <%= image_fu item.article.airline.logo, '40x40#c' %>
+                  <% else %>
+                    <img src="/assets/airline-blank.jpg" width="40" height="40">
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to refinery.airlines_airline_path(item.airline) do %>
+                  <div class="media-header"><%= item.article.airline.name %> <span>- <%= time_ago_in_words(item.article.created_at) %> ago</span></div>
+                  <div class="media-title"><%= item.article.name %></div>
+                <% end %>
+              </div>
+            </div>
+            <!--<div class="article-header">-->
+              <!--<%#= item.article.name %>-->
+            <!--</div>-->
+            <div class="post-content">
+                <div><%= truncate(item.article.body, :length => 260, :omission => '...') %><a href='#' class='read_more_content'>Read More</a></div>
+                <div class="hide_this_tag"><%= item.article.body %></div>
+            </div>
+            <% if item.article.image.present? %>
+              <%= link_to refinery.articles_article_path(item.article) do %>
+                <%= image_fu item.article.image, '515x266#c', :class => 'img-responsive post-image' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% elsif item.job.present? and item.job.is_active? %>
+          <div class="card">
+            <div class="media">
+              <div class="media-left">
+              <%= link_to refinery.airlines_airline_path(item.job.airline) do %>
+                <% if item.job.airline.logo.present? %>
+                  <%= image_fu item.job.airline.logo, '50x50#c' %>
+                <% else %>
+                  <img src="/assets/airline-blank.jpg" width="40" height="40">
+                <% end %>
+              <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to refinery.airlines_airline_path(item.job.airline) do %>
+                  <div class="media-header"><%= item.job.airline.name %> <span>- <%= time_ago_in_words(item.job.created_at) %> ago</span></div>
+                  <!--<div class="media-title">Article Title</div>-->
+                  <%= 'Based in ' + country_name(item.job.location) if item.job.location.present? %>
+                <% end %>
+              </div>
+              <div class="media-right">
+                <%= link_to 'Follow',refinery.favourite_job_path(:job_id => item.job.id), :class=>"btn btn-green btn-sm btn-window pull-right", :remote => true %>
+              </div>
+            </div>
+            <div class="job-header">
+              <h3><%= item.job.name %></h3>
+              <%= raw item.job.description %>
+            </div>
+            <div class="job-description">
+              <div class="benefits">
+                <h6>Benefits Include:</h6>
+                <ul class="list-unstyled">
+                  <%= raw item.job.benefits %>
+                </ul>
+              </div>
+              <div class="requirements">
+                <h6>Requirements:</h6>
+                <ul class="list-unstyled">
+                  <%= raw item.job.requirements %>
+                </ul>
+              </div>
+            </div>
+            <div class="job-button">
+              <%= link_to 'View listing', refinery.jobs_job_path(item.job), :class=>"btn btn-blue" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="card blank-state">
+        <h3>Your Feed is empty</h3>
+        <h6>You are not following any airlines yet</h6>
+        <a href="/airlines" class="btn btn-window btn-green">View Airlines</a>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :right do %>
+  <div class="col-xs-12 col-md-3">
+    <!--<div class="card upgrade-card">-->
+      <!--<h3>Upgrade to Pro</h3>-->
+      <!--<ul class="list-unstyled">-->
+        <!--<li>Lorem dolor <span>sit amet</span></li>-->
+        <!--<li>Aenean viverra <span>consectetur</span></li>-->
+        <!--<li>Mauris condimentum <span>id sapien</span></li>-->
+      <!--</ul>-->
+      <!--<a href="#" class="btn-green btn">Go Pro</a>-->
+    <!--</div>-->
+    <div class="dashboard-jobs">
+      <h5 class="pod-header">Suggested Airlines</h5>
+      <% if @not_favourite_airlines.present? %>
+        <% @not_favourite_airlines.limit(6).each do |airline| %>
+          <div class="media side-profiles">
+            <div class="media-left">
+              <%= link_to refinery.airlines_airline_path(airline) do %>
+                <% if airline.logo.present? %>
+                    <%= image_fu airline.logo, '40x40#c' %>
+                <% else %>
+                  <img src="/assets/airline-blank.jpg" width="40" height="40">
+                <% end %>
+              <% end %>
+            </div>
+            <div class="media-body">
+              <%= link_to refinery.airlines_airline_path(airline) do %>
+                <div class="media-header">
+                  <%= airline.name %>
+                </div>
+              <% end %>
+            </div>
+            <div class="media-right">
+              <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => airline.id), :class=>"btn btn-green btn-sm btn-window pull-right", :remote => true %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <a href="/airlines" class="view">View All</a>
+    </div>
+    <div class="dashboard-jobs">
+      <h5 class="pod-header">Latest Jobs</h5>
+      <% if @jobs.present? %>
+        <% @jobs.each do |job| %>
+          <div class="media side-profiles">
+            <div class="media-left">
+              <%= link_to refinery.jobs_job_path(job) do %>
+                <% if job.airline.logo.present? %>
+                  <%= image_fu job.airline.logo, '40x40#c' %>
+                <% else %>
+                  <img src="/assets/airline-blank.jpg" width="40" height="40">
+                <% end %>
+              <% end %>
+            </div>
+            <div class="media-body">
+              <%= link_to refinery.jobs_job_path(job) do %>
+                <div class="media-header">
+                  <%= job.name %>
+                </div>
+                <%= job.airline.name %>
+              <% end %>
+            </div>
+            <div class="media-right">
+              <%= link_to 'View', refinery.jobs_job_path(job), :class=>"btn btn-green btn-sm btn-window pull-right" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <a href="/jobs_feed" class="view">View All</a>
+    </div>
+    <!-- <div class="advert">
+      <a href="#"><img src="/assets/advert.jpg" class="img-responsive"></a>
+    </div> -->
+  </div>
+<% end %>
+

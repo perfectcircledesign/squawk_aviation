@@ -1,0 +1,29 @@
+en:
+  refinery:
+    plugins:
+      aircrafts:
+        title: Aircrafts
+    aircrafts:
+      admin:
+        aircrafts:
+          actions:
+            create_new: Add New Aircraft
+            reorder: Reorder Aircrafts
+            reorder_done: Done Reordering Aircrafts
+          records:
+            title: Aircrafts
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Aircrafts yet. Click "Add New Aircraft" to add your first aircraft.
+          aircraft:
+            view_live_html: View this aircraft live <br/><em>(opens in a new window)</em>
+            edit: Edit this aircraft
+            delete: Remove this aircraft forever
+      aircrafts:
+        show:
+          other: Other Aircrafts
+  activerecord:
+    attributes:
+      'refinery/aircrafts/aircraft':
+        name: Name
+        weight: Weight
+        engine: Engine

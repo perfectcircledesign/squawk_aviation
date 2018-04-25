@@ -1,0 +1,29 @@
+fr:
+  refinery:
+    plugins:
+      aircrafts:
+        title: Aircrafts
+    aircrafts:
+      admin:
+        aircrafts:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Aircraft
+            reorder: Réordonner les Aircrafts
+            reorder_done: Fin de réordonnancement des Aircrafts
+          records:
+            title: Aircrafts
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Aircraft. Cliquer sur "Créer un(e) nouve(au/l/lle) Aircraft" pour créer votre premi(er/ère) aircraft.'
+          aircraft:
+            view_live_html: Voir ce(t/tte) aircraft <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) aircraft
+            delete: Supprimer définitivement ce(t/tte) aircraft
+      aircrafts:
+        show:
+          other: Autres Aircrafts
+  activerecord:
+    attributes:
+      'refinery/aircrafts/aircraft':
+        name: Name
+        weight: Weight
+        engine: Engine

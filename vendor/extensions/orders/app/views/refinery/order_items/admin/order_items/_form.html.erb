@@ -1,0 +1,53 @@
+<%= form_for [refinery, :order_items_admin, @order_item] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @order_item,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%= f.label :product_name -%>
+    <%= f.text_field :product_name, :class => 'larger widest'  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :product_stock_code -%>
+    <%= f.text_field :product_stock_code  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :product_supplier_stock_code -%>
+    <%= f.text_field :product_supplier_stock_code  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :price -%>
+    <%= f.text_field :price  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :order_id -%>
+    <%= f.number_field :order_id  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :quantity -%>
+    <%= f.number_field :quantity  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :total -%>
+    <%= f.text_field :total  -%>
+
+  </div>
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.order_items.admin.order_items.order_item'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @order_item.product_name) %>
+<% end -%>

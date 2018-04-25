@@ -1,0 +1,35 @@
+nl:
+  refinery:
+    plugins:
+      invoices:
+        title: Invoices
+    invoices:
+      admin:
+        invoices:
+          actions:
+            create_new: Maak een nieuwe Invoice
+            reorder: Wijzig de volgorde van de Invoices
+            reorder_done: Klaar met het wijzingen van de volgorde van de Invoices
+          records:
+            title: Invoices
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Invoices. Druk op 'Maak een nieuwe Invoice' om de eerste aan te maken.
+          invoice:
+            view_live_html: Bekijk deze invoice op de website <br/><em>(opent een nieuw venster)</em>
+            edit: Bewerk deze invoice
+            delete: Verwijder deze invoice voor eeuwig
+      invoices:
+        show:
+          other: Andere Invoices
+  activerecord:
+    attributes:
+      'refinery/invoices/invoice':
+        invoice_number: Invoice Number
+        trans_number: Trans Number
+        sub_type: Sub Type
+        start_date: Start Date
+        end_date: End Date
+        price_dollar: Price Dollar
+        price_rand: Price Rand
+        card_last_digits: Card Last Digits
+        customer_id: Customer

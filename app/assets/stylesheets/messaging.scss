@@ -1,0 +1,162 @@
+@import 'application';
+@import 'dashboard';
+
+.messenger {padding: 1.25em 0; margin-top: -200px;
+	.message-header {display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex;  display: flex; background-color: #eeeeee; position: relative; box-shadow: 0px 5px 30px rgba(0,0,0,0.2); border-top-right-radius: 5px; border-top-left-radius: 5px;
+		.my-avatar {-webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; max-width: 360px; border-right: 1px solid #d7d2cf;}
+		.my-avatar, .their-avatar {
+			.media {padding: 20px 15px;}
+			.media-left {img {border-radius: 100%; width: 75px; height: 75px; border: 2px solid #fff;}}
+			.media-left, .media-body {vertical-align: middle; color: $bodydark; font-weight: 700;}
+		}
+		.their-avatar {-webkit-box-flex: 2; -webkit-flex: 2; -ms-flex: 2; flex: 2;
+			.media-right {white-space: nowrap; vertical-align: middle;
+				a {display: inline-block; margin: 0 10px; font-size: 1.7em; color: $body;}
+			}
+		}
+		&:before {display: block; content: ''; width: 100%; height: 10px; flex: none; position: absolute; bottom: -10px; z-index: 1049;
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+		}
+	}
+	.messenger-container {display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex;  display: flex; max-height: 700px; box-shadow: 0px 5px 30px rgba(0,0,0,0.2); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;  height: 100vh;
+		.message-list {padding-left: 0; list-style: none; -webkit-box-flex: 1 1 auto; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; max-width: 360px; background-color: #fff; overflow-y: scroll; margin-bottom: 0; border-bottom-left-radius: 5px;
+			.avatar {vertical-align: middle; padding: 20px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer;
+				.media-left {
+					img {border-radius: 100%; height: 50px; width: 50px;}
+				}
+				.media-body {font-size: 14px; position: relative;
+					.media-header {color: $bodydark; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+					.time {color: #aaa; font-weight: 300; position: absolute; right: 0; top: 5px; font-size: 12px;}
+					.message {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 240px; color: $body}
+				}
+				.media-left, .media-body, .media-right {vertical-align: middle;}
+			}
+
+		}
+		.live-message {background: #d7d2cf url(/assets/plane-pattern.jpg) repeat; -webkit-box-flex: 2; -webkit-flex: 2; -ms-flex: 2; flex: 2; position: relative; display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex;  display: flex; flex-direction: column; border-bottom-right-radius: 5px;
+			.blank-message {padding: 50px 20px;
+				h1 {color: $body; margin-bottom: 0; font-size: 2em;}
+			}
+			.messages {overflow-y: scroll; -webkit-box-flex: 1 1 auto; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; padding: 1.25em;
+				ul {padding: 0; margin: 0; list-style: none;}
+				.user-message, .airline-message {list-style: none; margin-top: 1em;
+					.message {border-radius: 5px; padding: 10px 10px 20px; text-align: left; display: inline-block;  position: relative; min-width: 150px;
+						span {position: absolute; bottom: 5px; right: 5px; font-size: 0.75em; opacity: 0.7}
+					}
+				} 
+				.user-message {text-align: right;
+					.message {color: $body; background-color: #fff;
+						&:after {content: ''; display: block; background: url(/assets/user-message.png); width: 10px; height: 9px; right: -10px; bottom: 5px; position: absolute;}
+					}
+				}
+				.airline-message {text-align: left;
+					.message {color: white; background-color: $blue;
+						&:after {content: ''; display: block; background: url(/assets/airline-message.png); width: 10px; height: 9px; left: -10px; bottom: 5px; position: absolute;}
+					}
+				}
+			}
+			.reply {padding: 1.25em; background-color: #fff; position: relative; border-bottom-right-radius: 5px;
+				textarea {display:block; box-sizing: padding-box; resize: none; padding: 0.75em 1.25em 0.75em 0.75em; overflow-x: hidden; max-height: 200px;}
+				button {position: absolute; right: 2em; bottom: 2em; border: none; background-color: transparent;}
+			}
+		}
+	}
+}
+
+.messenger-sliver {background: url(/assets/home-bg.jpg); height: 200px;}
+
+.unread_count {width: 18px; height: 18px; background: $green; color: white; position: absolute; display: block; right: 0; top: 25px; text-align: center; border-radius: 100%; line-height: 18px;}
+
+.mobile-messenger {background-color: #fff; position: fixed; top:0; width: 100%; height: 100%; z-index: 90; display: none;
+	.header {background-color: $blue; padding: 1.25em 1.25em 10px; position: relative;
+		h1 {color: #fff; margin: 0; margin-bottom: 10px;}
+		&:before {display: block; content: ''; width: 100%; height: 10px; flex: none; position: absolute; bottom: -10px; z-index: 1049; left: 0;
+			background: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+		}
+		.mobile-nav {margin: 0; background: $blue; margin: 0 -1.25em;
+			.bar {background-color: #fff;}
+		}
+	}
+	.contact-index {
+		ul {padding: 0; list-style: none;
+			li {padding: 10px;
+				.media-body, .media-left {vertical-align: middle;}
+				.media-body {border-bottom: 1px solid #dadada; color: $body; position: relative;
+					.media-header {color: $bodydark; font-weight: 700; font-size: 1em; position: relative; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 260px;}
+					.time {color: #aaa; font-weight: 300; position: absolute; right: 0; top: 5px;}
+					p {overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 240px; color: $body}
+					.message-count {position: absolute; right: 0; background-color: $green; border-radius: 100%; color: #fff; display: block; width:20px; height: 20px; bottom: 5px; text-align: center;}
+				}
+			}
+		}
+	}
+	.message-display {background: #d7d2cf url(/assets/plane-pattern.jpg) repeat; display: none; flex-direction: column; height: 100%;
+		.header { padding: 11px 1.25em;
+			[class*="media-"] {vertical-align: middle};
+			h2 {color: #fff; margin-bottom: 0}
+			#message-back {color: #fff;}
+		}
+		.message-container {display: flex; display: -webkit-flex; flex-direction: column; height: 100%; flex: 1 1 auto;
+			#live-message {display: flex; flex-direction: column; height: 100%;}
+			.messages {flex: 1 1 auto; padding: 20px; overflow-y: scroll;
+				ul {padding: 0; margin: 0; list-style: none;}
+				.user-message, .airline-message {list-style: none; margin-top: 1em;
+					.message {border-radius: 5px; padding: 10px 10px 20px; text-align: left; display: inline-block;  position: relative; min-width: 150px;
+						span {position: absolute; bottom: 5px; right: 5px; font-size: 0.75em; opacity: 0.7}
+					}
+				} 
+				.user-message {text-align: right;
+					.message {color: $body; background-color: #fff;
+						&:after {content: ''; display: block; background: url(/assets/user-message.png); width: 10px; height: 9px; right: -10px; bottom: 5px; position: absolute;}
+					}
+				}
+				.airline-message {text-align: left;
+					.message {color: white; background-color: $blue;
+						&:after {content: ''; display: block; background: url(/assets/airline-message.png); width: 10px; height: 9px; left: -10px; bottom: 5px; position: absolute;}
+					}
+				}
+			}
+			.reply {padding: 1.25em; background-color: #fff; position: relative; border-bottom-right-radius: 5px;
+				textarea {display:block; box-sizing: padding-box; resize: none; padding: 0.75em 1.25em 0.75em 0.75em; overflow-x: hidden; max-height: 200px;}
+				button {position: absolute; right: 2em; bottom: 2em; border: none; background-color: transparent;}
+			}
+		}
+	}
+	.message-view {display: flex; display: -webkit-flex;}
+}
+
+#mobile_msg {
+	.blank-message {padding: 50px 20px;
+				h1 {color: $body; margin-bottom: 0; font-size: 2em;}
+	}
+}
+
+//Tiny
+@media (max-width:576px) {
+
+}
+
+//Extra Small
+@media (max-width: 767px) {
+	.messenger-sliver, .messenger {display: none;}
+	.mobile-messenger {display: block;}
+}
+
+//Small
+@media (max-width: 991px) {
+}
+
+//Medium
+@media (max-width:1199px) {
+	
+}
+//Large
+@media (min-width: 1200px) { 
+
+}

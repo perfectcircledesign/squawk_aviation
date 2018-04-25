@@ -1,0 +1,39 @@
+<% content_for :body_content_title do %>
+  <%= @employer.name %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Name</h1>
+    <p>
+      <%=raw @employer.name %>
+    </p>
+  </section>
+  <section>
+    <h1>Image</h1>
+    <p>
+      <%= image_fu @employer.image, nil %>
+    </p>
+  </section>
+  <section>
+    <h1>Url</h1>
+    <p>
+      <%=raw @employer.url %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="employers">
+      <% @employers.each do |employer| %>
+        <li>
+          <%= link_to employer.name, refinery.employers_employer_path(employer) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

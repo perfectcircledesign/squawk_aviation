@@ -1,0 +1,99 @@
+<% content_for :body_content_title do %>
+
+<% end %>
+
+<% content_for :full do %>
+<div class="article-show">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-9">
+        <div class="card">
+          <% if @article.image.present? %>
+            <%= image_fu @article.image, '808x508#c', :class=>"img-responsive" %>
+          <% end %>
+          <h1><%= @article.name %></h1>
+          <div class="date"><%= @article.created_at.strftime('%e %B %Y') %><br>
+            <% if @article.url.present? %>
+                Source: <a href="<%= @article.url %>"><%= @article.url %></a>
+            <% end %>
+          </div>
+          <p><%= raw @article.body %></p>
+          <!--<div class="comments">-->
+            <!--<div class="comment">-->
+              <!--<div class="media">-->
+                <!--<div class="media-left">-->
+                  <!--<img src="images/profile-pic.jpg">-->
+                <!--</div>-->
+                <!--<div class="media-body">-->
+                  <!--<div class="media-header">Dewald Pienaar</div>-->
+                  <!--Duis nec efficitur lectus. Nunc blandit sapien at egestas pulvinar. Fusce cursus eleifend lacus a cursus. Vivamus sed fringilla diam, id viverra felis. Nunc sit amet elementum nibh. Nullam et lorem at quam elementum pharetra. Nullam diam neque, finibus nec elit id, tristique egestas massa. Fusce facilisis accumsan pretium. Donec ac imperdiet lectus.-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="comment">-->
+              <!--<div class="media">-->
+                <!--<div class="media-left">-->
+                  <!--<img src="images/profile-pic.jpg">-->
+                <!--</div>-->
+                <!--<div class="media-body">-->
+                  <!--<div class="media-header">Dewald Pienaar</div>-->
+                  <!--Duis nec efficitur lectus. Nunc blandit sapien at egestas pulvinar. Fusce cursus eleifend lacus a cursus. Vivamus sed fringilla diam, id viverra felis. Nunc sit amet elementum nibh. Nullam et lorem at quam elementum pharetra. Nullam diam neque, finibus nec elit id, tristique egestas massa. Fusce facilisis accumsan pretium. Donec ac imperdiet lectus.-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="comment-input">-->
+              <!--<div class="profile">-->
+                <!--<img src="images/profile-pic.jpg">-->
+              <!--</div>-->
+              <!--<div class="input">-->
+                <!--<input placeholder="Comment">-->
+                <!--<a href="#"><img src="images/send.png"></a>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="card article-details">
+          <%= link_to refinery.airlines_airline_path(@article.airline) do %>
+            <% if @article.airline.logo.present? %>
+              <%= image_fu @article.airline.logo, '223x223#c' %>
+            <% else %>
+              <img src="/assets/profile-blank.jpg" width="223" height="223">
+            <% end %>
+            <h3><%= @article.airline.name %></h3>
+            <!--<small>Based in Dubai</small>-->
+          <% end %>
+          <p><%= raw @article.airline.description %></p>
+          <% if current_customer.present? %>
+              <% if customer_airline_favourite(current_customer.id, @article.airline.id, 'pilot') %>
+                  <%= link_to 'Unfollow',refinery.favourite_airline_path(:airline_id => @article.airline.id), :class=>"btn btn-unfollow btn-lrg", :remote => true %>
+              <% else %>
+                  <%= link_to 'Follow',refinery.favourite_airline_path(:airline_id => @article.airline.id), :class=>"btn btn-green btn-follow btn-lrg", :remote => true %>
+              <% end %>
+          <% end %>
+          <hr>
+          <div class="share1">
+            <h4>Share this now</h4>
+            <div id="article_share"></div>
+            <!--<a href="#">-->
+              <!--<img src="/assets/fb-color.svg">-->
+            <!--</a>-->
+            <!--<a href="#">-->
+              <!--<img src="/assets/twitter-color.svg">-->
+            <!--</a>-->
+            <!--<a href="#">-->
+              <!--<img src="/assets/linkedin-color.svg">-->
+            <!--</a>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% end %>
+
+
+<%= render '/refinery/content_page' %>

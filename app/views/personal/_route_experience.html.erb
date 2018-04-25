@@ -1,0 +1,78 @@
+<% @customer = Refinery::Customers::Customer.find(current_customer.id)  %>
+<%= simple_form_for @customer, url: refinery.customers_customers_path, :html => {multipart:true} do |f| -%>
+<%= hidden_field_tag 'customer[route_experience_ids][]' %>
+
+
+
+  <div class="modal fade" id="route_experience" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Route Experiences</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group route_experiences_form">
+            <div class="row">
+              <div class="col-xs-2" style="vertical-align: top">
+                <label>Continent</label>
+              </div>
+              <div class="col-xs-10">
+                <% continents = @customer.route_experiences.pluck(:continent).uniq %>
+                <% Refinery::RouteExperiences::RouteExperience::CONTINENTS.each do |item| %>
+                <div>
+                  <input class="filter_airports hidden" id="<%= item %>" <%= continents.include?(item) ? "checked='Checked'" : '' %> type="checkbox" value="<%= item.downcase.gsub(' ', '_')%>">
+                  <label for="<%= item %>" class="form-checkbox"></label>
+                  <label for="<%= item %>"><%= item %></label>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-2" style="vertical-align: top">
+                <label>City / Airports | IATA3</label>
+              </div>
+              <div class="col-xs-10">
+                <% Refinery::RouteExperiences::RouteExperience.order('airport ASC').all.each do |item| %>
+                  <div class="all_airports <%= item.continent.downcase.gsub(' ', '_') %>">
+                    <%= check_box_tag "customer[route_experience_ids][]", item.id, @customer.route_experiences.include?(item), :class => 'hidden', :id => 'route' + item.id.to_s %>
+                    <label for='<%= "route" + item.id.to_s %>' class="form-checkbox"></label>
+                    <label for='<%= "route" + item.id.to_s %>'><%= item.airport %></label>
+                  </div>
+                <% end %>
+              </div>
+          </div>
+          </div>
+          
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+          <% if @customer.cover_letter.blank? %>
+            <%= f.button :submit, "Add Route Experience", :class=>"btn btn-green" %>
+          <% else %>
+            <%= f.button :submit, "Update Route Experience", :class=>"btn btn-green" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script type="application/javascript">
+      $('.all_airports').hide();
+      $('.filter_airports:checked').each(function(){
+          $("." + $(this).val()).show();
+      });
+
+      $('.filter_airports').click(function(){
+          $("." + $(this).val()).toggle();
+      });
+
+    </script>
+
+<% end %>
+
+
+
+

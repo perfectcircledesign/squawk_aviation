@@ -1,0 +1,11 @@
+<% content_for :body_content_left do %>
+  <ul id="route_experiences">
+    <% @route_experiences.each do |route_experience| %>
+      <li>
+        <%= link_to route_experience.continent, refinery.route_experiences_route_experience_path(route_experience) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

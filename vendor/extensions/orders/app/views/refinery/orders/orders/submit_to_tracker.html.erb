@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Submit to Tracker</title>
+</head>
+<body>
+  <form name="frmtrack" method="POST" action="http://mem.dawnwing.co.za/dwn/tracking">
+    <input type="hidden" name="pWaybill" value="<%= @waybill %>" />
+    <input type="hidden" name="pRef" value="ELD138" />
+    <input type="hidden" name="pAction" value="PUBLIC">
+
+    <input type="submit" value="Pay Now" style="display: none;" />
+  </form>
+
+  <script language="JavaScript" type="text/javascript">
+    document.forms[0].submit();
+  </script>
+</body>
+</html>

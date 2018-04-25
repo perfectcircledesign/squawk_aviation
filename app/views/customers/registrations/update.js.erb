@@ -1,0 +1,10 @@
+<% if @old_password.present? %>
+$('.password_errors').html('');
+$('.password_errors').html("<li>Current password is incorrect</li>").addClass('show-error');
+<% elsif resource.errors.empty? %>
+$('.password_errors').html('').removeClass('show-error');
+$('.password_errors').html("<li class='alert alert-success'>Password Successfully Updated</li>");
+<% else %>
+$('.password_errors').html('');
+$('.password_errors').html('<%= raw resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join %>').addClass('show-error');
+<% end %>

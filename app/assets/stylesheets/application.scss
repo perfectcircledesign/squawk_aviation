@@ -1,0 +1,266 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require jquery.colorbox-example1
+ *= require_directory .
+ *= require_self
+ */
+
+//Typefaces
+@font-face {
+  font-family:'Camphor Pro';
+  src: url('../fonts/CamphorPro-Light.eot');
+  src: url('../fonts/CamphorPro-Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/CamphorPro-Light.woff2') format('woff2'),
+  url('../fonts/CamphorPro-Light.woff') format('woff'),
+  url('../fonts/CamphorPro-Light.svg#CamphorPro-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-00FE;
+}
+
+@font-face {
+  font-family:'Camphor Pro';
+  src: url('../fonts/CamphorPro-Bold.eot');
+  src: url('../fonts/CamphorPro-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/CamphorPro-Bold.woff2') format('woff2'),
+  url('../fonts/CamphorPro-Bold.woff') format('woff'),
+  url('../fonts/CamphorPro-Bold.svg#CamphorPro-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-00FE;
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('../fonts/hinted-GothamRounded-Bold.eot');
+  src: url('../fonts/hinted-GothamRounded-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/hinted-GothamRounded-Bold.woff2') format('woff2'),
+    url('../fonts/hinted-GothamRounded-Bold.woff') format('woff'),
+    url('../fonts/hinted-GothamRounded-Bold.ttf') format('truetype'),
+    url('../fonts/hinted-GothamRounded-Bold.svg#GothamRounded-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  src: url('../fonts/hinted-GothamRounded-Light.eot');
+  src: url('../fonts/hinted-GothamRounded-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/hinted-GothamRounded-Light.woff2') format('woff2'),
+    url('../fonts/hinted-GothamRounded-Light.woff') format('woff'),
+    url('../fonts/hinted-GothamRounded-Light.ttf') format('truetype'),
+    url('../fonts/hinted-GothamRounded-Light.svg#GothamRounded-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lSSlideOuter{height: 150px!important;}
+.lSSlideWrapper{
+  height: 150px!important;
+  #airlines{
+    height: 150px!important;
+    //.lslide{
+    //  margin-top: 1%;
+    //}
+  }
+}
+.lightSlider .lslide, .lightSlider .clone {height: 150px; position: relative;}
+.lightSlider .lslide img, .lightSlider .clone img {position: absolute; top: 50%; transform: translatey(-50%); left: 0; right: 0; margin: 0 auto; padding: 15px;}
+
+//Colours
+$blue: #03a9f5;
+$green: #cddc39;
+$jetblue: #122a50;
+$red: #e63933;
+$body: #6b7c93;
+$bodydark: #474857;
+
+
+//Typography
+@mixin body_font ($weight:300,$color:$body,$size:16px){ font-family:'Camphor Pro', sans-serif; font-weight:$weight; color:$color; font-size: $size;}
+@mixin bold_font ($weight:700,$color:$blue,$size:16px){ font-family:'Camphor Pro', sans-serif; font-weight:$weight; color:$color; font-size: $size;}
+body { @include body_font();}
+h1,h2,h3 {line-height: 1; margin-bottom: 1.25em; margin-top: 0}
+h4 {margin-top: 0;}
+
+h1 {@include body_font(300,$blue,3.75em); font-family: 'gotham rounded', sans-serif;}
+h2 {@include body_font(300,$blue,1.875em); font-family: 'gotham rounded', sans-serif;}
+h3 {@include bold_font(700,$blue,1.5em); font-family: 'gotham rounded', sans-serif;}
+h4 {@include bold_font(300,$blue,1.25em); margin-bottom: 0; line-height: 28px; font-family: 'gotham rounded', sans-serif;}
+h5 {@include bold_font(700,$blue,1em);font-family: 'gotham rounded', sans-serif;}
+a, a:hover, a:active, a:focus {color: $blue; text-decoration: none;}
+p {line-height: 28px;}
+
+//Graphics
+@mixin gradient {
+  background: rgb(4,50,146);
+  background: -moz-linear-gradient(left, rgba(4,50,146,1) 0%, rgba(4,107,146,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(4,50,146,1) 0%,rgba(4,107,146,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(4,50,146,1) 0%,rgba(4,107,146,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#043292', endColorstr='#046b92',GradientType=1 ); /* IE6-9 */
+}
+
+//Layout
+@mixin clearfix {
+  #{if(&, "&", "*")}:before, #{if(&, "&", "*")}:after {content: " "; display: table;};
+  #{if(&, "&", "*")}:after {clear: both;}
+}
+
+$bp-tiny: '(max-width: 576px)';
+$bp-xs: '(max-width: 767px)';
+$bp-small: '(max-width: 991px)';
+$bp-medium: '(max-width: 1199px)';
+$bp-large: '(min-width: 1200px)';
+
+
+//Forms
+input[type="text"], input[type="password"], input[type="email"] {color: $bodydark; padding: 0.75em; border-radius: 4px; border: 1px solid #dadada; box-shadow: none; margin-bottom: 1.25em;}
+.form-checkbox-hide {display: none;}
+.form-checkbox {display: inline-block; position: relative; cursor: pointer; outline: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; width: 40px!important; height: 18px; border-radius: 9px; margin: 8px 0; float: none; transition: all 0.4s; margin-bottom: 0; border: 1px solid #dadada; vertical-align: middle;
+  &:after {display: block; position: absolute; top: 1px; left: 1px; bottom: 1px; content: "";  width: 14px; height: 14px; background-color: #fff; border-radius: 100%; transition: margin 0.4s; border: 1px solid #ccc;}
+}
+input[type='checkbox']:checked + .form-checkbox {background-color: $green; border-color: $green;
+  &:after {margin-left: 21px; border-color: white;}
+}
+.form-control {box-shadow: none;}
+.vertical-middle {vertical-align: middle!important;}
+.vertical-top {vertical-align: top!important;}
+
+
+.modal-backdrop{z-index: 9!important;}
+
+
+//Buttons
+textarea.form-control {resize: none;}
+.btn {font-size: 1em; font-weight: 300; border: 1px solid grey;}
+.btn-window {border: 1px solid $jetblue; background: none; color: $jetblue;}
+.btn-lrg {padding: 14px 12px;}
+.btn-sm {font-size: 0.65em!important;}
+.btn-green {background: $green; color: $bodydark; border: 1px solid $green;}
+.btn-green.btn-window {background: none; color: $bodydark;}
+.btn-blue {background: $blue; color: #fff; border: 1px solid $blue;
+  &:hover, &:active, &:focus {color: #fff; }
+}
+.btn-grey {background: #eee; color: $body; border: 1px solid #eee;
+  &:hover, &:active, &:focus {color: $body; background: #ddd}
+}
+.btn-blue.btn-window {background: none; color: $blue;}
+.btn-follow {display: block; margin-bottom: 10px;}
+.btn-unfollow {display: block; margin-bottom: 10px; background-color: #fff; border-color: $jetblue; color: $jetblue;
+  &:hover {color: #fff; background-color: #e63933;}
+}
+.btn-upload {color: #fff!important; padding: 6px 12px; background-color: $blue; border-radius: 4px; cursor: pointer; display: inline-block!important; font-size: 14px; font-weight: 300; border: none;}
+
+//Cards
+.float-card {padding: 50px 50px 50px 150px; border-radius: 5px; background-color: rgb(255, 255, 255); box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1); position: relative; display: block;
+  p{margin-bottom: 0; color: $body}
+  img {position: absolute; left: 0; top: 0; bottom: 0;margin: auto;}
+}
+
+//Generic Layout Elements
+.footer {@include gradient(); padding: 4em 0; color:#fff;
+  p {margin: 0;}
+  .social {text-align: right;
+    img {width: 32px; height: 32px;}
+    a {margin-left: 5px;}
+  }
+}
+
+.lightSlider {
+  .lslide, .clone {
+    img {width: 100%; height: auto;}
+  }
+}
+
+.bullets {list-style: none; padding-left: 0;
+  li {width: 10px; height: 10px; background-color: #f0f0f0; display: inline-block; border-radius: 50%; cursor: pointer;}
+  li.active {background-color: $green;}
+}
+
+//Modals
+.modal-header {background-color: $blue; border-top-left-radius: 6px; border-top-right-radius: 6px; border: none; margin-bottom: 1em;
+  h4 {color: #fff; font-weight: 300;}
+  .close {color: #fff; text-shadow: none; opacity: 1;
+    span {font-weight: 300; font-size: 1.25em;}
+  }
+}
+
+.modal-body {
+  .form-group {
+    .col-xs-3 {text-align: right;}
+    .row {display: table; width: 100%;}
+    [class*='col-'] {display: table-cell; float: none; vertical-align: middle;}
+    label {display: block; font-size: 0.875em; color: $bodydark; font-weight: 300;}
+  }
+  input[type="text"], input[type="password"], input[type="email"] {padding: 0.5em; margin-bottom: 0.5em; width: 100%; font-size: 0.875em;}
+  select {display: inline-block; width: 100%; margin-bottom: 0; box-shadow: none; border: 1px solid #dadada; border-radius: 4px; font-size: 14px; padding: 0.5em;}
+  select {background: #fff url(/assets/downarrow.jpg) no-repeat right 10px top 50%;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+  }
+
+  select::-ms-expand {
+      display: none;
+  }
+  [id*='customer_date_of_birth'] {width: 33.3333333333%; float: left;}
+}
+
+.separate-dial-code {@include clearfix(); display: table; width: 100%;
+  .flag-container {display: table-cell;}
+  input {display: table-cell;}
+}
+
+.modal-footer {border: none;}
+
+
+//CUSTOM CODE
+#slim-logbook .slim-label{margin-top: 20%!important;}
+
+//Large
+@media (min-width: 1200px) {
+
+}
+
+//Medium
+@media (max-width:1199px) {
+  h1 {font-size:3em};
+}
+
+//Small
+@media (max-width: 991px) {
+  body {font-size: 14px;}
+  h1 {font-size:3em};
+  .footer, .footer .social {text-align: center;}
+  .footer .social {margin-bottom: 2em;}
+  .float-card {margin-bottom: 2em;}
+}
+
+//Extra Small
+@media (max-width: 767px) {
+  h1 {font-size:2.25em};
+  h4 {font-size:1em};
+}
+
+//Tiny
+@media (max-width:576px) {
+  h1 {font-size: 1.5em;}
+  h2 {font-size: 1.25em;}
+  h3 {font-size: 1.1em;}
+  .btn-lrg {padding: 6px 12px;}
+  input[type="text"], input[type="password"] {padding: 0.5em;}
+  .float-card {padding: 25px 25px 25px 35px;
+    img {width: 25px; height: auto; top: 25px; margin: 0;}
+  }
+}
+

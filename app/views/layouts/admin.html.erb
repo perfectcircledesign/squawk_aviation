@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Squawk Aviation</title>
+   <script src="https://code.jquery.com/jquery.js"></script>
+  <%= stylesheet_link_tag 'admin/application', media: 'all' %>
+  <%= javascript_include_tag 'admin/application' %>
+  <%= csrf_meta_tags %>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+</head>
+  <body class="hold-transition skin-blue <%= controller_name %>">
+    <div class="wrapper">
+
+      <header class="main-header">
+        <a href="/" class="logo">
+          <span class="logo-mini"><b>SQUAWK</b>AVIATION</span>
+          <span class="logo-lg"><b>SQUAWK</b>AVIATION</span>
+        </a>
+       <%= render 'admin/shared/navigation' %>
+      </header>
+      <%= render 'admin/shared/side_menu' %>
+
+      <div class="content-wrapper">
+
+        <%= render 'admin/shared/flashes' %>
+
+        <section class="content-header">
+          <h1>
+            <%= yield :title %>
+          </h1>
+        </section>
+
+        <section class="content">
+          <%= yield :content %>
+        </section>
+      </div>
+      <footer class="main-footer">
+        <strong>Copyright &copy;</strong> All rights
+        reserved.
+      </footer>
+
+    </div>
+
+
+  <%= yield :javascript %>
+  </body>
+</html>

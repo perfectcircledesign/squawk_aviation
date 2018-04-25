@@ -1,0 +1,11 @@
+$.amaran({
+    'theme'     :'user',
+    'content'   :{
+        img:'<%= @product.image.thumbnail("100x100#c").url if @product.image.present? %>',
+        user:'<%= "#{@product.name}" %><hr>',
+        message:'<span><%= rands(@product.price) %></span>Removed From Cart'
+    },
+    'position'  :'bottom right'
+  });
+
+$(".my_cart").html("<%= j render partial:"shared/cart" %>");

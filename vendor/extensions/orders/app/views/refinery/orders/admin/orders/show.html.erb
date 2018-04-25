@@ -1,0 +1,203 @@
+
+
+<div class="content">
+
+  <div class='field'>
+    <h2>Order Number: <%= @order.order_number  -%></h2>
+  </div>
+
+  <div class='customer_details'>
+    <div class='label' style="float:left;padding-right:5px;">
+      <div class='field'>
+        <b>Order Status:</b>
+      </div>
+      <div class='field'>
+        <b>Payment Type:</b>
+      </div>
+      <div class='field'>
+        <b>Date:</b>
+      </div>
+      <div class='field'>
+        <b>Delivery Method:</b>
+      </div>
+    </div>
+    <div class='text' style="float:left;">
+      <div class='field'>
+        <%= @order.order_status  -%>
+      </div>
+      <div class='field'>
+        <%= @order.payment_type  -%>
+      </div>
+      <div class='field'>
+        <%= @order.created_at.strftime("%d %B %Y") -%>
+      </div>
+      <div class='field'>
+        <%= @order.delivery_option_name -%>
+      </div>
+    </div>
+  </div>
+
+  <div style="clear:both;"></div>
+
+  <br><br>
+  <div class='field' style="clear:both;">
+    <h2>Customer Details</h2>
+  </div>
+
+  <div class="customer_details">
+
+    <div class='label' style="float:left;padding-right:5px;">
+      <div class='field'>
+        <b>Name: </b>
+      </div>
+      <div class='field'>
+        <b>Surname: </b>
+      </div>
+      <div class='field'>
+        <b>Contact No: </b>
+      </div>
+    </div>
+    <div class='text' style="float:left;">
+      <div class='field'>
+        <%= link_to @order.customer.first_name, refinery.edit_customers_admin_customer_path(@order.customer)  -%>
+      </div>
+      <div class='field'>
+        <%= @order.customer.surname  -%>
+      </div>
+      <div class='field'>
+        <%= @order.customer.contact_number  -%>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="address">
+    <div class='second_label' style="float:left;">
+      <b>Address: </b>
+    </div>
+    <div class='text' style="float:left;padding-left:24px;">
+      <div class='field'>
+        <%= @order.address_line_1  -%>
+      </div>
+      <div class='field'>
+        <%= @order.address_line_2  -%>
+      </div>
+      <div class='field'>
+        <%= @order.suburb  -%>
+      </div>
+      <div class='field'>
+        <%= @order.city  -%>
+      </div>
+      <div class='field'>
+        <%= @order.postal_code  -%>
+      </div>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+  <br><BR>
+  <div class='field'>
+    <h2>Order Details</h2>
+  </div>
+  <hr />
+
+  <table width="100%">
+    <tr class="<%= cycle("even", "odd") %>">
+      <th><b>Product Name</b></th>
+      <th><b>Price</b></th>
+      <th><b>Quantity</b></th>
+      <th><b>Stock Code</b></th>
+      <th><b>Total</b></th>
+    </tr>
+    <% @order.order_items.each do |order_item| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <td style="border:1 solid grey;"><%= order_item.product_name  -%></td>
+        <td style="border:1 solid grey;"><%= rands(order_item.price)  -%></td>
+        <td style="border:1 solid grey;"><%= order_item.quantity  -%></td>
+        <td style="border:1 solid grey;"><%= order_item.product_stock_code  -%></td>
+        <td style="border:1 solid grey;"><%= rands(order_item.total)  -%></td>
+      </tr>
+    <% end %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td colspan="4">Delivery Method: <%= @order.delivery_option_name %></td>
+      <td><%= rands(@order.delivery_cost)  -%></td>
+    </tr>
+    <% if @order.coupon_description.present? %>
+      <tr>
+        <td colspan="4"><%= @order.coupon_description %></td>
+        <td>- <%= rands(@order.coupon_discount_amount) %></td>
+      </tr>
+    <% end %>
+    <tr class="<%= cycle("odd", "even") %>">
+      <td colspan="4" align="right"><b>Grand Total</b></td>
+      <td><%= rands(@order.grand_total)  -%></td>
+    </tr>
+  </table>
+  <hr />
+
+</div>
+
+<div class="statuses">
+  <% if @order.order_status.present? %>
+    <br />
+    <h2>Update Status</h2>
+    <ul>
+    <% if @order.order_status == 'Awaiting EFT Payment' %>
+        <li><%= link_to 'Payment Received', refinery.orders_admin_order_update_new_path(:order_id => @order.id, :payment_type => @order.payment_type), :class => "status" %></li>
+        <li><%= link_to 'Cancelled', refinery.orders_admin_order_update_cancelled_path(:order_id => @order.id), :class => "status" %></li>
+        <li><%= link_to 'Stale', refinery.orders_admin_order_update_stale_path(:order_id => @order.id), :class => "status" %></li>
+    <% elsif @order.order_status == 'Awaiting Credit Card Payment' %>
+        <li><%= link_to 'Payment Received', refinery.orders_admin_order_update_new_path(:order_id => @order.id, :payment_type => @order.payment_type), :class => "status" %></li>
+        <li><%= link_to 'Stale', refinery.orders_admin_order_update_stale_path(:order_id => @order.id), :class => "status" %></li>
+    <% elsif @order.order_status == 'New' %>
+        <li><%= link_to 'Processing', refinery.orders_admin_order_update_processing_path(:order_id => @order.id), :class => "status" %></li>
+        <li><%= link_to 'Cancelled', refinery.orders_admin_order_update_cancelled_path(:order_id => @order.id), :class => "status" %></li>
+    <% elsif @order.order_status == 'Processing' %>
+        <li><%= link_to 'Complete', refinery.orders_admin_order_update_complete_path(:order_id => @order.id), :class => "status complete" %></li>
+        <li><%= link_to 'Cancelled', refinery.orders_admin_order_update_cancelled_path(:order_id => @order.id), :class => "status" %></li>
+    <% elsif @order.order_status == 'Cancelled' %>
+        <li><%= link_to 'Uncancel', refinery.orders_admin_order_update_new_path(:order_id => @order.id), :class => "status" %></li>
+    <% else %>
+        <li>No actions available</li>
+    <% end %>
+    </ul>
+  <% end %>
+  &nbsp;<br>
+  <h2>Print Invoice / Waybill</h2>
+  <ul>
+    <li><%= link_to('Print Invoice', refinery.orders_admin_order_print_invoice_path(@order.id), :class => "status") %></li>
+    <li><%= link_to('Print Waybill', refinery.orders_admin_order_print_waybill_path(@order.id), :class => "status") %></li>
+  </ul>
+
+</div>
+
+<div style="clear:both;"></div>
+
+<div>
+  <br />
+  <% if @order.delivery_waybill_number.blank? %>
+    <h2>Update Waybill Number</h2>
+    <%= form_for [refinery, :orders_admin, @order] do |f| -%>
+      <%= f.text_field :delivery_waybill_number %><br /><br />
+      <%= f.submit 'Save Waybill Number' %>
+    <% end %>
+  <% else %>
+    <h2>Waybill Number</h2>
+    <div class='field'>
+      <%= @order.delivery_waybill_number  -%>
+    </div>
+  <% end %>
+</div>
+
+<% content_for :javascripts do %>
+  <script>
+    $(document).ready(function() {
+      $(".complete").click(function(){
+        if ($("#order_delivery_waybill_number").val() == "") {
+          alert("The waybill number cannot be empty if you want to mark this order as complete!");
+          return false;
+        }
+      });
+    });
+  </script>
+<% end %>

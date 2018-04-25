@@ -1,0 +1,488 @@
+<% content_for :full do %>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Print CV</title>
+
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="printcv.css" />
+
+
+
+  <script src="http://code.jquery.com/jquery.js"></script>
+
+  <script src="/assets/intlTelInput.min.js"></script>
+
+  <script type="application/javascript">
+      // window.print();
+  </script>
+
+
+  </head>
+  <body>
+  <div class="container">
+  <table style="width: 100%; height: 100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="width: 5cm; vertical-align: top; padding: 5mm; text-align: center; background-color: #028c99 !important; -webkit-print-color-adjust: exact; color: #fff!important">
+        <img src="/assets/logo-white.png" style="width: 4cm">
+        <%= image_fu @customer.profile_image, '160x160#c', :style=>"border-radius: 50%; margin-top: 5mm; margin-bottom: 3mm" %>
+        <!--<img src="/assets/large-profile-pic.jpg" style="border-radius: 50%; margin-top: 10mm; margin-bottom: 10mm">-->
+        <table style="width: 100%; text-align: left; font-size: 9pt;" border="0" cellpadding="0" cellspacing="0" class="side-panel">
+          <tr>
+            <td style="vertical-align: top; color: #fff!important">
+              <strong>Location:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <%= country_name(@customer.dual_nationality_details) %>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>Age:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <%= @customer.age %>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>Gender:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <%= @customer.gender %>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>Languages:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <% @customer.languages.all.each do |lang| %>
+                  <%= lang.name %><br>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>Email:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <%= @customer.email %>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>Mobile:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <div class="extension_display">
+              <%= @customer.contact_number %>
+              </div>
+              <input class="hidden extension" value="<%= @customer.phone_extension1 %>">
+              <script type="text/javascript">
+                  var countryData = $.fn.intlTelInput.getCountryData();
+                  $.each(countryData, function(i, country) {
+                      if (country.iso2 == $(".extension").val()){
+                          $(".extension_display").prepend("(+" + country.dialCode +")");
+                      }
+
+                  });
+              </script>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">
+              <strong>ICAO English:</strong>
+            </td>
+            <td style="vertical-align: top; padding-left: 2mm;">
+              <%= @customer.icao %>
+            </td>
+          </tr>
+
+          <% if @customer.career_path == 'Pilot' %>
+            <tr>
+              <td colspan="2" style="vertical-align: top; padding: 7mm 0 1mm;">
+                <strong>Total Flying Hours</strong>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">
+                <strong>P1 Hours:</strong>
+              </td>
+              <td style="vertical-align: top; padding-left: 2mm;">
+                <%= @customer.p1.to_i %>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">
+                <strong>P2 Hours:</strong>
+              </td>
+              <td style="vertical-align: top; padding-left: 2mm;">
+                <%= @customer.p2.to_i %>
+              </td>
+            </tr>
+            <tr>
+              <td style="vertical-align: top">
+                <strong>P3 Hours:</strong>
+              </td>
+              <td style="vertical-align: top; padding-left: 2mm;">
+                <%= @customer.p3.to_i %>
+              </td>
+            </tr>
+          <% elsif @customer.career_path == 'Cabin Crew' %>
+              <tr>
+                <td colspan="2" style="vertical-align: top; padding: 7mm 0 1mm;">
+                  <strong>Total Flying Hours</strong>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: top">
+                  <strong>Flight Attendant Hours:</strong>
+                </td>
+                <td style="vertical-align: top; padding-left: 2mm;">
+                  <%= @customer.p1.to_i %>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: top">
+                  <strong>Purser Hours:</strong>
+                </td>
+                <td style="vertical-align: top; padding-left: 2mm;">
+                  <%= @customer.p2.to_i %>
+                </td>
+              </tr>
+              <tr>
+                <td style="vertical-align: top">
+                  <strong>Chief Purser Hours:</strong>
+                </td>
+                <td style="vertical-align: top; padding-left: 2mm;">
+                  <%= @customer.p3.to_i %>
+                </td>
+              </tr>
+          <% end %>
+
+
+        </table>
+      </td>
+      <td style="padding:2mm 5mm; vertical-align: top;">
+          <div>
+            <h1><%= @customer.name %></h1>
+            <h4 class="path"><%= @customer.career_path %></h4>
+          </div>
+          <% if @customer.cover_letter.present? %>
+            <div>
+              <h4>Introduction</h4>
+              <p><%= @customer.cover_letter %></p>
+            <div>
+          <% end %>
+          <% if @customer.aviation_education_details.present? %>
+            <div>
+              <h4>Education Details</h4>
+              <table style="width: 100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <th style="border-bottom: 1px solid #dddddd; padding-bottom: 5px">
+                    Qualification
+                  </th>
+                  <th style="border-bottom: 1px solid #dddddd; padding-bottom: 5px">
+                    Institution
+                  </th>
+                  <th style="border-bottom: 1px solid #dddddd; padding-bottom: 5px">
+                    Year Graduated
+                  </th>
+                </tr>
+                <% @customer.aviation_education_details.each do |item| %>
+                  <tr>
+                    <td style="padding: 5px 0">
+                      <strong><%= item.program %></strong>
+                    </td>
+                    <td style="padding: 5px 0">
+                      <%= item.institution %>
+                    </td>
+                    <td style="padding: 5px 0">
+                      <%= item.period %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          <% end %>
+          <% if @customer.career_path == 'Pilot' %>
+            <% if @customer.aviation_certification_details.present? %>
+              <div>
+                <h4>Licence and Certificates Details</h4>
+                <table style="width: 100%" cellspacing="0" cellpadding="0">
+
+                  <!-- Loop Start -->
+                  <% @customer.aviation_certification_details.each do |item| %>
+                    <tr>
+                      <td colspan="4"><strong><%= item.license_type %></strong></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 1px; white-space: nowrap;">License Authority:</td>
+                      <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.license_authority %></td>
+                      <td style="width: 1px; white-space: nowrap;">Date of Expiry:</td>
+                      <td style="width: 10000px; white-space: nowrap;  padding-left: 10px"><%= item.date_of_expiry %></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Endorsements:</td>
+                      <td colspan="3" style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;">
+                        <% if item.mcc %>
+                            MCC
+                        <% end %>
+                        <% if item.dangerous_goods %>
+                            Dangerous Goods,
+                        <% end %>
+                        <% if item.crm %>
+                            CRM,
+                        <% end %>
+                        <% if item.tcas_acas %>
+                            TCAS/ACAS,
+                        <% end %>
+                        <% if item.lvo %>
+                            LVO,
+                        <% end %>
+                        <% if item.rnav_gnss %>
+                            RNAV,GNSS,
+                        <% end %>
+                        <% if item.rvsm %>
+                            RVSM,
+                        <% end %>
+                        <% if item.cfit_gpws %>
+                            CFIT/GPWS,
+                        <% end %>
+                        <% if item.etops %>
+                            ETOPS
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                  <!-- Loop End -->
+                </table>
+              </div>
+            <% end %>
+          <% elsif @customer.career_path == 'Cabin Crew' %>
+            <% if @customer.cabin_certifications.present? %>
+              <div>
+              <h4>Licence and Certificates Details</h4>
+              <table style="width: 100%" cellspacing="0" cellpadding="0">
+                <!-- Loop Start -->
+                <% @customer.cabin_certifications.each do |item| %>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap;">License Authority:</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.license_authority %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Endorsements:</td>
+                    <td colspan="3" style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;">
+                      <% if item.first_aid %>
+                          First Aid,
+                      <% end %>
+                      <% if item.SEPT %>
+                          SEPT,
+                      <% end %>
+                      <% if item.CRM %>
+                          CRM,
+                      <% end %>
+                      <% if item.DG %>
+                          DG,
+                      <% end %>
+                      <% if item.Ditching %>
+                          Ditching,
+                      <% end %>
+                      <% if item.Fire_fighting %>
+                          Fire Fighting
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+              </div>
+            <% end %>
+            <% elsif @customer.career_path == 'Aircraft Maintenance' %>
+              <% if @customer.maintenance_certifications.present? %>
+                <div>
+                <h4>Licence and Certificates Details</h4>
+                <table style="width: 100%" cellspacing="0" cellpadding="0">
+                  <!-- Loop Start -->
+                  <% @customer.maintenance_certifications.each do |item| %>
+                    <tr>
+                      <td style="width: 1px; white-space: nowrap;">License Authority:</td>
+                      <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.license_authority %></td>
+                    </tr>
+                    <tr>
+                      <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Endorsements:</td>
+                      <td colspan="3" style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.license_type %></td>
+                    </tr>
+                  <% end %>
+                  <!-- Loop End -->
+                </table>
+                </div>
+              <% end %>
+          <% end %>
+          <% if @customer.aviation_records.present? %>
+            <div>
+              <h4>Employment History</h4>
+              <table style="width: 100%" cellspacing="0" cellpadding="0">
+              <% @customer.aviation_records.order('current_work DESC').each do |item| %>
+                <% if item.current_work %>
+                  <tr>
+                    <td colspan="4"><strong><%= item.employer %> - Currently Employed here</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap;">Start Date:</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.start_date.strftime("%d/%m/%Y") %></td>
+                    <td style="width: 1px; white-space: nowrap;">Notice Period:</td>
+                    <td style="width: 10000px; white-space: nowrap;  padding-left: 10px"><%= item.notice_period %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px; border-bottom: 1px solid #dddddd;">Position Held:</td>
+                    <td colspan="3" style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px; border-bottom: 1px solid #dddddd;"><%= item.position_held %></td>
+                  </tr>
+                <% else %>
+                  <tr>
+                    <td colspan="4"><strong><%= item.employer %></strong></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap;">Start Date:</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.start_date.strftime("%d/%m/%Y") %></td>
+                    <td style="width: 1px; white-space: nowrap;">End Date:</td>
+                    <td style="width: 10000px; white-space: nowrap;  padding-left: 10px"><%= item.end_date.strftime("%d/%m/%Y") %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Position Held:</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.position_held %></td>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Reason for Leaving:</td>
+                    <td style="width: 10000px; white-space: nowrap;  padding-left: 10px; padding-bottom: 20px;"><%= raw item.reason_for_leaving %></td>
+                  </tr>
+                <% end %>
+             <% end %>
+            </table>
+            </div>
+          <% end %>
+          <% if @customer.career_path == 'Pilot' %>
+            <% if @customer.flying_hours.present? %>
+            <div>
+              <h4>Flying Hours</h4>
+              <table style="width: 100%" cellspacing="0" cellpadding="0">
+                <!-- Loop Start -->
+                <% @customer.flying_hours.each do |item| %>
+                  <tr>
+                    <td colspan="4"><strong><%= item.aircraft.name if item.aircraft.present? %></strong></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap;">Date Last Flown:</td>
+                    <td colspan="5" style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.date_last_flown %></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">CA(P1):</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.ca %></td>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">FO(P2):</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.fo %></td>
+                    <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Cruise (P3/FE):</td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.cruise_only_pilot %></td>
+                  </tr>
+                <% end %>
+                <!-- Loop End -->
+              </table>
+            </div>
+            <% end %>
+          <% elsif @customer.career_path == 'Cabin Crew' %>
+            <% if @customer.flying_hours_cabins.present? %>
+            <div>
+              <h4>Flying Hours</h4>
+            <table style="width: 100%" cellspacing="0" cellpadding="0">
+              <!-- Loop Start -->
+              <% @customer.flying_hours_cabins.each do |item| %>
+                <tr>
+                  <td colspan="4"><strong><%= item.aircraft.name if item.aircraft.present? %></strong></td>
+                </tr>
+                <tr>
+                  <td style="width: 1px; white-space: nowrap;">Date Last Flown:</td>
+                  <td colspan="5" style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.date_last_flown %></td>
+                </tr>
+                <tr>
+                  <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Flight Attendant:</td>
+                  <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.flight_attendant %></td>
+                  <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Purser:</td>
+                  <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.purser %></td>
+                  <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Chief Purser:</td>
+                  <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;"><%= item.chief_purser %></td>
+                </tr>
+              <% end %>
+              <!-- Loop End -->
+            </table>
+            </div>
+            <% end %>
+          <% elsif @customer.career_path == 'Aircraft Maintenance' %>
+            <% if @customer.maintenance_hours.present? %>
+            <div>
+              <h4>On the Job Experience</h4>
+            <table style="width: 100%" cellspacing="0" cellpadding="0">
+              <!-- Loop Start -->
+              <% @customer.maintenance_hours.each do |item| %>
+                <tr>
+                  <td colspan="4"><strong><%= item.aircraft.name if item.aircraft.present? %></strong></td>
+                </tr>
+                <tr>
+                  <td style="width: 1px; white-space: nowrap;">Total Hours:</td>
+                  <td colspan="5" style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.total_hours %></td>
+                </tr>
+                <tr>
+                  <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Experience:</td>
+                  <td style="width: 10000px; white-space: nowrap; padding-left: 10px; padding-bottom: 20px;">
+                    <% if item.airframe %>
+                        Airframe,
+                    <% end %>
+                    <% if item.avionics %>
+                        Avionics,
+                    <% end %>
+                    <% if item.electrical %>
+                        Electrical,
+                    <% end %>
+                    <% if item.fuel %>
+                        Fuel,
+                    <% end %>
+                    <% if item.hydraulics %>
+                        Hydraulics,
+                    <% end %>
+                    <% if item.interiors %>
+                        Interiors incl Air-con,
+                    <% end %>
+                    <% if item.pneumatic %>
+                        Pneumatic,
+                    <% end %>
+                    <% if item.power_plant %>
+                        Power Plant,
+                    <% end %>
+                    <% if item.interiors %>
+                        Interiors incl Air-con
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+              <!-- Loop End -->
+            </table>
+            </div>
+            <% end %>
+          <% end %>
+          <% if @customer.route_experiences.present? %>
+            <h4>Route Experience</h4>
+            <table style="width: 100%" cellspacing="0" cellpadding="0">
+              <tr>
+                <td style="padding-bottom: 20px;">
+                <% @customer.route_experiences.order(:continent).each do |item| %>
+                  <%= item.continent %> - <%= item.airport %><br>
+                <% end %>
+                </td>
+              </tr>
+            </table>
+          <% end %>
+        </td>
+      </tr>
+  </table>
+  </div>
+
+  </body>
+  </html>
+<% end %>

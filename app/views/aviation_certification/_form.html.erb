@@ -1,0 +1,150 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Licence and Certificates Details</h4>
+</div>
+<%= simple_form_for @aviation_certification, :url => aviation_certification_details_path, :html => {multipart:true}, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @aviation_certification.id if @aviation_certification.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Licencing Authority</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :license_authority, AviationCertificationDetail::AUTHORITIES, {:include_blank => true}, :class => "form-control fc2", required: true %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>License Type</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.select :license_type, AviationCertificationDetail::TYPES, {:include_blank => true}, :class => "form-control fc2", required: true %>
+          <%#= f.text_field :license_type, :label => false, :placeholder => "License Type", :class => "form-control fc2" %>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>License Number</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :license_number, :label => false, :placeholder => "License Number", :class => "form-control fc2" %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>Country of Issue</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.country_select :country_of_issue, :label => false, :placeholder => "Country of Issue", :class => "form-control fc2" %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-4">-->
+          <!--<label>Date of Issue</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-8">-->
+          <!--<%#= f.text_field :date_of_issue, :label => false, :class => "date_pick" %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>I.F Rating Expiry</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :date_of_expiry, :label => false, :class => "date_pick"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4 vertical-top">
+          <label>Endorsements</label>
+        </div>
+        <div class="col-xs-8">
+          <div class="row full-mobile licence-checkboxes">
+            <div class="col-xs-12 col-md-6 vertical-top">
+              <%= f.check_box :mcc, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_mcc" class="form-checkbox"></label><span>MCC</span><br>
+              
+              <%= f.check_box :dangerous_goods, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_dangerous_goods" class="form-checkbox"></label><span>Dangerous Goods</span><br>
+
+              <%= f.check_box :crm, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_crm" class="form-checkbox"></label><span>CRM</span><br>
+
+              <%= f.check_box :tcas_acas, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_tcas_acas" class="form-checkbox"></label><span>TCAS/ACAS</span><br>
+
+              <%= f.check_box :lvo, :class=>"boolean optiona hidden" %>
+              <label for="aviation_certification_detail_lvo" class="form-checkbox"></label><span>LVO</span><br>
+            </div>
+            <div class="col-xs-12 col-md-6 vertical-top">
+              <%= f.check_box :rnav_gnss, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_rnav_gnss" class="form-checkbox"></label><span>RNAV,GNSS</span><br>
+
+              <%= f.check_box :rvsm, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_rvsm" class="form-checkbox"></label><span>RVSM</span><br>
+
+              <%= f.check_box :cfit_gpws, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_cfit_gpws" class="form-checkbox"></label><span>CFIT/GPWS</span><br>
+
+              <%= f.check_box :etops, :class=>"boolean optional hidden" %>
+              <label for="aviation_certification_detail_etops" class="form-checkbox"></label><span>ETOPS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4 vertical-top">
+          <label>Upload supporting document</label>
+        </div>
+        <div class="col-xs-8">
+          <div class="preview">
+            <% if @aviation_certification.present? and  @aviation_certification.file.present? %>
+              <%= @aviation_certification.file.file_name %>
+            <% end %>
+          </div>
+          <label class="btn btn-upload" for="inp">Select File</label>
+          <%= file_field_tag :aviation_file, id: 'inp' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @aviation_certification.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create new", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+<script type="application/javascript">
+  $(document).on('change','#inp', function(){
+      var filename = $(this).val().replace(/^.*\\/, "");
+      $(".preview").html(filename);
+  });
+</script>
+
+
+
+
+
+
+
+

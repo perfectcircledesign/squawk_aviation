@@ -1,0 +1,27 @@
+<% if post.live? %>
+  <article class="blog_post" id="<%= dom_id(post) %>">
+      <%= link_to refinery.blog_post_path(post) do %>
+        <div class="media">
+          <div class="media-left">
+            <% if post.image.present? %>
+              <%= image_fu post.image, '240x160#c' %>
+            <% else %>
+              <img src="/assets/blank-blog.gif" width="240" height="160">
+            <% end %>
+          </div>
+          <div class="media-body">
+            <h3><%= post.title %></h3>
+            <div class="details">
+            <%= t('created_at', :scope => 'refinery.blog.shared.posts', :when => l(post.published_at.to_date, :format => :short)) %>
+            </div>
+            <% if post.custom_teaser.present? %>
+              <%= raw truncate(post.custom_teaser, length: 100) %>
+            <% else %>
+              <%= raw truncate(post.body, length: 100) %>
+            <% end %>
+            <div class="btn btn-grey">Read More</div>
+          </div>
+        </div>
+      <% end %>
+  </article>
+<% end %>

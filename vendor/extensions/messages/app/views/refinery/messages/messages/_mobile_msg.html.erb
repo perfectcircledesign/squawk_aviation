@@ -1,0 +1,39 @@
+<% if @messengers.present? %>
+    <% @messengers.each do |messenger| %>
+        <li class="media">
+          <%= link_to refinery.messages_message_path(:id => messenger.id), :class=> "msg_click#{messenger.id}", :remote => true do %>
+              <div class="media-left">
+                <% if current_customer.present? and messenger.logo.present? %>
+                    <%= image_fu messenger.logo, '40x40#c', :class=>"img-circle" %>
+                <% elsif current_airline.present? and messenger.profile_image.present? %>
+                    <%= image_fu messenger.profile_image, '40x40#c', :class=>"img-circle" %>
+                <% else %>
+                    <img src="/assets/profile-blank.jpg" width="40" height="40" class="img-circle">
+                <% end %>
+              </div>
+              <div class="media-body">
+                <% if current_customer.present? %>
+                    <% last_item = messenger.messages.where(:customer_id => current_customer.id).order(:created_at).last %>
+                <% elsif current_airline.present? %>
+                    <% last_item = messenger.messages.where(:airline_id => current_airline.id).order(:created_at).last %>
+                <% end %>
+                <div class="media-header"><%= messenger.name %></div>
+                <% if last_item.present? %>
+                    <div class="time"><%= time_ago_in_words(last_item.created_at) %> ago</div>
+                    <p><%= last_item.message %></p>
+                <% end %>
+                <% if unread_count(messenger) != 0 %>
+                    <span class="message-count"><%= unread_count(messenger) %></span>
+                <% end %>
+              </div>
+          <% end %>
+        </li>
+    <% end %>
+<% else %>
+    <div class="text-center blank-message">
+      <img src="assets/blank-message.png" class="center-block">
+      <h1>Welcome to the Messenger</h1>
+      <p>New messages will appear here</p>
+    </div>
+<% end %>
+

@@ -1,0 +1,73 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Education Details</h4>
+</div>
+<%= simple_form_for @aviation_education, :url => aviation_education_details_path, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @aviation_education.id if @aviation_education.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+
+    <!--<div class="form-group">-->
+      <!--<div class="row">-->
+        <!--<div class="col-xs-3">-->
+          <!--<label>Type</label>-->
+        <!--</div>-->
+        <!--<div class="col-xs-9">-->
+          <!--<%#= f.select :education_type, AviationEducationDetail::EDTYPES, {:include_blank => true}, :class => "form-control fc2", required: true %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Qualification</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.select :program, AviationEducationDetail::PROGRAMS, {:include_blank => true}, :class => "form-control fc2", required: true %>
+          <%#= f.text_field :program, :label => false, :placeholder => "Qualification", :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Institution</label>
+        </div>
+        <div class="col-xs-9">
+          <%= f.text_field :institution, :label => false, :placeholder => "Institution", :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-3">
+          <label>Year Graduated</label>
+        </div>
+        <div class="col-xs-9">
+          <%#= f.text_field :period, :label => false, :class => "date_pick" %>
+          <%= f.select :period, (Time.zone.now.year - 50)..(Time.zone.now.year + 1) %>
+          <%#= f.text_field :period, :label => false, :placeholder => "Period(from - to)", :class => "form-control fc2"  %>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @aviation_education.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create new", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+

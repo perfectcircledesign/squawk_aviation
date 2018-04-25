@@ -1,0 +1,33 @@
+en:
+  refinery:
+    plugins:
+      notifications:
+        title: Notifications
+    notifications:
+      admin:
+        notifications:
+          actions:
+            create_new: Add New Notification
+            reorder: Reorder Notifications
+            reorder_done: Done Reordering Notifications
+          records:
+            title: Notifications
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no Notifications yet. Click "Add New Notification" to add your first notification.
+          notification:
+            view_live_html: View this notification live <br/><em>(opens in a new window)</em>
+            edit: Edit this notification
+            delete: Remove this notification forever
+      notifications:
+        show:
+          other: Other Notifications
+  activerecord:
+    attributes:
+      'refinery/notifications/notification':
+        notification_type: Notification Type
+        url: Url
+        receiver_id: Receiver
+        receiver_class: Receiver Class
+        sender_id: Sender
+        sender_class: Sender Class
+        seen: Seen

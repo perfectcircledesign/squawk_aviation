@@ -1,0 +1,35 @@
+nb:
+  refinery:
+    plugins:
+      invoices:
+        title: Invoices
+    invoices:
+      admin:
+        invoices:
+          actions:
+            create_new: Lag en ny Invoice
+            reorder: Endre rekkefølgen på Invoices
+            reorder_done: Ferdig å endre rekkefølgen Invoices
+          records:
+            title: Invoices
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Invoices enda. Klikk på "Lag en ny Invoice" for å legge til din første invoice.
+          invoice:
+            view_live_html: Vis hvordan denne invoice ser ut offentlig <br/><em>(åpner i et nytt vindu)</em>
+            edit: Rediger denne invoice
+            delete: Fjern denne invoice permanent
+      invoices:
+        show:
+          other: Andre Invoices
+  activerecord:
+    attributes:
+      'refinery/invoices/invoice':
+        invoice_number: Invoice Number
+        trans_number: Trans Number
+        sub_type: Sub Type
+        start_date: Start Date
+        end_date: End Date
+        price_dollar: Price Dollar
+        price_rand: Price Rand
+        card_last_digits: Card Last Digits
+        customer_id: Customer

@@ -1,0 +1,27 @@
+fr:
+  refinery:
+    plugins:
+      airlines:
+        title: Airlines
+    airlines:
+      admin:
+        airlines:
+          actions:
+            create_new: Créer un(e) nouve(au/l/lle) Airline
+            reorder: Réordonner les Airlines
+            reorder_done: Fin de réordonnancement des Airlines
+          records:
+            title: Airlines
+            sorry_no_results: "Désolé ! Aucun résultat."
+            no_items_yet: 'Il n''y a actuellement aucun(e) Airline. Cliquer sur "Créer un(e) nouve(au/l/lle) Airline" pour créer votre premi(er/ère) airline.'
+          airline:
+            view_live_html: Voir ce(t/tte) airline <br/><em>(Ouvre une nouvelle fenêtre)</em>
+            edit: Modifier ce(t/tte) airline
+            delete: Supprimer définitivement ce(t/tte) airline
+      airlines:
+        show:
+          other: Autres Airlines
+  activerecord:
+    attributes:
+      'refinery/airlines/airline':
+        name: Name

@@ -1,0 +1,28 @@
+<%= form_for [refinery, :aircrafts_admin, @aircraft] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @aircraft,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%= f.label :name -%>
+    <%= f.text_field :name, :class => 'larger widest'  -%>
+
+  </div>
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :weight, "Weight (10 000 tons)" -%>-->
+    <!--<%#= f.select :weight, ::Refinery::Aircrafts::Aircraft::CRAFTS, {:include_blank => true} %>-->
+  <!--</div>-->
+
+  <!--<div class='field'>-->
+    <!--<%#= f.label :engine -%>-->
+    <!--<%#= f.select :engine, ::Refinery::Aircrafts::Aircraft::ENGINES, {:include_blank => true} %>-->
+  <!--</div>-->
+
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.aircrafts.admin.aircrafts.aircraft'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @aircraft.name) %>
+<% end -%>

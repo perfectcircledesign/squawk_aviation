@@ -1,0 +1,61 @@
+<% if RUBY_VERSION < '1.9' %>
+  <%- require 'rubygems' %>
+  <%- require 'faster_csv' %>
+  <% csv = FasterCSV %>
+<% else %>
+  <%- require 'csv' %>
+  <% csv = CSV %>
+<% end %>
+
+<%- headers = ['order number',
+               'customer',
+               'order status',
+               'date purchased',
+               'delivery address',
+               'suburb',
+               'city',
+               'postal code',
+               'payment type',
+               'delivery option',
+               'delivery cost',
+               'waybill number',
+               'coupon description',
+               'discount amount',
+               'order item product',
+               'order item stock code',
+               'order item price',
+               'order item quantity',
+               'order item total',
+               'order total'
+
+
+] -%>
+<%= csv.generate_line headers -%>
+<%= csv.generate do |csv|
+  @orders.each do |order|
+    order.order_items.each do |order_item|
+      csv << [sanitize_csv_field(order.order_number),
+              sanitize_csv_field(order.customer.first_name+" "+order.customer.surname),
+              sanitize_csv_field(order.order_status),
+              sanitize_csv_field(order.created_at.strftime("%d-%B-%Y")),
+              sanitize_csv_field(order.address_line_1+", "+order.address_line_2),
+              sanitize_csv_field(order.suburb),
+              sanitize_csv_field(order.city),
+              sanitize_csv_field(order.postal_code),
+              sanitize_csv_field(order.payment_type),
+              sanitize_csv_field(order.delivery_option_name),
+              sanitize_csv_field(order.delivery_cost),
+              sanitize_csv_field(order.delivery_waybill_number),
+              sanitize_csv_field(order.coupon_description),
+              sanitize_csv_field(order.coupon_discount_amount),
+              sanitize_csv_field(order_item.product_name),
+              sanitize_csv_field(order_item.product_stock_code),
+              sanitize_csv_field(order_item.price),
+              sanitize_csv_field(order_item.quantity),
+              sanitize_csv_field(order_item.total),
+              sanitize_csv_field(order.grand_total)
+      ]
+    end
+
+  end
+end %>

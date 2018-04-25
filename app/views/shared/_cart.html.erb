@@ -1,0 +1,35 @@
+<div id="side_nav">
+  <h2>My Cart</h2>
+  <table class="table cart">
+
+    <% if @current_cart.line_items.present? %>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+      </tr>
+        <% @current_cart.line_items.each do |cart_item| %>
+          <% if cart_item.product.present? %>
+            <tr>
+              <td><%= cart_item.product.name %></td>
+              <td><%= rands cart_item.product.price %>.00</td>
+            </tr>
+          <% end %>
+        <% end %>
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="total">Grand Total</td>
+        <td class="total"><%= rands(@current_cart.grand_total) %>.00</td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= link_to(raw('Checkout') , refinery.new_orders_order_path, class: "btn btn-custom")  %></td>
+      </tr>
+    <% else %>
+
+          No Products
+
+
+    <% end %>
+  </table>
+</div>

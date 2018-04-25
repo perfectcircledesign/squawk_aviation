@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  license_authority: MyString
+  first_aid: false
+  CRM: false
+  SEPT: false
+  DG: false
+  Ditching: false
+  Fire_fighting: false
+  file_id: 1
+  customer_id: 1
+
+two:
+  license_authority: MyString
+  first_aid: false
+  CRM: false
+  SEPT: false
+  DG: false
+  Ditching: false
+  Fire_fighting: false
+  file_id: 1
+  customer_id: 1

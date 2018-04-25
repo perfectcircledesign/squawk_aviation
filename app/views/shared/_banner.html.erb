@@ -1,0 +1,25 @@
+<% if @page.present? and @page.banners.published.present? and home_page? %>
+  <div class="master-slider ms-skin-default" id="masterslider">
+      <% @page.banners.published.each do |banner| %>
+        <div class="ms-slide slide-1" data-delay="7">
+          <%= image_fu(banner.image, "1920x1035#c") %>
+          <div class="ms-layer image" data-type="text" data-delay="500" data-resize="false" data-duration="2000" data-ease="easeOutExpo">
+            <img src="/assets/logo.png" class="logo">
+          </div>
+          <div class="ms-layer text" data-type="text" data-delay="500" data-resize="false" data-duration="2000" data-ease="easeOutExpo">
+            <h1><%= raw banner.name %></h1>
+            <% if banner.description.present? %>
+              <h3 class="hidden-xs"><%= raw banner.description %></h3>
+            <% end %>
+            <% if banner.url.present? %>
+              <a href="<%= banner.url %>" class="btn btn-custom">Find out more</a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <div class="clear"></div>
+<% end %>
+
+
+

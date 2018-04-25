@@ -1,0 +1,35 @@
+<%= form_for [refinery, :subscriptions_admin, @subscription] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @subscription,
+              :include_object_name => true %>
+
+
+
+  <div class='field'>
+    <%= f.label :customer_id -%>
+    <%= f.collection_select :customer_id, ::Refinery::Customers::Customer.order(:first_name), :id , :first_name, {:prompt => "Select"}, {} -%>
+  </div>
+
+  <div class='field'>
+    <%= f.label :credit_card_id -%>
+    <%= f.text_field :credit_card_id  -%>
+
+  </div>
+
+  <div class='field'>
+    <%= f.label :plan_id -%>
+    <%= f.text_field :plan_id  -%>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :exp_date -%>
+    <%= f.date_select :exp_date  -%>
+
+  </div>
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.subscriptions.admin.subscriptions.subscription'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @subscription.customer_id) %>
+<% end -%>

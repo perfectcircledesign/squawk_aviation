@@ -1,0 +1,230 @@
+<% content_for :title do %>
+  Airline Details
+<% end %>
+
+<% content_for :content do %>
+  <div class="row">
+  <div class="col-md-4">
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+        <img class="profile-user-img img-responsive img-circle" src="/assets/profile-blank.jpg" alt="User profile picture">
+
+        <h3 class="profile-username text-center"><%= @airline.name %></h3>
+
+        <!--<p class="text-muted text-center">Airline Location</p>-->
+
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <b>Joined</b> <a class="pull-right">2017</a>
+          </li>
+          <li class="list-group-item">
+            <b>Last Active</b> <a class="pull-right">24 August 2017</a>
+          </li>
+          <li class="list-group-item">
+            <b>Days since last post</b> <a class="pull-right"><% if @airline.articles.present? %>
+              <%= (Date.today - @airline.articles.last.created_at.to_date).to_i %>
+          <% else %>
+              0
+          <% end %></a>
+          </li>
+          <li class="list-group-item">
+            <b>Profile Views</b> <a class="pull-right"><%= @airline.views_count.to_s %></a>
+          </li>
+          <li class="list-group-item">
+            <b>Jobs Listed</b> <a class="pull-right">10</a>
+          </li>
+          <li class="list-group-item">
+            <b>Articles Posted</b> <a class="pull-right"><%= @airline.articles.count %></a>
+          </li>
+          <% if @airline.website.present? %>
+            <li class="list-group-item">
+              <b>Website</b> <a class="pull-right" href="<%= @airline.website %>" target="_blank"><%= @airline.website %></a>
+            </li>
+          <% end %>
+          <% if @airline.facebook.present? %>
+            <li class="list-group-item">
+              <b>Facebook</b> <a class="pull-right" href="<%= @airline.facebook %>" target="_blank"><%= @airline.facebook %></a>
+            </li>
+          <% end %>
+          <% if @airline.twitter.present? %>
+            <li class="list-group-item">
+              <b>Twitter</b> <a class="pull-right" href="<%= @airline.twitter %>" target="_blank"><%= @airline.twitter %></a>
+            </li>
+          <% end %>
+          <% if @airline.linkedin.present? %>
+            <li class="list-group-item">
+              <b>Linkedin</b> <a class="pull-right" href="<%= @airline.linkedin %>" target="_blank"><%= @airline.linkedin %></a>
+            </li>
+          <% end %>
+          <% if @airline.googleplus.present? %>
+            <li class="list-group-item">
+              <b>Google +</b> <a class="pull-right" href="<%= @airline.googleplus %>" target="_blank"><%= @airline.googleplus %></a>
+            </li>
+          <% end %>
+        </ul>
+
+        <!--<a href="#" class="btn btn-primary btn-block"><b>Revoke Account</b></a>-->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Customers Liked</h3>
+      </div>
+      <div class="box-body">
+        <% @favourite_customers = Refinery::Customers::Customer.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.airline_id = ? AND favourites.customer_id = refinery_customers.id', 'Airline', @airline.id) %>
+          <% if @favourite_customers.present? %>
+            <% @favourite_customers.limit(10).each do |customer| %>
+              <%= customer.name %><br>
+            <% end %>
+          <% else %>
+            <p class="text-center">No Favourited Customers</p>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Jobs Posted</h3>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-12">
+        <table id="example2" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Published Date</th>
+              <th>Active</th>
+              <th>Expire Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% if @airline.jobs.present? %>
+            <% @airline.jobs.each do |job| %>
+              <tr>
+                <td><%= job.name %></td>
+                <td><%= job.published_date.strftime('%e %B %Y') if job.published_date.present?  %></td>
+                <td><%= job.active ? 'True' : 'False' %></td>
+                <td><%= job.expiry_date.strftime('%e %B %Y') if job.expiry_date.present? %></td>
+                <td>
+                  <!--<a href="#" class="btn btn-flat btn-default btn-xs">Disable</a> -->
+                  <a href="<%= refinery.jobs_job_path(job) %>" target="_blank" class="btn btn-flat btn-primary btn-xs">View</a>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+            <!--<tr>-->
+              <!--<td>Emirates Captain</td>-->
+              <!--<td>21 October 2017</td>-->
+              <!--<td>Active</td>-->
+              <!--<td>15 December 2017</td>-->
+              <!--<td><a href="#" class="btn btn-flat btn-default btn-xs">Disable</a> <a href="#" class="btn btn-flat btn-primary btn-xs">View</a></td>-->
+            <!--</tr>-->
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <!-- TODO: This is just a layout. needs to be linked -->
+      <!--<div class="row">-->
+        <!--<div class="col-sm-5">-->
+          <!--<div class="dataTables_info">Showing 1 to 10 of 19 entries</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7">-->
+          <!--<div class="dataTables_paginate">-->
+            <!--<ul class="pagination">-->
+              <!--<li class="paginate_button previous disabled">-->
+                <!--<a href="#">Previous</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button active">-->
+                <!--<a href="#">1</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button ">-->
+                <!--<a href="#">2</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button next" id="customers_next">-->
+                <!--<a href="#">Next</a>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+  <div class="box box-success">
+    <div class="box-header with-border">
+      <h3 class="box-title">Articles Posted</h3>
+    </div>
+    <div class="box-body">
+      <div class="row">
+      <div class="col-xs-12">
+      <table id="example2" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Article</th>
+            <th>Date Created</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if @airline.articles.present? %>
+            <% @airline.articles.each do |article| %>
+                <tr>
+                  <td><%= article.name %></td>
+                  <td><%= article.created_at.strftime('%e %B %Y') if article.created_at.present?  %></td>
+                  <td>
+                    <!--<a href="#" class="btn btn-flat btn-default btn-xs">Disable</a> -->
+                    <a href="<%= refinery.articles_article_path(article) %>" target="_blank" class="btn btn-flat btn-primary btn-xs">View</a>
+                  </td>
+                </tr>
+            <% end %>
+        <% end %>
+          <!--<tr>-->
+            <!--<td>New planes set to skyrocket</td>-->
+            <!--<td>21 October 2017</td>-->
+            <!--<td>Yes</td>-->
+            <!--<td>22 October 2017</td>-->
+            <!--<td>-->
+              <!--<a href="#" class="btn btn-flat btn-default btn-xs">Disable</a>-->
+              <!--<a href="#" class="btn btn-flat btn-primary btn-xs">View</a>-->
+            <!--</td>-->
+          <!--</tr>-->
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <!-- TODO: This is just a layout. needs to be linked -->
+      <!--<div class="row">-->
+        <!--<div class="col-sm-5">-->
+          <!--<div class="dataTables_info">Showing 1 to 10 of 19 entries</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-7">-->
+          <!--<div class="dataTables_paginate">-->
+            <!--<ul class="pagination">-->
+              <!--<li class="paginate_button previous disabled">-->
+                <!--<a href="#">Previous</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button active">-->
+                <!--<a href="#">1</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button ">-->
+                <!--<a href="#">2</a>-->
+              <!--</li>-->
+              <!--<li class="paginate_button next" id="customers_next">-->
+                <!--<a href="#">Next</a>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+  </div>
+  </div>
+<% end %>
+
+<% content_for :javascript do %>
+
+<% end %>

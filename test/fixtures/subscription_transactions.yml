@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_id: 1
+  subscription_id: 1
+  credit_card_id: 1
+  amount: MyString
+  notes: MyString
+  transaction_status: MyString
+
+two:
+  customer_id: 1
+  subscription_id: 1
+  credit_card_id: 1
+  amount: MyString
+  notes: MyString
+  transaction_status: MyString
