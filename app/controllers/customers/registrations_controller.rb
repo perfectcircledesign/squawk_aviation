@@ -3,7 +3,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   before_filter :authenticate_customer!
   before_filter :find_page
-  skip_before_filter :check_customer, :only => [:wizard, :update, :create, :new, :edit, :status, :payments, :load_new_form, :retry_payment]
+  skip_before_filter :check_customer, :only => [:wizard, :account, :update, :create, :new, :edit, :status, :payments, :load_new_form, :retry_payment]
 
   def wizard
     # if current_customer.trial? and !current_customer.trial_vaild?
@@ -193,6 +193,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   def account
       @show_nav = true
       @customer = Refinery::Customers::Customer.find(current_customer.id)
+      @subscriptions_deail = Refinery::Subscriptions::Subscription.where(customer_id:current_customer.id)
+      #@subscriptions_deail = Refinery::Subscriptions::Subscription.find(3)
+
+      #Rails.logger.debug "Customer deatils #{@subscriptions_deail}"
+      #abort
       @favourite_airlines = Refinery::Airlines::Airline.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.customer_id = ? AND favourites.airline_id = refinery_airlines.id', 'pilot', @customer.id)
       @favourite_jobs = Refinery::Jobs::Job.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.customer_id = ? AND favourites.job_id = refinery_jobs.id', 'pilot', @customer.id)
   end

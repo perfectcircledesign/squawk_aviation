@@ -150,6 +150,9 @@ module Refinery
 
         present(@page)
       end
+      def request_profile
+        
+      end
 
       def print_cv
         if params[:customer_id].present?
@@ -160,6 +163,7 @@ module Refinery
       end
 
       def show
+        @customer_detail = Refinery::Subscriptions::Subscription.where(customer_id:params[:id])
         @show_nav = true
         @stylesheet = 'user-profile'
         @customer = Customer.find(params[:id])

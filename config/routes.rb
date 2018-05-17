@@ -14,6 +14,7 @@ Jetcrew360::Application.routes.draw do
 
   devise_scope :customer do
     match 'account' => 'customers/registrations#account', :as => 'account'
+    match 'payperview_subs' => 'refinery/subscriptions/subscriptions#payperview_subs', :as => 'payperview_subs'
     match 'wizard' => 'customers/registrations#wizard', :as => 'wizard'
     match 'payments' => 'customers/registrations#payments', :as => 'payments'
     match 'invoice_show' => 'customers/registrations#invoice_show', :as => 'invoice_show'
@@ -23,6 +24,8 @@ Jetcrew360::Application.routes.draw do
     match '/jobs_feed' => 'customers/registrations#jobs_feed', :as => 'jobs_feed'
     match '/search' => 'customers/registrations#search', :as => 'search'
     get 'load_new_form' => 'customers/registrations#load_new_form', as: :load_new_form
+    #match 'request_profile' => "refinery/customers/customers#request_profile", :as => 'request_profile'
+    post 'request_profile' => 'refinery/customers/customers#request_profile', :as => 'request_profile'
     # get '/customers/auth/facebook', to: "customers/omniauth_callbacks#facebook", as: :customer_facebook_omniauth_authorize
     # get '/customers/auth/linkedin', to: "customers/omniauth_callbacks#linkedin", as: :customer_linkedin_omniauth_authorize
   end

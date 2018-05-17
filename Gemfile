@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 #GERARD DID THIS
-ruby '1.9.3'
+#ruby '1.9.3'
 
 gem 'rails', '3.2.13'
 

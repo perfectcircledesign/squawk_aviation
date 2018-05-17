@@ -29,7 +29,7 @@
               </div>
               <% if @customers.present? %>
                 <% @customers.each do |customer| %>
-                  <% next if !['Trail','Active'].include?(customer.account_status) %>
+                  <% next if !['Trail','Active','Pay per view'].include?(customer.account_status) %>
                     <div class="media">
                       <div class="media-left">
                         <% if customer.profile_image.present? %>

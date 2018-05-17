@@ -21,6 +21,13 @@ module Refinery
         present(@page)
       end
 
+      def payperview_subs
+        # if current_customer.subscription.present?
+        #   redirect_to '/payments'
+        # end
+        redirect_to '/payments'
+      end
+
       def destroy
         item = Refinery::Subscriptions::Subscription.find(params[:id])
         cust = item.customer_id
@@ -34,33 +41,36 @@ module Refinery
       end
 
       def create
-
-        if params[:plan_id].present?
-          # send to get token
-          plan = Refinery::Plans::Plan.find(params[:plan_id])
-          require 'eu_central_bank'
-          eu_bank = EuCentralBank.new
-          Money.default_bank = eu_bank
-          eu_bank.update_rates
-          cost = sprintf "%.2f", eu_bank.exchange_with(Money.new(plan.cost, "USD"), "ZAR").cents
-
-          if CreditCardValidations::Luhn.valid?(params[:credit_card][:card_number].gsub(' ', ''))
-              card = ::PeachPayments::CreditCard.new(credit_card_params)   
-              peachPayment = PeachPayments::Overlord.new
-              @capture_result = peachPayment.pay_and_clear(card, cost, current_customer, params[:plan_id])
-              if !@capture_result.redirect?
-                flash[:notice] = @capture_result.description
-                redirect_to '/status'
-              end
+        if (params[:plan_id]=='3')
+          card = CreditCard.create(:customer_id => current_customer.id, :last_digits => params[:credit_card][:card_number], :holder =>  params[:credit_card][:holder], :exp_month => params[:credit_card][:exp_month], :exp_year => params[:credit_card][:exp_year])
+          Refinery::Subscriptions::Subscription.create(customer_id: current_customer.id, exp_date: '', plan_id: params[:plan_id], credit_card_id: card.id)
+            redirect_to '/account'
+        else
+          if params[:plan_id].present?
+            # send to get token
+            plan = Refinery::Plans::Plan.find(params[:plan_id])
+            require 'eu_central_bank'
+            eu_bank = EuCentralBank.new
+            Money.default_bank = eu_bank
+            eu_bank.update_rates
+            cost = sprintf "%.2f", eu_bank.exchange_with(Money.new(plan.cost, "USD"), "ZAR").cents
+            if CreditCardValidations::Luhn.valid?(params[:credit_card][:card_number].gsub(' ', ''))
+                card = ::PeachPayments::CreditCard.new(credit_card_params)   
+                peachPayment = PeachPayments::Overlord.new
+                @capture_result = peachPayment.pay_and_clear(card, cost, current_customer, params[:plan_id])
+                if !@capture_result.redirect?
+                  flash[:notice] = @capture_result.description
+                  redirect_to '/status'
+                end
+            else
+              flash[:error] = "CreditCard info was incorrect, please try again"
+              redirect_to '/subscriptions/new'
+            end
           else
-            flash[:error] = "CreditCard info was incorrect, please try again"
+            flash[:error] = "Please select a payment plan"
             redirect_to '/subscriptions/new'
           end
-        else
-          flash[:error] = "Please select a payment plan"
-          redirect_to '/subscriptions/new'
         end
-
       end
 
       def determine_user_layout

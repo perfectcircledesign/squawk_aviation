@@ -430,11 +430,11 @@ ActiveRecord::Schema.define(:version => 20180220091151) do
     t.string   "uid"
     t.string   "facebook_image_url"
     t.string   "small_facebook_image_url"
+    t.boolean  "agree_tc"
     t.string   "linkedin_image_url"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.boolean  "agree_tc"
     t.date     "trial_start_at"
     t.date     "trial_end_at"
     t.boolean  "free_user",                   :default => false

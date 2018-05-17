@@ -102,8 +102,15 @@
                           <input type="radio" id="<%= plan.id %>" name="plan_id" value="<%= plan.id %>" class="hidden option<%= plan.id %>">
                           <div class="plan-option">
                             <label for="<%= plan.id %>">
-                              <h1>$<%= plan.cost %></h1>
-                              <% if plan.duration == '1' %>
+                              <% if plan.duration != '' %>
+                                <h1>$<%= plan.cost %></h1>
+                              <% else %>
+                                <h1>&nbsp;</h1>
+                              <% end %>
+
+                              <% if plan.duration == '' %>
+                                <h4>&nbsp;</h4>
+                              <% elsif plan.duration == '1' %>
                                   <h4>Billed every Month</h4>
                               <% else %>
                                   <h4>Billed every <%= plan.duration %> Months</h4>
@@ -119,6 +126,7 @@
 
                     <div class="text-center next">
                       <a href="#tab3" id="step3-highlight" class="btn btn-blue" data-toggle="tab">Continue</a>
+                      <a id="step-direct-highlight" style="display: none;" class="btn btn-blue" data-toggle="tab">Continue</a>
                     </div>
                   </div>
                 </div>
@@ -280,6 +288,23 @@
 
     <script type="application/javascript">
       $(window).load(function () {
+          /*$('input[name="plan_id"]').click(function(){
+            var button_val = $(this).val();
+            if(button_val==3){
+              $("#step-direct-highlight").show()
+              $("#step3-highlight").hide()
+            }else{
+              $("#step-direct-highlight").hide()
+              $("#step3-highlight").show()
+            }
+          });
+          $('#step-direct-highlight').click(function(){
+
+              if($('input[name="plan_id"]').val()==3){
+                window.location.href="/payperview_subs";
+              }else{
+              }
+          });*/
           var card = new Card({
               form: '.new_credit_card',
               container: '.card-wrapper',

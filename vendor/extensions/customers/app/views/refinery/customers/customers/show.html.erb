@@ -53,44 +53,71 @@
             <% end %>
           </div>
           <div class="col-xs-3">
-            <div class="card send-message">
-              <h4>Send a Message</h4>
-              <% @message = Refinery::Messages::Message.new %>
-              <%= simple_form_for [refinery, :messages, @message] do |f| -%>
-                  <%= f.hidden_field :seen, :label => false, :value => false  %>
-                  <%= f.hidden_field :sender, :label => false, :value => 'airline-message'  %>
-                  <%= f.hidden_field :airline_id, :label => false, :value => current_airline.id  %>
-                  <%= f.hidden_field :customer_id, :label => false, :value => @customer.id  %>
-                  <%= f.text_area :message, :rows => 4, :class=>"form-control"  %>
-                  <!--<textarea name="message[message]" class='form-control autoExpand' rows='1' data-min-rows='1' placeholder="Reply"></textarea>-->
-                  <button type="submit" style="margin-top: 10px;" class="btn btn-blue btn-window" >Submit</button>
-              <% end -%>
-            </div>
-            <div class="card contact-number">
-              <h4>Contact Details</h4>
-              <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> <%= mail_to(@customer.email) %><br/>
-              <i class="fa fa-phone-square fa-fw" aria-hidden="true"></i><div class="extension_display" style="display: initial;"><%= @customer.contact_number %></div><br>
-              <a href="/print_cv?customer_id=<%= @customer.id %>" class="btn btn-blue btn-window"  target="_blank">Print Portfolio</a>
+            <% 
+              @message = Refinery::Messages::Message.new
+              if(@customer_detail.first.present?)
+                if(@customer_detail.first.exp_date!=nil) %>
+                  <div class="card send-message">
+                    <h4>Send a Message</h4>
+                    <%= simple_form_for [refinery, :messages, @message] do |f| -%>
+                        <%= f.hidden_field :seen, :label => false, :value => false  %>
+                        <%= f.hidden_field :sender, :label => false, :value => 'airline-message'  %>
+                        <%= f.hidden_field :airline_id, :label => false, :value => current_airline.id  %>
+                        <%= f.hidden_field :customer_id, :label => false, :value => @customer.id  %>
+                        <%= f.text_area :message, :rows => 4, :class=>"form-control"  %>
+                        <!--<textarea name="message[message]" class='form-control autoExpand' rows='1' data-min-rows='1' placeholder="Reply"></textarea>-->
+                        <button type="submit" style="margin-top: 10px;" class="btn btn-blue btn-window" >Submit</button>
+                    <% end -%>
+                  </div>
+                  <div class="card contact-number">
+                    <h4>Contact Details</h4>
+                    <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> <%= mail_to(@customer.email) %><br/>
+                    <i class="fa fa-phone-square fa-fw" aria-hidden="true"></i><div class="extension_display" style="display: initial;"><%= @customer.contact_number %></div><br>
+                    <a href="/print_cv?customer_id=<%= @customer.id %>" class="btn btn-blue btn-window"  target="_blank">Print Portfolio</a>
 
-              <input class="hidden extension" value="<%= @customer.phone_extension1 %>">
-              <script src="/assets/intlTelInput.min.js"></script>
-              <script type="text/javascript">
-                  var countryData = $.fn.intlTelInput.getCountryData();
-                  $.each(countryData, function(i, country) {
-                      if (country.iso2 == $(".extension").val()){
-                          $(".extension_display").prepend("(+" + country.dialCode +") ");
-                      }
+                    <input class="hidden extension" value="<%= @customer.phone_extension1 %>">
+                    <script src="/assets/intlTelInput.min.js"></script>
+                    <script type="text/javascript">
+                        var countryData = $.fn.intlTelInput.getCountryData();
+                        $.each(countryData, function(i, country) {
+                            if (country.iso2 == $(".extension").val()){
+                                $(".extension_display").prepend("(+" + country.dialCode +") ");
+                            }
 
-                  });
-              </script>
-            </div>
+                        });
+                    </script>
+                  </div>
+              <% else %>
+
+                  <div class="card send-message">
+                    <button type="button" data_request_type="airline-message" data_request_frm="<%=current_airline.id%>" data_customer_id="<%=@customer.id %>" style="margin-top: 10px;display: block;margin: auto;" class="btn btn-blue btn-window request_profile" >Request profile</button>
+                  </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
 
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.request_profile').click(function(){
+      var data_request_type = $(this).attr('data_request_type');
+      var data_request_frm = $(this).attr('data_request_frm');
+      var data_customer_id = $(this).attr('data_customer_id');
+      $.ajax({
+        url: "/request_profile", 
+        type: "POST", 
+        success: function(result){
+          $('.employment').html(result);
+        }
+    });
+    });
+  });
+</script>
 
 <% end %>
+
 
 <%= render '/refinery/content_page' %>

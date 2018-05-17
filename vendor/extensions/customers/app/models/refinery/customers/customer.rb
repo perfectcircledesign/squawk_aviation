@@ -165,6 +165,8 @@ module Refinery
           status = 'Inactive'
         elsif self.subscription.present? and self.subscription.exp_date.present? and self.subscription.exp_date <= Date.today
           status = 'Expired'
+        elsif self.subscription.present?
+          status = 'Pay per view'
         end
         status
       end

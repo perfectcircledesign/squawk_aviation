@@ -163,8 +163,19 @@
           </form>
     
     <div class="collapse navbar-collapse" id="navigation">
-      
       <ul class="nav navbar-nav navbar-right">
+      <% 
+        if(@subscriptions_deail.present?)
+          if (@subscriptions_deail.first.plan_id!=3)
+            show_nav_user_role = 1
+           else
+            show_nav_user_role = 0
+          end
+        else
+          show_nav_user_role = 1
+        end
+
+        if (show_nav_user_role==1) %>
         <li><a href="/news_feed"><img src="/assets/home.png">Feed</a></li>
         <li><a href="/jobs_feed"><img src="/assets/jobs.png">Jobs</a></li>
         <li><a href="/airlines"><img src="/assets/airlines.png">Airlines</a></li>
@@ -174,6 +185,8 @@
           <span class="notification_count"><%= current_customer.unread_message_count if current_customer.unread_message_count > 0 %></span>
         <% end %>
         </a></li>
+          <% end %>
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle activate_notify" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" remote="true"><img src="/assets/notifications.png"><span class="notification_title">Notifications</span>
           <% if current_customer.notification_count > 0 %>

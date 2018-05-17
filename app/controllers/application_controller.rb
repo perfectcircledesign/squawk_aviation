@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :get_current_users, :check_airline
   layout :determine_layout
   before_filter :determine_notification_count, :check_customer
+  skip_before_filter :check_customer, :only => [:update, :create, :new, :edit]
 
   def determine_layout
       if home_page?
@@ -47,12 +48,15 @@ class ApplicationController < ActionController::Base
   end
 
   def check_customer
+    #Rails.logger.debug "User_dtail dd #{current_customer.subscription.inspect}"
     if current_customer.present?
       if (current_customer.trial? and !current_customer.trial_vaild?) and current_customer.subscription.nil? and !current_customer.free_user
         return redirect_to '/subscriptions/new'
       elsif !current_customer.trial? and current_customer.subscription.nil? and !current_customer.free_user
         return redirect_to '/subscriptions/new'
-      elsif current_customer.subscription.present? and (current_customer.subscription.suspend or current_customer.subscription.exp_date < DateTime.now ) and !current_customer.free_user
+      #elsif current_customer.subscription.present? and (current_customer.subscription.suspend or current_customer.subscription.exp_date? < DateTime.now ) and !current_customer.free_user
+      # comment ODZ dev 
+      elsif current_customer.subscription.present? and (current_customer.subscription.suspend  ) and !current_customer.free_user
         flash[:error] = 'Sorry, subscription has expired.'
         redirect_to '/payments'
       elsif !current_customer.career_path.present?
