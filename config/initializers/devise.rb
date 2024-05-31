@@ -144,8 +144,8 @@ require 'devise'
   #   #end
   #   #manager.default_strategies(:scope => :user).unshift :twitter_oauth
   #end
-  config.omniauth :facebook, '241084483082027', '381cc6cd0034a111abd8a6a0fc2c0aa5', scope:'email,public_profile', info_fields: 'email,first_name,last_name,cover,picture'
-  config.omniauth :linkedin, '7886nqeyhc6l10' ,'PoQ7GrEEqra4V24L' , :display => "popup", :scope => 'r_basicprofile r_emailaddress'
+  # config.omniauth :facebook, '241084483082027', '381cc6cd0034a111abd8a6a0fc2c0aa5', scope:'email,public_profile', info_fields: 'email,first_name,last_name,cover,picture'
+  # config.omniauth :linkedin, '7886nqeyhc6l10' ,'PoQ7GrEEqra4V24L' , :display => "popup", :scope => 'r_basicprofile r_emailaddress'
 
 
   # Have to specifically setup the default strategies because Refinery is being totally evil and destroying this for the customer

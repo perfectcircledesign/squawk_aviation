@@ -3,7 +3,8 @@ source 'http://rubygems.org'
 #GERARD DID THIS
 #ruby '1.9.3'
 
-gem 'rails', '3.2.13'
+ruby '2.3.7'
+gem 'rails', '3.2.22.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -42,16 +43,17 @@ gem 'jbuilder'
 
 # To use debugger
 # gem 'debugger'
-gem 'json', '1.8.1'
-gem 'babosa', '0.3.11'
+# gem 'json', '1.8.1'
+gem 'babosa', '!=0.3.6'
 gem 'net-ssh', '2.9.2'
-gem 'rack-cache', '1.2'
+gem 'coffee-script-source', '1.8.0'
+gem 'rack-cache'
 gem 'nokogiri', '1.6.8.1'
-gem 'i18n', '0.6.1'
+gem 'i18n'
 gem 'sort_alphabetical', '1.0.2'
 gem 'sass', '3.4.24'
 gem 'credit_card_validations'
-gem 'rake', '12.1.0'
+gem 'rake'
 gem 'money', '5.1.1'
 
 gem 'roo', '~> 1.13.2'
@@ -103,7 +105,7 @@ gem 'airbrake', '~> 3.1.6'
 gem "jquery-colorbox-rails", "0.1.4"
 
 # Required to get Refinery working on Heroku
-gem 'fog', '~> 0.8.1'
+gem 'fog','1.22.1'
 
 #Monitoring
 gem 'newrelic_rpm',  '3.18.1.330'
@@ -119,7 +121,7 @@ end
 group :production do
   gem 'pg', "0.17.1"
   #gem 'thin'
-  gem "puma"
+  gem 'puma', '3.10'
 end
 
 gem 'scout_apm'
@@ -137,8 +139,13 @@ gem 'omniauth-oauth2', '1.4'
 
 gem 'eu_central_bank'
 
-gem 'wicked_pdf'
+gem 'wicked_pdf', '1.1'
 gem 'wkhtmltopdf-binary'
+
+gem 'mime-types'
+gem 'test-unit', '~> 3.0'
+
+gem 'dry-inflector', '0.1.2'
 
 
 gem 'refinerycms-employers', :path => 'vendor/extensions'
