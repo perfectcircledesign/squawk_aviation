@@ -73,7 +73,7 @@ gem 'bcrypt-ruby', '3.0.1'
 
 gem "refinerycms-pods", "~> 2.1.0"
 gem "refinerycms-videos", "~> 2.0.1"
-gem "refinerycms-portfolio", :git => "git://github.com/refinery/refinerycms-portfolio.git", :branch => "2-0-stable"
+gem "refinerycms-portfolio", :git => "https://github.com/refinery/refinerycms-portfolio.git", :branch => "2-0-stable"
 gem "refinerycms-pc_banners", "~> 2.0.2"
 gem "refinerycms-inquiries", "~> 2.0.0"
 gem "simple_form", "~> 2.0.2"
