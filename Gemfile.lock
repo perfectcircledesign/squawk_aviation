@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/refinery/refinerycms-portfolio.git
+  remote: https://github.com/refinery/refinerycms-portfolio.git
   revision: 5c528cfe2ebff8cae4b018c70b74dcc9e6674ac6
   branch: 2-0-stable
   specs:
