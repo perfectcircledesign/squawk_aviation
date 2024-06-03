@@ -21,7 +21,7 @@ Jetcrew360::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.force_ssl = true
+  # config.force_ssl = false
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
