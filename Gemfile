@@ -121,7 +121,7 @@ end
 group :production do
   gem 'pg', "0.17.1"
   #gem 'thin'
-  gem 'puma', '3.10'
+  gem 'puma', '3.11.0'
 end
 
 gem 'scout_apm'

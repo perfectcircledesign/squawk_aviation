@@ -225,7 +225,7 @@ GEM
     pg (0.17.1)
     polyglot (0.3.5)
     power_assert (2.0.3)
-    puma (3.10.0)
+    puma (3.11.0)
     racc (1.5.2)
     rack (1.4.7)
     rack-cache (1.15.0)
@@ -413,7 +413,7 @@ DEPENDENCIES
   omniauth-linkedin-oauth2
   omniauth-oauth2 (= 1.4)
   pg (= 0.17.1)
-  puma (= 3.10)
+  puma (= 3.11.0)
   rack-cache
   rack-cors (= 1.0.1)
   rails (= 3.2.22.5)
