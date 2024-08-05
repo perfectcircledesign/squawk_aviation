@@ -49,19 +49,29 @@ class ApplicationController < ActionController::Base
 
   def check_customer
     #Rails.logger.debug "User_dtail dd #{current_customer.subscription.inspect}"
+    # raise
     if current_customer.present?
-      if (current_customer.trial? and !current_customer.trial_vaild?) and current_customer.subscription.nil? and !current_customer.free_user
-        return redirect_to '/subscriptions/new'
-      elsif !current_customer.trial? and current_customer.subscription.nil? and !current_customer.free_user
-        return redirect_to '/subscriptions/new'
-      #elsif current_customer.subscription.present? and (current_customer.subscription.suspend or current_customer.subscription.exp_date? < DateTime.now ) and !current_customer.free_user
-      # comment ODZ dev 
-      elsif current_customer.subscription.present? and (current_customer.subscription.suspend  ) and !current_customer.free_user
-        flash[:error] = 'Sorry, subscription has expired.'
-        redirect_to '/payments'
-      elsif !current_customer.career_path.present?
+      # raise
+      #set customer to a free user
+      if !current_customer.free_user
+        current_customer.update_attribute(:free_user, true)
+      end
+      if !current_customer.career_path.present?
         return redirect_to '/wizard'
       end
+
+      #till we need to change to payment again. set all customers to free users
+      #
+      # if (current_customer.trial? and !current_customer.trial_vaild?) and current_customer.subscription.nil? and !current_customer.free_user
+      #   return redirect_to '/subscriptions/new'
+      # elsif !current_customer.trial? and current_customer.subscription.nil? and !current_customer.free_user
+      #   return redirect_to '/subscriptions/new'
+      # elsif current_customer.subscription.present? and (current_customer.subscription.suspend  ) and !current_customer.free_user
+      #   flash[:error] = 'Sorry, subscription has expired.'
+      #   redirect_to '/payments'
+      # elsif !current_customer.career_path.present?
+      #   return redirect_to '/wizard'
+      # end
     end
   end
 
