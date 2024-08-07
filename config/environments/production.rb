@@ -54,7 +54,7 @@ Jetcrew360::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :protocol => 'https', :host => 'www.squawkaviation.com'}
+  config.action_mailer.default_url_options = { :protocol => 'https', :host => 'squawkaviation.co.za'}
 
   # config.action_mailer.default_url_options = { :protocol => 'https', :host => 'jetcrew360.herokuapp.com'}
 
