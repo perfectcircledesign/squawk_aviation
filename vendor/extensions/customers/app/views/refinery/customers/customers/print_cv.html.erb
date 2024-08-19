@@ -345,9 +345,9 @@
                   </tr>
                   <tr>
                     <td style="width: 1px; white-space: nowrap;">Start Date:</td>
-                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.start_date.strftime("%d/%m/%Y") %></td>
+                    <td style="width: 10000px; white-space: nowrap; padding-left: 10px"><%= item.start_date.strftime("%d/%m/%Y") if item.start_date.present? %></td>
                     <td style="width: 1px; white-space: nowrap;">End Date:</td>
-                    <td style="width: 10000px; white-space: nowrap;  padding-left: 10px"><%= item.end_date.strftime("%d/%m/%Y") %></td>
+                    <td style="width: 10000px; white-space: nowrap;  padding-left: 10px"><%= item.end_date.strftime("%d/%m/%Y") if item.end_date.present? %></td>
                   </tr>
                   <tr>
                     <td style="width: 1px; white-space: nowrap; padding-bottom: 20px;">Position Held:</td>
