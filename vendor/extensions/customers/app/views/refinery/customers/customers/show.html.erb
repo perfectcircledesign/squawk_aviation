@@ -74,7 +74,7 @@
                     <h4>Contact Details</h4>
                     <i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> <%= mail_to(@customer.email) %><br/>
                     <i class="fa fa-phone-square fa-fw" aria-hidden="true"></i><div class="extension_display" style="display: initial;"><%= @customer.contact_number %></div><br>
-                    <a href="/print_cv?customer_id=<%= @customer.id %>" class="btn btn-blue btn-window"  target="_blank">Print Portfolio</a>
+<!--                    <a href="/print_cv?customer_id=<%#= @customer.id %>" class="btn btn-blue btn-window"  target="_blank">Print Portfolio</a>-->
 
                     <input class="hidden extension" value="<%= @customer.phone_extension1 %>">
                     <script src="/assets/intlTelInput.min.js"></script>
