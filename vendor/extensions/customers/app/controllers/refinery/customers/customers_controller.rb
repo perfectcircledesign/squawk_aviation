@@ -5,11 +5,11 @@ module Refinery
 
       before_filter :find_page
 
-      skip_before_filter :check_customer, :only => [:sign_in_customer]
+      skip_before_filter :check_customer, :only => [:sign_in_customer, :print_cv]
 
       layout :determine_user_layout
 
-      before_filter :airline_account, :except => [:sign_in_customer]
+      before_filter :airline_account, :except => [:sign_in_customer, :print_cv]
 
       def sign_in_customer
         customer = Refinery::Customers::Customer.find_by_email(params[:email])
