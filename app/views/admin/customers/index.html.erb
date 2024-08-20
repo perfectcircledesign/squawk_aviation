@@ -27,7 +27,12 @@
               <td><%= customer.account_status %></td>
               <td><%= customer.complete_percentage.present? ? customer.complete_percentage : 0 %>%</td>
               <td><%= customer.created_at.strftime('%Y-%m-%d') %></td>
-              <td><%= link_to('Show', admin_customer_path(customer)) %> - <%= link_to('Imitate Customer', refinery.imitate_customer_path(:id => customer.id), :target => '_blank') %></td>
+              <td><%= link_to('Show', admin_customer_path(customer)) %>
+                -
+                <%= link_to('Imitate', refinery.imitate_customer_path(:id => customer.id), :target => '_blank') %>
+                -
+                <%= link_to('PDF', "/print_cv?customer_id=#{customer.id}", :target => '_blank') %>
+              </td>
             </tr>
           <% end %>
         </tbody>
