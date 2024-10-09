@@ -84,7 +84,7 @@ gem 'refinerycms-copywriting', '2.0.2'
 gem "nested_form"
 gem 'country_select'
 
-gem 'bootstrap-datepicker-rails', '1.3.0.2'
+# gem 'bootstrap-datepicker-rails', '1.3.0.2'
 
 # BLOG
 gem "refinerycms-blog", "~> 2.0.0"

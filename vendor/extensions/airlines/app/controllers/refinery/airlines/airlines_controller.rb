@@ -47,6 +47,7 @@ module Refinery
             favourite.destroy
           else
             Favourite.create(:airline_id => params[:airline_id], :customer_id => current_customer.id, :who_favourite => 'pilot')
+            @favourite_airline = ::Refinery::Airlines::Airline.where(id: params[:airline_id]).first
           end
         end
       end

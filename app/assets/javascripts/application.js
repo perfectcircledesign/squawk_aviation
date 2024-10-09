@@ -13,7 +13,6 @@
 //= require jquery_ujs
 //= require jquery.colorbox
 //= require refinerycms-pods
-//= require bootstrap-datepicker
 //= require intlTelInput
 //= require jquery_nested_form
 //= require isotope.pkgd.min
@@ -140,7 +139,10 @@ $(document).ready(function() {
     // });
     // $('.date_pick').dateDropper();
 
-    $(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });
+    // $(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });
+
+    $(".date_pick").flatpickr();
+
 
 
     //////////////////////////////////////////

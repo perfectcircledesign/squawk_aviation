@@ -1,8 +1,11 @@
+<% if @favourite_airline.present? %>
+  <div style="text-align: center;margin: -20px 0 20px 0;color: #03a9f5;">You are now following <%= @favourite_airline.name %></div>
+<% end %>
 <ul class="list-inline airlines_like_wiz">
   <%
     @favourite_airlines = Refinery::Airlines::Airline.active.eager_load(:favourites).where('favourites.who_favourite = ? AND favourites.customer_id = ? AND favourites.airline_id = refinery_airlines.id', 'pilot', current_customer.id)
     ids_to_exclude = @favourite_airlines.map{ |t| t.id}
-    @not_favourite_airlines = Refinery::Airlines::Airline.active.where('id NOT IN (?)', ids_to_exclude).order('position ASC').has_logo
+    @not_favourite_airlines = Refinery::Airlines::Airline.active.where('id NOT IN (?)', ids_to_exclude).order('position ASC').has_logo.first(20)
   %>
   <% if @not_favourite_airlines.present? %>
       <% @not_favourite_airlines.each do |airline| %>
