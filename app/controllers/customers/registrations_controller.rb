@@ -6,9 +6,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   skip_before_filter :check_customer, :only => [:wizard, :account, :update, :create, :new, :edit, :status, :payments, :load_new_form, :retry_payment]
 
   def wizard
-    if !current_customer.free_user
-      current_customer.update_attribute(:free_user, true)
-    end
+    # if !current_customer.free_user
+    #   current_customer.update_attribute(:free_user, true)
+    # end
     # if current_customer.trial? and !current_customer.trial_vaild?
     #   return redirect_to '/subscriptions/new'
     # elsif !current_customer.trial? and current_customer.subscription.nil?

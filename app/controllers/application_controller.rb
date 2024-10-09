@@ -53,9 +53,9 @@ class ApplicationController < ActionController::Base
     if current_customer.present?
       # raise
       #set customer to a free user
-      if !current_customer.free_user
-        current_customer.update_attribute(:free_user, true)
-      end
+      # if !current_customer.free_user
+      #   current_customer.update_attribute(:free_user, true)
+      # end
       if !current_customer.career_path.present?
         return redirect_to '/wizard'
       end

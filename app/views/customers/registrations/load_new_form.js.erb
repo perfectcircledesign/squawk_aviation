@@ -210,21 +210,21 @@ $('#new_form').modal({
   });
 <% end %>
 
-$('.date_pick').data( "theme", "calendar-squawk" );
-$('.date_pick').data( "modal", true);
-$('.date_pick').data( "large-mode", true);
-$('.date_pick').data( "format", "Y-m-d" );
-$('.date_pick').data( "max-year", "2030" );
-$('.date_pick').data( "min-year", "1800" );
-$(".date_pick").each(function() {
-    var v = $(this).val();
-    if(v.length > 0){
-      var value = v.substr(5,2) + "-" + v.substr(8,2) + "-" + v.substr(0,4);
-      $(this).data("default-date", value);
-    }
-});
-$('.date_pick').dateDropper();
+//$('.date_pick').data( "theme", "calendar-squawk" );
+//$('.date_pick').data( "modal", true);
+//$('.date_pick').data( "large-mode", true);
+//$('.date_pick').data( "format", "Y-m-d" );
+//$('.date_pick').data( "max-year", "2030" );
+//$('.date_pick').data( "min-year", "1800" );
+//$(".date_pick").each(function() {
+//    var v = $(this).val();
+//    if(v.length > 0){
+//      var value = v.substr(5,2) + "-" + v.substr(8,2) + "-" + v.substr(0,4);
+//      $(this).data("default-date", value);
+//    }
+//});
+//$('.date_pick').dateDropper();
 $('.pick-d').css('display', 'none');
 
 
-//$(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });
+$(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });

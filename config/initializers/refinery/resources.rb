@@ -22,5 +22,5 @@ Refinery::Resources.configure do |config|
   # config.dragonfly_secret = "b23f75be0d32c5b02cea2fa03c2a6968491b1ff4c9152cd0"
   # config.dragonfly_url_format = "/system/resources/:job/:basename.:format"
   # config.datastore_root_path = "C:/Dev/Workspace/jetcrew360/jetcrew360/public/system/refinery/resources"
-
+  config.dragonfly_verify_urls = false
 end
