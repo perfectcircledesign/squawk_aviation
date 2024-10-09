@@ -1,6 +1,9 @@
 <% if params[:wizard] %>
-$(".wizard_airlines").html("");
+console.log("hitting")
+//$("#search-loader").removeClass("d-none")
+//$(".wizard_airlines").html("");
 $(".wizard_airlines").html("<%= j render :partial => 'unliked_airlines' %>");
+//$("#search-loader").addClass("d-none")
 <% else %>
   location.reload();
 <% end %>
