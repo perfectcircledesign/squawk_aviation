@@ -141,7 +141,7 @@ $(document).ready(function() {
 
     // $(".date_pick").datepicker({ format: "yyyy-mm-dd", autoclose: true });
 
-    $(".date_pick").flatpickr();
+    $(".date_pick").flatpickr({defaultDate: "2000-01-01"});
 
 
 
