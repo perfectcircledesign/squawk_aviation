@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Reference</h4>
+</div>
+<%= simple_form_for @reference, :url => references_path, :method => params[:method_type] do |f| -%>
+  <div class="modal-body">
+    <%= hidden_field_tag :id, @reference.id if @reference.id.present?  %>
+    <%= f.hidden_field :customer_id, :label => false, :value => current_customer.id  %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Name</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :name, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Company Name</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :company, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Contact Number</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :contact_details, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Email Address</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :email, :label => false, :class => "form-control fc2", required: true, type: "email"  %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-4">
+          <label>Job Title</label>
+        </div>
+        <div class="col-xs-8">
+          <%= f.text_field :job_position, :label => false, :class => "form-control fc2", required: true  %>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-window btn-green" data-dismiss="modal">Close</button>
+    <% if @reference.id.present? %>
+      <%= f.button :submit, "Update Details", :class=>"btn btn-green" %>
+    <% else %>
+      <%= f.button :submit, "Create", :class=>"btn btn-green" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+

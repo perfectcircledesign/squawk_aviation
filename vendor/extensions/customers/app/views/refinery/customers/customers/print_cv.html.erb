@@ -359,6 +359,54 @@
             </table>
             </div>
           <% end %>
+
+          <% if @customer.references.present? %>
+            <div>
+            <h4>Reference</h4>
+              <% @customer.references.each do |item| %>
+                <table style="width: 100%;" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td>
+                      <strong>Name & Job Title </strong>
+                    </td>
+                    <td>
+                      <%= item.name %>
+                      <% if item.job_position.present? %>
+                        - <%= raw item.job_position %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Company </strong>
+                    </td>
+                    <td>
+                      <% if item.company.present? %>
+                        <%= raw item.company %>
+                      <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong><strong>Contact Number & Email</strong> </strong>
+                    </td>
+                    <td>
+                      <% if item.contact_details.present? %>
+                        <%= raw item.contact_details %>
+                      <% end %>
+                      <% if item.email.present? %>
+                        - <%= raw item.email %>
+                      <% end %>
+                    </td>
+                  </tr>
+                </table>
+                <% unless @customer.references.last == item %>
+                  <hr>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
           <% if @customer.career_path == 'Pilot' %>
             <% if @customer.flying_hours.present? %>
             <div>
@@ -465,6 +513,7 @@
             </div>
             <% end %>
           <% end %>
+
           <% if @customer.route_experiences.present? %>
             <h4>Route Experience</h4>
             <table style="width: 100%" cellspacing="0" cellpadding="0">

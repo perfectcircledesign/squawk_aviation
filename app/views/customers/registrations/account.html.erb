@@ -21,6 +21,10 @@
 
   <%= render '/shared/customer/employment_history' -%>
 
+  <%# if current_customer.present? %>
+    <%= render '/shared/customer/reference' -%>
+  <%# end %>
+
   <% if @customer.career_path == 'Pilot' %>
     <%= render '/shared/customer/flying_hours' -%>
   <% end %>

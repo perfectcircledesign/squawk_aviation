@@ -246,12 +246,64 @@
                       </div>                      
                     </div>
                   </li>
+                  <li>
+                    <i class="fa fa-user bg-blue"></i>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header">References</h3>
+                      <div class="timeline-body">
+                        <% if @customer.references.present? %>
+                            <% @customer.references.each do |item| %>
+                              <div class="details-panel">
+                                <table style="width: 430px;">
+                                  <tr>
+                                    <td>
+                                      <strong>Name & Job Title </strong>
+                                    </td>
+                                    <td>
+                                      <%= item.name %>
+                                      <% if item.job_position.present? %>
+                                        - <%= raw item.job_position %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong>Company </strong>
+                                    </td>
+                                    <td>
+                                      <% if item.company.present? %>
+                                        <%= raw item.company %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <strong><strong>Contact Number & Email</strong> </strong>
+                                    </td>
+                                    <td>
+                                      <% if item.contact_details.present? %>
+                                        <%= raw item.contact_details %>
+                                      <% end %>
+                                      <% if item.email.present? %>
+                                        - <%= raw item.email %>
+                                      <% end %>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                              <% unless @customer.references.last == item %>
+                              <hr>
+                              <% end %>
+                            <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </li>
               </ul>
               </div>
             </div>
         </div>
   </div>
-
 
 <% end %>
 

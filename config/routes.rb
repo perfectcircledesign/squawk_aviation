@@ -69,6 +69,7 @@ Jetcrew360::Application.routes.draw do
           resources :educations, only: [:create, :update, :index]
           resources :certifications, only: [:create, :update, :index]
           resources :employment_histories, only: [:create, :update, :index]
+          resources :references, only: [:create, :update, :index]
           resources :hours, only: [:create, :update, :index]
           resources :route_experiences, only: [:create, :update, :index]
           resources :logbooks, only: [:create, :update, :index]
@@ -95,6 +96,8 @@ Jetcrew360::Application.routes.draw do
   resource :flying_hours_cabins
 
   resource :aviation_records
+
+  resource :references
 
   resource :route_experiences
 

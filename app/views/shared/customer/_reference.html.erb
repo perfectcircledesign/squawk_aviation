@@ -1,0 +1,47 @@
+<div class="card details-card" id="reference_tag">
+  <h2>References</h2>
+  <% if current_customer.present? %>
+    <%= link_to load_new_form_path(type:"reference", method_type: :post), class:"edit", remote:true, :data => {:backdrop => 'static'} do %>
+        <img src="/assets/edit.png">
+    <% end %>
+  <% end %>
+  <% if @customer.references.present? %>
+      <% @customer.references.each do |item| %>
+          <div class="details-panel">
+            <% if current_customer.present? %>
+              <%= link_to load_new_form_path(type:"reference", id: item.id, method_type: :put), class:"btn-edit", remote:true, :data => {:backdrop => 'static'} do %>
+                <img src="/assets/edit.png" width="10" height="10">
+              <% end %>
+              <%= link_to references_path(id:item.id),
+                          :class => "btn-delete",
+                          :confirm => "Are you sure you want to delete: " + "#{item.name}",
+                          :method => :delete do %>
+                <span aria-hidden="true" class="close">&times;</span>
+              <% end %>
+            <% end %>
+            <strong>Name & Job Title</strong>
+            <%= item.name %>
+            <% if item.job_position.present? %>
+              - <%= raw item.job_position %>
+            <% end %>
+            <% if item.company.present? %>
+              <strong>Company</strong>
+              <%= raw item.company %>
+            <% end %>
+            <strong>Contact Number & Email</strong>
+            <% if item.contact_details.present? %>
+              <%= raw item.contact_details %>
+            <% end %>
+            <% if item.email.present? %>
+               - <%= raw item.email %>
+            <% end %>
+          </div>
+      <% end %>
+  <% else %>
+      <div class="blank-state">
+        <img src="/assets/reference.jpg">
+        <h2>Do you have any References?</h2>
+        <%= link_to 'Add a Reference', load_new_form_path(type:"reference", method_type: :post), class:"btn btn-green btn-window btn-lrg", remote:true, :data => {:backdrop => 'static'} %>
+      </div>
+  <% end %>
+</div>

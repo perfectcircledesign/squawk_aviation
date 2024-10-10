@@ -208,6 +208,11 @@ $('#new_form').modal({
   $('#new_form').modal({
     backdrop: 'static'
   });
+<% elsif @reference.present? %>
+  $("#new_form .modal-content").html("<%= j render :partial => '../views/reference/form' %>");
+  $('#new_form').modal({
+      backdrop: 'static'
+  });
 <% end %>
 
 //$('.date_pick').data( "theme", "calendar-squawk" );

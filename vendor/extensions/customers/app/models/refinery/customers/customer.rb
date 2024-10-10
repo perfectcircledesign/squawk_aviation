@@ -31,6 +31,9 @@ module Refinery
       has_many :aviation_records, :dependent => :destroy
       accepts_nested_attributes_for :aviation_records, :reject_if => lambda { |item| item['employer'].blank?}, :allow_destroy => true
 
+      has_many :references, :dependent => :destroy
+      accepts_nested_attributes_for :references, :reject_if => lambda { |item| item['name'].blank?}, :allow_destroy => true
+
       has_many :flying_hours, :dependent => :destroy
       accepts_nested_attributes_for :flying_hours, :reject_if => lambda { |item| item['aircraft'].blank?}, :allow_destroy => true
 
@@ -90,7 +93,7 @@ module Refinery
 
       def complete_percentage
         if self.career_path == 'Pilot'
-          status_value = 40
+          status_value = 30
           if self.aviation_education_details.present?
               status_value = status_value + 10
           end
@@ -109,8 +112,11 @@ module Refinery
           if self.cover_letter.present?
               status_value = status_value + 10
           end
+          if self.references.present?
+            status_value = status_value + 10
+          end
         elsif self.career_path == 'Cabin Crew'
-          status_value = 40
+          status_value = 30
           if self.aviation_education_details.present?
             status_value = status_value + 10
           end
@@ -129,8 +135,11 @@ module Refinery
           if self.cover_letter.present?
             status_value = status_value + 10
           end
+          if self.references.present?
+            status_value = status_value + 10
+          end
         elsif self.career_path == 'Aircraft Maintenance'
-          status_value = 50
+          status_value = 40
           if self.aviation_education_details.present?
             status_value = status_value + 10
           end
@@ -144,6 +153,9 @@ module Refinery
             status_value = status_value + 10
           end
           if self.cover_letter.present?
+            status_value = status_value + 10
+          end
+          if self.references.present?
             status_value = status_value + 10
           end
         end

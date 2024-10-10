@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180220091151) do
+ActiveRecord::Schema.define(:version => 20241010082350) do
 
   create_table "article_job_lookups", :force => true do |t|
     t.integer  "job_id"
@@ -157,6 +157,17 @@ ActiveRecord::Schema.define(:version => 20180220091151) do
     t.integer  "customer_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "references", :force => true do |t|
+    t.string   "name"
+    t.string   "company"
+    t.string   "contact_details"
+    t.string   "job_position"
+    t.integer  "customer_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "email"
   end
 
   create_table "refinery_aircrafts", :force => true do |t|

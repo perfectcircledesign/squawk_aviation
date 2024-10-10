@@ -277,6 +277,12 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       else
         @aviation_record = AviationRecord.new
       end
+    elsif params[:type] == "reference"
+      if params[:id].present?
+        @reference = Reference.find(params[:id])
+      else
+        @reference = Reference.new
+      end
     elsif params[:type] == "credit_card"
       if params[:id].present?
         @credit_card = CreditCard.find(params[:id])
