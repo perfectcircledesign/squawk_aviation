@@ -16,6 +16,10 @@ Refinery::Core::Engine.routes.append do
 
   match '/print_cv' => 'customers/customers#print_cv', :as => 'print_cv'
 
+  match '/print_pdf_cv' => 'customers/customers#print_pdf_cv', :as => 'print_pdf_cv'
+
+
+
   # Admin routes
   namespace :customers, :path => '' do
     namespace :admin, :path => 'refinery' do

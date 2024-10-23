@@ -1,0 +1,203 @@
+<% content_for :body do %>
+<!DOCTYPE html>
+  <html>
+  <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Julius+Sans+One&family=Open+Sans&family=Source+Sans+Pro&display=swap" %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" %>
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" %>
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" %>
+    <%= wicked_pdf_stylesheet_link_tag 'bootstrap.min' %>
+    <%= wicked_pdf_stylesheet_link_tag '/pdf' %>
+    <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
+
+  </head>
+  <body contenteditable="false" data-new-gr-c-s-check-loaded="14.1200.0" data-gr-ext-installed="" style="height: 37.7cm; ">
+  <div class="container">
+      <div class="row">
+        <div class="col-xs-4" style="background-color: #1c7899!important; height: 37.7cm; color: #fff; padding: 0">
+          <div class="mask1" style="height: 207px; min-height: 207px;">
+            <% if @customer.profile_image.present? %>
+              <%= image_tag wicked_pdf_asset_path(@customer.profile_image.image.remote_url), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%; max-width: 100%" %>
+            <% else %>
+              <%= image_tag wicked_pdf_asset_base64('profile-blank.jpg'), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%; max-width: 100%" %>
+            <% end %>
+          </div>
+          <%= image_tag wicked_pdf_asset_base64('cv-angle-am.png'), height:"auto", style: "margin-bottom: 0mm; margin-top: -20px; object-fit: cover; width: 100%; max-width: 100%" %>
+          <div style="text-align: left; padding: 0 25px 0 45px; margin-top: -170px;">
+            <h3 style="text-align: left;letter-spacing: 1px; display: flex; margin-bottom: 15px; font-weight:bold"><i class="fa fa-phone" aria-hidden="true" style="color: #fff; margin-right: 10px; margin-top: 5px; width: 20px; opacity: 0.6;"></i>Contact</h3>
+            <p style="font-size: 9pt;margin-bottom: 0px; margin-top: 5px;"><%= @customer.email %></p>
+            <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;" class="extension_display"><%= @customer.contact_number %></p>
+            <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"><%= country_name(@customer.dual_nationality_details) %></p>
+          </div>
+
+          <% if @customer.aviation_education_details.present? %>
+            <div style="text-align: left; padding: 0 25px 0 45px; margin-top: 20pt; margin-bottom: 5pt;">
+              <h3 style="text-align: left; letter-spacing: 1px;  display: flex; margin-bottom: 15px; line-height: 1.2;  font-weight:bold">
+                <i class="fa fa-graduation-cap" aria-hidden="true" style="color: #fff; margin-right: 10px; margin-top: 5px; width: 20px; opacity: 0.6;"></i>
+                Education
+              </h3>
+            </div>
+            <% @customer.aviation_education_details.each do |item| %>
+              <div style="text-align: left; padding: 0 25px 0 45px">
+                <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"><i class="fa fa-circle" aria-hidden="true" style="color: #3ca3c8; margin-right: 10px; margin-top: 10px; width: 10px; opacity: 0.6; font-size: 8px;"></i><strong><%= item.program %>:</strong> <%= item.institution %> - <%= item.period %></p>
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if @customer.maintenance_certifications.present? %>
+            <div style="text-align: left; padding: 0 25px 0 45px; margin-top: 20pt; margin-bottom: 5pt;">
+              <h3 style="text-align: left; letter-spacing: 1px;  display: flex; margin-bottom: 15px; line-height: 1.2;  font-weight:bold">
+                <i class="fa fa-certificate" aria-hidden="true" style="color: #fff; margin-right: 10px; margin-top: 5px; width: 20px; opacity: 0.6;"></i>
+                Licence & Certificates
+              </h3>
+            </div>
+            <% @customer.maintenance_certifications.each do |item| %>
+              <div style="text-align: left; padding: 0 25px 0 45px;">
+                <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"><i class="fa fa-circle" aria-hidden="true" style="color: #3ca3c8; margin-right: 10px; margin-top: 10px; width: 10px; opacity: 0.6; font-size: 8px;"></i><%= item.license_authority %> - <%= item.license_type %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="col-xs-8" style="background-color: #fff !important; padding: 30px 55px 30px 35px;  height: 37.7cm;">
+          <div style="text-align: end; float: right">
+            <%= image_tag wicked_pdf_asset_base64('squawk_icon.png'), style: "width: 8mm" %>
+            <p style="font-size: 6pt; margin: 5px 0 0 0;"> Generated by<br> Squawk Aviation</p>
+          </div>
+          <div style="height: 207px; min-height: 207px;">
+            <h1 style="font-size: 45pt; margin-bottom: 0px; max-width: 90%; max-width: 70%; line-height: 1;"><%= @customer.first_name %><br><span style="  font-weight:bold "><%= @customer.surname %></span></h1>
+            <h4 class="font-size: 10pt; path" style="margin-top: 10px; margin-bottom: 8px; font-weight: bold"><%= @customer.career_path %></h4>
+            <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"><span style="margin-right:10px"><%= @customer.age %> years old</span> |   <span style="margin: 0 10px"><%= @customer.gender %></span>   |
+              <span style="margin-left:10px">
+            <% @customer.languages.all.each do |lang| %>
+                  <%= lang.name %>
+              <% end %></span></p>
+          </div>
+          <div>
+            <h3 style="text-align: left; letter-spacing: 1px; display: flex;  font-weight:bold">Profile</h3>
+            <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"> <%= @customer.cover_letter %></p>
+          </div>
+
+          <% if @customer.aviation_records.present? %>
+            <div>
+              <h3 style="text-align: left; letter-spacing: 1px; display: flex; margin-top: 20pt; margin-bottom: 5pt;  font-weight:bold">Employment History</h3>
+            </div>
+
+            <div style="margin-bottom: 15pt">
+              <div class="row">
+                <% @customer.aviation_records.order('current_work DESC').first(3).each do |item| %>
+                  <% if item.current_work %>
+                    <div class="col-xs-12" style="text-align: left; margin-bottom: 5pt;">
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 4px;">
+                        <i class="fa fa-circle" aria-hidden="true" style="color: #3ca3c8; margin-right: 10px; margin-top: 10px; width: 10px; opacity: 0.6;"></i>
+                        <%= item.start_date.strftime("%d/%m/%Y") if item.start_date.present? %> - Present
+                      </p>
+                      <h4 style="font-size: 11pt; margin-bottom: 0px; margin-top: 0px; font-weight: bold;  margin-bottom: 0px; padding-left: 20px"><%= item.employer %></h4>
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 2px; padding-left: 20px"><%= item.position_held %></p>
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 2px; padding-left: 20px">Notice Period: <%= item.notice_period %></p>
+                    </div>
+                  <% else %>
+                    <div class="col-xs-12" style="text-align: left; margin-bottom: 11pt;">
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 4px;"><i class="fa fa-circle" aria-hidden="true" style="color: #3ca3c8; margin-right: 10px; margin-top: 10px; width: 10px; opacity: 0.6;"></i><%= item.start_date.strftime("%d/%m/%Y") if item.start_date.present? %> - <%= item.end_date.strftime("%d/%m/%Y") if item.end_date.present? %></p>
+                      <h4 style="font-size: 11pt; margin-bottom: 0px; margin-top: 0px; font-weight: bold;  margin-bottom: 0px; padding-left: 20px"><%= item.employer %></h4>
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 2px; padding-left: 20px"><%= item.position_held %></p>
+                      <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 2px; padding-left: 20px">Reason for Leaving: <%= raw item.reason_for_leaving %></p>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <% if @customer.aviation_records.count > 3 %>
+                <p style="font-size: 6pt; margin: 0; text-align: right; float: right;">+ <%= @customer.aviation_records.count - 3 %> more on request</p>
+              <% end %>
+            </div>
+          <% end %>
+
+
+          <% if @customer.references.present? %>
+            <div>
+              <h3 style="text-align: left; letter-spacing: 1px; display: flex; margin-top: 20pt; margin-bottom: 5pt;  font-weight:bold">Reference</h3>
+            </div>
+            <div style="text-align: left; margin-bottom: 15pt">
+              <div class="row">
+                <% @customer.references.first(2).each do |item| %>
+                  <div class="col-xs-6" style="margin-bottom: 0.5em">
+                    <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"><strong><% if item.company.present? %>
+                        <%= raw item.company %>
+                      <% end %></strong> </p>
+                    <h4 style="font-size: 11pt; margin-bottom: 0px; margin-top: 3px; font-weight: bold;  margin-bottom: 0px"><%= item.name %>
+                      <% if item.job_position.present? %>
+                        - <%= raw item.job_position %>
+                      <% end %></h4>
+                    <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"> <% if item.contact_details.present? %>
+                        <%= raw item.contact_details %>
+                      <% end %>
+                      <% if item.email.present? %>
+                        - <%= raw item.email %>
+                      <% end %></p>
+                  </div>
+                <% end %>
+              </div>
+              <% if @customer.references.count > 2 %>
+                <p style="font-size: 6pt; margin: 0; text-align: right; float: right;">+ <%= @customer.references.count - 2 %> more on request</p>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if @customer.maintenance_hours.present? %>
+            <div>
+              <h3 style="text-align: left; letter-spacing: 1px; display: flex; margin-top: 20pt; margin-bottom: 5pt;  font-weight:bold">On the Job Experience</h3>
+            </div>
+            <div style="text-align: left; margin-bottom: 15pt">
+              <div class="row">
+                <% @customer.maintenance_hours.first(4).each do |item| %>
+                  <div class="col-xs-6" style="margin-bottom: 0.5em">
+                    <h4 style="font-size: 11pt; margin-bottom: 0px; margin-top: 3px; font-weight: bold;  margin-bottom: 0px"><%= item.aircraft.name if item.aircraft.present? %></h4>
+                     <p style="font-size: 9pt; margin-bottom: 0px; margin-top: 5px;"> Total Hours: <%= item.total_hours %><br>
+                      Experience:
+                      <% if item.airframe %>
+                        Airframe,
+                      <% end %>
+                      <% if item.avionics %>
+                        Avionics,
+                      <% end %>
+                      <% if item.electrical %>
+                        Electrical,
+                      <% end %>
+                      <% if item.fuel %>
+                        Fuel,
+                      <% end %>
+                      <% if item.hydraulics %>
+                        Hydraulics,
+                      <% end %>
+                      <% if item.interiors %>
+                        Interiors incl Air-con,
+                      <% end %>
+                      <% if item.pneumatic %>
+                        Pneumatic,
+                      <% end %>
+                      <% if item.power_plant %>
+                        Power Plant,
+                      <% end %>
+                      <% if item.interiors %>
+                        Interiors incl Air-con
+                      <% end %>
+                    </p>
+                  </div>
+                <% end %>
+                <% if @customer.maintenance_hours.count > 4 %>
+                  <p style="font-size: 6pt; margin: 0; text-align: right; float: right;">+ <%= @customer.maintenance_hours.count - 4 %> more on request</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  </div>
+
+  </body>
+  </html>
+<% end %>
+

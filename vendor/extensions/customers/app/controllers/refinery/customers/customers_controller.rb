@@ -5,11 +5,11 @@ module Refinery
 
       before_filter :find_page
 
-      skip_before_filter :check_customer, :only => [:sign_in_customer, :print_cv]
+      skip_before_filter :check_customer, :only => [:sign_in_customer, :print_cv, :print_pdf_cv]
 
       layout :determine_user_layout
 
-      before_filter :airline_account, :except => [:sign_in_customer, :print_cv]
+      before_filter :airline_account, :except => [:sign_in_customer, :print_cv, :print_pdf_cv]
 
       def sign_in_customer
         customer = Refinery::Customers::Customer.find_by_email(params[:email])
@@ -159,6 +159,35 @@ module Refinery
           @customer = Customer.find(params[:customer_id])
         else
           render index
+        end
+      end
+
+      def print_pdf_cv
+        @customer = Customer.find(params[:customer_id])
+
+        respond_to do |format|
+          format.html # Renders the CV in HTML (for preview or editing)
+          format.pdf do
+
+            pdf_filename = "#{@customer.name.parameterize}_cv.pdf"
+            template_path = case @customer.career_path
+                            when 'Aircraft Maintenance'
+                              "refinery/customers/customers/print_aircraft_maintenance_pdf_cv.pdf.erb"
+                            when 'Pilot'
+                              "refinery/customers/customers/print_pilot_pdf_cv.pdf.erb"
+                            else
+                              "refinery/customers/customers/print_cabin_crew_pdf_cv.pdf.erb"
+                            end
+
+            render pdf: "#{pdf_filename}",   # PDF filename
+                   template: template_path, # Path to your template
+                   layout: "pdf",
+                   show_as_html: false,
+                   page_size: 'A4',
+                   encoding: 'UTF-8',
+                   :margin => {:top => 0, :right => 0, :bottom => 0, :left => 0}
+
+          end
         end
       end
 

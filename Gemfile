@@ -107,6 +107,10 @@ gem "jquery-colorbox-rails", "0.1.4"
 # Required to get Refinery working on Heroku
 gem 'fog','1.22.1'
 
+# gem 'config', '1.0'
+
+gem 'dotenv', groups: [:development, :test]
+
 #Monitoring
 gem 'newrelic_rpm',  '3.18.1.330'
 

@@ -1,0 +1,39 @@
+body {
+    background: rgb(204,204,204);
+    /*width: 21cm;*/
+    /*height: 29.7cm;*/
+    /*margin: 0 auto;*/
+    font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/*page {*/
+/*    background: white;*/
+/*    display: block;*/
+/*    margin: 0 auto;*/
+/*    margin-bottom: 0.5cm;*/
+/*    position: relative;*/
+/*}*/
+
+/*page[size="A4"] {*/
+/*    width: 21cm;*/
+/*    height: 29.7cm;*/
+/*}*/
+
+/*@page {*/
+/*    size: 21cm 29.7cm;*/
+/*    margin: 0mm;*/
+/*}*/
+.mask1 {
+    -webkit-mask-image: linear-gradient(195deg, #000000 71%, transparent 60%);
+    mask-image: linear-gradient(195deg, #000000 71%, transparent 60%);
+}
+
+/*.page {*/
+/*    display: flex;*/
+/*    height: 100vh; !* Full viewport height *!*/
+/*}*/
+
+.container {
+    padding: 0;
+}

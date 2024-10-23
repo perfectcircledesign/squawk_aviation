@@ -124,6 +124,7 @@ GEM
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1.1)
+    dotenv (2.8.1)
     dragonfly (0.9.12)
       rack
     dry-inflector (0.1.2)
@@ -389,6 +390,7 @@ DEPENDENCIES
   commands
   country_select
   credit_card_validations
+  dotenv
   dragonfly (= 0.9.12)
   dry-inflector (= 0.1.2)
   eu_central_bank
