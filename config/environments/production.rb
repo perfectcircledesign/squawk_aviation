@@ -16,7 +16,7 @@ Jetcrew360::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
-  config.assets.precompile += ['bootstrap.min.css', '*.js', '*.json', '*.css', '*.scss', 'refinery/*.js', 'refinery/*.css']
+  config.assets.precompile += ["../fonts/*.eot","../fonts/*.html","../fonts/*.svg","../fonts/*.woff","../fonts/*.woff2","../fonts/*.otf","../fonts/*.ttf", 'bootstrap.min.css', '*.js', '*.json', '*.css', '*.scss', 'refinery/*.js', 'refinery/*.css']
 
   # Generate digests for assets URLs
   config.assets.digest = true
