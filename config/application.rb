@@ -1,6 +1,5 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'dotenv/load'
 require 'rails/all'
 require 'roo'
 require 'csv'
@@ -10,7 +9,6 @@ if defined?(Bundler)
   # Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   Bundler.require(:default, :assets, Rails.env)
-  Bundler.require(*Rails.groups)
 end
 
 module Jetcrew360

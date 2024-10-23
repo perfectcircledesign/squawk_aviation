@@ -109,7 +109,7 @@ gem 'fog','1.22.1'
 
 # gem 'config', '1.0'
 
-gem 'dotenv', groups: [:development, :test]
+# gem 'dotenv', groups: [:development, :test, :production]
 
 #Monitoring
 gem 'newrelic_rpm',  '3.18.1.330'
