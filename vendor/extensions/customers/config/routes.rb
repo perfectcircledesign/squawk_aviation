@@ -23,7 +23,7 @@ Refinery::Core::Engine.routes.append do
   # Admin routes
   namespace :customers, :path => '' do
     namespace :admin, :path => 'refinery' do
-      resources :customers, :except => [:show, :destroy] do
+      resources :customers, :except => [:show] do
         collection do
           post :update_positions
         end
