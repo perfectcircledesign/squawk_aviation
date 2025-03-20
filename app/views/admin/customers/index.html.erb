@@ -30,8 +30,8 @@
               <td><%= link_to('Show', admin_customer_path(customer)) %>
                 -
                 <%= link_to('Imitate', refinery.imitate_customer_path(:id => customer.id), :target => '_blank') %>
-                -
-                <%= link_to('CV', "/print_cv?customer_id=#{customer.id}", :target => '_blank') %>
+<!--                --->
+                <%#= link_to('CV', "/print_cv?customer_id=#{customer.id}", :target => '_blank') %>
                 -
                 <%= link_to 'PDF CV', refinery.print_pdf_cv_path(:customer_id => customer.id, format: :pdf), :target => '_blank' %>
               </td>

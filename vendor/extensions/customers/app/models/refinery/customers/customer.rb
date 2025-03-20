@@ -11,7 +11,7 @@ module Refinery
       # has_many :customer_files, :class_name => '::Refinery::CustomerFiles::CustomerFile'
 
       GENDERS = %w(Male Female)
-      CAREERS = %w(Pilot Cabin\ Crew Aircraft\ Maintenance)
+      CAREERS = %w(Pilot Cabin\ Crew Aircraft\ Maintenance Other)
       MARITALSTATUS = %w(Single Married Widowed Separated\ /\ Divorced)
       # NOTICEPERIOD = %w(7\ Days 15\ Days 30\ Days Other)
       # %w(Level\ 1\ –\ Pre-elementary Level\ 2\ –\ Elementary Level\ 3\ –\ Pre-operational Level\ 4\ –\ Operational Level\ 5\ –\ Extended Level\ 6\ –\ Expert)
@@ -150,6 +150,17 @@ module Refinery
             status_value = status_value + 10
           end
           if self.maintenance_hours.present?
+            status_value = status_value + 10
+          end
+          if self.cover_letter.present?
+            status_value = status_value + 10
+          end
+          if self.references.present?
+            status_value = status_value + 10
+          end
+        else self.career_path == 'other'
+          status_value = 40
+          if self.aviation_education_details.present?
             status_value = status_value + 10
           end
           if self.cover_letter.present?

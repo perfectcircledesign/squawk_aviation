@@ -1,4 +1,4 @@
-<%= form_for(resource, :as => :customer, :url => registration_path(:customer), :html => {:id => "sign_up_customer"}, :format => :json, :remote => true ) do |f| %>
+<%= form_for(resource, :as => :customer, :url => registration_path(:customer), :html => {:id => "sign_up_customer", :honeypot => true}, :format => :json, :remote => true ) do |f| %>
   <%= devise_error_messages! %>
   <div class="modal-body">
     <div class="form-group">

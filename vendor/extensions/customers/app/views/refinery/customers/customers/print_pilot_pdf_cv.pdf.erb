@@ -19,11 +19,11 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-4" style="background-color: #155784 !important; height: 37.7cm; color: #fff; padding: 0">
-        <div class="mask1" style="height: 247px; min-height: 247px;">
+        <div class="mask1" style="height: 207px; min-height: 207px;">
           <% if @customer.profile_image.present? %>
-            <%= image_tag wicked_pdf_asset_path(@customer.profile_image.image.remote_url), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%" %>
+            <%= image_tag wicked_pdf_asset_path(@customer.profile_image.image.remote_url), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%; max-width: 100%" %>
           <% else %>
-            <%= image_tag wicked_pdf_asset_base64('profile-blank.jpg'), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%" %>
+            <%= image_tag wicked_pdf_asset_base64('profile-blank.jpg'), height:"auto", style: "margin-bottom: 3mm; object-fit: cover; width: 100%; max-width: 100%" %>
           <% end %>
         </div>
         <%= image_tag wicked_pdf_asset_base64('cv-angle-pilot.png'), height:"auto", style: "margin-bottom: 0mm; margin-top: -20px; object-fit: cover; width: 100%; max-width: 100%" %>

@@ -154,6 +154,8 @@ gem 'test-unit', '~> 3.0'
 
 gem 'dry-inflector', '0.1.2'
 
+gem 'honeypot-captcha'
+
 
 gem 'refinerycms-employers', :path => 'vendor/extensions'
 gem 'refinerycms-jobs', :path => 'vendor/extensions'

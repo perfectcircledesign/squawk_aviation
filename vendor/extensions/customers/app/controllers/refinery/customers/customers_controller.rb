@@ -169,14 +169,16 @@ module Refinery
           format.html # Renders the CV in HTML (for preview or editing)
           format.pdf do
 
-            pdf_filename = "#{@customer.name.parameterize}_cv.pdf"
+            pdf_filename = "#{@customer.name.parameterize}_cv"
             template_path = case @customer.career_path
                             when 'Aircraft Maintenance'
                               "refinery/customers/customers/print_aircraft_maintenance_pdf_cv.pdf.erb"
                             when 'Pilot'
                               "refinery/customers/customers/print_pilot_pdf_cv.pdf.erb"
-                            else
+                            when "Cabin Crew"
                               "refinery/customers/customers/print_cabin_crew_pdf_cv.pdf.erb"
+                            else
+                              "refinery/customers/customers/print_other_pdf_cv.pdf.erb"
                             end
 
             render pdf: "#{pdf_filename}",   # PDF filename

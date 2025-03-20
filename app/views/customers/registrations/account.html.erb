@@ -33,7 +33,9 @@
     <%= render '/shared/customer/flying_hours_cabins' -%>
   <% end %>
 
-  <% if @customer.career_path != 'Aircraft Maintenance' %>
+  <% if @customer.career_path != 'Aircraft Maintenance' or @customer.career_path = 'Other' %>
+
+  <% else %>
     <%= render '/shared/customer/route_experience' -%>
     <%= render '../views/personal/route_experience' -%>
     <%#= render '/shared/customer/route_experience' -%>
@@ -43,7 +45,9 @@
     <%= render '/shared/customer/maintenance_hour' -%>
   <% end %>
 
-  <%= render '/shared/customer/logbook' -%>
+  <% if @customer.career_path != 'Other' %>
+    <%= render '/shared/customer/logbook' -%>
+  <% end %>
 
 </div>
 

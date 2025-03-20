@@ -7,7 +7,7 @@
       </div>
       <div class="content-place">
         <% resource ||= Refinery::Customers::Customer.new %>
-        <%= form_for(resource, :as => :customer, :url => registration_path(:customer), :html => {:id => "sign_up_customer"}, :format => :json, :remote => true ) do |f| %>
+        <%= form_for(resource, :as => :customer, :url => registration_path(:customer), :html => {:id => "sign_up_customer", :honeypot => true}, :format => :json, :remote => true ) do |f| %>
           <div class="modal-body">
             <div class="form-group">
               <div class="row">
@@ -39,16 +39,6 @@
                 </div>
               </div>
             </div>
-            <!--<div class="form-group">-->
-              <!--<div class="row">-->
-                <!--<div class="col-xs-3">-->
-                  <!--<label>Other Contact Number</label>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9">-->
-                  <!--<%#= f.text_field :other_number, :placeholder => 'Other Contact Number', :label => false  %>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
             <div class="form-group">
               <div class="row">
                 <div class="col-xs-3">
@@ -59,16 +49,6 @@
                 </div>
               </div>
             </div>
-            <!--<div class="form-group">-->
-              <!--<div class="row">-->
-                <!--<div class="col-xs-3">-->
-                  <!--<label>Career Path</label>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9">-->
-                  <!--<%#= f.select :career_path, ::Refinery::Customers::Customer::CAREERS %>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
             <div class="form-group">
               <div class="row">
                 <div class="col-xs-3">
