@@ -1,0 +1,5 @@
+﻿{
+  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
+  "Domain": "squawkaviation.co.za",
+  "Id": "82fda223-d116-4d11-bb56-fb8c7721fd09"
+}
